@@ -1,0 +1,29 @@
+import { useAuthors } from './useAuthors';
+import { useUser } from './useUser';
+import { motion } from 'motion/react';
+
+import AuthorSkeleton from '../../ui/Skeletons/AuthorSkeleton';
+import AuthorItem from './AuthorItem';
+
+function AuthorList() {
+   const { isPending, authors } = useAuthors();
+   const { user } = useUser();
+   const theAuthor = authors?.find((item) => item.id === user.id);
+
+   if (isPending) return <AuthorSkeleton />;
+
+   return (
+      <motion.ul
+         className="grid grid-cols-2 gap-6 mb-14"
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         transition={{ duration: 0.3 }}
+      >
+         <AuthorItem author={theAuthor} />
+         {authors.map((item) => (
+            <AuthorItem author={item} key={item.id} activeUser={user} />
+         ))}
+      </motion.ul>
+   );
+}
+export default AuthorList;

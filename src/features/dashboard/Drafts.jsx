@@ -1,0 +1,43 @@
+import { useDraftedArticles } from './useDraftedArticles';
+import { BsStack } from 'react-icons/bs';
+import { motion } from 'motion/react';
+
+import DraftSkeleton from '../../ui/Skeletons/DraftSkeleton';
+import ArticleItem from '../../ui/ArticleItem';
+import Heading from '../../ui/Heading';
+
+function Drafts() {
+   const { isPending, articles } = useDraftedArticles();
+
+   return (
+      <motion.div
+         className="relative col-span-2 space-y-3 text-base border bg-white dark:bg-primary-200 rounded-xl py-8 px-10 box-shadow transition-200 overflow-auto remove-scrollbar [&_h1]:pb-4"
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         transition={{ duration: 0.4 }}
+      >
+         <Heading type="h2">Continue writing</Heading>
+
+         {!isPending ? (
+            articles.length > 0 ? (
+               <>
+                  {articles.map((item) => (
+                     <ArticleItem article={item} key={item.id} />
+                  ))}
+               </>
+            ) : (
+               <div className="flex flex-col items-center gap-1 justify-self-center mt-16">
+                  <BsStack className="text-6xl text-primary-200 dark:text-primary-300 transition-color" />
+                  <span className="text-2xl italic text-primary-300 transition-color">
+                     No drafted articles...
+                  </span>
+               </div>
+            )
+         ) : (
+            <DraftSkeleton />
+         )}
+      </motion.div>
+   );
+}
+
+export default Drafts;

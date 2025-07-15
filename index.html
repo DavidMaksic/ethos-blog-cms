@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <!-- FONT -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Cormorant+SC:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+         rel="stylesheet"
+      />
+
+      <link rel="icon" href="/assets/icon.png" type="image/svg+xml" />
+
+      <title>Ethos</title>
+
+      <style>
+         .container {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -100%);
+            z-index: 1;
+         }
+
+         .loading {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+         }
+
+         .loading::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border-top: 2px solid #b78343;
+            border-right: 3px solid transparent;
+         }
+
+         @keyframes rotation {
+            0% {
+               transform: rotate(0deg);
+            }
+            100% {
+               transform: rotate(360deg);
+            }
+         }
+      </style>
+   </head>
+
+   <body
+      class="font-default text-xl text-text selection:bg-accent-500/50 dark:selection:bg-accent-200/50 selection:text-white caret-primary-400"
+   >
+      <div id="root">
+         <div class="container">
+            <span class="loading"></span>
+         </div>
+      </div>
+      <script type="module" src="/src/main.jsx"></script>
+   </body>
+</html>
