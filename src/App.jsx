@@ -15,8 +15,8 @@ import UpdateAuthor from './pages/UpdateAuthor';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Features from './pages/Features';
-import Newpost from './pages/Newpost';
 import Archive from './pages/Archive';
+import NewPost from './pages/NewPost';
 import Authors from './pages/Authors';
 import Article from './pages/Article';
 import Layout from './ui/Layout';
@@ -68,7 +68,7 @@ function App() {
                                     path="dashboard"
                                     element={<Dashboard />}
                                  />
-                                 <Route path="new-post" element={<Newpost />} />
+                                 <Route path="new-post" element={<NewPost />} />
                                  <Route path="archive" element={<Archive />} />
                                  <Route
                                     path="archive/:id"
