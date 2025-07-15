@@ -284,14 +284,14 @@ button,
    -moz-text-decoration-color: var(--color-primary-400);
 }
 
+@keyframes pulse {
+   50% {
+      opacity: 0.5;
+   }
+}
+
 .animate-skeleton {
    animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-
-   @keyframes pulse {
-      50% {
-         opacity: 0.5;
-      }
-   }
 }
 
 /* Chart background lines */
