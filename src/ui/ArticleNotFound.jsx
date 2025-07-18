@@ -1,5 +1,5 @@
-import { IoPencil } from 'react-icons/io5';
 import { LuArrowLeft } from 'react-icons/lu';
+import { IoPencil } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 function ArticleNotFound({ to, prompt, children }) {

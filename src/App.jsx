@@ -30,8 +30,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Real statistics
-
 // TODO: Show comments in articles
 // TODO: Comment and users table
 // TODO: Admin permissions

@@ -914,11 +914,11 @@ article .bn-file-block-content-wrapper {
 
 [data-file-block] .bn-visual-media {
    border-radius: 24px;
-   opacity: 90%;
+   opacity: 95%;
 }
 
 [data-theme='dark'] [data-file-block] .bn-visual-media {
-   opacity: 75%;
+   opacity: 80%;
 }
 
 @container (max-width: 550px) {
