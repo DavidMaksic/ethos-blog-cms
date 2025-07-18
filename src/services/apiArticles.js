@@ -149,7 +149,7 @@ export async function updateArticle(article) {
 export async function getArticlesAfterDate(date) {
    const { data, error } = await supabase
       .from('articles')
-      .select('created_at, status, categoryID')
+      .select('created_at, status, categoryID, likes')
       .gte('created_at', date)
       .lte('created_at', getToday({ end: true }));
 
@@ -188,6 +188,18 @@ export async function getMainFeatureArticles() {
       .order('index');
 
    if (error) throw new Error('Featured articles could not be loaded');
+
+   return data;
+}
+
+export async function getComments() {
+   const { data: data1, error } = await supabase.from('comments').select('id');
+   if (error) throw new Error(error.message);
+
+   const { data: data2, error2 } = await supabase.from('replies').select('id');
+   if (error2) throw new Error(error2.message);
+
+   const data = [...data1, ...data2];
 
    return data;
 }

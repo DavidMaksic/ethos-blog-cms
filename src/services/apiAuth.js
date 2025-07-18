@@ -44,11 +44,19 @@ export async function getCurrentUser() {
    return data?.user;
 }
 
-export async function getUsers() {
+export async function getAuthors() {
    const { data, error } = await supabase
       .from('authors')
       .select()
       .order('id', { ascending: false });
+
+   if (error) throw new Error(error.message);
+
+   return data;
+}
+
+export async function getUsers() {
+   const { data, error } = await supabase.from('users').select('id, bookmarks');
 
    if (error) throw new Error(error.message);
 

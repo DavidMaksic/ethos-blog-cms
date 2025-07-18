@@ -68,7 +68,6 @@ function Creator() {
 
    useEffect(() => {
       document.documentElement.setAttribute('data-lang', localArticle.language);
-      console.log(localArticle);
    }, [localArticle]);
 
    // - Editor logic

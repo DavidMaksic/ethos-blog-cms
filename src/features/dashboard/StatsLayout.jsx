@@ -1,52 +1,54 @@
-import { HiOutlinePencil, HiOutlineUser } from 'react-icons/hi2';
-import { HiOutlineUpload } from 'react-icons/hi';
-import { useAuthors } from '../authentication/useAuthors';
-import { RxStack } from 'react-icons/rx';
+import { PiChatCircleLight } from 'react-icons/pi';
+import { HiOutlineUser } from 'react-icons/hi2';
+import { useComments } from '../../hooks/useComments';
+import { CiBookmark } from 'react-icons/ci';
+import { useUsers } from '../../hooks/useUsers';
+import { SlHeart } from 'react-icons/sl';
 import Stats from './Stats';
+// import { FaRegBookmark, FaRegComment, FaRegHeart } from 'react-icons/fa';
 
 function StatsLayout({ articles }) {
-   const { authors } = useAuthors();
+   const { users } = useUsers();
+   const { comments } = useComments();
 
-   const numArticles = articles.length;
-   const numAuthors = authors?.length;
-   const numPublished = articles.filter(
-      (item) => item.status === 'published'
-   ).length;
-   const numDrafted = articles.filter(
-      (item) => item.status === 'drafted'
-   ).length;
+   const numAuthors = users?.length;
+   const totalLikes = articles.reduce((sum, item) => sum + item.likes, 0);
+   const totalComments = comments?.length;
+   const totalBookmarks = users
+      ?.map((item) => JSON.parse(item.bookmarks))
+      .flat().length;
 
    return (
       <>
          <Stats
-            title="Articles"
-            value={numArticles}
-            icon={<RxStack className="text-svg-articles transition-color" />}
-            color="bg-stat-articles"
+            title="Likes"
+            value={totalLikes}
+            icon={
+               <SlHeart className="text-svg-likes transition-color p-0.5!" />
+            }
+            color="bg-stat-likes"
          />
          <Stats
-            title="Authors"
+            title="Comments"
+            value={totalComments}
+            icon={
+               <PiChatCircleLight className="text-svg-comments transition-color" />
+            }
+            color="bg-stat-comments"
+         />
+         <Stats
+            title="Bookmarks"
+            value={totalBookmarks}
+            icon={
+               <CiBookmark className="text-svg-bookmarks transition-color" />
+            }
+            color="bg-stat-bookmarks"
+         />
+         <Stats
+            title="Users"
             value={numAuthors}
-            icon={
-               <HiOutlineUser className="text-svg-authors transition-color" />
-            }
-            color="bg-stat-authors"
-         />
-         <Stats
-            title="Published"
-            value={numPublished}
-            icon={
-               <HiOutlineUpload className="text-svg-published transition-color" />
-            }
-            color="bg-stat-published"
-         />
-         <Stats
-            title="Drafted"
-            value={numDrafted}
-            icon={
-               <HiOutlinePencil className="text-svg-drafted transition-color" />
-            }
-            color="bg-stat-drafted"
+            icon={<HiOutlineUser className="text-svg-users transition-color" />}
+            color="bg-stat-users"
          />
       </>
    );

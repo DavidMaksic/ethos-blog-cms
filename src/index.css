@@ -53,14 +53,46 @@
    --color-accent-50: #faf5f0;
    --color-accent: #b78343;
 
-   --color-stat-articles: #f0eafe;
-   --color-svg-articles: #7549dd;
-   --color-stat-authors: #fef9c3;
-   --color-svg-authors: #854d0e;
-   --color-stat-published: #dcfce7;
-   --color-svg-published: #166534;
-   --color-stat-drafted: #e0f2fe;
-   --color-svg-drafted: #075985;
+   --color-stat-likes: color-mix(
+      in oklab,
+      var(--color-red-300) 20%,
+      transparent
+   );
+   --color-svg-likes: color-mix(
+      in oklab,
+      var(--color-red-600) 40%,
+      transparent
+   );
+   --color-stat-comments: color-mix(
+      in oklab,
+      var(--color-green-300) 20%,
+      transparent
+   );
+   --color-svg-comments: color-mix(
+      in oklab,
+      var(--color-green-700) 60%,
+      transparent
+   );
+   --color-stat-bookmarks: color-mix(
+      in oklab,
+      var(--color-cyan-300) 20%,
+      transparent
+   );
+   --color-svg-bookmarks: color-mix(
+      in oklab,
+      var(--color-cyan-700) 60%,
+      transparent
+   );
+   --color-stat-users: color-mix(
+      in oklab,
+      var(--color-violet-300) 20%,
+      transparent
+   );
+   --color-svg-users: color-mix(
+      in oklab,
+      var(--color-violet-700) 50%,
+      transparent
+   );
 
    --color-table: #f3f4f6;
    --color-text: #5d6673;
@@ -130,14 +162,46 @@
       --color-accent-200: #d2af84;
       --color-accent: #c69963;
 
-      --color-stat-articles: #b597fa9c;
-      --color-svg-articles: #f0eafe;
-      --color-stat-authors: #dfb4359f;
-      --color-svg-authors: #fef9c3;
-      --color-stat-published: #34d3999c;
-      --color-svg-published: #d1fae5;
-      --color-stat-drafted: #60a5faa4;
-      --color-svg-drafted: #e0f2fe;
+      --color-stat-likes: color-mix(
+         in oklab,
+         var(--color-red-300) 30%,
+         transparent
+      );
+      --color-svg-likes: color-mix(
+         in oklab,
+         var(--color-red-300) 80%,
+         transparent
+      );
+      --color-stat-comments: color-mix(
+         in oklab,
+         var(--color-green-300) 30%,
+         transparent
+      );
+      --color-svg-comments: color-mix(
+         in oklab,
+         var(--color-green-300) 80%,
+         transparent
+      );
+      --color-stat-bookmarks: color-mix(
+         in oklab,
+         var(--color-cyan-300) 30%,
+         transparent
+      );
+      --color-svg-bookmarks: color-mix(
+         in oklab,
+         var(--color-cyan-300) 80%,
+         transparent
+      );
+      --color-stat-users: color-mix(
+         in oklab,
+         var(--color-violet-300) 30%,
+         transparent
+      );
+      --color-svg-users: color-mix(
+         in oklab,
+         var(--color-violet-300) 80%,
+         transparent
+      );
 
       --color-table: var(--color-primary-50);
       --color-text: #99a2ad;

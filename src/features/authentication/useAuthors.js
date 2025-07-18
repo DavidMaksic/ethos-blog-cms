@@ -1,9 +1,9 @@
-import { getUsers } from '../../services/apiAuth';
+import { getAuthors } from '../../services/apiAuth';
 import { useQuery } from '@tanstack/react-query';
 
 export function useAuthors() {
    const { isPending, data: authors } = useQuery({
-      queryFn: getUsers,
+      queryFn: getAuthors,
       queryKey: ['authors'],
    });
 
