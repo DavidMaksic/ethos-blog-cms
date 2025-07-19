@@ -165,10 +165,10 @@ function Article() {
          </div>
 
          <div
-            className={`text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[3.6rem]! [&_h2]:leading-[3.5rem]! [&_h3]:leading-[3.1rem]! ${
+            className={`text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
                article.language === 'English'
-                  ? `font-latin text-2xl xl:text-[1.325rem] [&_p]:leading-[1.49]!`
-                  : `font-cyrillic text-[1.4rem] xl:text-[1.235rem] [&_p]:leading-[1.65]! [&_blockquote]:text-2xl! xl:[&_blockquote]:text-[1.32rem]! [&_em]:leading-[1.5]!`
+                  ? `font-latin text-2xl xl:text-[1.325rem] [&_p]:leading-[1.49]! [&_blockquote>*]:text-[1.65rem] xl:[&_blockquote>*]:text-[1.5rem] [&_blockquote>*]:leading-[1.23]`
+                  : `font-cyrillic text-[1.4rem] xl:text-[1.235rem] [&_p]:leading-[1.65]! [&_blockquote]:text-2xl! xl:[&_blockquote]:text-[1.32rem]! [&_blockquote>*]:leading-[1.5]!`
             }`}
             dangerouslySetInnerHTML={{ __html: article.content }}
          />
