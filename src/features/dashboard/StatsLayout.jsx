@@ -5,7 +5,6 @@ import { CiBookmark } from 'react-icons/ci';
 import { useUsers } from '../../hooks/useUsers';
 import { SlHeart } from 'react-icons/sl';
 import Stats from './Stats';
-// import { FaRegBookmark, FaRegComment, FaRegHeart } from 'react-icons/fa';
 
 function StatsLayout({ articles }) {
    const { users } = useUsers();

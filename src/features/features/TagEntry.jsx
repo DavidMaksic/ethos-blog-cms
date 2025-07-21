@@ -16,6 +16,7 @@ function TagEntry({ article }) {
    } = useUpdateTagFeature();
 
    const { authors } = useAuthors();
+   const theAuthor = authors?.find((item) => item.id === article.author_id);
 
    const { refetch } = useEntry();
    const boolean = false;
@@ -29,8 +30,6 @@ function TagEntry({ article }) {
    useEffect(() => {
       if (isSuccess) refetch();
    }, [isSuccess, refetch]);
-
-   const theAuthor = authors.find((item) => item.id === article.author_id);
 
    return (
       <>
@@ -54,7 +53,7 @@ function TagEntry({ article }) {
                            format(new Date(article.created_at), 'MMM dd, yyyy')}
                      </span>
                      <span className="text-lg">•</span>
-                     <span>{theAuthor.full_name}</span>
+                     <span>{theAuthor?.full_name}</span>
                   </div>
 
                   <h2
