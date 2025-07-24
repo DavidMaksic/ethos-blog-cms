@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDeleteArticle } from './useDeleteArticle';
+import { useCurrentAuthor } from '../authentication/useCurrentAuthor';
 import { AnimatePresence } from 'motion/react';
 import { PiArticleMedium } from 'react-icons/pi';
 import { LuPencilLine } from 'react-icons/lu';
 import { useAuthors } from '../authentication/useAuthors';
 import { useState } from 'react';
-import { useUser } from '../authentication/useUser';
 import { CgClose } from 'react-icons/cg';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
@@ -20,7 +20,7 @@ function ArchiveRow({ article }) {
    const { id, created_at, image, title, status } = article;
 
    const { isPending, authors } = useAuthors();
-   const { user: currentAuthor } = useUser();
+   const { user: currentAuthor } = useCurrentAuthor();
 
    const { isDeleting, deleteArticle } = useDeleteArticle();
    const [openDelete, setOpenDelete] = useState(false);

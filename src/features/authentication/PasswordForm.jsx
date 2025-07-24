@@ -1,6 +1,6 @@
-import { useUpdateUser } from './useUpdateUser';
+import { useCurrentAuthor } from './useCurrentAuthor';
+import { useUpdateAuthor } from './useUpdateAuthor';
 import { useForm } from 'react-hook-form';
-import { useUser } from './useUser';
 
 import PasswordButton from '../../ui/Buttons/PasswordButton';
 import FormItem from '../../ui/Form/FormItem';
@@ -8,13 +8,13 @@ import FormRow from '../../ui/Form/FormRow';
 import Form from '../../ui/Form/Form';
 
 function PasswordForm() {
-   const { isPending, updateUser } = useUpdateUser();
+   const { isPending, updateAuthor } = useUpdateAuthor();
    const { register, handleSubmit, formState, getValues } = useForm();
    const { errors } = formState;
-   const { user } = useUser();
+   const { user } = useCurrentAuthor();
 
    function onSubmit({ password }) {
-      updateUser({ password });
+      updateAuthor({ password });
    }
 
    return (

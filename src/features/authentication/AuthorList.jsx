@@ -1,13 +1,13 @@
+import { useCurrentAuthor } from './useCurrentAuthor';
 import { useAuthors } from './useAuthors';
-import { useUser } from './useUser';
 import { motion } from 'motion/react';
 
 import AuthorSkeleton from '../../ui/Skeletons/AuthorSkeleton';
 import AuthorItem from './AuthorItem';
 
 function AuthorList() {
+   const { user } = useCurrentAuthor();
    const { isPending, authors } = useAuthors();
-   const { user } = useUser();
    const theAuthor = authors?.find((item) => item.id === user.id);
 
    if (isPending) return <AuthorSkeleton />;

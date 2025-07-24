@@ -9,6 +9,7 @@ import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { useEffect, useState } from 'react';
 import { useDeleteArticle } from '../features/archive/useDeleteArticle';
 import { useGetCategories } from '../features/tags/useGetCategories';
+import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { useFindArticle } from '../features/archive/useFindArticle';
 import { useFullscreen } from '../context/FullscreenContext';
 import { IoMoonOutline } from 'react-icons/io5';
@@ -16,7 +17,6 @@ import { useDarkMode } from '../context/DarkModeContext';
 import { FiChevronUp } from 'react-icons/fi';
 import { useAuthors } from '../features/authentication/useAuthors';
 import { useScroll } from '../hooks/useScroll';
-import { useUser } from '../features/authentication/useUser';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ function Article() {
    // - Data fetching
    const { isPending: isLoading, authors } = useAuthors();
    const { article, isPending } = useFindArticle();
-   const { user: currentAuthor } = useUser();
+   const { user: currentAuthor } = useCurrentAuthor();
 
    // - Category logic
    const { categories } = useGetCategories();

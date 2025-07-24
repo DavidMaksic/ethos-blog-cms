@@ -1,11 +1,11 @@
+import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useUser } from '../features/authentication/useUser';
 import Spinner from '../ui/Spinner';
 
 function ProtectedRoute({ children }) {
    const navigate = useNavigate();
-   const { isPending, isAuthenticated } = useUser();
+   const { isPending, isAuthenticated } = useCurrentAuthor();
 
    useEffect(() => {
       if (!isAuthenticated && !isPending) navigate('/login');

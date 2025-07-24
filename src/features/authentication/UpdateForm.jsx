@@ -1,11 +1,11 @@
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { updateUsersTable } from '../../services/apiAuth';
 import { useRef, useState } from 'react';
-import { useUpdateUser } from './useUpdateUser';
+import { useCurrentAuthor } from './useCurrentAuthor';
+import { useUpdateAuthor } from './useUpdateAuthor';
 import { useAuthors } from '../authentication/useAuthors';
 import { LuPencil } from 'react-icons/lu';
 import { useForm } from 'react-hook-form';
-import { useUser } from './useUser';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
@@ -14,11 +14,11 @@ import FormRow from '../../ui/Form/FormRow';
 import Form from '../../ui/Form/Form';
 
 function UpdateForm() {
-   const { isPending, updateUser } = useUpdateUser();
+   const { user: currentAuthor } = useCurrentAuthor();
+   const { isPending, updateAuthor } = useUpdateAuthor();
    const { register, handleSubmit, formState } = useForm();
    const { errors } = formState;
 
-   const { user: currentAuthor } = useUser();
    const {
       id,
       email,
@@ -52,7 +52,12 @@ function UpdateForm() {
    function onSubmit({ full_name, description_en, description_srb }) {
       const profile_image = currentImage;
 
-      updateUser({ full_name, description_en, description_srb, profile_image });
+      updateAuthor({
+         full_name,
+         description_en,
+         description_srb,
+         profile_image,
+      });
       updateUsersTable({
          full_name,
          profile_image,

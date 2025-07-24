@@ -33,15 +33,12 @@ export async function logout() {
    if (error) throw new Error(error.message);
 }
 
-export async function getCurrentUser() {
-   const { data: session } = await supabase.auth.getSession();
-   if (!session.session) return null;
-
-   const { data, error } = await supabase.auth.getUser();
+export async function getUsers() {
+   const { data, error } = await supabase.from('users').select('id, bookmarks');
 
    if (error) throw new Error(error.message);
 
-   return data?.user;
+   return data;
 }
 
 export async function getAuthors() {
@@ -55,15 +52,18 @@ export async function getAuthors() {
    return data;
 }
 
-export async function getUsers() {
-   const { data, error } = await supabase.from('users').select('id, bookmarks');
+export async function getCurrentAuthor() {
+   const { data: session } = await supabase.auth.getSession();
+   if (!session.session) return null;
+
+   const { data, error } = await supabase.auth.getUser();
 
    if (error) throw new Error(error.message);
 
-   return data;
+   return data?.user;
 }
 
-export async function updateUser({
+export async function updateAuthor({
    password,
    full_name,
    description_en,
@@ -108,15 +108,13 @@ export async function updateUser({
    if (imageUploadError) throw new Error(imageUploadError.message);
 
    // 4. Update profile image in the user
-   const { data: updatedUser, error: error2 } = await supabase.auth.updateUser({
+   const { error: error2 } = await supabase.auth.updateUser({
       data: {
          profile_image: `${supabaseUrl}/storage/v1/object/public/profile_images/${fileName}`,
       },
    });
 
    if (error2) throw new Error(error2.message);
-
-   return updatedUser;
 }
 
 export async function updateUsersTable(user) {

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { LuCloudUpload, LuSunMedium } from 'react-icons/lu';
 import { useGetCategories } from '../tags/useGetCategories';
 import { useCreateArticle } from '../archive/useCreateArticle';
+import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { HiOutlineInbox } from 'react-icons/hi';
 import { useFullscreen } from '../../context/FullscreenContext';
@@ -13,7 +14,6 @@ import { useDarkMode } from '../../context/DarkModeContext';
 import { insertAlert } from '../../utils/helpers';
 import { FiChevronUp } from 'react-icons/fi';
 import { useScroll } from '../../hooks/useScroll';
-import { useUser } from '../../features/authentication/useUser';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -142,7 +142,7 @@ function Creator() {
    const { setScroll: setBottomScroll, ref: bottomRef } = useScroll();
 
    // - Other
-   const { user } = useUser();
+   const { user } = useCurrentAuthor();
    const { isDarkMode, toggleDarkMode } = useDarkMode();
    const { isPending, createArticle } = useCreateArticle();
 

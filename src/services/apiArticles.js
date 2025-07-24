@@ -69,6 +69,7 @@ export async function createArticle(newArticle) {
 }
 
 export async function deleteArticle(article) {
+   // 1. Delete article
    const { error } = await supabase
       .from('articles')
       .delete()
@@ -76,13 +77,107 @@ export async function deleteArticle(article) {
 
    if (error) throw new Error('Article could not be deleted');
 
-   // - Delete image from DB
+   // 2. Delete image from DB
    const imageName = article.image.split('/').pop();
-   const { error: imageError } = await supabase.storage
+   const { error: image2 } = await supabase.storage
       .from('article_images')
       .remove([imageName]);
 
-   if (imageError) throw new Error('Image could not be deleted from database');
+   if (image2) throw new Error('Image could not be deleted from database');
+
+   // 3. Delete comments on this article
+   const { error3 } = await supabase
+      .from('comments')
+      .delete()
+      .eq('article_id', article.id);
+
+   if (error3) throw new Error('Comments could not be deleted');
+
+   // 5. Delete replies on this article
+   const { error4 } = await supabase
+      .from('replies')
+      .delete()
+      .eq('article_id', article.id);
+
+   if (error4) throw new Error('Replies could not be deleted');
+
+   // 6. Fetch all categories
+   const { data: categories, error5 } = await supabase
+      .from('categories')
+      .select('id, articles');
+
+   if (error5) throw new Error('Categories could not be fetched');
+
+   // 7. Delete article reference in all categories
+   const updatePromises = categories.map(async (category) => {
+      try {
+         const articles = JSON.parse(category.articles);
+         const filtered = articles.filter((item) => item !== article.id);
+
+         const { error } = await supabase
+            .from('categories')
+            .update({ articles: filtered })
+            .eq('id', category.id);
+
+         if (error) throw new Error('Category could not be updated');
+      } catch (err) {
+         console.error(err);
+      }
+   });
+
+   await Promise.all(updatePromises);
+
+   // 8. Fetch all bookmarks in users table
+   const { data: bookmarks, error6 } = await supabase
+      .from('users')
+      .select('id, bookmarks');
+
+   if (error6) throw new Error('Bookmarks could not be fetched');
+
+   // 9. Delete article reference in all bookmarks
+   const updatePromise = bookmarks.map(async (user) => {
+      try {
+         const bookmarks = JSON.parse(user.bookmarks);
+         const filtered = bookmarks.filter((item) => item !== article.id);
+
+         const { error } = await supabase
+            .from('users')
+            .update({ bookmarks: filtered })
+            .eq('id', user.id);
+
+         if (error) throw new Error('Bookmark could not be updated');
+      } catch (err) {
+         console.error(err);
+      }
+   });
+
+   await Promise.all(updatePromise);
+
+   // 10. Fetch all likes in users table
+   const { data: likes, error7 } = await supabase
+      .from('users')
+      .select('id, liked');
+
+   if (error7) throw new Error('Liked article IDs could not be fetched');
+
+   // 11. Delete article reference in all likes array
+   const updateAllPromises = likes.map(async (user) => {
+      try {
+         const likes = JSON.parse(user.liked);
+         const filtered = likes.filter((item) => item !== article.id);
+
+         const { error } = await supabase
+            .from('users')
+            .update({ liked: filtered })
+            .eq('id', user.id);
+
+         if (error) throw new Error('Liked article IDs could not be updated');
+      } catch (err) {
+         console.error(err);
+      }
+   });
+
+   await Promise.all(updateAllPromises);
 }
 
 export async function updateArticle(article) {

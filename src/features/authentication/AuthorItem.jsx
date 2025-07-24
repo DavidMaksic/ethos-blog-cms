@@ -1,10 +1,10 @@
 import { HiOutlineUserCircle } from 'react-icons/hi2';
+import { useCurrentAuthor } from '../authentication/useCurrentAuthor';
 import { TbSettings } from 'react-icons/tb';
-import { useUser } from '../authentication/useUser';
 import { Link } from 'react-router-dom';
 
 function AuthorItem({ author, activeUser }) {
-   const { user: currentAuthor } = useUser();
+   const { user: currentAuthor } = useCurrentAuthor();
 
    if (activeUser?.id === author?.id) return;
 

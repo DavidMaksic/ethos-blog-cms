@@ -1,8 +1,8 @@
 import { HiOutlineUserCircle } from 'react-icons/hi2';
-import { useUser } from '../../features/authentication/useUser';
+import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 
 function HeaderUser() {
-   const { user } = useUser();
+   const { user } = useCurrentAuthor();
    const { full_name, profile_image } = user.user_metadata;
 
    return (
