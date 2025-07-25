@@ -128,26 +128,30 @@ function Article() {
                      setLocalFullscreen={setLocalFullscreen}
                   />
 
-                  <div className="text-primary-300 text-2xl pointer-events-none">
+                  <div
+                     className={`text-primary-300 text-2xl pointer-events-none ${
+                        currentAuthor?.email !== theAuthor?.email && 'hidden'
+                     }`}
+                  >
                      |
                   </div>
 
-                  <div className="flex items-center gap-3">
-                     {currentAuthor?.email === theAuthor?.email && (
-                        <>
-                           <Link to={`/archive/edit/:${article.id}`}>
-                              <LuPencilLine className="size-10 p-2 stroke-[1.6px] hover:bg-primary-200/30 dark:hover:bg-primary-300/30 text-primary-400 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 cursor-pointer rounded-lg transition-200" />
-                           </Link>
+                  {currentAuthor?.email === theAuthor?.email && (
+                     <div className="flex items-center gap-3">
+                        <Link to={`/archive/edit/:${article.id}`}>
+                           <LuPencilLine className="size-10 p-2 stroke-[1.6px] hover:bg-primary-200/30 dark:hover:bg-primary-300/30 text-primary-400 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 cursor-pointer rounded-lg transition-200" />
+                        </Link>
 
-                           <AiFillCloseCircle
-                              className="size-10 p-2 hover:bg-red-200/20 dark:hover:bg-red-300/20 text-[#f98d8d]/80 hover:text-[#f98d8d] dark:text-red-300/70 dark:hover:text-red-300 rounded-lg transition-200 cursor-pointer"
-                              onClick={() => setOpenDelete((isOpen) => !isOpen)}
-                           />
-                        </>
-                     )}
-                  </div>
+                        <AiFillCloseCircle
+                           className="size-10 p-2 hover:bg-red-200/20 dark:hover:bg-red-300/20 text-[#f98d8d]/80 hover:text-[#f98d8d] dark:text-red-300/70 dark:hover:text-red-300 rounded-lg transition-200 cursor-pointer"
+                           onClick={() => setOpenDelete((isOpen) => !isOpen)}
+                        />
+                     </div>
+                  )}
 
-                  <div className="text-primary-300 text-2xl pointer-events-none">
+                  <div
+                     className={`text-primary-300 text-2xl pointer-events-none `}
+                  >
                      |
                   </div>
 
