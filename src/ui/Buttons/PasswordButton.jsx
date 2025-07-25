@@ -6,7 +6,7 @@ function PasswordButton({ handler, isPending, loadingText, children }) {
          <button
             className="flex items-center gap-3 text-4xl text-primary-400 hover:text-primary-500 px-6 py-3 dark:shadow-none rounded-full border-2 border-primary-300 hover:border-primary-400 transition-[color,border] disabled:!cursor-default font-logo"
             type="submit"
-            onClick={handler}
+            onClick={() => handler()}
          >
             {isPending ? (
                <>
