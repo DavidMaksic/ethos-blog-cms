@@ -92,7 +92,7 @@ function Article() {
             </h3>
          </div>
 
-         <div className="flex flex-col border bg-white/50 dark:bg-transparent border-primary-300/70 dark:border-quaternary rounded-3xl mt-3 shadow-article dark:shadow-none transition-bg_border">
+         <div className="flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-article dark:shadow-menu-dark transition-bg_border">
             <img
                className="rounded-3xl h-[24rem] xl:h-[21rem] object-cover opacity-95 dark:opacity-75"
                src={article.image}
