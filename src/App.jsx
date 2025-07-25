@@ -30,10 +30,10 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: Make features take position better
+// TODO: Admin permissions
 // TODO: Show comments in articles
 // TODO: Comment and users table
-// TODO: Admin permissions
-// TODO: Media queries
 // TODO: Footnotes
 // TODO: I18n
 

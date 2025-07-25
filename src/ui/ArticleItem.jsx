@@ -35,9 +35,9 @@ function ArticleItem({
    return (
       <Link
          to={isLink && `/archive/${id}`}
-         className={`grid grid-cols-[2fr_1.2fr]! gap-x-6 h-max rounded-2xl border border-quaternary/80 dark:border-quaternary shadow-xs dark:shadow-sm transition-bg hover:translate-x-1 group transition duration-200 ${
+         className={`grid grid-cols-[2fr_1.2fr]! gap-x-6 h-max rounded-2xl border bg-white dark:bg-primary-300/10 border-quaternary/80 dark:border-primary-300/15 shadow-xs dark:shadow-sm transition-bg hover:translate-x-1 group transition duration-200 ${
             openID === id &&
-            'bg-accent-300/40 text-primary-600 dark:bg-accent-300/40'
+            'bg-accent-300/40! text-primary-600 dark:bg-accent-300/40!'
          }`}
          onClick={handleClick}
       >

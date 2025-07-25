@@ -12,6 +12,7 @@ function StatsLayout({ articles }) {
 
    const numAuthors = users?.length;
    const totalLikes = articles.reduce((sum, item) => sum + item.likes, 0);
+
    const totalComments = comments?.length;
    const totalBookmarks = users
       ?.map((item) => JSON.parse(item.bookmarks))
