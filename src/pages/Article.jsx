@@ -210,7 +210,11 @@ function Article() {
 
          <div className="absolute top-[-120px] left-0" ref={ref} />
 
-         <Options articleID={article.id}>
+         <Options
+            currentAuthor={currentAuthor}
+            theAuthor={theAuthor}
+            articleID={article.id}
+         >
             <FiChevronUp
                className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl"
                onClick={() => setScroll(true)}

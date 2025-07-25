@@ -8,7 +8,14 @@ import { useFullscreen } from '../context/FullscreenContext';
 import { FiChevronDown } from 'react-icons/fi';
 import { IoOptions } from 'react-icons/io5';
 
-function Options({ articleID, setBottomScroll, isEdit = false, children }) {
+function Options({
+   currentAuthor,
+   theAuthor,
+   articleID,
+   setBottomScroll,
+   isEdit = false,
+   children,
+}) {
    const [openMenu, setOpenMenu] = useState(false);
    const ref = useOutsideClick(() => setOpenMenu((isOpen) => !isOpen), false);
 
@@ -71,7 +78,10 @@ function Options({ articleID, setBottomScroll, isEdit = false, children }) {
 
                   {headings.length && !isEdit ? (
                      <LuTableOfContents
-                        className="pt-1 px-3.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 transition mb-0.5 rounded-2xl"
+                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 transition rounded-2xl  ${
+                           currentAuthor?.email !== theAuthor?.email &&
+                           'rounded-b-[20px] mb-1 mt-0.5'
+                        }`}
                         onClick={(e) => {
                            e.stopPropagation();
                            setOpenTable((isOpen) => !isOpen);
@@ -79,11 +89,11 @@ function Options({ articleID, setBottomScroll, isEdit = false, children }) {
                      />
                   ) : null}
 
-                  {articleID && (
+                  {currentAuthor?.email === theAuthor?.email && articleID ? (
                      <Link to={`/archive/edit/:${articleID}`}>
                         <LuPencilLine className="py-3 pb-5 mt-1.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 stroke-[1.7px] rounded-b-[20px] rounded-2xl mb-1" />
                      </Link>
-                  )}
+                  ) : null}
 
                   <AnimatePresence>
                      {openTable && (
