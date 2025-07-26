@@ -27,7 +27,7 @@ function AuthorItem({ author, activeUser }) {
       >
          {profile_image ? (
             <img
-               className="block size-30 xl:size-26 aspect-square object-cover object-center rounded-[50%] opacity-90"
+               className="block size-30 xl:size-26 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
                src={profile_image}
                alt="User image"
             />
