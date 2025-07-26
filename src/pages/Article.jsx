@@ -103,7 +103,7 @@ function Article() {
                <div className="flex gap-4 xl:gap-3.5 items-center">
                   {theAuthor?.profile_image ? (
                      <img
-                        className="block size-12 xl:size-10 aspect-square object-cover object-center rounded-[50%] dark:opacity-80"
+                        className="block size-12 xl:size-10 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
                         src={theAuthor.profile_image}
                         alt="Author profile image"
                      />

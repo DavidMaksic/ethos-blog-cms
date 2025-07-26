@@ -9,7 +9,7 @@ function HeaderUser() {
       <div className="flex gap-3 items-center p-2 px-1 text-[0.94rem] font-medium">
          {profile_image ? (
             <img
-               className="block size-9 aspect-square object-cover object-center rounded-[50%] opacity-80 transition-200"
+               className="block size-9 aspect-square object-cover object-center rounded-[50%] dark:opacity-90 transition-200"
                src={profile_image}
                alt="User image"
             />

@@ -273,7 +273,7 @@ function EditForm() {
                   <img
                      ref={imageRef}
                      src={currentImage}
-                     className="object-cover h-31 w-60 object-center rounded-3xl opacity-80 dark:opacity-75 border border-primary-300 dark:border-quaternary transition-border cursor-pointer"
+                     className="object-cover h-31 w-60 object-center rounded-3xl dark:opacity-90 border border-primary-300 dark:border-quaternary transition-border cursor-pointer"
                   />
 
                   <input

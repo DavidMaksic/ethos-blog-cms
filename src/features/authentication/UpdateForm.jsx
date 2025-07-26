@@ -98,7 +98,7 @@ function UpdateForm() {
                >
                   {currentImage || profile_image ? (
                      <img
-                        className="block aspect-square object-cover object-center rounded-full opacity-80 dark:opacity-75 border border-quaternary"
+                        className="block aspect-square object-cover object-center rounded-full dark:opacity-90 border border-quaternary"
                         src={profile_image}
                         ref={imageRef}
                         alt="User profile image"
