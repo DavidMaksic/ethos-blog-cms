@@ -36,7 +36,7 @@ function SignupForm() {
 
    return (
       <Form isPending={isPending}>
-         <FormRow columns="grid-cols-[32rem]">
+         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[34rem]">
             <FormItem label="Full name" error={errors?.full_name?.message}>
                <input
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none"
@@ -57,7 +57,7 @@ function SignupForm() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[32rem]">
+         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[34rem]">
             <FormItem label="Email address" error={errors?.email?.message}>
                <input
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none"
@@ -75,7 +75,7 @@ function SignupForm() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[32rem]">
+         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[34rem]">
             <FormItem label="Password" error={errors?.password?.message}>
                <input
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none mb-2"
@@ -97,7 +97,7 @@ function SignupForm() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[32rem]">
+         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[34rem]">
             <FormItem
                label="Repeat password"
                error={errors?.passwordConfirm?.message}
