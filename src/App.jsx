@@ -30,6 +30,9 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: When clicking any options button close options modal
+// TODO: Update options in CMS to look the same as in blog
+
 // TODO: Make features take position better
 // TODO: Admin permissions
 // TODO: Show comments in articles

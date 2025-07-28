@@ -57,7 +57,7 @@ function Options({
    return (
       <>
          <IoOptions
-            className="fixed bottom-13 right-24 xl:right-7 size-16 hover:bg-primary-100 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
+            className="fixed bottom-13 xl:bottom-10 right-24 xl:right-7 size-16 hover:bg-primary-100 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
             onClick={(e) => {
                e.stopPropagation();
                setOpenMenu((isOpen) => !isOpen);
@@ -67,7 +67,7 @@ function Options({
          <AnimatePresence>
             {openMenu && (
                <motion.ul
-                  className="fixed bottom-32 right-24 xl:right-7 flex flex-col items-center border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1"
+                  className="fixed bottom-32 xl:bottom-30 right-24 xl:right-7 flex flex-col items-center border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1"
                   ref={ref}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
