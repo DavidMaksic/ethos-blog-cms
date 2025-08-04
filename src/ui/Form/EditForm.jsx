@@ -167,6 +167,7 @@ function EditForm() {
          oldImage,
          content: contentHTML,
          categoryID,
+         featured: false,
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
          flag: localArticle.flag,

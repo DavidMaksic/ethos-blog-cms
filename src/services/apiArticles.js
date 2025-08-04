@@ -183,8 +183,9 @@ export async function deleteArticle(article) {
 export async function updateArticle(article) {
    const isFile = !article.image?.startsWith?.(supabaseUrl);
 
+   // 1. IMAGE WAS CHANGED
    if (isFile) {
-      // - 1. Delete old image from DB
+      // - Delete old image from DB
       const oldImageName = article.oldImage.split('/').pop();
 
       const { error: imageError } = await supabase.storage
@@ -194,10 +195,10 @@ export async function updateArticle(article) {
       if (imageError)
          throw new Error('Image could not be deleted from database');
 
-      // - 2. Upload new image
+      // - Upload new image
       const [imageName, imagePath] = createImagePath(article);
 
-      // - 3. Edit article with new image
+      // - Edit article with new image
       const { error } = await supabase
          .from('articles')
          .update({
@@ -205,6 +206,7 @@ export async function updateArticle(article) {
             description: article.description,
             content: article.content,
             categoryID: article.categoryID,
+            featured: article.featured,
             status: article.status,
             language: article.language,
             flag: article.flag,
@@ -215,13 +217,41 @@ export async function updateArticle(article) {
 
       if (error) throw new Error('Article could not be updated');
 
-      // - 4. Upload new image
+      // - Upload new image
       const { error: storageError } = await supabase.storage
          .from('article_images')
          .upload(imageName, article.image);
 
       if (storageError) throw new Error('Article image could not be updated');
+
+      // Fetch all categories
+      const { data: categories, error2 } = await supabase
+         .from('categories')
+         .select('id, articles');
+
+      if (error2) throw new Error('Categories could not be fetched');
+
+      // Delete article reference in all categories
+      const updatePromises = categories.map(async (category) => {
+         try {
+            const articles = JSON.parse(category.articles);
+            const filtered = articles.filter((item) => item !== article.id);
+
+            const { error } = await supabase
+               .from('categories')
+               .update({ articles: filtered })
+               .eq('id', category.id);
+
+            if (error) throw new Error('Category could not be updated');
+         } catch (err) {
+            console.error(err);
+         }
+      });
+
+      await Promise.all(updatePromises);
    }
+
+   // 2. IMAGE WASN'T CHANGED
 
    // - Edit article with old image
    const { error } = await supabase
@@ -231,6 +261,7 @@ export async function updateArticle(article) {
          description: article.description,
          content: article.content,
          categoryID: article.categoryID,
+         featured: article.featured,
          status: article.status,
          language: article.language,
          flag: article.flag,
@@ -239,6 +270,32 @@ export async function updateArticle(article) {
       .select();
 
    if (error) throw new Error('Article could not be updated');
+
+   // - Fetch all categories
+   const { data: categories, error2 } = await supabase
+      .from('categories')
+      .select('id, articles');
+
+   if (error2) throw new Error('Categories could not be fetched');
+
+   // - Delete article reference in all categories
+   const updatePromises = categories.map(async (category) => {
+      try {
+         const articles = JSON.parse(category.articles);
+         const filtered = articles.filter((item) => item !== article.id);
+
+         const { error } = await supabase
+            .from('categories')
+            .update({ articles: filtered })
+            .eq('id', category.id);
+
+         if (error) throw new Error('Category could not be updated');
+      } catch (err) {
+         console.error(err);
+      }
+   });
+
+   await Promise.all(updatePromises);
 }
 
 export async function getArticlesAfterDate(date) {
