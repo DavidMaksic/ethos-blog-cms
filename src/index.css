@@ -289,7 +289,7 @@
    }
 
    .grid-table {
-      @apply grid grid-cols-[1.5fr_2.5fr_0.9fr_0.9fr_1.3fr_0.6fr] gap-x-16 items-center;
+      @apply grid grid-cols-[11rem_2.5fr_0.9fr_0.9fr_1.3fr_0.6fr] gap-x-16 items-center;
    }
 
    .label {
