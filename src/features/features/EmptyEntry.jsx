@@ -23,7 +23,7 @@ function EmptyEntry({ currentTag }) {
          <AnimatePresence>
             {openModal && (
                <Modal
-                  style="min-h-[560px] w-[60rem]"
+                  style="w-[60rem]"
                   closeModal={() => {
                      setSearchParams('');
                      setOpenModal(false);

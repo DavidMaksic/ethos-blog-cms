@@ -71,11 +71,11 @@ function MainFeatures() {
             <AnimatePresence>
                {openModal && (
                   <Modal
-                     style="min-h-[560px] w-[60rem]"
                      closeModal={() => {
                         setSearchParams('');
                         setOpenModal(false);
                      }}
+                     style="w-[60rem]"
                   >
                      <MainFeatureModal
                         onClose={() => {
