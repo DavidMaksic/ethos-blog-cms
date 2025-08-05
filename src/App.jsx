@@ -30,8 +30,8 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: In CMS, make modal list scrollable in features
 // TODO: When clicking any options button close options modal
-// TODO: Update options in CMS to look the same as in blog
 
 // TODO: Make features take position better
 // TODO: Admin permissions
