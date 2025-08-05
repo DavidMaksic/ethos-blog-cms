@@ -1,18 +1,18 @@
 import { LuPencilLine, LuTableOfContents } from 'react-icons/lu';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import { useFullscreen } from '../context/FullscreenContext';
-import { FiChevronDown } from 'react-icons/fi';
 import { IoOptions } from 'react-icons/io5';
+import { useScroll } from '../hooks/useScroll';
 
 function Options({
    currentAuthor,
    theAuthor,
    articleID,
-   setBottomScroll,
    isEdit = false,
    children,
 }) {
@@ -24,6 +24,10 @@ function Options({
 
    const [openTable, setOpenTable] = useState(false);
    const tableRef = useOutsideClick(() => setOpenTable((isOpen) => !isOpen));
+
+   // - Scroll logic
+   const { setScroll: setTopScroll, ref: topRef } = useScroll();
+   const { setScroll: setBottomScroll, ref: bottomRef } = useScroll();
 
    const [headings, setHeadings] = useState([]);
    const [activeId, setActiveId] = useState();
@@ -56,6 +60,9 @@ function Options({
 
    return (
       <>
+         <div className="absolute top-[-120px] left-0" ref={topRef} />
+         <div className="absolute bottom-0 left-0" ref={bottomRef} />
+
          <IoOptions
             className="fixed bottom-13 xl:bottom-10 right-24 xl:right-7 size-16 hover:bg-primary-100 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
             onClick={(e) => {
@@ -74,13 +81,18 @@ function Options({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.05 }}
                >
+                  <FiChevronUp
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl"
+                     onClick={() => setTopScroll(true)}
+                  />
+
                   {children}
 
                   {headings.length && !isEdit ? (
                      <LuTableOfContents
                         className={`py-1 px-3.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 transition rounded-2xl  ${
                            currentAuthor?.email !== theAuthor?.email &&
-                           'rounded-b-[20px] mb-1 mt-0.5'
+                           'mb-1 mt-0.5'
                         }`}
                         onClick={(e) => {
                            e.stopPropagation();
@@ -91,7 +103,7 @@ function Options({
 
                   {currentAuthor?.email === theAuthor?.email && articleID ? (
                      <Link to={`/archive/edit/:${articleID}`}>
-                        <LuPencilLine className="py-3 pb-5 mt-1.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 stroke-[1.7px] rounded-b-[20px] rounded-2xl mb-1" />
+                        <LuPencilLine className="py-4 mt-1.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 stroke-[1.7px] rounded-2xl" />
                      </Link>
                   ) : null}
 
@@ -136,12 +148,10 @@ function Options({
                      )}
                   </AnimatePresence>
 
-                  {!articleID && (
-                     <FiChevronDown
-                        className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl"
-                        onClick={() => setBottomScroll(true)}
-                     />
-                  )}
+                  <FiChevronDown
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl"
+                     onClick={() => setBottomScroll(true)}
+                  />
                </motion.ul>
             )}
          </AnimatePresence>

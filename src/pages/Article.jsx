@@ -14,9 +14,7 @@ import { useFindArticle } from '../features/archive/useFindArticle';
 import { useFullscreen } from '../context/FullscreenContext';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../context/DarkModeContext';
-import { FiChevronUp } from 'react-icons/fi';
 import { useAuthors } from '../features/authentication/useAuthors';
-import { useScroll } from '../hooks/useScroll';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
@@ -43,9 +41,6 @@ function Article() {
    // - Category logic
    const { categories } = useGetCategories();
    const category = categories?.find((item) => item.id === article?.categoryID);
-
-   // - Scroll logic
-   const { setScroll, ref } = useScroll();
 
    // - Dark mode logic
    const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -208,18 +203,11 @@ function Article() {
             </div>
          </div>
 
-         <div className="absolute top-[-120px] left-0" ref={ref} />
-
          <Options
             currentAuthor={currentAuthor}
             theAuthor={theAuthor}
             articleID={article.id}
          >
-            <FiChevronUp
-               className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl"
-               onClick={() => setScroll(true)}
-            />
-
             <button
                className="hover:bg-primary-100 dark:hover:bg-primary-200 my-0.5 rounded-2xl"
                onClick={(e) => {
