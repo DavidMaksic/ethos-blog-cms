@@ -11,10 +11,8 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { insertAlert } from '../../utils/helpers';
 import { useDarkMode } from '../../context/DarkModeContext';
-import { FiChevronUp } from 'react-icons/fi';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
-import { useScroll } from '../../hooks/useScroll';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -94,8 +92,6 @@ function EditForm() {
    // - Other
    const [isDefault, setIsDefault] = useState(true);
    const { isDarkMode, toggleDarkMode } = useDarkMode();
-   const { setScroll, ref: topRef } = useScroll();
-   const { setScroll: setBottomScroll, ref: bottomRef } = useScroll();
 
    const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
       useFullscreen();
@@ -368,15 +364,7 @@ function EditForm() {
             setLocalItem={setLocalArticle}
          />
 
-         <div className="absolute top-[-200px] left-0" ref={topRef} />
-         <div className="absolute bottom-0 left-0" ref={bottomRef} />
-
-         <Options setBottomScroll={setBottomScroll} isEdit={true}>
-            <FiChevronUp
-               className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-t-[20px] rounded-2xl mt-1"
-               onClick={() => setScroll(true)}
-            />
-
+         <Options isEdit={true}>
             <button
                className="hover:bg-primary-100 dark:hover:bg-primary-200 transition-bg my-0.5 rounded-2xl"
                onClick={(e) => {
