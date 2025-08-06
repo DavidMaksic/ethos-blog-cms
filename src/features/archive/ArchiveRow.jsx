@@ -62,7 +62,7 @@ function ArchiveRow({ article }) {
          <span
             className={`${
                status === 'drafted' ? draftedColor : publishedColor
-            } uppercase text-sm font-medium w-min px-3.5 py-1.5 rounded-full transition-200 border ${
+            } uppercase text-sm font-medium w-min px-3.5 pt-2 pb-1.5 2xl:py-1.5 xl:pt-1.5 xl:pb-2 rounded-full transition-200 border ${
                status === 'drafted' ? draftedBorder : publishedBorder
             }`}
          >

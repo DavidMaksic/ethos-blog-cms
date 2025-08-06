@@ -30,6 +30,8 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: Fix text size in edit for 2k and 4k screens
+
 // TODO: Admin permissions
 // TODO: Show comments in articles
 // TODO: Comment and users table

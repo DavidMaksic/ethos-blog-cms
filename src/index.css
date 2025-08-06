@@ -1,12 +1,11 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @import 'tailwindcss';
-@source inline("grid-cols-{1,2,3}");
 
 @theme {
    --breakpoint-*: initial;
 }
 
-@custom-variant 4k (@media (min-width: 3940px));
+@custom-variant 4k (@media (min-width: 3840px));
 @custom-variant 2k (@media (min-width: 2560px));
 @custom-variant 2xl (@media (max-width: 1580px));
 @custom-variant xl (@media (max-width: 1290px));
@@ -15,6 +14,18 @@
 @custom-variant md (@media (max-width: 768px));
 @custom-variant sm (@media (max-width: 640px));
 @custom-variant xs (@media (max-width: 450px));
+
+@media (min-width: 2560px) {
+   html {
+      font-size: 21px !important;
+   }
+}
+
+@media (min-width: 3840px) {
+   html {
+      font-size: 32px !important;
+   }
+}
 
 @media (max-width: 2000px) {
    html {
