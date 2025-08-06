@@ -207,6 +207,7 @@ export async function updateArticle(article) {
             content: article.content,
             categoryID: article.categoryID,
             featured: article.featured,
+            main_feature: article.main_feature,
             status: article.status,
             language: article.language,
             flag: article.flag,
@@ -263,6 +264,7 @@ export async function updateArticle(article) {
          categoryID: article.categoryID,
          featured: article.featured,
          status: article.status,
+         main_feature: article.main_feature,
          language: article.language,
          flag: article.flag,
       })

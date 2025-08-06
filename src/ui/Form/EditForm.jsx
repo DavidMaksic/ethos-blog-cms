@@ -164,6 +164,7 @@ function EditForm() {
          content: contentHTML,
          categoryID,
          featured: false,
+         main_feature: false,
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
          flag: localArticle.flag,
