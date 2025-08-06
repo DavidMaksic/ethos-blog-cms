@@ -39,13 +39,13 @@ function ArchiveRow({ article }) {
 
    return (
       <motion.div
-         className="grid-table xl:grid-cols-[9.5rem_4.3fr_1.4fr_0.1fr_1.7fr_1fr]! xl:gap-x-10! bg-white dark:bg-primary-200 odd:bg-[#f8f8fa] dark:odd:bg-primary-100 transition-bg last:rounded-b-xl last:[&_img]:rounded-bl-xl"
+         className="grid-table bg-white dark:bg-primary-200 odd:bg-[#f8f8fa] dark:odd:bg-primary-100 transition-bg last:rounded-b-xl last:[&_img]:rounded-bl-xl"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
       >
          <img
-            className="w-full h-24 xl:h-22 object-cover opacity-90 dark:opacity-75"
+            className="w-full h-24 object-cover opacity-90 dark:opacity-75"
             src={image}
             alt={title}
          />

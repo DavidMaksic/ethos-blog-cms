@@ -29,7 +29,7 @@ function Features() {
             </Row>
          </div>
 
-         <div className="mb-80 xl:mb-40">
+         <div className="mb-80">
             <Row>
                <UpdateSettings>
                   <TagFeatures />

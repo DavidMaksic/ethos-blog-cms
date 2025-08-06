@@ -7,11 +7,31 @@
 
 @custom-variant 4k (@media (min-width: 3940px));
 @custom-variant 2k (@media (min-width: 2560px));
-@custom-variant xl (@media (max-width: 1580px));
+@custom-variant 2xl (@media (max-width: 1580px));
+@custom-variant xl (@media (max-width: 1290px));
 @custom-variant lg (@media (max-width: 1024px));
+
 @custom-variant md (@media (max-width: 768px));
 @custom-variant sm (@media (max-width: 640px));
 @custom-variant xs (@media (max-width: 450px));
+
+@media (max-width: 2000px) {
+   html {
+      font-size: 15px;
+   }
+}
+
+@media (max-width: 1580px) {
+   html {
+      font-size: 14px;
+   }
+}
+
+@media (max-width: 1290px) {
+   html {
+      font-size: 12px;
+   }
+}
 
 @theme {
    --font-default: Poppins, sans-serif;
@@ -277,7 +297,7 @@
    }
 
    .nav-link {
-      @apply flex items-center gap-3 text-base xl:text-[0.95rem] font-medium py-3 px-7 xl:px-5 rounded-xl text-primary-600 dark:text-primary-400 hover:text-accent hover:bg-gray-50 dark:hover:bg-[#131c2479];
+      @apply flex items-center gap-3 text-base font-medium py-3 px-7 rounded-xl text-primary-600 dark:text-primary-400 hover:text-accent hover:bg-gray-50 dark:hover:bg-[#131c2479];
    }
 
    .box-shadow {
@@ -297,7 +317,7 @@
    }
 
    .bn-block-group:first-child > div:first-child .bn-inline-content {
-      @apply first-letter:font-creator first-letter:text-[8rem] xl:first-letter:text-[7rem]! first-letter:leading-24 xl:first-letter:leading-20.5 first-letter:float-left first-letter:pr-4 first-letter:pt-1.5 first-letter:font-medium first-letter:text-accent-600/60 dark:first-letter:text-accent-200/70;
+      @apply first-letter:font-creator first-letter:text-[8rem] first-letter:leading-24 first-letter:float-left first-letter:pr-4 first-letter:pt-1.5 first-letter:font-medium first-letter:text-accent-600/60 dark:first-letter:text-accent-200/70;
    }
 }
 
@@ -379,6 +399,12 @@ button,
 
 .recharts-legend-wrapper {
    right: 18px !important;
+}
+
+@media (max-width: 1290px) {
+   .recharts-legend-wrapper {
+      right: 0 !important;
+   }
 }
 
 .remove-scrollbar {
@@ -594,12 +620,26 @@ input:-webkit-autofill {
    font-size: 24px !important;
 }
 
-[data-lang='Српски'] .bn-default-styles {
-   font-size: 22.5px !important;
+@media (max-width: 1290px) {
+   [data-lang='Српски'] .bn-default-styles {
+      font-size: 20px !important;
+   }
 }
 
-[data-lang='English'] .bn-block-outer {
-   line-height: 1.49 !important;
+[data-lang='English'] .bn-container .bn-block-outer {
+   line-height: 1.4 !important;
+}
+
+@media (max-width: 1580px) {
+   [data-lang='English'] .bn-container .bn-block-outer {
+      line-height: 1.5 !important;
+   }
+}
+
+@media (max-width: 1290px) {
+   [data-lang='English'] .bn-container .bn-block-outer {
+      line-height: 1.45 !important;
+   }
 }
 
 [data-lang='Српски'] .bn-block-outer {
@@ -631,6 +671,16 @@ input:-webkit-autofill {
    }
 }
 
+@media (max-width: 1290px) {
+   [data-lang='Српски'] .bn-default-styles {
+      font-size: 16.6px !important;
+   }
+
+   [data-lang='English'] .bn-default-styles {
+      font-size: 17.85px !important;
+   }
+}
+
 .bn-default-styles {
    font-family: var(--font-cyrillic);
 }
@@ -650,8 +700,20 @@ input:-webkit-autofill {
 }
 
 .bn-editor {
-   padding-inline: 115px;
+   padding-inline: 141px;
    transition: background-color 0.2s;
+}
+
+@media (max-width: 1580px) {
+   .bn-editor {
+      padding-inline: 97px;
+   }
+}
+
+@media (max-width: 1290px) {
+   .bn-editor {
+      padding-inline: 65px;
+   }
 }
 
 [data-floating-ui-focusable] {
@@ -1059,16 +1121,27 @@ strong {
 
 [data-lang='English'] blockquote {
    font-size: 1.65rem;
-   line-height: 1.23;
+   line-height: 1.38;
 }
 
 @media (max-width: 1580px) {
    [data-lang='Српски'] blockquote {
-      font-size: 20.9px;
+      font-size: 21px;
    }
 
    [data-lang='English'] blockquote {
-      font-size: 1.5rem;
+      line-height: 1.37;
+   }
+}
+
+@media (max-width: 1290px) {
+   [data-lang='Српски'] blockquote {
+      font-size: 17.8px;
+   }
+
+   [data-lang='English'] blockquote {
+      line-height: 1.45;
+      font-size: 19.6px;
    }
 }
 

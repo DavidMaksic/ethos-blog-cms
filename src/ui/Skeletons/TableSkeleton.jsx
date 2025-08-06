@@ -12,7 +12,7 @@ function TableSkeleton() {
          animate={{ opacity: 1 }}
          transition={{ duration: 0.4 }}
       >
-         <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary dark:from-primary-50 transition duration-150" />
+         <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary transition duration-150" />
 
          <div className="space-y-8">
             <div className="h-12 bg-primary-200 dark:bg-skeleton rounded-2xl!" />

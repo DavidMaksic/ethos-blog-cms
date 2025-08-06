@@ -12,8 +12,6 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { insertAlert } from '../../utils/helpers';
-import { FiChevronUp } from 'react-icons/fi';
-import { useScroll } from '../../hooks/useScroll';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -137,10 +135,6 @@ function Creator() {
    const { register, handleSubmit, formState } = useForm();
    const { errors } = formState;
 
-   // - Scroll logic
-   const { setScroll, ref: topRef } = useScroll();
-   const { setScroll: setBottomScroll, ref: bottomRef } = useScroll();
-
    // - Other
    const { user } = useCurrentAuthor();
    const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -227,7 +221,7 @@ function Creator() {
 
    return (
       <Form isPending={isPending}>
-         <FormRow columns="grid-cols-[40rem_1fr] xl:grid-cols-[38rem_1fr]">
+         <FormRow columns="grid-cols-[40rem_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
@@ -266,7 +260,7 @@ function Creator() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[40rem_1fr] xl:grid-cols-[38rem_1fr]">
+         <FormRow columns="grid-cols-[40rem_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-primary-200 text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"
@@ -399,15 +393,7 @@ function Creator() {
             setLocalItem={setLocalArticle}
          />
 
-         <div className="absolute top-[-200px] left-0" ref={topRef} />
-         <div className="absolute bottom-0 left-0" ref={bottomRef} />
-
-         <Options setBottomScroll={setBottomScroll} isEdit={true}>
-            <FiChevronUp
-               className="py-3 size-13.5 stroke-[1.8px] hover:bg-white dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl"
-               onClick={() => setScroll(true)}
-            />
-
+         <Options isEdit={true}>
             <button
                className=" hover:bg-white dark:hover:bg-primary-200 transition-bg mt-0.5 rounded-2xl"
                onClick={(e) => {

@@ -20,7 +20,7 @@ function PasswordForm() {
    return (
       <div className="space-y-8">
          <Form isPending={isPending} hasMargin={false}>
-            <FormRow columns="grid-cols-[24rem] xl:grid-cols-[20rem]">
+            <FormRow columns="grid-cols-[24rem]">
                <FormItem label="New password" error={errors?.password?.message}>
                   <input
                      className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none mb-2"
@@ -41,7 +41,7 @@ function PasswordForm() {
                </FormItem>
             </FormRow>
 
-            <FormRow columns="grid-cols-[24rem] xl:grid-cols-[20rem]">
+            <FormRow columns="grid-cols-[24rem]">
                <FormItem
                   label="Repeat password"
                   error={errors?.passwordConfirm?.message}
@@ -71,7 +71,7 @@ function PasswordForm() {
             </FormRow>
          </Form>
 
-         <div className="label w-fit flex flex-col gap-3 font-creator bg-secondary dark:bg-primary-200 rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium box-shadow transition-200 px-20 xl:px-14 pr-24 xl:pr-16 pt-7 xl:pt-6 pb-10 xl:pb-9">
+         <div className="label w-fit flex flex-col gap-3 font-creator bg-secondary dark:bg-primary-200 rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium box-shadow transition-200 px-20 pr-24 pt-7 pb-10">
             <label>Email</label>
             <span className="text-2xl">{user.email}</span>
          </div>

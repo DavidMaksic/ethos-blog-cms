@@ -70,7 +70,7 @@ function UpdateForm() {
 
    return (
       <Form isPending={isPending}>
-         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[28rem]">
+         <FormRow columns="grid-cols-[32rem]">
             <div className="flex items-center justify-between">
                <FormItem label="Full name" error={errors?.full_name?.message}>
                   <input
@@ -120,7 +120,7 @@ function UpdateForm() {
             </div>
          </FormRow>
 
-         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[28rem]">
+         <FormRow columns="grid-cols-[32rem]">
             <FormItem
                label="Description (en)"
                error={errors?.description_en?.message}
@@ -142,7 +142,7 @@ function UpdateForm() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[32rem] xl:grid-cols-[28rem]">
+         <FormRow columns="grid-cols-[32rem]">
             <FormItem
                label="Description (srb)"
                error={errors?.description_srb?.message}

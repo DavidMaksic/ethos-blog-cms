@@ -30,7 +30,7 @@ function SubmitButton({
       >
          <Link
             to={isSuccess && to}
-            className={`flex items-center gap-5 text-5xl px-10 xl:px-8 pr-11 xl:pr-9 py-4 xl:py-3.5 pt-5 xl:pt-4 text-white font-logo hover:text-accent hover:drop-shadow-xs dark:hover:text-accent/90 transition-[color] duration-300 disabled:!cursor-default ${loadingTextStyle}`}
+            className={`flex items-center gap-5 text-5xl px-10 pr-11 py-4 pt-5 text-white font-logo hover:text-accent hover:drop-shadow-xs dark:hover:text-accent/90 transition-[color] duration-300 disabled:!cursor-default ${loadingTextStyle}`}
             type="submit"
             onClick={() => {
                handler();

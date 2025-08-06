@@ -30,6 +30,8 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: Fetch only needed data for articles
+
 // TODO: Admin permissions
 // TODO: Show comments in articles
 // TODO: Comment and users table

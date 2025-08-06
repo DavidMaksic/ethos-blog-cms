@@ -17,10 +17,10 @@ function Layout() {
          <Header />
          <Sidebar />
          <motion.main
-            className={`main px-59 pt-29 xl:pt-26 py-12 flex flex-col gap-8 xl:gap-6 transition-200 bg-primary overflow-auto remove-scrollbar h-screen ${
+            className={`main px-59 pt-29 py-12 flex flex-col gap-8 transition-200 bg-primary overflow-auto remove-scrollbar h-screen ${
                isFullscreen
-                  ? 'px-[21.5rem]! xl:px-[13.5rem]!'
-                  : 'pl-[28rem] xl:pl-[20rem] xl:pr-[7rem]'
+                  ? 'px-[21.5rem]! 2xl:px-[16.5rem]!'
+                  : 'pl-[28rem] 2xl:pl-[24.5rem] 2xl:pr-[8.5rem]'
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -35,7 +35,7 @@ function TagEntry({ article }) {
       <>
          {article ? (
             <motion.li
-               className={`relative flex h-[20rem] w-[16rem] xl:w-[15rem] border rounded-3xl group transition px-5 py-5 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center  hover:border-primary-200 ${
+               className={`relative flex h-[20rem] w-[16rem] border rounded-3xl group transition px-5 py-5 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center  hover:border-primary-200 ${
                   isDeleting && 'opacity-80! pointer-events-none'
                }`}
                initial={{ opacity: 0 }}

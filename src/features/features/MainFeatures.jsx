@@ -27,7 +27,7 @@ function MainFeatures() {
 
    return (
       <TagForm>
-         <div className="grid grid-cols-[0.5fr_2.3fr] xl:grid-cols-[0.3fr_2fr] gap-12 xl:gap-0 items-center pr-16">
+         <div className="grid grid-cols-[0.5fr_2.3fr] gap-12 items-center pr-16">
             <span className="font-extralight text-primary-400 text-base uppercase ml-1">
                Choose articles:
             </span>
@@ -61,7 +61,7 @@ function MainFeatures() {
                </>
             ) : (
                <div
-                  className="relative flex justify-center h-[22.5rem] xl:h-[20.5rem] w-full border rounded-[34px] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/10 dark:hover:bg-primary-200 border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
+                  className="relative flex justify-center h-[22.5rem] w-full border rounded-[34px] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/10 dark:hover:bg-primary-200 border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
                   onClick={() => setOpenModal((isOpen) => !isOpen)}
                >
                   <CgMathPlus className="absolute icons self-center size-11! text-primary-400/80! group-hover:text-accent-300! dark:group-hover:text-accent-400/80!" />

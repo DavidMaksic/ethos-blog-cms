@@ -11,7 +11,7 @@ function DeleteModal({ returnPage, isDeleting, isSuccess, onClose, onDelete }) {
 
    return (
       <>
-         <span className=" text-primary-600 dark:text-primary-500 text-center w-full xl:leading-13 pb-8 pt-2 border-b-1 border-b-quaternary">
+         <span className=" text-primary-600 dark:text-primary-500 text-center w-full pb-8 pt-2 border-b-1 border-b-quaternary">
             Delete this article?
          </span>
 

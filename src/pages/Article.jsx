@@ -73,13 +73,13 @@ function Article() {
 
    return (
       <motion.article
-         className="relative max-w-5xl xl:max-w-[58rem] self-center font-article flex flex-col gap-6 py-4 xl:pt-0 px-24 pb-32 transition-200"
+         className="relative max-w-5xl self-center font-article flex flex-col gap-6 py-4 px-24 pb-32 transition-200"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
       >
          <div className="space-y-2 text-center">
-            <h2 className="relative styled_text font-normal! text-6xl xl:text-[3.6rem] pb-2 bg-gradient-to-r from-gray-600 to-gray-500/90 dark:from-slate-300 dark:to-slate-300/80">
+            <h2 className="relative styled_text font-normal! text-6xl pb-2 bg-gradient-to-r from-gray-600 to-gray-500/90 dark:from-slate-300 dark:to-slate-300/80">
                {article.title}
             </h2>
             <h3 className="font-creator font-medium! text-2xl text-primary-500/80">
@@ -89,31 +89,31 @@ function Article() {
 
          <div className="flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-article dark:shadow-menu-dark transition-bg_border">
             <img
-               className="rounded-3xl h-[24rem] xl:h-[21rem] object-cover opacity-95 dark:opacity-75"
+               className="rounded-3xl h-[24rem] object-cover opacity-95 dark:opacity-75"
                src={article.image}
                alt={article.title}
             />
 
-            <div className="flex items-center justify-between gap-6 px-6 py-4 xl:py-3">
-               <div className="flex gap-4 xl:gap-3.5 items-center">
+            <div className="flex items-center justify-between gap-6 px-6 py-4">
+               <div className="flex gap-4 items-center">
                   {theAuthor?.profile_image ? (
                      <img
-                        className="block size-12 xl:size-10 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
+                        className="block size-12 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
                         src={theAuthor.profile_image}
                         alt="Author profile image"
                      />
                   ) : (
-                     <HiOutlineUserCircle className="size-12 xl:size-10 stroke-[0.5px] text-primary-400 dark:text-primary-300" />
+                     <HiOutlineUserCircle className="size-12 stroke-[0.5px] text-primary-400 dark:text-primary-300" />
                   )}
 
                   <div className="flex flex-col font-medium leading-6 self-center">
                      <div className="space-x-1.5">
                         <span>By</span>
-                        <span className="text-accent-500 dark:text-accent-200/90 xl:text-[1.2rem] font-semibold">
+                        <span className="text-accent-500 dark:text-accent-200/90 font-semibold">
                            {theAuthor?.full_name}
                         </span>
                      </div>
-                     <span className="text-base xl:text-sm">{date}</span>
+                     <span className="text-base">{date}</span>
                   </div>
                </div>
 
@@ -166,8 +166,8 @@ function Article() {
          <div
             className={`text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
                article.language === 'English'
-                  ? `font-latin text-2xl xl:text-[1.325rem] [&_p]:leading-[1.49]! [&_blockquote>*]:text-[1.65rem] xl:[&_blockquote>*]:text-[1.5rem] [&_blockquote>*]:leading-[1.23]`
-                  : `font-cyrillic text-[1.4rem] xl:text-[1.235rem] [&_p]:leading-[1.65]! [&_blockquote]:text-2xl! xl:[&_blockquote]:text-[1.32rem]! [&_blockquote>*]:leading-[1.5]!`
+                  ? `font-latin text-2xl [&_p]:leading-[1.49]!`
+                  : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.65]! [&_blockquote]:text-2xl! [&_blockquote>*]:leading-[1.5]!`
             }`}
             dangerouslySetInnerHTML={{ __html: article.content }}
          />

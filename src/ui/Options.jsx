@@ -64,7 +64,7 @@ function Options({
          <div className="absolute bottom-0 left-0" ref={bottomRef} />
 
          <IoOptions
-            className="fixed bottom-13 xl:bottom-10 right-24 xl:right-7 size-16 hover:bg-primary-100 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
+            className="fixed bottom-13 right-24 2xl:right-10 size-16 hover:bg-primary-100 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
             onClick={(e) => {
                e.stopPropagation();
                setOpenMenu((isOpen) => !isOpen);
@@ -74,7 +74,7 @@ function Options({
          <AnimatePresence>
             {openMenu && (
                <motion.ul
-                  className="fixed bottom-32 xl:bottom-30 right-24 xl:right-7 flex flex-col items-center border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1"
+                  className="fixed bottom-32 right-24 2xl:right-10 flex flex-col items-center border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1"
                   ref={ref}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -114,7 +114,7 @@ function Options({
                   <AnimatePresence>
                      {openTable && (
                         <motion.div
-                           className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-tertiary rounded-2xl bg-primary/70 dark:bg-primary/60 backdrop-blur-3xl overflow-y-auto scrollbar shadow-article xl:shadow-none dark:shadow-none"
+                           className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-tertiary rounded-2xl bg-primary/70 dark:bg-primary/60 backdrop-blur-3xl overflow-y-auto scrollbar shadow-article  dark:shadow-none"
                            initial={{ opacity: 0 }}
                            animate={{ opacity: 1 }}
                            exit={{ opacity: 0 }}

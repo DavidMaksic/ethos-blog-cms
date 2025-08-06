@@ -24,7 +24,7 @@ function MainArticle({ article, refetch, index }) {
 
    return (
       <div
-         className={`relative grid! grid-cols-[1fr_1.2fr]! xl:grid-cols-[1.5fr_1.5fr]! gap-10 xl:gap-6 pl-2 mt-7 xl:mt-3 mb-1 ${
+         className={`relative grid! grid-cols-[1fr_1.2fr]! gap-10 pl-2 mt-7 mb-1 ${
             isEditing && 'opacity-80! pointer-events-none'
          }`}
       >

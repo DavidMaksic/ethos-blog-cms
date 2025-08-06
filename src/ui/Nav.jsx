@@ -9,7 +9,7 @@ import { CiStar } from 'react-icons/ci';
 
 function Nav() {
    return (
-      <nav className="space-y-2 xl:space-y-1 w-53 xl:w-46">
+      <nav className="space-y-2 w-53">
          <NavItem to="/dashboard">
             <BiHomeAlt2 className="icons" />
             <span>Home</span>

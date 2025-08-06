@@ -8,7 +8,7 @@ function UpdateAuthor() {
    const navigate = useNavigate();
 
    return (
-      <div className="flex justify-center gap-10 xl:gap-6">
+      <div className="flex justify-center gap-10">
          <Row>
             <div className="space-y-8">
                <Row type="horizontal">

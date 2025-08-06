@@ -21,18 +21,18 @@ function AuthorItem({ author, activeUser }) {
 
    return (
       <li
-         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-200 rounded-2xl px-20 xl:px-12 py-12 box-shadow transition-200 h-full ${
+         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-200 rounded-2xl px-20 py-12 box-shadow transition-200 h-full ${
             !description_en && 'pb-18'
          }`}
       >
          {profile_image ? (
             <img
-               className="block size-30 xl:size-26 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
+               className="block size-30 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
                src={profile_image}
                alt="User image"
             />
          ) : (
-            <HiOutlineUserCircle className="size-30 xl:size-26 stroke-[0.4px] text-primary-400/70 dark:text-primary-300" />
+            <HiOutlineUserCircle className="size-30 stroke-[0.4px] text-primary-400/70 dark:text-primary-300" />
          )}
 
          <div className="flex flex-col gap-6 self-center text-center">

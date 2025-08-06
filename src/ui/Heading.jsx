@@ -1,5 +1,5 @@
 function Heading({ type, children }) {
-   const h1 = 'text-3xl xl:text-[1.6rem] font-semibold';
+   const h1 = 'text-3xl font-semibold';
    const h2 = 'text-xl font-semibold';
    const h3 = 'text-lg font-medium';
 

@@ -50,7 +50,7 @@ function ColorsTable({ input, isEdit = false, localTag, children }) {
    ]);
 
    return (
-      <div className="grid grid-cols-[45rem_1fr] xl:grid-cols-[40rem_1fr] self-start gap-14 xl:gap-8">
+      <div className="grid grid-cols-[45rem_1fr] self-start gap-14">
          <div className="flex flex-col gap-3 items-center">
             <label className="self-start">Colors</label>
             <section className="grid grid-cols-[0.2fr_1fr_1fr_1fr] self-start border border-quaternary rounded-2xl py-6 pb-8 px-4  transition-[border]">

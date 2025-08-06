@@ -7,7 +7,7 @@ function ColorTableCol({
 }) {
    return (
       <div
-         className={`${picker} flex flex-col items-center gap-6 px-14 xl:px-10 ${
+         className={`${picker} flex flex-col items-center gap-6 px-14 ${
             hasBorder && 'border-r border-r-quaternary transition-[border]'
          } ${hasMargin && 'ml-10'}`}
       >

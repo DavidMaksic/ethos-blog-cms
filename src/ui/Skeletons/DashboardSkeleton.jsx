@@ -6,7 +6,7 @@ function DashboardSkeleton() {
 
    return (
       <motion.div
-         className="relative grid grid-cols-4 grid-rows-[auto_22rem_auto] gap-6 mb-14 [&_div]:rounded-3xl [&_span]:rounded-3xl animate-skeleton"
+         className="relative grid grid-cols-4 grid-rows-[auto_23rem_auto] 2xl:grid-rows-[auto_23.5rem_auto] xl:grid-rows-[auto_26.5rem_auto] gap-6 mb-14 [&_div]:rounded-3xl [&_span]:rounded-3xl animate-skeleton"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
