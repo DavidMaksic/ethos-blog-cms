@@ -36,7 +36,7 @@ function MainFeatureModal({ onClose }) {
             <SearchAlt />
          </span>
 
-         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-y-auto scrollbar h-[470px]">
+         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-y-auto scrollbar h-[30rem]">
             {!isPending ? (
                filteredArticles?.length >= 1 ? (
                   filteredArticles?.map((item) => (

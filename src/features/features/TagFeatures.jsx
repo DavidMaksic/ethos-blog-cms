@@ -31,7 +31,7 @@ function TagFeatures() {
       <TagForm>
          <div className="flex flex-col items-center [&_label]:text-primary-400 [&_label]:font-extralight [&_label]:text-base [&_label]:uppercase">
             <section className="flex items-center self-start">
-               <div className="flex flex-col gap-3 w-60 self-start">
+               <div className="flex flex-col gap-3 w-60 2xl:w-56 xl:w-54 self-start">
                   <label className="ml-1">Select tag</label>
                   <div className="font-creator">
                      <Context setLocalItem={setLocalTag} localItem={localTag}>
@@ -41,7 +41,8 @@ function TagFeatures() {
                      </Context>
                   </div>
                </div>
-               <ul className="flex gap-8">
+
+               <ul className="flex gap-6">
                   {taggedArticles?.map((item) => (
                      <TagEntry
                         article={item}

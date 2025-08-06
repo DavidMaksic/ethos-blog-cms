@@ -35,7 +35,7 @@ function TagEntry({ article }) {
       <>
          {article ? (
             <motion.li
-               className={`relative flex h-[20rem] w-[16rem] border rounded-3xl group transition px-5 py-5 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center  hover:border-primary-200 ${
+               className={`relative flex h-[24rem] 2xl:h-[23rem] xl:h-[22rem] w-[19rem] 2xl:w-[17rem] xl:w-[16rem] border rounded-3xl group transition p-8 2xl:p-7 xl:p-6 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center hover:border-primary-200 ${
                   isDeleting && 'opacity-80! pointer-events-none'
                }`}
                initial={{ opacity: 0 }}
@@ -44,7 +44,7 @@ function TagEntry({ article }) {
                transition={{ duration: 0.3 }}
                style={{ backgroundImage: `url(${article.image})` }}
             >
-               <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary-700 dark:from-primary-200/80 z-10 pointer-events-none rounded-[20px] transition duration-300 group-hover:saturate-120" />
+               <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary-700 dark:from-primary-200/80 z-10 pointer-events-none rounded-[20px] xl:rounded-[16px] transition duration-300 group-hover:saturate-120" />
 
                <div className="z-20 self-end">
                   <div className="space-x-2 text-primary-300/80 dark:text-primary-600/60 font-creator text-base">
@@ -57,7 +57,7 @@ function TagEntry({ article }) {
                   </div>
 
                   <h2
-                     className="text-primary dark:text-primary-600/95 text-[1.4rem] font-article font-medium leading-7"
+                     className="text-primary dark:text-primary-600/95 text-2xl font-article font-medium leading-7.5"
                      style={{ textShadow: '2px 2px 12px rgba(0, 0, 0, 1)' }}
                   >
                      {article.title}

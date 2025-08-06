@@ -90,7 +90,7 @@ function CategoryUpdate() {
    }, [isSuccess]); // eslint-disable-line
 
    return (
-      <TagForm cols="1fr" isPending={isPending}>
+      <TagForm isPending={isPending}>
          <div className="flex flex-col gap-12 items-center [&_label]:text-primary-400 [&_label]:font-extralight [&_label]:text-base [&_label]:uppercase">
             <section className="flex gap-20 items-center self-start">
                <div className="flex flex-col gap-3 w-60">
