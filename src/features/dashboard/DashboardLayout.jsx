@@ -1,5 +1,4 @@
 import { useRecentArticles } from './useRecentArticles';
-import { useArticles } from '../archive/useArticles';
 import { motion } from 'motion/react';
 
 import DashboardSkeleton from '../../ui/Skeletons/DashboardSkeleton';
@@ -10,7 +9,6 @@ import Chart from './Chart';
 
 function DashboardLayout() {
    const { isPending, articles, numDays } = useRecentArticles();
-   useArticles();
 
    if (isPending) return <DashboardSkeleton />;
 
