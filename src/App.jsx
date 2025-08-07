@@ -30,8 +30,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Make archive row images wider
-// TODO: Fix article loader
+// TODO: Fix article and arhive loaders
 
 // TODO: Admin permissions
 // TODO: Show comments in articles

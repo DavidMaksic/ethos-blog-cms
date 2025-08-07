@@ -221,7 +221,7 @@ function Creator() {
 
    return (
       <Form isPending={isPending}>
-         <FormRow columns="grid-cols-[40rem_1fr] 2xl:grid-cols-[2fr_1fr]">
+         <FormRow columns="4k:grid-cols-[1.8fr_1fr]! grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
@@ -260,11 +260,11 @@ function Creator() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[40rem_1fr] 2xl:grid-cols-[2fr_1fr]">
+         <FormRow columns="4k:grid-cols-[1.8fr_1fr]! grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-primary-200 text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"
-                  minRows={3}
+                  minRows={4}
                   maxRows={4}
                   id="description"
                   type="text"
@@ -293,14 +293,14 @@ function Creator() {
             <FormItem label="Image" error={errors?.image?.message}>
                <label htmlFor="image">
                   <div
-                     className={`relative h-31 w-60 rounded-3xl cursor-pointer ${
+                     className={`relative h-39.5 w-80 rounded-3xl cursor-pointer ${
                         !currentImage &&
                         'border-2 border-dashed border-primary-300 dark:border-primary-300/60 transition-[border]'
                      }`}
                   >
                      <img
                         ref={imageRef}
-                        className={`object-cover h-31 w-60 object-center rounded-3xl dark:opacity-90 border border-primary-300 dark:border-quaternary transition-border ${
+                        className={`object-cover h-39.5 w-80 object-center rounded-3xl dark:opacity-90 border border-primary-300 dark:border-quaternary transition-border ${
                            !currentImage && 'hidden'
                         }`}
                      />
