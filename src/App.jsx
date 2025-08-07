@@ -30,7 +30,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Fix text size in edit for 2k and 4k screens
+// TODO: Make archive row images wider
 // TODO: Fix article loader
 
 // TODO: Admin permissions
