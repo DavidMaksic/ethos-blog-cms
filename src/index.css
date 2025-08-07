@@ -35,7 +35,7 @@
 
 @media (max-width: 1580px) {
    html {
-      font-size: 14px;
+      font-size: 13px;
    }
 }
 
@@ -629,7 +629,7 @@ input:-webkit-autofill {
 }
 
 [data-lang='English'] .bn-default-styles {
-   font-size: 24px !important;
+   font-size: 1.6rem !important;
 }
 
 @media (max-width: 1290px) {
@@ -650,7 +650,7 @@ input:-webkit-autofill {
 
 @media (max-width: 1290px) {
    [data-lang='English'] .bn-container .bn-block-outer {
-      line-height: 1.45 !important;
+      line-height: 1.48 !important;
    }
 }
 
@@ -714,6 +714,12 @@ input:-webkit-autofill {
 .bn-editor {
    padding-inline: 141px;
    transition: background-color 0.2s;
+}
+
+@media (min-width: 3840px) {
+   .bn-editor {
+      padding-inline: 186px;
+   }
 }
 
 @media (max-width: 1580px) {
@@ -1126,34 +1132,33 @@ strong {
    height: 33px;
 }
 
-[data-lang='Српски'] blockquote {
+[data-lang='Српски'] .bn-container blockquote {
    font-size: 1.5rem;
    line-height: 1.5;
 }
 
-[data-lang='English'] blockquote {
-   font-size: 1.65rem;
+[data-lang='English'] .bn-container blockquote {
+   font-size: 1.76rem;
    line-height: 1.38;
 }
 
 @media (max-width: 1580px) {
-   [data-lang='Српски'] blockquote {
+   [data-lang='Српски'] .bn-container blockquote {
       font-size: 21px;
    }
 
-   [data-lang='English'] blockquote {
-      line-height: 1.37;
+   [data-lang='English'] .bn-container blockquote {
+      font-size: 1.635rem;
    }
 }
 
 @media (max-width: 1290px) {
-   [data-lang='Српски'] blockquote {
+   [data-lang='Српски'] .bn-container blockquote {
       font-size: 17.8px;
    }
 
-   [data-lang='English'] blockquote {
-      line-height: 1.45;
-      font-size: 19.6px;
+   [data-lang='English'] .bn-container blockquote {
+      font-size: 1.58rem;
    }
 }
 
