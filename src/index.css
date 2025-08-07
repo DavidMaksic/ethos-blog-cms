@@ -724,7 +724,7 @@ input:-webkit-autofill {
 
 @media (max-width: 1580px) {
    .bn-editor {
-      padding-inline: 97px;
+      padding-inline: 121px;
    }
 }
 
@@ -1148,7 +1148,7 @@ strong {
    }
 
    [data-lang='English'] .bn-container blockquote {
-      font-size: 1.635rem;
+      font-size: 1.7rem;
    }
 }
 

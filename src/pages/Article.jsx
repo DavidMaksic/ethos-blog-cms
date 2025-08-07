@@ -166,7 +166,7 @@ function Article() {
          <div
             className={`text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
                article.language === 'English'
-                  ? `font-latin text-2xl [&_p]:leading-[1.49]! 4k:[&_blockquote>*]:text-[1.746rem]! 2k:[&_blockquote>*]:text-[1.701rem] [&_blockquote>*]:text-[1.65rem] [&_blockquote>*]:leading-[1.3] 2xl:[&_blockquote>*]:text-[1.635rem] xl:[&_blockquote>*]:text-[1.605rem]`
+                  ? `font-latin text-2xl [&_p]:leading-[1.49]! 4k:[&_blockquote>*]:text-[1.746rem]! 2k:[&_blockquote>*]:text-[1.701rem] [&_blockquote>*]:text-[1.65rem] 2xl:[&_blockquote>*]:text-[1.6rem] xl:[&_blockquote>*]:text-[1.605rem] [&_blockquote>*]:leading-[1.3]`
                   : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.65]! [&_blockquote]:text-2xl! [&_blockquote>*]:leading-[1.5]!`
             }`}
             dangerouslySetInnerHTML={{ __html: article.content }}
