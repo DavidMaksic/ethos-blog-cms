@@ -37,7 +37,7 @@ function FormStatus({
                   setOpen((isOpen) => !isOpen);
                }}
             >
-               <p className="absolute left-[-88px] font-creator uppercase text-xl text-primary-400">
+               <p className="absolute left-[-5.85rem] font-creator uppercase text-xl text-primary-400">
                   Status
                </p>
                <span className="py-3 w-38 pb-2 pl-7 mr-16 text-primary-400 group-hover:text-primary-500 transition-200">

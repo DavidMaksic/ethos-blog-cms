@@ -8,6 +8,7 @@ import {
    Area,
 } from 'recharts';
 import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
+import { useMediaQuery } from 'react-responsive';
 import { useDarkMode } from '../../context/DarkModeContext';
 import Heading from '../../ui/Heading';
 
@@ -51,8 +52,28 @@ function Chart({ articles, numDays }) {
            border: '#e5e7eb',
         };
 
+   const is4k = useMediaQuery({ maxWidth: 3840 });
+   const is2k = useMediaQuery({ maxWidth: 2560 });
+   const isFullHD = useMediaQuery({ maxWidth: 1920 });
+   const isXl = useMediaQuery({ maxWidth: 1290 });
+
+   let size;
+
+   if (is4k) {
+      size = 400;
+   }
+   if (is2k) {
+      size = 300;
+   }
+   if (isFullHD) {
+      size = 300;
+   }
+   if (isXl) {
+      size = 260;
+   }
+
    return (
-      <div className="col-span-full space-y-6 bg-white dark:bg-primary-200 rounded-xl py-8 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
+      <div className="col-span-full space-y-6 bg-white dark:bg-primary-200 rounded-xl py-8 2k:pl-8 2k:pr-12 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
          <Heading type="h2">
             <div className="flex justify-between items-center">
                Articles statistics
@@ -63,7 +84,7 @@ function Chart({ articles, numDays }) {
             </div>
          </Heading>
 
-         <ResponsiveContainer height={300} width="100%">
+         <ResponsiveContainer height={size} width="100%">
             <AreaChart data={data}>
                <XAxis
                   dataKey="label"

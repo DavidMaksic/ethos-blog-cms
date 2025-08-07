@@ -60,7 +60,7 @@ function Options({
 
    return (
       <>
-         <div className="absolute top-[-120px] left-0" ref={topRef} />
+         <div className="absolute top-[-12rem] left-0" ref={topRef} />
          <div className="absolute bottom-0 left-0" ref={bottomRef} />
 
          <IoOptions

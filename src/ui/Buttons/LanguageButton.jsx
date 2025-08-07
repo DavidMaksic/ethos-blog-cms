@@ -21,7 +21,7 @@ function LanguageButton({ localItem, setLocalItem }) {
    const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
 
    return (
-      <div className="absolute rounded-full right-6 top-[21px] border border-primary-300 cursor-pointer transition-200">
+      <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
          <img
             className="size-11 opacity-80 dark:opacity-70 hover:opacity-100 dark:hover:opacity-85 transition-[opacity]"
             src={localItem.flag ? localItem.flag : srbFlag}

@@ -221,7 +221,7 @@ function Creator() {
 
    return (
       <Form isPending={isPending}>
-         <FormRow columns="grid-cols-[40rem_1fr]">
+         <FormRow columns="grid-cols-[40rem_1fr] 2xl:grid-cols-[2fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
@@ -260,7 +260,7 @@ function Creator() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="grid-cols-[40rem_1fr]">
+         <FormRow columns="grid-cols-[40rem_1fr] 2xl:grid-cols-[2fr_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-primary-200 text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"

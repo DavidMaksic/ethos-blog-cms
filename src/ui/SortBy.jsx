@@ -27,7 +27,7 @@ function SortBy({ options }) {
 
          <div className="relative w-32">
             <div
-               className="relative px-3 py-[9px] pt-[11px] pl-5 cursor-pointer rounded-xl bg-white dark:bg-primary-200 dark:hover:bg-primary-200/50 text-primary-500 border border-tertiary shadow-2xs transition-200"
+               className="relative px-3 py-[0.6rem] pl-5 cursor-pointer rounded-xl bg-white dark:bg-primary-200 dark:hover:bg-primary-200/50 text-primary-500 border border-tertiary shadow-2xs transition-200"
                onClick={(e) => {
                   e.stopPropagation();
                   setOpen((isOpen) => !isOpen);
