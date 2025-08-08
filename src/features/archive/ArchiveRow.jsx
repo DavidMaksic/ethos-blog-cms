@@ -10,7 +10,6 @@ import { CgClose } from 'react-icons/cg';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
 
-import TableSkeleton from '../../ui/Skeletons/TableSkeleton';
 import DeleteModal from '../../ui/DeleteModal';
 import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
@@ -19,13 +18,11 @@ function ArchiveRow({ article }) {
    const navigate = useNavigate();
    const { id, created_at, image, title, status } = article;
 
-   const { isPending, authors } = useAuthors();
+   const { authors } = useAuthors();
    const { user: currentAuthor } = useCurrentAuthor();
 
    const { isDeleting, deleteArticle } = useDeleteArticle();
    const [openDelete, setOpenDelete] = useState(false);
-
-   if (isPending) return <TableSkeleton />;
 
    const theAuthor = authors?.find((item) => item.id === article?.author_id);
 
