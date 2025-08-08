@@ -206,8 +206,6 @@ export async function updateArticle(article) {
             description: article.description,
             content: article.content,
             categoryID: article.categoryID,
-            // featured: article.featured,
-            // main_feature: article.main_feature,
             status: article.status,
             language: article.language,
             flag: article.flag,
@@ -224,32 +222,6 @@ export async function updateArticle(article) {
          .upload(imageName, article.image);
 
       if (storageError) throw new Error('Article image could not be updated');
-
-      // Fetch all categories
-      const { data: categories, error2 } = await supabase
-         .from('categories')
-         .select('id, articles');
-
-      if (error2) throw new Error('Categories could not be fetched');
-
-      // Delete article reference in all categories
-      const updatePromises = categories.map(async (category) => {
-         try {
-            const articles = JSON.parse(category.articles);
-            const filtered = articles.filter((item) => item !== article.id);
-
-            const { error } = await supabase
-               .from('categories')
-               .update({ articles: filtered })
-               .eq('id', category.id);
-
-            if (error) throw new Error('Category could not be updated');
-         } catch (err) {
-            console.error(err);
-         }
-      });
-
-      await Promise.all(updatePromises);
    }
 
    // 2. IMAGE WASN'T CHANGED
@@ -262,8 +234,6 @@ export async function updateArticle(article) {
          description: article.description,
          content: article.content,
          categoryID: article.categoryID,
-         // featured: article.featured,
-         // main_feature: article.main_feature,
          status: article.status,
          language: article.language,
          flag: article.flag,
@@ -272,32 +242,6 @@ export async function updateArticle(article) {
       .select();
 
    if (error) throw new Error('Article could not be updated');
-
-   // - Fetch all categories
-   const { data: categories, error2 } = await supabase
-      .from('categories')
-      .select('id, articles');
-
-   if (error2) throw new Error('Categories could not be fetched');
-
-   // - Delete article reference in all categories
-   const updatePromises = categories.map(async (category) => {
-      try {
-         const articles = JSON.parse(category.articles);
-         const filtered = articles.filter((item) => item !== article.id);
-
-         const { error } = await supabase
-            .from('categories')
-            .update({ articles: filtered })
-            .eq('id', category.id);
-
-         if (error) throw new Error('Category could not be updated');
-      } catch (err) {
-         console.error(err);
-      }
-   });
-
-   await Promise.all(updatePromises);
 }
 
 export async function getArticlesAfterDate(date) {
@@ -356,4 +300,43 @@ export async function getComments() {
    const data = [...data1, ...data2];
 
    return data;
+}
+
+export async function updateFeatures(article) {
+   const { error } = await supabase
+      .from('articles')
+      .update({
+         main_feature: article.main_feature,
+         featured: article.featured,
+      })
+      .eq('id', article.id)
+      .select();
+
+   if (error) throw new Error(error.message);
+
+   // Fetch all categories
+   const { data: categories, error2 } = await supabase
+      .from('categories')
+      .select('id, articles');
+
+   if (error2) throw new Error('Categories could not be fetched');
+
+   // Delete article reference in all categories
+   const promises = categories.map(async (category) => {
+      try {
+         const articles = JSON.parse(category.articles);
+         const filtered = articles.filter((item) => item !== article.id);
+
+         const { error } = await supabase
+            .from('categories')
+            .update({ articles: filtered })
+            .eq('id', category.id);
+
+         if (error) throw new Error('Category could not be updated');
+      } catch (err) {
+         console.error(err);
+      }
+   });
+
+   await Promise.all(promises);
 }

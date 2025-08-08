@@ -9,6 +9,7 @@ import { HiOutlineInbox } from 'react-icons/hi';
 import { useFullscreen } from '../../context/FullscreenContext';
 import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
+import { useUnFeature } from '../../features/archive/useUnFeature';
 import { insertAlert } from '../../utils/helpers';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { LuSunMedium } from 'react-icons/lu';
@@ -149,8 +150,9 @@ function EditForm() {
    }, [editor, article]);
 
    // - React Query logic
-   const { isEditing, editArticle } = useEditArticle();
    const [currentImage, setCurrentImage] = useState(oldImage);
+   const { isUnFeaturing, unFeature } = useUnFeature();
+   const { isEditing, editArticle } = useEditArticle();
 
    function onSubmit(data) {
       const { id: categoryID } = categories.find(
@@ -163,12 +165,21 @@ function EditForm() {
          oldImage,
          content: contentHTML,
          categoryID,
-         // featured: false,
-         // main_feature: false,
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
          flag: localArticle.flag,
       });
+
+      if (
+         currentStatus !== articleStatus ||
+         category.category !== localArticle.category
+      ) {
+         unFeature({
+            id: article.id,
+            featured: false,
+            main_feature: false,
+         });
+      }
    }
 
    // Upload image logic
@@ -194,7 +205,7 @@ function EditForm() {
       }
    }, [currentImage, oldImage, imgReload]);
 
-   const isLoading = isPending || isEditing;
+   const isLoading = isPending || isEditing || isUnFeaturing;
 
    return (
       <Form isPending={isLoading}>
