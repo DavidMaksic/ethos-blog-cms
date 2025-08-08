@@ -293,14 +293,14 @@ function Creator() {
             <FormItem label="Image" error={errors?.image?.message}>
                <label htmlFor="image">
                   <div
-                     className={`relative h-39.5 w-80 rounded-3xl cursor-pointer ${
+                     className={`relative h-39.5 w-76 rounded-3xl cursor-pointer ${
                         !currentImage &&
                         'border-2 border-dashed border-primary-300 dark:border-primary-300/60 transition-[border]'
                      }`}
                   >
                      <img
                         ref={imageRef}
-                        className={`object-cover h-39.5 w-80 object-center rounded-3xl dark:opacity-90 border border-primary-300 dark:border-quaternary transition-border ${
+                        className={`object-cover h-39.5 w-76 object-center rounded-3xl dark:opacity-90 border border-primary-300 dark:border-quaternary transition-border ${
                            !currentImage && 'hidden'
                         }`}
                      />

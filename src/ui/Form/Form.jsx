@@ -5,7 +5,7 @@ function Form({ isPending, hasMargin = true, children }) {
 
    return (
       <motion.div
-         className={`label font-creator relative flex flex-col gap-8 bg-secondary dark:bg-primary-200 rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium px-20 py-12 [&_input]:text-3xl box-shadow transition-200 ${disableClick} ${
+         className={`label font-creator relative flex flex-col gap-8 bg-secondary rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium px-20 py-12 [&_input]:text-3xl box-shadow transition-200 ${disableClick} ${
             hasMargin && 'mb-24'
          }`}
          initial={{ opacity: 0 }}
