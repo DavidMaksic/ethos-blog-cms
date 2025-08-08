@@ -10,6 +10,7 @@ function ArchiveOps() {
                { value: 'all', label: 'All' },
                { value: 'published', label: 'Published' },
                { value: 'drafted', label: 'Drafted' },
+               { value: 'my-article', label: 'My articles' },
             ]}
          />
 

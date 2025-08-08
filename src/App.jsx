@@ -30,8 +30,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Fix article and arhive loaders
-
 // TODO: Admin permissions
 // TODO: Show comments in articles
 // TODO: Comment and users table

@@ -3,28 +3,42 @@ import { createImagePath, getToday } from '../utils/helpers';
 import { PAGE_SIZE } from '../utils/constants';
 
 export async function getArticles({ filter, sortBy, page, search }) {
+   // 1. Fetch current author
+   const { data: session } = await supabase.auth.getSession();
+   if (!session.session) return null;
+
+   const { data: author, error: errorAuthor } = await supabase.auth.getUser();
+
+   if (errorAuthor) throw new Error('Author could not be fetched');
+
    let query = supabase.from('articles').select('*', { count: 'exact' });
 
-   // 1. Filter
-   if (filter) query = query[filter.method || 'eq'](filter.field, filter.value);
+   // 2. Filter
+   if (filter) {
+      if (filter.value === 'my-article') {
+         query = query['eq']('author_id', author.user.id);
+      } else {
+         query = query[filter.method || 'eq'](filter.field, filter.value);
+      }
+   }
 
-   // 2. Sort
+   // 3. Sort
    if (sortBy)
       query = query.order(sortBy.field, {
          ascending: sortBy.direction === 'asc',
       });
 
-   // 3. Search
+   // 4. Search
    if (search) query = query.ilike('title', `%${search}%`);
 
-   // 4. Pagination
+   // 5. Pagination
    if (page) {
       const from = (page - 1) * PAGE_SIZE;
       const to = from + PAGE_SIZE - 1;
       query = query.range(from, to);
    }
 
-   // Await data
+   // 6. Await data
    const { data, error, count } = await query;
 
    if (error) throw new Error('Articles could not be loaded');
