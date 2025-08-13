@@ -30,8 +30,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Allow only published articles to be accessed in featuring menu
-
 // TODO: Admin permissions
 // TODO: Show comments in articles
 // TODO: Comment and users table

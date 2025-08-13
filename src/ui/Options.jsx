@@ -64,7 +64,7 @@ function Options({
          <div className="absolute bottom-0 left-0" ref={bottomRef} />
 
          <IoOptions
-            className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-primary/60 hover:bg-primary-100/80 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
+            className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-primary/60 hover:bg-primary-100/80 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full shadow-dashboard dark:shadow-none transition"
             onClick={(e) => {
                e.stopPropagation();
                setOpenMenu((isOpen) => !isOpen);
@@ -74,7 +74,7 @@ function Options({
          <AnimatePresence>
             {openMenu && (
                <motion.ul
-                  className="fixed bottom-32 right-24 2xl:right-10 flex flex-col items-center bg-white dark:bg-primary/60 border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1"
+                  className="fixed bottom-32 right-24 2xl:right-10 flex flex-col items-center bg-white dark:bg-primary/60 border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1 shadow-dashboard dark:shadow-none"
                   ref={ref}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

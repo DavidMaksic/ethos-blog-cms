@@ -56,14 +56,6 @@ export async function getTagArticles({ search }) {
    return data;
 }
 
-export async function getAllArticles() {
-   const { data, error } = await supabase.from('articles').select();
-
-   if (error) throw new Error('Articles could not be loaded');
-
-   return data;
-}
-
 export async function createArticle(newArticle) {
    const [imageName, imagePath] = createImagePath(newArticle);
 
@@ -270,6 +262,17 @@ export async function getArticlesAfterDate(date) {
    return data;
 }
 
+export async function getPublishedArticles() {
+   const { data, error } = await supabase
+      .from('articles')
+      .select()
+      .eq('status', 'published');
+
+   if (error) throw new Error('Articles could not be loaded');
+
+   return data;
+}
+
 export async function getDraftedArticles() {
    const { data, error } = await supabase
       .from('articles')
@@ -297,6 +300,7 @@ export async function getMainFeatureArticles() {
       .from('articles')
       .select()
       .eq('main_feature', true)
+      .eq('status', 'published')
       .order('index');
 
    if (error) throw new Error('Featured articles could not be loaded');

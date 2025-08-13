@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { usePublishedArticles } from '../archive/usePublishedArticles';
 import { useUpdateMainFeature } from './useUpdateMainFeature';
-import { useTagArticles } from '../archive/useTagArticles';
+import { useEffect, useState } from 'react';
 import { ImSpinner2 } from 'react-icons/im';
 
 import ArticleItem from '../../ui/ArticleItem';
@@ -8,7 +8,7 @@ import SearchAlt from '../../ui/SearchAlt';
 import toast from 'react-hot-toast';
 
 function MainFeatureModal({ onClose }) {
-   const { isPending, articles } = useTagArticles();
+   const { isPending, articles } = usePublishedArticles();
 
    const [selectedID, setSelectedID] = useState('');
    const { isEditing, isSuccess, updateMainFeature } = useUpdateMainFeature();
@@ -36,7 +36,7 @@ function MainFeatureModal({ onClose }) {
             <SearchAlt />
          </span>
 
-         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-y-auto scrollbar 2k:h-[29.5rem] h-[30rem]">
+         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-auto scrollbar max-h-[30rem]">
             {!isPending ? (
                filteredArticles?.length >= 1 ? (
                   filteredArticles?.map((item) => (

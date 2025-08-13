@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useUpdateTagFeature } from './useUpdateTagFeature';
-import { useTagArticles } from '../archive/useTagArticles';
+import { usePublishedArticles } from '../archive/usePublishedArticles';
 import { ImSpinner2 } from 'react-icons/im';
 import { useEntry } from '../../context/EntryContext';
 
@@ -8,7 +8,7 @@ import ArticleItem from '../../ui/ArticleItem';
 import SearchAlt from '../../ui/SearchAlt';
 
 function TagFeatureModal({ currentTag, onClose }) {
-   const { isPending, articles } = useTagArticles();
+   const { isPending, articles } = usePublishedArticles();
    const [selectedID, setSelectedID] = useState('');
    const { isEditing, isSuccess, updateTagFeature } = useUpdateTagFeature();
    const { refetch } = useEntry();
@@ -39,7 +39,7 @@ function TagFeatureModal({ currentTag, onClose }) {
             <SearchAlt />
          </span>
 
-         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-auto scrollbar">
+         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-auto scrollbar max-h-[30rem]">
             {!isPending ? (
                taggedArticles?.length >= 1 ? (
                   taggedArticles?.map((item) => (

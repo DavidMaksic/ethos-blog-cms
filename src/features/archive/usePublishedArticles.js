@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllArticles as getAllArticlesAPI } from '../../services/apiArticles';
+import { getPublishedArticles } from '../../services/apiArticles';
 
-export function useAllArticles() {
+export function usePublishedArticles() {
    const { isPending, data: articles } = useQuery({
-      queryFn: getAllArticlesAPI,
+      queryFn: getPublishedArticles,
       queryKey: ['allArticles'],
    });
 
