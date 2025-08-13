@@ -209,7 +209,7 @@ function Article() {
             articleID={article.id}
          >
             <button
-               className="hover:bg-primary-100 dark:hover:bg-primary-200 my-0.5 rounded-2xl transition"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 my-0.5 rounded-2xl transition"
                onClick={(e) => {
                   e.stopPropagation();
                   setLocalFullscreen((isOpen) => !isOpen);
@@ -224,7 +224,7 @@ function Article() {
             </button>
 
             <button
-               className="hover:bg-primary-100 dark:hover:bg-primary-200 transition-bg mt-0.5 rounded-2xl"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 transition-bg mt-0.5 rounded-2xl"
                onClick={(e) => {
                   e.stopPropagation();
                   toggleDarkMode((isOpen) => !isOpen);

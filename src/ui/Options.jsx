@@ -64,7 +64,7 @@ function Options({
          <div className="absolute bottom-0 left-0" ref={bottomRef} />
 
          <IoOptions
-            className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-primary/60 hover:bg-primary-100 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
+            className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-primary/60 hover:bg-primary-100/80 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full transition"
             onClick={(e) => {
                e.stopPropagation();
                setOpenMenu((isOpen) => !isOpen);
@@ -82,7 +82,7 @@ function Options({
                   transition={{ duration: 0.05 }}
                >
                   <FiChevronUp
-                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl transition"
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl transition"
                      onClick={() => {
                         setTopScroll(true);
                         setOpenTable(false);
@@ -94,7 +94,7 @@ function Options({
 
                   {headings.length && !isEdit ? (
                      <LuTableOfContents
-                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 transition rounded-2xl  ${
+                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-200 transition rounded-2xl  ${
                            currentAuthor?.email !== theAuthor?.email &&
                            'mb-1 mt-0.5'
                         }`}
@@ -107,7 +107,7 @@ function Options({
 
                   {currentAuthor?.email === theAuthor?.email && articleID ? (
                      <Link to={`/archive/edit/:${articleID}`}>
-                        <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100 dark:hover:bg-primary-200 stroke-[1.7px] rounded-2xl transition" />
+                        <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-200 stroke-[1.7px] rounded-2xl transition" />
                      </Link>
                   ) : null}
 
@@ -156,7 +156,7 @@ function Options({
                   </AnimatePresence>
 
                   <FiChevronDown
-                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100 dark:hover:bg-primary-200 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl transition"
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-200 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl transition"
                      onClick={() => {
                         setBottomScroll(true);
                         setOpenTable(false);

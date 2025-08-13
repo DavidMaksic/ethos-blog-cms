@@ -395,7 +395,7 @@ function Creator() {
 
          <Options isEdit={true}>
             <button
-               className="hover:bg-primary-100 dark:hover:bg-primary-200 mt-0.5 rounded-2xl transition"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 mt-0.5 rounded-2xl transition"
                onClick={(e) => {
                   e.stopPropagation();
                   setLocalFullscreen((isOpen) => !isOpen);
@@ -410,7 +410,7 @@ function Creator() {
             </button>
 
             <button
-               className="hover:bg-primary-100 dark:hover:bg-primary-200 transition mt-0.5 rounded-2xl"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 transition mt-0.5 rounded-2xl"
                onClick={(e) => {
                   e.stopPropagation();
                   toggleDarkMode((isOpen) => !isOpen);
