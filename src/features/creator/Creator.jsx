@@ -395,21 +395,7 @@ function Creator() {
 
          <Options isEdit={true}>
             <button
-               className=" hover:bg-white dark:hover:bg-primary-200 transition-bg mt-0.5 rounded-2xl"
-               onClick={(e) => {
-                  e.stopPropagation();
-                  toggleDarkMode((isOpen) => !isOpen);
-               }}
-            >
-               {isDarkMode ? (
-                  <IoMoonOutline className="py-1 px-3.5 size-13.5" />
-               ) : (
-                  <LuSunMedium className="py-1 px-3.5 size-13.5" />
-               )}
-            </button>
-
-            <button
-               className="hover:bg-white dark:hover:bg-primary-200 mt-0.5 rounded-2xl"
+               className="hover:bg-primary-100 dark:hover:bg-primary-200 mt-0.5 rounded-2xl transition"
                onClick={(e) => {
                   e.stopPropagation();
                   setLocalFullscreen((isOpen) => !isOpen);
@@ -420,6 +406,20 @@ function Creator() {
                   <AiOutlineFullscreen className="py-1 pb-1.5 px-3.5 size-13.5" />
                ) : (
                   <AiOutlineFullscreenExit className="py-1 pb-1.5 px-3.5 size-13.5" />
+               )}
+            </button>
+
+            <button
+               className="hover:bg-primary-100 dark:hover:bg-primary-200 transition mt-0.5 rounded-2xl"
+               onClick={(e) => {
+                  e.stopPropagation();
+                  toggleDarkMode((isOpen) => !isOpen);
+               }}
+            >
+               {isDarkMode ? (
+                  <IoMoonOutline className="py-1 px-3.5 size-13.5" />
+               ) : (
+                  <LuSunMedium className="py-1 px-3.5 size-13.5" />
                )}
             </button>
          </Options>
