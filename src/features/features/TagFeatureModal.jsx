@@ -9,6 +9,7 @@ import SearchAlt from '../../ui/SearchAlt';
 
 function TagFeatureModal({ currentTag, onClose }) {
    const { isPending, articles } = usePublishedArticles();
+
    const [selectedID, setSelectedID] = useState('');
    const { isEditing, isSuccess, updateTagFeature } = useUpdateTagFeature();
    const { refetch } = useEntry();
@@ -34,7 +35,7 @@ function TagFeatureModal({ currentTag, onClose }) {
    }, [isSuccess, refetch, onClose]);
 
    return (
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center justify-between gap-2 min-h-[28rem]">
          <span className="pb-3">
             <SearchAlt />
          </span>
@@ -54,40 +55,23 @@ function TagFeatureModal({ currentTag, onClose }) {
                      />
                   ))
                ) : (
-                  <span
-                     className={`self-center col-span-2 text-primary-400 ${
-                        !taggedArticles?.length && 'mt-33 mb-9'
-                     }`}
-                  >
+                  <span className="self-center col-span-2 text-primary-400">
                      No articles to show...
                   </span>
                )
             ) : (
                <>
-                  <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary dark:from-primary-50 from-30% transition duration-150 z-10" />
-                  <li className="h-25.5 w-100 bg-primary-200 rounded-3xl animate-skeleton" />
-                  <li className="bg-primary-200 rounded-3xl animate-skeleton" />
-                  <li className="h-25.5 w-100 bg-primary-200 rounded-3xl animate-skeleton" />
-                  <li className="bg-primary-200 rounded-3xl animate-skeleton" />
+                  <li className="h-25.5 w-105 bg-primary-200 dark:bg-primary-300/30 rounded-2xl animate-skeleton" />
+                  <li className="h-25.5 w-105 bg-primary-200 dark:bg-primary-300/30 rounded-2xl animate-skeleton" />
+                  <li className="h-25.5 w-105 bg-primary-200/60 dark:bg-primary-300/15 rounded-2xl animate-skeleton" />
+                  <li className="h-25.5 w-105 bg-primary-200/60 dark:bg-primary-300/15 rounded-2xl animate-skeleton" />
+                  <li className="h-25.5 w-105 bg-primary-200/40 dark:bg-primary-300/5 rounded-2xl animate-skeleton" />
+                  <li className="h-25.5 w-105 bg-primary-200/40 dark:bg-primary-300/5 rounded-2xl animate-skeleton" />
                </>
             )}
          </ul>
 
-         <div
-            className={`flex items-center pt-1.5 space-x-10 z-20 ${
-               taggedArticles?.length === 3 || taggedArticles?.length === 4
-                  ? 'mt-31'
-                  : ''
-            } ${taggedArticles?.length === 2 && 'mt-60.5'} ${
-               taggedArticles?.length === 0 || !taggedArticles
-                  ? 'mt-[123px]'
-                  : ''
-            } ${taggedArticles?.length === 1 && 'mt-[242px]'} ${
-               taggedArticles?.length === 5 || taggedArticles?.length === 6
-                  ? 'mt-[5px]'
-                  : ''
-            }`}
-         >
+         <div className="flex items-center pt-1.5 space-x-10 z-20">
             <button
                className={`relative text-[#ca6565] dark:text-[#e78989] hover:text-[#be6565] ${
                   !openID || isEditing ? 'pointer-events-none opacity-30' : ''
@@ -109,6 +93,7 @@ function TagFeatureModal({ currentTag, onClose }) {
             <span className="text-3xl font-bold text-[#b7babe] dark:text-primary-300 pointer-events-none">
                /
             </span>
+
             <button
                className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500"
                onClick={onClose}

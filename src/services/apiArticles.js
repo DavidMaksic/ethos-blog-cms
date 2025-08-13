@@ -46,16 +46,6 @@ export async function getArticles({ filter, sortBy, page, search }) {
    return { data, count };
 }
 
-export async function getTagArticles({ search }) {
-   let query = supabase.from('articles').select();
-   if (search) query = query.ilike('title', `%${search}%`);
-
-   const { data, error } = await query;
-   if (error) throw new Error('Articles could not be loaded');
-
-   return data;
-}
-
 export async function createArticle(newArticle) {
    const [imageName, imagePath] = createImagePath(newArticle);
 
@@ -262,11 +252,11 @@ export async function getArticlesAfterDate(date) {
    return data;
 }
 
-export async function getPublishedArticles() {
-   const { data, error } = await supabase
-      .from('articles')
-      .select()
-      .eq('status', 'published');
+export async function getPublishedArticles({ search }) {
+   let query = supabase.from('articles').select().eq('status', 'published');
+   if (search) query = query.ilike('title', `%${search}%`);
+
+   const { data, error } = await query;
 
    if (error) throw new Error('Articles could not be loaded');
 
