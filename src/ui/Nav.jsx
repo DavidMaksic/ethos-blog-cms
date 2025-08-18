@@ -1,3 +1,4 @@
+import { RiErrorWarningLine } from 'react-icons/ri';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { HiOutlineHashtag } from 'react-icons/hi';
@@ -7,7 +8,9 @@ import { BiHomeAlt2 } from 'react-icons/bi';
 import { CgMathPlus } from 'react-icons/cg';
 import { LuLibrary } from 'react-icons/lu';
 import { NavLink } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
 import { CiStar } from 'react-icons/ci';
+import 'react-tooltip/dist/react-tooltip.css';
 
 function Nav() {
    return (
@@ -58,21 +61,40 @@ function NavItem({ to, children }) {
    const { authors } = useAuthors();
    const currentAuthor = authors?.find((item) => item.id === user.id);
 
-   const noAccess = protectedRoutes && !currentAuthor?.is_admin;
+   const hasAccess = !protectedRoutes || currentAuthor?.is_admin;
 
    return (
-      <NavLink
-         className={({ isActive }) =>
-            isActive
-               ? 'nav-link group rounded-xl bg-gray-50 dark:bg-[#131c2479] !text-accent [&_svg]:!text-accent transition-bg_color'
-               : `nav-link group transition-bg_color ${
-                    noAccess && 'pointer-events-none opacity-50'
-                 }`
-         }
-         to={to}
-      >
-         {children}
-      </NavLink>
+      <>
+         {hasAccess ? (
+            <NavLink
+               className={({ isActive }) =>
+                  isActive
+                     ? 'nav-link group rounded-xl bg-gray-50 dark:bg-[#131c2479] !text-accent [&_svg]:!text-accent transition-bg_color'
+                     : `nav-link group transition-bg_color`
+               }
+               to={to}
+            >
+               {children}
+            </NavLink>
+         ) : (
+            <>
+               <div className="nav-link group transition-bg_color my-tooltip opacity-50 cursor-default">
+                  {children}
+               </div>
+
+               <Tooltip
+                  anchorSelect=".my-tooltip"
+                  place="right"
+                  className="bg-[#eaecef]! text-primary-500! font-medium dark:bg-[#29323A]! rounded-2xl! transition-all! duration-300! ease-out! px-5!"
+               >
+                  <div className="flex items-center space-x-2">
+                     <RiErrorWarningLine className="stroke-[0.3px] text-xl" />
+                     <span>Admins only</span>
+                  </div>
+               </Tooltip>
+            </>
+         )}
+      </>
    );
 }
 
