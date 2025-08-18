@@ -119,7 +119,7 @@ function CategoryChart({ articles, numDays }) {
                </PieChart>
             </ResponsiveContainer>
          ) : (
-            <div className="flex flex-col items-center gap-1 justify-self-center 2k:mt-18 mt-16 2xl:mt-20 xl:mt-22">
+            <div className="flex flex-col items-center gap-3 justify-self-center 2k:mt-18 mt-16 2xl:mt-20 xl:mt-22">
                <FaFileCircleXmark className="text-6xl text-primary-200 dark:text-primary-300 transition-color" />
                <span className="text-2xl italic text-primary-300 transition-color w-72 text-center">
                   No articles posted in the last {numDays} days...
