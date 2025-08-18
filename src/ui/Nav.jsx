@@ -85,7 +85,8 @@ function NavItem({ to, children }) {
                <Tooltip
                   anchorSelect=".my-tooltip"
                   place="right"
-                  className="bg-[#eaecef]! text-primary-500! font-medium dark:bg-[#29323A]! rounded-2xl! transition-all! duration-300! ease-out! px-5!"
+                  noArrow={true}
+                  className="bg-white! text-primary-500! font-medium dark:bg-[#29323A]! rounded-2xl! transition-all! duration-300! ease-out! px-5! border! border-quaternary dark:border-primary-300/20!"
                >
                   <div className="flex items-center space-x-2">
                      <RiErrorWarningLine className="stroke-[0.3px] text-xl" />
