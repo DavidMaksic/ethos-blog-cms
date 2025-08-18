@@ -24,7 +24,8 @@ function Drafts() {
          className="relative col-span-2 space-y-3 text-base border bg-white dark:bg-primary-200 rounded-xl py-8 px-10 box-shadow transition-200 overflow-auto remove-scrollbar [&_h1]:pb-4"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
-         transition={{ duration: 0.4 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.3 }}
       >
          <Heading type="h2">Continue writing</Heading>
 

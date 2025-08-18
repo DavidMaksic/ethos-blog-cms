@@ -6,7 +6,8 @@ function DraftSkeleton() {
          className="grid gap-y-3 mb-14 [&_div]:rounded-2xl animate-skeleton"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
-         transition={{ duration: 0.1 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.3 }}
       >
          <div className="h-25 bg-primary-100 dark:bg-skeleton transition-bg_border" />
          <div className="h-25 bg-primary-100 dark:bg-skeleton transition-bg_border" />
