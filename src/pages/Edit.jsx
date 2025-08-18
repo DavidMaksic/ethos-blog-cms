@@ -1,17 +1,36 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { useFindArticle } from '../features/archive/useFindArticle';
+import { useAuthors } from '../features/authentication/useAuthors';
 
 import ArticleNotFound from '../ui/ArticleNotFound';
 import EditSkeleton from '../ui/Skeletons/EditSkeleton';
 import EditForm from '../ui/Form/EditForm';
 import Heading from '../ui/Heading';
+import Spinner from '../ui/Spinner';
 import Row from '../ui/Row';
 
 function Edit() {
    const navigate = useNavigate();
    const { article, isPending } = useFindArticle();
 
+   const { isPending: isLoading, user } = useCurrentAuthor();
+   const { isPending: isFetching, authors } = useAuthors();
+   const currentAuthor = authors?.find((item) => item.id === user.id);
+
+   if (isLoading || isFetching)
+      return (
+         <div className="h-screen bg-primary">
+            <Spinner />
+         </div>
+      );
+
+   if (currentAuthor?.id !== article?.author_id && !currentAuthor?.is_admin) {
+      return <Navigate to="/dashboard" />;
+   }
+
    if (isPending) return <EditSkeleton />;
+
    if (!article)
       return (
          <ArticleNotFound to="/archive" prompt="Go back">

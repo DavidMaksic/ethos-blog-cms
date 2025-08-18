@@ -5,6 +5,7 @@ import { AnimatePresence } from 'motion/react';
 import { Pagination } from 'swiper/modules';
 import { CgMathPlus } from 'react-icons/cg';
 import { useState } from 'react';
+import { motion } from 'motion/react';
 
 import MainFeatureModal from './MainFeatureModal';
 import MainArticle from './MainArticle';
@@ -21,7 +22,7 @@ function MainFeatures() {
    const [openModal, setOpenModal] = useState(false);
    // eslint-disable-next-line
    const [searchParams, setSearchParams] = useSearchParams();
-   const { articles, refetch } = useGetMainFeatureArticles();
+   const { isPending, articles, refetch } = useGetMainFeatureArticles();
 
    refetch();
 
@@ -32,7 +33,15 @@ function MainFeatures() {
                Choose articles:
             </span>
 
-            {articles?.length ? (
+            {isPending ? (
+               <motion.div
+                  className="flex h-[22.75rem] bg-primary-300/30 animate-skeleton rounded-[2.3rem]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+               />
+            ) : articles?.length ? (
                <>
                   <Swiper
                      spaceBetween={100}
@@ -61,7 +70,7 @@ function MainFeatures() {
                </>
             ) : (
                <div
-                  className="relative flex justify-center h-[22.5rem] w-full border rounded-[34px] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/10 dark:hover:bg-primary-200 border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
+                  className="relative flex justify-center h-[22.7rem] w-full border rounded-[2.3rem] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/10 dark:hover:bg-primary-200 border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
                   onClick={() => setOpenModal((isOpen) => !isOpen)}
                >
                   <CgMathPlus className="absolute icons self-center size-11! text-primary-400/80! group-hover:text-accent-300! dark:group-hover:text-accent-400/80!" />

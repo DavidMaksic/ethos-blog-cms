@@ -3,6 +3,7 @@ import { IoRemoveCircle } from 'react-icons/io5';
 import { useSetIndex } from '../features/useSetIndex';
 import { ImSpinner2 } from 'react-icons/im';
 import { useEffect } from 'react';
+import { motion } from 'motion/react';
 
 function MainArticle({ article, refetch, index }) {
    const { isEditing, isSuccess, updateMainFeature } = useUpdateMainFeature();
@@ -23,10 +24,14 @@ function MainArticle({ article, refetch, index }) {
    }
 
    return (
-      <div
+      <motion.div
          className={`relative grid! grid-cols-[1fr_1.2fr]! gap-10 pl-2 mt-7 mb-2 ${
             isEditing && 'opacity-80! pointer-events-none'
          }`}
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.3 }}
       >
          <div className="space-y-2 self-center flex flex-col">
             <h2 className="relative styled_text text-4xl bg-gradient-to-r from-gray-600 to-gray-500/90 dark:from-slate-300 dark:to-slate-300/80 cursor-default! font-article">
@@ -58,7 +63,7 @@ function MainArticle({ article, refetch, index }) {
                <IoRemoveCircle className="absolute top-2.5 right-3 fill-white size-8 drop-shadow-xl opacity-80 hover:opacity-100 transition" />
             </button>
          )}
-      </div>
+      </motion.div>
    );
 }
 

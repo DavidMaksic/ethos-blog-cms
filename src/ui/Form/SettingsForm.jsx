@@ -17,8 +17,8 @@ function SettingsForm() {
          <div className="flex items-center gap-20 self-start">
             <label htmlFor="comment_length">Comment length</label>
 
-            {isPending ? (
-               <div className="h-[33px] w-63 bg-primary-100 dark:bg-primary-100 rounded-xl animate-skeleton" />
+            {!isPending ? (
+               <div className="2k:h-[2.05rem] h-[2.1rem] w-63 bg-primary-100 dark:bg-primary-100 rounded-xl animate-skeleton" />
             ) : (
                <input
                   className={`bg-secondary dark:bg-primary-200 border-b border-primary-300/80 dark:border-primary-300/50 transition-bg_border outline-none text-2xl ${

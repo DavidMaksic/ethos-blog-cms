@@ -1,6 +1,8 @@
 import { IoSettingsOutline } from 'react-icons/io5';
+import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { HiOutlineHashtag } from 'react-icons/hi';
 import { HiOutlineUsers } from 'react-icons/hi2';
+import { useAuthors } from '../features/authentication/useAuthors';
 import { BiHomeAlt2 } from 'react-icons/bi';
 import { CgMathPlus } from 'react-icons/cg';
 import { LuLibrary } from 'react-icons/lu';
@@ -49,12 +51,23 @@ function Nav() {
 }
 
 function NavItem({ to, children }) {
+   const protectedRoutes =
+      to === '/features' || to === '/tags' || to === '/settings';
+
+   const { user } = useCurrentAuthor();
+   const { authors } = useAuthors();
+   const currentAuthor = authors?.find((item) => item.id === user.id);
+
+   const noAccess = protectedRoutes && !currentAuthor?.is_admin;
+
    return (
       <NavLink
          className={({ isActive }) =>
             isActive
                ? 'nav-link group rounded-xl bg-gray-50 dark:bg-[#131c2479] !text-accent [&_svg]:!text-accent transition-bg_color'
-               : 'nav-link group transition-bg_color'
+               : `nav-link group transition-bg_color ${
+                    noAccess && 'pointer-events-none opacity-50'
+                 }`
          }
          to={to}
       >

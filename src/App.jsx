@@ -12,6 +12,7 @@ import ProtectedRoute from './ui/ProtectedRoute';
 import AuthorCreator from './pages/AuthorCreator';
 import PageNotFound from './pages/PageNotFound';
 import UpdateAuthor from './pages/UpdateAuthor';
+import AdminRoute from './pages/AdminRoute';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Features from './pages/Features';
@@ -30,7 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Admin permissions
 // TODO: Show comments in articles
 // TODO: Comment and users table
 // TODO: Footnotes
@@ -77,9 +77,20 @@ function App() {
                                  />
                                  <Route
                                     path="features"
-                                    element={<Features />}
+                                    element={
+                                       <AdminRoute>
+                                          <Features />
+                                       </AdminRoute>
+                                    }
                                  />
-                                 <Route path="tags" element={<Tags />} />
+                                 <Route
+                                    path="tags"
+                                    element={
+                                       <AdminRoute>
+                                          <Tags />
+                                       </AdminRoute>
+                                    }
+                                 />
                                  <Route path="authors" element={<Authors />} />
                                  <Route
                                     path="authors/:id"
@@ -87,11 +98,19 @@ function App() {
                                  />
                                  <Route
                                     path="authors/author-creator"
-                                    element={<AuthorCreator />}
+                                    element={
+                                       <AdminRoute>
+                                          <AuthorCreator />
+                                       </AdminRoute>
+                                    }
                                  />
                                  <Route
                                     path="settings"
-                                    element={<Settings />}
+                                    element={
+                                       <AdminRoute>
+                                          <Settings />
+                                       </AdminRoute>
+                                    }
                                  />
                               </Route>
 

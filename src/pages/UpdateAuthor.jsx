@@ -1,11 +1,31 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
+import { useAuthors } from '../features/authentication/useAuthors';
+
 import PasswordForm from '../features/authentication/PasswordForm';
 import UpdateForm from '../features/authentication/UpdateForm';
 import Heading from '../ui/Heading';
+import Spinner from '../ui/Spinner';
 import Row from '../ui/Row';
 
 function UpdateAuthor() {
    const navigate = useNavigate();
+
+   const { isPending: isLoading, user } = useCurrentAuthor();
+   const { isPending: isFetching, authors } = useAuthors();
+   const currentAuthor = authors?.find((item) => item.id === user.id);
+   const { id } = useParams();
+
+   if (isLoading || isFetching)
+      return (
+         <div className="h-screen bg-primary">
+            <Spinner />
+         </div>
+      );
+
+   if (currentAuthor?.id !== id) {
+      return <Navigate to="/dashboard" />;
+   }
 
    return (
       <div className="flex justify-center gap-10">

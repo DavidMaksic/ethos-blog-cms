@@ -20,6 +20,9 @@ function ArchiveRow({ article }) {
 
    const { authors } = useAuthors();
    const { user: currentAuthor } = useCurrentAuthor();
+   const isAdmin = authors?.find(
+      (item) => item.id === currentAuthor.id
+   ).is_admin;
 
    const { isDeleting, deleteArticle } = useDeleteArticle();
    const [openDelete, setOpenDelete] = useState(false);
@@ -68,7 +71,7 @@ function ArchiveRow({ article }) {
 
          <span className="italic text-primary-400">{theAuthor?.full_name}</span>
 
-         {currentAuthor?.email === theAuthor?.email && (
+         {currentAuthor?.email === theAuthor?.email || isAdmin ? (
             <Menus.Menu>
                <Menus.Toggle id={id} />
 
@@ -95,7 +98,7 @@ function ArchiveRow({ article }) {
                   </Menus.Button>
                </Menus.List>
             </Menus.Menu>
-         )}
+         ) : null}
 
          <AnimatePresence>
             {openDelete && (

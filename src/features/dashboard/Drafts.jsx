@@ -1,4 +1,6 @@
 import { useDraftedArticles } from './useDraftedArticles';
+import { useCurrentAuthor } from '../authentication/useCurrentAuthor';
+import { useAuthors } from '../authentication/useAuthors';
 import { BsStack } from 'react-icons/bs';
 import { motion } from 'motion/react';
 
@@ -8,6 +10,14 @@ import Heading from '../../ui/Heading';
 
 function Drafts() {
    const { isPending, articles } = useDraftedArticles();
+
+   const { user } = useCurrentAuthor();
+   const { authors } = useAuthors();
+   const currentAuthor = authors?.find((item) => item.id === user.id);
+
+   const myArticles = articles?.filter(
+      (item) => item.author_id === currentAuthor.id
+   );
 
    return (
       <motion.div
@@ -19,9 +29,9 @@ function Drafts() {
          <Heading type="h2">Continue writing</Heading>
 
          {!isPending ? (
-            articles.length > 0 ? (
+            myArticles.length > 0 ? (
                <>
-                  {articles.map((item) => (
+                  {myArticles.map((item) => (
                      <ArticleItem article={item} key={item.id} />
                   ))}
                </>
