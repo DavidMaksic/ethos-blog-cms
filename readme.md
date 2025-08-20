@@ -1,1 +1,5 @@
-# Ethos Blog CMS
+Installation:
+```
+npm i
+npm run dev
+```
