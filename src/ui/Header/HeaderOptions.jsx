@@ -26,7 +26,7 @@ function HeaderOptions() {
          <motion.span whileTap={{ scale: 0.85 }}>
             <HeaderButton handler={logout} isPending={isPending}>
                {!isPending ? (
-                  <AiOutlineLogout />
+                  <AiOutlineLogout className="size-7! p-0.5!" />
                ) : (
                   <ImSpinner2 className="size-5! animate-spin" />
                )}

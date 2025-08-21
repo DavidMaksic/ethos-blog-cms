@@ -31,10 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Show comments in articles
 // TODO: Comment and users table
-// TODO: Footnotes
-// TODO: I18n
 
 function App() {
    return (

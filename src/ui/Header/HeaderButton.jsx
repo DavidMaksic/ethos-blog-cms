@@ -3,7 +3,7 @@ function HeaderButton({ handler, loading, children }) {
 
    return (
       <button
-         className={`bg-none border-none p-2 rounded-lg transition-200 hover:bg-primary-100 dark:hover:bg-primary-300/30 [&_svg]:size-6 [&_svg]:text-accent ${disableClick}`}
+         className={`bg-none border-none p-2 rounded-xl transition-200 hover:bg-primary-100 dark:hover:bg-primary-300/30 [&_svg]:size-6 [&_svg]:text-accent ${disableClick}`}
          onClick={() => handler()}
       >
          {children}
