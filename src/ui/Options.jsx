@@ -6,10 +6,9 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import { useFullscreen } from '../context/FullscreenContext';
-import { IoOptions } from 'react-icons/io5';
-import { useScroll } from '../hooks/useScroll';
 import { useAuthors } from '../features/authentication/useAuthors';
-import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
+import { useScroll } from '../hooks/useScroll';
+import { IoOptions } from 'react-icons/io5';
 
 function Options({
    currentAuthor,

@@ -393,7 +393,7 @@ function Creator() {
             setLocalItem={setLocalArticle}
          />
 
-         <Options isEdit={true}>
+         <Options isEdit={true} currentAuthor={user}>
             <button
                className="hover:bg-primary-100/80 dark:hover:bg-primary-200 mt-0.5 rounded-2xl transition"
                onClick={(e) => {
