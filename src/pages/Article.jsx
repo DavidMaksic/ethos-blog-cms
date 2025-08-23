@@ -37,6 +37,9 @@ function Article() {
    const { isPending: isLoading, authors } = useAuthors();
    const { article, isPending } = useFindArticle();
    const { user: currentAuthor } = useCurrentAuthor();
+   const isAdmin = authors?.find(
+      (item) => item.id === currentAuthor?.id
+   ).is_admin;
 
    // - Category logic
    const { categories } = useGetCategories();
@@ -125,13 +128,15 @@ function Article() {
 
                   <div
                      className={`text-primary-300 text-2xl pointer-events-none ${
-                        currentAuthor?.email !== theAuthor?.email && 'hidden'
+                        currentAuthor?.email !== theAuthor?.email && !isAdmin
+                           ? 'hidden'
+                           : ''
                      }`}
                   >
                      |
                   </div>
 
-                  {currentAuthor?.email === theAuthor?.email && (
+                  {currentAuthor?.email === theAuthor?.email || isAdmin ? (
                      <div className="flex items-center gap-2.5">
                         <Link to={`/archive/edit/:${article.id}`}>
                            <LuPencilLine className="size-11 p-2.5 stroke-[1.6px] hover:bg-primary-200/30 dark:hover:bg-primary-300/30 text-primary-400 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 cursor-pointer rounded-xl transition-200" />
@@ -142,7 +147,7 @@ function Article() {
                            onClick={() => setOpenDelete((isOpen) => !isOpen)}
                         />
                      </div>
-                  )}
+                  ) : null}
 
                   <div
                      className={`text-primary-300 text-2xl pointer-events-none `}
