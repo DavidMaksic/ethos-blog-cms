@@ -2,6 +2,7 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { useEffect, useRef, useState } from 'react';
 import { useGetCategories } from '../../features/tags/useGetCategories';
+import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useEditArticle } from '../../features/archive/useEditArticle';
 import { useFindArticle } from '../../features/archive/useFindArticle';
@@ -93,6 +94,7 @@ function EditForm() {
    // - Other
    const [isDefault, setIsDefault] = useState(true);
    const { isDarkMode, toggleDarkMode } = useDarkMode();
+   const { user } = useCurrentAuthor();
 
    const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
       useFullscreen();
@@ -376,7 +378,7 @@ function EditForm() {
             setLocalItem={setLocalArticle}
          />
 
-         <Options isEdit={true}>
+         <Options isEdit={true} currentAuthor={user}>
             <button
                className="hover:bg-primary-100/80 dark:hover:bg-primary-200 mb-0.5 rounded-2xl transition"
                onClick={(e) => {

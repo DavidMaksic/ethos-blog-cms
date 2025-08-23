@@ -34,6 +34,7 @@ function Options({
    const [activeId, setActiveId] = useState();
 
    const location = useLocation();
+   const isEditPage = location.pathname.includes('/edit');
 
    const { setIsFullscreen } = useFullscreen();
    useEffect(() => setIsFullscreen(false), [setIsFullscreen]);
@@ -112,7 +113,7 @@ function Options({
                   ) : null}
 
                   {(currentAuthor?.email === theAuthor?.email && articleID) ||
-                  isAdmin ? (
+                  (isAdmin && !isEditPage) ? (
                      <Link to={`/archive/edit/:${articleID}`}>
                         <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-200 stroke-[1.7px] rounded-2xl transition" />
                      </Link>
