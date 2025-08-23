@@ -8,6 +8,8 @@ import { useOutsideClick } from '../hooks/useOutsideClick';
 import { useFullscreen } from '../context/FullscreenContext';
 import { IoOptions } from 'react-icons/io5';
 import { useScroll } from '../hooks/useScroll';
+import { useAuthors } from '../features/authentication/useAuthors';
+import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 
 function Options({
    currentAuthor,
@@ -58,6 +60,11 @@ function Options({
 
    useIntersectionObserver(setActiveId, activeId);
 
+   const { authors } = useAuthors();
+   const isAdmin = authors?.find(
+      (item) => item.id === currentAuthor?.id
+   ).is_admin;
+
    return (
       <>
          <div className="absolute top-[-12rem] left-0" ref={topRef} />
@@ -105,7 +112,8 @@ function Options({
                      />
                   ) : null}
 
-                  {currentAuthor?.email === theAuthor?.email && articleID ? (
+                  {(currentAuthor?.email === theAuthor?.email && articleID) ||
+                  isAdmin ? (
                      <Link to={`/archive/edit/:${articleID}`}>
                         <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-200 stroke-[1.7px] rounded-2xl transition" />
                      </Link>
