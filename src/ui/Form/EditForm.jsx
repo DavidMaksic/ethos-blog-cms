@@ -47,8 +47,9 @@ import ResetButton from '../Buttons/ResetButton';
 import FormStatus from './FormStatus';
 import FormItem from './FormItem';
 import Context from '../Context';
-import FormRow from './FormRow';
 import Options from '../Options';
+import FormRow from './FormRow';
+import slugify from 'slugify';
 import Form from './Form';
 
 function EditForm() {
@@ -161,6 +162,9 @@ function EditForm() {
          (item) => item.category === localArticle.category
       );
 
+      const slug = slugify(data.title, { lower: true, strict: true });
+      console.log('slug: ', slug);
+
       editArticle({
          ...data,
          image: currentImage,
@@ -170,6 +174,7 @@ function EditForm() {
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
          flag: localArticle.flag,
+         slug,
       });
 
       if (

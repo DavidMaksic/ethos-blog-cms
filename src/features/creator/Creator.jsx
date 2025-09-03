@@ -49,6 +49,7 @@ import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
 import Options from '../../ui/Options';
+import slugify from 'slugify';
 import toast from 'react-hot-toast';
 import Form from '../../ui/Form/Form';
 
@@ -156,6 +157,8 @@ function Creator() {
          throw new Error("Image doesn't exist!");
       }
 
+      const slug = slugify(data.title, { lower: true, strict: true });
+
       createArticle(
          {
             ...data,
@@ -168,6 +171,7 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             flag: localArticle.flag,
+            slug,
          },
          {
             onSuccess: clear,
@@ -187,6 +191,8 @@ function Creator() {
          throw new Error("Image doesn't exist!");
       }
 
+      const slug = slugify(data.title, { lower: true, strict: true });
+
       createArticle(
          {
             ...data,
@@ -199,6 +205,7 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             flag: localArticle.flag,
+            slug,
          },
          {
             onSuccess: clear,

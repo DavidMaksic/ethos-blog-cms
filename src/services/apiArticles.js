@@ -206,6 +206,7 @@ export async function updateArticle(article) {
             language: article.language,
             flag: article.flag,
             image: imagePath,
+            slug: article.slug,
          })
          .eq('id', article.id)
          .select();
@@ -233,6 +234,7 @@ export async function updateArticle(article) {
          status: article.status,
          language: article.language,
          flag: article.flag,
+         slug: article.slug,
       })
       .eq('id', article.id)
       .select();
