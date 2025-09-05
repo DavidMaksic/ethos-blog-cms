@@ -207,6 +207,7 @@ export async function updateArticle(article) {
             flag: article.flag,
             image: imagePath,
             slug: article.slug,
+            updated_at: new Date().toISOString(),
          })
          .eq('id', article.id)
          .select();
@@ -235,6 +236,7 @@ export async function updateArticle(article) {
          language: article.language,
          flag: article.flag,
          slug: article.slug,
+         updated_at: new Date().toISOString(),
       })
       .eq('id', article.id)
       .select();
