@@ -136,7 +136,6 @@
 
    --shadow-article: 0 0 40px 0px #e5e7eba4;
    --shadow-dashboard: 0 0 40px 0px #f3f4f6;
-   --shadow-reference: 0 0 30px 0px #f9fafb;
    --shadow-menu-dark: 0 0 40px 0px #0c111b;
    --shadow-btn: 0 0.2rem 0.5rem #cbd5e1;
    --shadow-toast-btn: 0 0.2rem 0.5rem #e5e7eb;
@@ -1011,7 +1010,7 @@ input:-webkit-autofill {
 }
 
 .alert[data-alert-type='references'] {
-   @apply border border-primary-300/80 dark:border-primary-300/40 shadow-reference dark:shadow-none;
+   @apply border border-primary-300/80 dark:border-primary-300/40;
 
    .alert-icon-wrapper > svg {
       @apply hidden;
