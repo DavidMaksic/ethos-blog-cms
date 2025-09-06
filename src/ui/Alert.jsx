@@ -1,5 +1,6 @@
 import { MdCancel, MdCheckCircle, MdError, MdInfo } from 'react-icons/md';
 import { createReactBlockSpec } from '@blocknote/react';
+import { PiListNumbers } from 'react-icons/pi';
 import { defaultProps } from '@blocknote/core';
 import { Menu } from '@mantine/core';
 
@@ -44,6 +45,16 @@ const alertTypes = [
          dark: '#208020',
       },
    },
+   {
+      title: 'References',
+      value: 'references',
+      icon: PiListNumbers,
+      color: '#777',
+      backgroundColor: {
+         light: '#888',
+         dark: '#988',
+      },
+   },
 ];
 
 export const Alert = createReactBlockSpec(
@@ -54,7 +65,7 @@ export const Alert = createReactBlockSpec(
          textColor: defaultProps.textColor,
          type: {
             default: 'info',
-            values: ['info', 'warning', 'error', 'success'],
+            values: ['info', 'warning', 'error', 'success', 'references'],
          },
       },
       content: 'inline',
@@ -67,7 +78,10 @@ export const Alert = createReactBlockSpec(
          const Icon = alertType.icon;
 
          return (
-            <div className={'alert'} data-alert-type={props.block.props.type}>
+            <div
+               className={`alert ${!alertType.icon && 'pr-24!'}`}
+               data-alert-type={props.block.props.type}
+            >
                <Menu withinPortal={false}>
                   <Menu.Target>
                      <div

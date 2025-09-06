@@ -41,7 +41,7 @@ export const insertAlert = (editor, icon) => ({
          type: 'alert',
       });
    },
-   aliases: ['info', 'warning', 'error', 'success'],
+   aliases: ['info', 'warning', 'error', 'success', 'credit'],
    group: 'Other',
    icon,
 });

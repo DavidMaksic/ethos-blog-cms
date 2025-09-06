@@ -163,7 +163,6 @@ function EditForm() {
       );
 
       const slug = slugify(data.title, { lower: true, strict: true });
-      console.log('slug: ', slug);
 
       editArticle({
          ...data,

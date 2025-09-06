@@ -136,6 +136,7 @@
 
    --shadow-article: 0 0 40px 0px #e5e7eba4;
    --shadow-dashboard: 0 0 40px 0px #f3f4f6;
+   --shadow-reference: 0 0 30px 0px #f9fafb;
    --shadow-menu-dark: 0 0 40px 0px #0c111b;
    --shadow-btn: 0 0.2rem 0.5rem #cbd5e1;
    --shadow-toast-btn: 0 0.2rem 0.5rem #e5e7eb;
@@ -165,8 +166,8 @@
 
    --color-link: var(--color-accent-500);
    --color-link-border: #d2af84de;
-   --color-link-hover: var(--color-accent-300);
-   --color-link-border-hover: var(--color-accent-200);
+   --color-link-hover: var(--color-primary-500);
+   --color-link-border-hover: var(--color-primary-500);
 
    --transition-time: cubic-bezier(0.17, 0.67, 0.5, 0.71) 100ms;
 }
@@ -269,8 +270,8 @@
 
       --color-link: #ddc3a2e0;
       --color-link-border: #d2af84d2;
-      --color-link-hover: var(--color-accent-300);
-      --color-link-border-hover: var(--color-accent-400);
+      --color-link-hover: var(--color-primary-500);
+      --color-link-border-hover: var(--color-primary-500);
    }
 }
 
@@ -851,19 +852,19 @@ input:-webkit-autofill {
    color: var(--color-primary-400);
 }
 
-.bn-inline-content > a {
+.inline-content a {
    color: var(--color-link);
    text-decoration-color: var(--color-link-border) !important;
    text-decoration: underline;
    text-decoration-thickness: 1.5px;
    text-underline-offset: 4px;
    cursor: pointer;
+   transition: all 0.15s;
 }
 
-.bn-inline-content > a:hover {
+.inline-content a:hover {
    color: var(--color-link-hover);
    text-decoration-color: var(--color-link-border-hover) !important;
-   transition: 0.075s;
 }
 
 .bn-block-content > h1 {
@@ -1007,6 +1008,14 @@ input:-webkit-autofill {
 
 .alert[data-alert-type='success'] {
    background-color: #d8f7d8b4;
+}
+
+.alert[data-alert-type='references'] {
+   @apply border border-primary-300/80 dark:border-primary-300/40 shadow-reference dark:shadow-none;
+
+   .alert-icon-wrapper > svg {
+      @apply hidden;
+   }
 }
 
 [data-theme='dark'] .alert[data-alert-type='info'] {
@@ -1187,11 +1196,7 @@ article .bn-file-block-content-wrapper {
 }
 
 strong {
-   color: var(--color-primary-600);
-}
-
-[data-theme='dark'] strong {
-   color: #e2e8f0b6;
+   @apply text-primary-600/90 dark:text-primary-600/70;
 }
 
 [data-content-type='quote'] strong {
