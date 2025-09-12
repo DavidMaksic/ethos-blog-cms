@@ -23,7 +23,7 @@ function Archive() {
             <ArchiveOps />
          </Row>
 
-         <div className="xl:mb-22">
+         <div className="mb-24">
             <Row>
                <ArchiveTable />
             </Row>

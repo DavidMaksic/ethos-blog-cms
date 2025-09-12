@@ -21,7 +21,7 @@ function AuthorItem({ author, activeUser }) {
 
    return (
       <li
-         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-200 rounded-2xl px-20 py-12 box-shadow transition-200 h-full ${
+         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-200 rounded-3xl px-20 py-12 box-shadow transition-200 h-full ${
             !description_en && 'pb-18'
          }`}
       >
