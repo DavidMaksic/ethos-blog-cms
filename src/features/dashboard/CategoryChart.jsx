@@ -74,7 +74,7 @@ function CategoryChart({ articles, numDays }) {
    }
 
    return (
-      <div className="categories col-start-3 col-span-2 space-y-4 text-base bg-white dark:bg-primary-200 shadow-dashboard dark:shadow-none rounded-xl py-8 px-10 box-shadow transition-200">
+      <div className="categories col-start-3 col-span-2 space-y-4 text-base bg-white dark:bg-primary-200 rounded-xl py-8 px-10 box-shadow transition-200 z-10">
          <Heading type="h2">Categories</Heading>
 
          {articles.length > 0 ? (
