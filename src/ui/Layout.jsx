@@ -1,4 +1,5 @@
 import { useFullscreen } from '../context/FullscreenContext';
+import { useThemeColor } from '../hooks/useThemeColor';
 import { Outlet } from 'react-router-dom';
 import { motion } from 'motion/react';
 
@@ -6,6 +7,7 @@ import Sidebar from './Sidebar';
 import Header from './Header/Header';
 
 function Layout() {
+   useThemeColor();
    const { isFullscreen } = useFullscreen();
 
    return (
