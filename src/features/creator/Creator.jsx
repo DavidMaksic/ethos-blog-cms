@@ -44,7 +44,7 @@ import LanguageButton from '../../ui/Buttons/LanguageButton';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
-import srbFlag from '../../../public/assets/srb-flag.png';
+import srbFlag from '../../../public/srb-flag.png';
 import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
