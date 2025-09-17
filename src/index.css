@@ -787,7 +787,6 @@ input:-webkit-autofill {
    font-family: var(--font-cyrillic);
 }
 
-.bn-default-styles > h1,
 .bn-default-styles > h2,
 .bn-default-styles > h3 {
    font-family: var(--font-text) !important;
@@ -866,11 +865,6 @@ input:-webkit-autofill {
    text-decoration-color: var(--color-link-border-hover) !important;
 }
 
-.bn-block-content > h1 {
-   font-size: 3rem;
-   line-height: 1.25;
-}
-
 .bn-block-content > h2 {
    font-size: 2.5rem;
    line-height: 1.3;
@@ -882,11 +876,6 @@ input:-webkit-autofill {
 }
 
 @media (min-width: 2560px) {
-   .bn-block-content > h1 {
-      font-size: 2.8rem;
-      line-height: 1.25;
-   }
-
    .bn-block-content > h2 {
       font-size: 2.4rem;
       line-height: 1.3;
@@ -899,11 +888,6 @@ input:-webkit-autofill {
 }
 
 @media (max-width: 1580px) {
-   .bn-block-content > h1 {
-      font-size: 3rem !important;
-      line-height: 3.5rem;
-   }
-
    .bn-block-content > h2 {
       font-size: 2.5rem !important;
       line-height: 3.2rem;
@@ -916,10 +900,6 @@ input:-webkit-autofill {
 }
 
 @media (max-width: 1290px) {
-   .bn-block-content > h1 {
-      font-size: 2.85rem !important;
-   }
-
    .bn-block-content > h2 {
       font-size: 2.4rem !important;
    }
@@ -929,7 +909,6 @@ input:-webkit-autofill {
    }
 }
 
-.bn-block-content > h1,
 .bn-block-content > h2,
 .bn-block-content > h3 {
    color: var(--color-editor-header);
@@ -1190,13 +1169,11 @@ strong {
    color: #e5c59e;
 }
 
-.bn-block-group h1 > strong,
 .bn-block-group h2 > strong,
 .bn-block-group h3 > strong {
    color: var(--color-editor-header);
 }
 
-[data-theme='dark'] .bn-block-group h1 > strong,
 [data-theme='dark'] .bn-block-group h2 > strong,
 [data-theme='dark'] .bn-block-group h3 > strong {
    color: var(--color-accent-200) !important;
@@ -1528,7 +1505,6 @@ strong {
 
 /* Margin above headers */
 
-.bn-block-group h1,
 .bn-block-group h2,
 .bn-block-group h3 {
    scroll-margin-top: 52px;

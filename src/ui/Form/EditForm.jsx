@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { useEffect, useRef, useState } from 'react';
+import { insertAlert, toSlug } from '../../utils/helpers';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -11,7 +12,6 @@ import { useFullscreen } from '../../context/FullscreenContext';
 import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
-import { insertAlert } from '../../utils/helpers';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
@@ -49,7 +49,6 @@ import FormItem from './FormItem';
 import Context from '../Context';
 import Options from '../Options';
 import FormRow from './FormRow';
-import slugify from 'slugify';
 import Form from './Form';
 
 function EditForm() {
@@ -162,7 +161,7 @@ function EditForm() {
          (item) => item.category === localArticle.category
       );
 
-      const slug = slugify(data.title, { lower: true, strict: true });
+      const slug = toSlug(data.title);
 
       editArticle({
          ...data,

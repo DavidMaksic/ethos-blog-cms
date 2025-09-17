@@ -31,6 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: Style headers better
 // TODO: Comment and users table
 
 function App() {

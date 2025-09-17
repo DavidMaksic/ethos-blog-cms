@@ -3,6 +3,7 @@ import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { useEffect, useRef, useState } from 'react';
 import { LuCloudUpload, LuSunMedium } from 'react-icons/lu';
 import { useGetCategories } from '../tags/useGetCategories';
+import { insertAlert, toSlug } from '../../utils/helpers';
 import { useCreateArticle } from '../archive/useCreateArticle';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -11,7 +12,6 @@ import { useFullscreen } from '../../context/FullscreenContext';
 import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
-import { insertAlert } from '../../utils/helpers';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -49,7 +49,6 @@ import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
 import Options from '../../ui/Options';
-import slugify from 'slugify';
 import toast from 'react-hot-toast';
 import Form from '../../ui/Form/Form';
 
@@ -157,7 +156,7 @@ function Creator() {
          throw new Error("Image doesn't exist!");
       }
 
-      const slug = slugify(data.title, { lower: true, strict: true });
+      const slug = toSlug(data.title);
 
       createArticle(
          {
@@ -191,7 +190,7 @@ function Creator() {
          throw new Error("Image doesn't exist!");
       }
 
-      const slug = slugify(data.title, { lower: true, strict: true });
+      const slug = toSlug(data.title);
 
       createArticle(
          {

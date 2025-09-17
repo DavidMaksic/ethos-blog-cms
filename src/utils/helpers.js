@@ -1,5 +1,6 @@
 import { insertOrUpdateBlock } from '@blocknote/core';
 import { supabaseUrl } from '../services/supabase';
+import slugify, { extend } from 'slugify';
 
 export function createImagePath(article) {
    const imageNameOld = `${Math.random()}-${article.image.name}`.replaceAll(
@@ -55,4 +56,28 @@ export function handleValidation(value, array) {
    });
 
    if (isDuplicate) return 'This category already exists';
+}
+
+extend({
+   ч: 'c',
+   Ч: 'C',
+   ш: 's',
+   Ш: 'S',
+   ж: 'z',
+   Ж: 'Z',
+   ђ: 'dj',
+   Ђ: 'Dj',
+   љ: 'lj',
+   Љ: 'Lj',
+   њ: 'nj',
+   Њ: 'Nj',
+   џ: 'dz',
+   Џ: 'Dz',
+});
+
+export function toSlug(string) {
+   return slugify(string, {
+      lower: true,
+      strict: true,
+   });
 }
