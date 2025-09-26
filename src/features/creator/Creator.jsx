@@ -145,11 +145,11 @@ function Creator() {
 
    // - Submit functions
    function onSubmit(data) {
-      let categoryID;
-      categoryID = categories.find(
+      let category_id;
+      category_id = categories.find(
          (item) => item.category === localArticle?.category
       )?.id;
-      if (!categoryID) categoryID = categories[0].id;
+      if (!category_id) category_id = categories[0].id;
 
       if (!currentImage) {
          toast.error("Image doesn't exist!");
@@ -162,7 +162,7 @@ function Creator() {
          {
             ...data,
             image: currentImage,
-            categoryID,
+            category_id,
             status: 'published',
             author_id: user.id,
             content: contentHTML,
@@ -179,11 +179,11 @@ function Creator() {
    }
 
    function onSubmitDraft(data) {
-      let categoryID;
-      categoryID = categories.find(
+      let category_id;
+      category_id = categories.find(
          (item) => item.category === localArticle?.category
       )?.id;
-      if (!categoryID) categoryID = categories[0].id;
+      if (!category_id) category_id = categories[0].id;
 
       if (!currentImage) {
          toast.error("Image doesn't exist!");
@@ -196,7 +196,7 @@ function Creator() {
          {
             ...data,
             image: currentImage,
-            categoryID,
+            category_id,
             status: 'drafted',
             author_id: user.id,
             content: contentHTML,

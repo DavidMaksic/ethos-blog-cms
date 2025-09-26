@@ -19,12 +19,12 @@ function TagFeatureModal({ currentTag, onClose }) {
    const open = setOpenID;
 
    const boolean = true;
-   const categoryID = currentTag.id;
+   const category_id = currentTag.id;
 
    const filteredArticles = articles?.filter((item) => item.featured !== true);
 
    const taggedArticles = filteredArticles?.filter(
-      (item) => item.categoryID === currentTag.id
+      (item) => item.category_id === currentTag.id
    );
 
    useEffect(() => {
@@ -77,7 +77,7 @@ function TagFeatureModal({ currentTag, onClose }) {
                   !openID || isEditing ? 'pointer-events-none opacity-30' : ''
                }`}
                onClick={() =>
-                  updateTagFeature({ selectedID, categoryID, boolean })
+                  updateTagFeature({ selectedID, category_id, boolean })
                }
             >
                {isEditing ? (

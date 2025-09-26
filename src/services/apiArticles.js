@@ -81,30 +81,14 @@ export async function deleteArticle(article) {
 
    if (image2) throw new Error('Image could not be deleted from database');
 
-   // 3. Delete comments on this article
-   const { error3 } = await supabase
-      .from('comments')
-      .delete()
-      .eq('article_id', article.id);
-
-   if (error3) throw new Error('Comments could not be deleted');
-
-   // 5. Delete replies on this article
-   const { error4 } = await supabase
-      .from('replies')
-      .delete()
-      .eq('article_id', article.id);
-
-   if (error4) throw new Error('Replies could not be deleted');
-
-   // 6. Fetch all categories
+   // 3. Fetch all categories
    const { data: categories, error5 } = await supabase
       .from('categories')
       .select('id, articles');
 
    if (error5) throw new Error('Categories could not be fetched');
 
-   // 7. Delete article reference in all categories
+   // 4. Delete article reference in all categories
    const updatePromises = categories.map(async (category) => {
       try {
          const articles = JSON.parse(category.articles);
@@ -123,14 +107,14 @@ export async function deleteArticle(article) {
 
    await Promise.all(updatePromises);
 
-   // 8. Fetch all bookmarks in users table
+   // 5. Fetch all bookmarks in users table
    const { data: bookmarks, error6 } = await supabase
       .from('users')
       .select('id, bookmarks');
 
    if (error6) throw new Error('Bookmarks could not be fetched');
 
-   // 9. Delete article reference in all bookmarks
+   // 6. Delete article reference in all bookmarks
    const updatePromise = bookmarks.map(async (user) => {
       try {
          const bookmarks = JSON.parse(user.bookmarks);
@@ -149,14 +133,14 @@ export async function deleteArticle(article) {
 
    await Promise.all(updatePromise);
 
-   // 10. Fetch all likes in users table
+   // 7. Fetch all likes in users table
    const { data: likes, error7 } = await supabase
       .from('users')
       .select('id, liked');
 
    if (error7) throw new Error('Liked article IDs could not be fetched');
 
-   // 11. Delete article reference in all likes array
+   // 8. Delete article reference in all likes array
    const updateAllPromises = likes.map(async (user) => {
       try {
          const likes = JSON.parse(user.liked);
@@ -201,7 +185,7 @@ export async function updateArticle(article) {
             title: article.title,
             description: article.description,
             content: article.content,
-            categoryID: article.categoryID,
+            category_id: article.category_id,
             status: article.status,
             language: article.language,
             flag: article.flag,
@@ -231,7 +215,7 @@ export async function updateArticle(article) {
          title: article.title,
          description: article.description,
          content: article.content,
-         categoryID: article.categoryID,
+         category_id: article.category_id,
          status: article.status,
          language: article.language,
          flag: article.flag,
@@ -247,7 +231,7 @@ export async function updateArticle(article) {
 export async function getArticlesAfterDate(date) {
    const { data, error } = await supabase
       .from('articles')
-      .select('created_at, status, categoryID, likes')
+      .select('created_at, status, category_id, likes')
       .gte('created_at', date)
       .lte('created_at', getToday({ end: true }));
 

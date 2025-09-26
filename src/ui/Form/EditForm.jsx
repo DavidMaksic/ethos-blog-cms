@@ -59,7 +59,7 @@ function EditForm() {
    // - Category logic
    const { categories } = useGetCategories();
    const category = categories?.find(
-      (item) => item.id === articleValues.categoryID
+      (item) => item.id === articleValues.category_id
    );
 
    // - LocalStorage logic
@@ -157,7 +157,7 @@ function EditForm() {
    const { isEditing, editArticle } = useEditArticle();
 
    function onSubmit(data) {
-      const { id: categoryID } = categories.find(
+      const { id: category_id } = categories.find(
          (item) => item.category === localArticle.category
       );
 
@@ -168,7 +168,7 @@ function EditForm() {
          image: currentImage,
          oldImage,
          content: contentHTML,
-         categoryID,
+         category_id,
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
          flag: localArticle.flag,

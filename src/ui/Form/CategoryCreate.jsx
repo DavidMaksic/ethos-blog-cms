@@ -49,11 +49,11 @@ function CategoryForm() {
    function handleCategory(data) {
       const finalData = {
          category: data.category,
-         bgLight: colorLightBg.hex,
-         bgDark: colorDarkBg.hex,
-         textLight: colorLightText.hex,
-         textDark: colorDarkText.hex,
-         chartColor: colorChart.hex,
+         bg_light: colorLightBg.hex,
+         bg_dark: colorDarkBg.hex,
+         text_light: colorLightText.hex,
+         text_dark: colorDarkText.hex,
+         chart_color: colorChart.hex,
       };
       createCategory(finalData);
    }

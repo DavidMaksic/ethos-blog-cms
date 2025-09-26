@@ -32,11 +32,11 @@ export async function updateCategory(updateObject) {
       .from('categories')
       .update({
          category: category,
-         bgLight: colorLightBg.hex,
-         textLight: colorLightText.hex,
-         bgDark: colorDarkBg.hex,
-         textDark: colorDarkText.hex,
-         chartColor: colorChart.hex,
+         bg_light: colorLightBg.hex,
+         text_light: colorLightText.hex,
+         bg_dark: colorDarkBg.hex,
+         text_dark: colorDarkText.hex,
+         chart_color: colorChart.hex,
       })
       .eq('id', id)
       .select()
@@ -45,7 +45,7 @@ export async function updateCategory(updateObject) {
    if (error) throw new Error('Category could not be updated');
 }
 
-export async function updateTagFeature({ selectedID, categoryID, boolean }) {
+export async function updateTagFeature({ selectedID, category_id, boolean }) {
    const { error } = await supabase
       .from('articles')
       .update({
@@ -62,7 +62,7 @@ export async function updateTagFeature({ selectedID, categoryID, boolean }) {
    } = await supabase
       .from('categories')
       .select('articles')
-      .eq('id', categoryID);
+      .eq('id', category_id);
 
    if (error2) {
       throw new Error('Article IDs could not be fetched');
@@ -76,7 +76,7 @@ export async function updateTagFeature({ selectedID, categoryID, boolean }) {
       const { error3 } = await supabase
          .from('categories')
          .update({ articles: [...allIDs, selectedID] })
-         .eq('id', categoryID)
+         .eq('id', category_id)
          .select();
 
       if (error3) throw new Error('Category table could not be updated');
@@ -86,7 +86,7 @@ export async function updateTagFeature({ selectedID, categoryID, boolean }) {
       const { error4 } = await supabase
          .from('categories')
          .update({ articles: [...allIDs] })
-         .eq('id', categoryID)
+         .eq('id', category_id)
          .select();
 
       if (error4) throw new Error('Category table could not be updated');

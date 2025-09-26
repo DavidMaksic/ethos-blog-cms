@@ -16,7 +16,7 @@ function EntryProvider({ children }) {
    );
 
    const taggedArticles = articles?.filter(
-      (item) => item.categoryID === currentTag?.id && item.featured
+      (item) => item.category_id === currentTag?.id && item.featured
    );
 
    return (

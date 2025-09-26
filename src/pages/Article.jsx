@@ -43,7 +43,9 @@ function Article() {
 
    // - Category logic
    const { categories } = useGetCategories();
-   const category = categories?.find((item) => item.id === article?.categoryID);
+   const category = categories?.find(
+      (item) => item.id === article?.category_id
+   );
 
    // - Dark mode logic
    const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -53,11 +55,11 @@ function Article() {
    useEffect(() => {
       if (!category) return;
       if (isDarkMode) {
-         setBgColor(category.bgDark);
-         setTextColor(category.textDark);
+         setBgColor(category.bg_dark);
+         setTextColor(category.text_dark);
       } else {
-         setBgColor(category.bgLight);
-         setTextColor(category.textLight);
+         setBgColor(category.bg_light);
+         setTextColor(category.text_light);
       }
    }, [isDarkMode, category]);
 

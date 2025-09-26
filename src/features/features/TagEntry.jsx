@@ -20,11 +20,11 @@ function TagEntry({ article }) {
 
    const { refetch } = useEntry();
    const boolean = false;
-   const categoryID = article.categoryID;
+   const category_id = article.category_id;
 
    function handleDelete() {
       const id = article.id;
-      updateTagFeature({ selectedID: id, categoryID, boolean });
+      updateTagFeature({ selectedID: id, category_id, boolean });
    }
 
    useEffect(() => {

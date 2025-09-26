@@ -17,8 +17,8 @@ function prepareData(articles, categories) {
       ?.map((item) => {
          return {
             category: item.category,
-            color: item.chartColor,
-            count: articles.filter((article) => article.categoryID === item.id)
+            color: item.chart_color,
+            count: articles.filter((article) => article.category_id === item.id)
                .length,
          };
       })

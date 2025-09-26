@@ -8,8 +8,8 @@ export function useUpdateTagFeature() {
       isSuccess,
       mutate: updateTagFeature,
    } = useMutation({
-      mutationFn: ({ selectedID, categoryID, boolean }) =>
-         updateTagFeatureAPI({ selectedID, categoryID, boolean }),
+      mutationFn: ({ selectedID, category_id, boolean }) =>
+         updateTagFeatureAPI({ selectedID, category_id, boolean }),
       onError: (err) => toast.error(err.message),
    });
    return { isEditing, isSuccess, updateTagFeature };

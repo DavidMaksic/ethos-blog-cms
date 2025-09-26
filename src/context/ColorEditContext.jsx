@@ -19,13 +19,13 @@ function ColorEditProvider({ children }) {
          (item) => currentTag.category === item.category
       );
 
-      setLightBg(currentCategory?.bgLight);
-      setLightText(currentCategory?.textLight);
+      setLightBg(currentCategory?.bg_light);
+      setLightText(currentCategory?.text_light);
 
-      setDarkBg(currentCategory?.bgDark);
-      setDarkText(currentCategory?.textDark);
+      setDarkBg(currentCategory?.bg_dark);
+      setDarkText(currentCategory?.text_dark);
 
-      setChartColor(currentCategory?.chartColor);
+      setChartColor(currentCategory?.chart_color);
    }, [categories, currentTag]);
 
    const [openLightBg, setOpenLightBg] = useState(false);
