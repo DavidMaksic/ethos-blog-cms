@@ -81,40 +81,14 @@ export async function deleteArticle(article) {
 
    if (image2) throw new Error('Image could not be deleted from database');
 
-   // 3. Fetch all categories
-   const { data: categories, error5 } = await supabase
-      .from('categories')
-      .select('id, articles');
-
-   if (error5) throw new Error('Categories could not be fetched');
-
-   // 4. Delete article reference in all categories
-   const updatePromises = categories.map(async (category) => {
-      try {
-         const articles = JSON.parse(category.articles);
-         const filtered = articles.filter((item) => item !== article.id);
-
-         const { error } = await supabase
-            .from('categories')
-            .update({ articles: filtered })
-            .eq('id', category.id);
-
-         if (error) throw new Error('Category could not be updated');
-      } catch (err) {
-         console.error(err);
-      }
-   });
-
-   await Promise.all(updatePromises);
-
-   // 5. Fetch all bookmarks in users table
-   const { data: bookmarks, error6 } = await supabase
+   // 3. Fetch all bookmarks in users table
+   const { data: bookmarks, error: error6 } = await supabase
       .from('users')
       .select('id, bookmarks');
 
    if (error6) throw new Error('Bookmarks could not be fetched');
 
-   // 6. Delete article reference in all bookmarks
+   // 4. Delete article reference in all bookmarks
    const updatePromise = bookmarks.map(async (user) => {
       try {
          const bookmarks = JSON.parse(user.bookmarks);
@@ -133,14 +107,14 @@ export async function deleteArticle(article) {
 
    await Promise.all(updatePromise);
 
-   // 7. Fetch all likes in users table
-   const { data: likes, error7 } = await supabase
+   // 5. Fetch all likes in users table
+   const { data: likes, error: error7 } = await supabase
       .from('users')
       .select('id, liked');
 
    if (error7) throw new Error('Liked article IDs could not be fetched');
 
-   // 8. Delete article reference in all likes array
+   // 6. Delete article reference in all likes array
    const updateAllPromises = likes.map(async (user) => {
       try {
          const likes = JSON.parse(user.liked);
@@ -290,7 +264,9 @@ export async function getComments() {
    const { data: data1, error } = await supabase.from('comments').select('id');
    if (error) throw new Error(error.message);
 
-   const { data: data2, error2 } = await supabase.from('replies').select('id');
+   const { data: data2, error: error2 } = await supabase
+      .from('replies')
+      .select('id');
    if (error2) throw new Error(error2.message);
 
    const data = [...data1, ...data2];
@@ -311,7 +287,7 @@ export async function updateFeatures(article) {
    if (error) throw new Error(error.message);
 
    // Fetch all categories
-   const { data: categories, error2 } = await supabase
+   const { data: categories, error: error2 } = await supabase
       .from('categories')
       .select('id, articles');
 

@@ -1,7 +1,7 @@
+import { getArticlesAfterDate } from '../../services/apiArticles';
+import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { subDays } from 'date-fns';
-import { useSearchParams } from 'react-router-dom';
-import { getArticlesAfterDate } from '../../services/apiArticles';
 
 export function useRecentArticles() {
    const [searchParams] = useSearchParams();

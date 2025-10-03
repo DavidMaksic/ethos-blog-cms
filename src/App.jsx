@@ -31,7 +31,8 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Style headers better
+// TODO: Remove arrays from DB
+// TODO: Sync article headers to look the same
 // TODO: Comment and users table
 
 function App() {
