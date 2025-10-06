@@ -1500,7 +1500,7 @@ strong {
 
 .bn-block-group h2,
 .bn-block-group h3 {
-   scroll-margin-top: 52px;
+   scroll-margin-top: 50px;
 }
 
 @media (min-width: 2560px) {

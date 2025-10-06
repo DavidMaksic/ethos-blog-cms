@@ -87,7 +87,7 @@ function Article() {
             <h2 className="relative styled_text font-normal! text-6xl pb-2 bg-gradient-to-r from-gray-600 to-gray-500/90 dark:from-slate-300 dark:to-slate-300/80">
                {article.title}
             </h2>
-            <h3 className="font-creator font-medium! text-2xl w-5/6 text-primary-500/80">
+            <h3 className="font-creator font-medium! text-2xl w-5/6 text-primary-500/80 self-center">
                {article.description}
             </h3>
          </div>
