@@ -898,6 +898,16 @@ input:-webkit-autofill {
       margin-bottom: 0.7rem !important;
       margin-top: 0.4rem !important;
    }
+
+   .bn-inline-content:empty {
+      height: 1.5rem !important;
+   }
+}
+
+@media (max-width: 1270px) {
+   .bn-block-content > h2 {
+      font-size: 2.7rem !important;
+   }
 }
 
 .bn-block-content > h2,
@@ -1500,7 +1510,7 @@ strong {
 
 .bn-block-group h2,
 .bn-block-group h3 {
-   scroll-margin-top: 50px;
+   scroll-margin-top: 44px;
 }
 
 @media (min-width: 2560px) {
