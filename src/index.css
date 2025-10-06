@@ -952,9 +952,9 @@ input:-webkit-autofill {
    justify-content: center;
    align-items: center;
    flex-grow: 1;
-   border-radius: 16px;
+   border-radius: 1rem;
    min-height: 48px;
-   padding: 22px 40px 22px 10px;
+   padding: 1.5rem 2rem 1.5rem 0.7rem;
    transition: background-color 0.1s;
    color: #0000009c;
 }
@@ -994,11 +994,13 @@ input:-webkit-autofill {
    user-select: none;
    cursor: pointer;
 
-   height: 24px;
-   width: 24px;
-   margin-left: 16px;
-   margin-right: 22px;
-   border-radius: 16px;
+   margin-left: 1.05rem;
+   margin-right: 1.5rem;
+}
+
+.alert-icon-wrapper > svg {
+   height: 1.5rem;
+   width: 1.5rem;
 }
 
 .alert-icon[data-alert-icon-type='info'] {
