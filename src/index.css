@@ -17,7 +17,7 @@
 
 @media (min-width: 2560px) {
    html {
-      font-size: 21px !important;
+      font-size: 22px !important;
    }
 }
 
@@ -633,7 +633,13 @@ input:-webkit-autofill {
 
 @media (min-width: 3840px) {
    .bn-editor {
-      padding-inline: 230px;
+      padding-inline: 230px !important;
+   }
+}
+
+@media (min-width: 2560px) {
+   .bn-editor {
+      padding-inline: 120px;
    }
 }
 
@@ -656,12 +662,12 @@ input:-webkit-autofill {
 }
 
 [data-lang='English'] .bn-default-styles {
-   font-size: 1.484rem !important;
+   font-size: 1.48rem !important;
 }
 
 @media (min-width: 2560px) {
    [data-lang='English'] .bn-default-styles {
-      font-size: 1.51rem !important;
+      font-size: 1.5rem !important;
    }
 
    [data-lang='Српски'] .bn-default-styles {
@@ -671,7 +677,7 @@ input:-webkit-autofill {
 
 @media (min-width: 3840px) {
    [data-lang='English'] .bn-default-styles {
-      font-size: 1.59rem !important;
+      font-size: 1.505rem !important;
    }
 }
 
@@ -732,11 +738,14 @@ input:-webkit-autofill {
 [data-lang='Српски'] .bn-container blockquote {
    font-size: 1.48rem;
    line-height: 1.5;
+   font-family: var(--font-cyrillic) !important;
 }
 
 [data-lang='English'] .bn-container blockquote {
    font-size: 1.625rem;
    line-height: 1.38;
+   font-family: var(--font-creator) !important;
+   font-weight: 600;
 }
 
 @media (min-width: 2560px) {
@@ -751,7 +760,7 @@ input:-webkit-autofill {
 
 @media (min-width: 3840px) {
    [data-lang='English'] .bn-container blockquote {
-      font-size: 1.8rem !important;
+      font-size: 1.7rem !important;
    }
 }
 
@@ -868,18 +877,6 @@ input:-webkit-autofill {
 .bn-block-content > h3 {
    font-size: 1.8rem;
    line-height: 1.4;
-}
-
-@media (min-width: 2560px) {
-   .bn-block-content > h2 {
-      font-size: 2.2rem;
-      line-height: 3.2rem;
-   }
-
-   .bn-block-content > h3 {
-      font-size: 1.55rem;
-      line-height: 2.8rem;
-   }
 }
 
 @media (max-width: 1580px) {
@@ -1146,12 +1143,12 @@ article .bn-file-block-content-wrapper {
 }
 
 [data-file-block] .bn-visual-media {
-   border-radius: 24px;
-   opacity: 95%;
+   border-radius: 1.6rem !important;
+   opacity: 95% !important;
 }
 
 [data-theme='dark'] [data-file-block] .bn-visual-media {
-   opacity: 80%;
+   opacity: 80% !important;
 }
 
 @container (max-width: 550px) {
@@ -1515,7 +1512,7 @@ strong {
 
 @media (min-width: 2560px) {
    .bn-inline-content:empty {
-      height: 34px !important;
+      height: 2rem !important;
    }
 
    .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis,
@@ -1526,7 +1523,7 @@ strong {
 
 @media (min-width: 3840px) {
    .bn-inline-content:empty {
-      height: 48px !important;
+      height: 2.5rem !important;
    }
 
    .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis,
