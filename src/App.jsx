@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Remove arrays from DB
+// TODO: Remove like array from DB
 // TODO: Sync article headers to look the same
 // TODO: Comment and users table
 
