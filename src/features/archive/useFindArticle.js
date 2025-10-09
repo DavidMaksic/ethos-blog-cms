@@ -8,8 +8,9 @@ export function useFindArticle() {
    articleID = id.includes(':') ? id.split(':').at(1) : id;
 
    const { isPending, data: article } = useQuery({
-      queryKey: ['articles'],
+      queryKey: ['article', articleID],
       queryFn: () => getArticle(articleID),
+      keepPreviousData: false,
    });
 
    return { article, isPending };
