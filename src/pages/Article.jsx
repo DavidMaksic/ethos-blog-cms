@@ -8,13 +8,11 @@ import { AnimatePresence, motion } from 'motion/react';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { useEffect, useState } from 'react';
 import { useDeleteArticle } from '../features/archive/useDeleteArticle';
-import { useGetCategories } from '../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { useFindArticle } from '../features/archive/useFindArticle';
 import { useFullscreen } from '../context/FullscreenContext';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../context/DarkModeContext';
-import { useAuthors } from '../features/authentication/useAuthors';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
@@ -34,18 +32,12 @@ function Article() {
       useFullscreen();
 
    // - Data fetching
-   const { isPending: isLoading, authors } = useAuthors();
    const { article, isPending } = useFindArticle();
    const { user: currentAuthor } = useCurrentAuthor();
-   const isAdmin = authors?.find(
-      (item) => item.id === currentAuthor?.id
-   ).is_admin;
 
-   // - Category logic
-   const { categories } = useGetCategories();
-   const category = categories?.find(
-      (item) => item.id === article?.category_id
-   );
+   const category = article?.categories;
+   const author = article?.authors;
+   const isAdmin = author?.is_admin;
 
    // - Dark mode logic
    const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -64,7 +56,7 @@ function Article() {
    }, [isDarkMode, category]);
 
    // - Loading and no data returns
-   if (isPending || isLoading) return <ArticleSkeleton />;
+   if (isPending) return <ArticleSkeleton />;
    if (!article)
       return (
          <ArticleNotFound to="/archive" prompt="Go back">
@@ -73,7 +65,6 @@ function Article() {
       );
 
    // - Other logic
-   const theAuthor = authors.find((item) => item.id === article.author_id);
    const date = format(new Date(article.created_at), 'MMM dd, yyyy');
 
    return (
@@ -101,10 +92,10 @@ function Article() {
 
             <div className="flex items-center justify-between gap-6 px-6 py-4">
                <div className="flex gap-4 items-center">
-                  {theAuthor?.profile_image ? (
+                  {author?.profile_image ? (
                      <img
                         className="block size-12 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
-                        src={theAuthor.profile_image}
+                        src={author.profile_image}
                         alt="Author profile image"
                      />
                   ) : (
@@ -115,7 +106,7 @@ function Article() {
                      <div className="space-x-1.5">
                         <span>By</span>
                         <span className="text-accent-500 dark:text-accent-200/90 font-semibold">
-                           {theAuthor?.full_name}
+                           {author?.full_name}
                         </span>
                      </div>
                      <span className="text-base">{date}</span>
@@ -130,7 +121,7 @@ function Article() {
 
                   <div
                      className={`text-primary-300 text-2xl pointer-events-none ${
-                        currentAuthor?.email !== theAuthor?.email && !isAdmin
+                        currentAuthor?.email !== author?.email && !isAdmin
                            ? 'hidden'
                            : ''
                      }`}
@@ -138,7 +129,7 @@ function Article() {
                      |
                   </div>
 
-                  {currentAuthor?.email === theAuthor?.email || isAdmin ? (
+                  {currentAuthor?.email === author?.email || isAdmin ? (
                      <div className="flex items-center gap-2.5">
                         <Link to={`/archive/edit/:${article.id}`}>
                            <LuPencilLine className="size-11 p-2.5 stroke-[1.6px] hover:bg-primary-200/30 dark:hover:bg-primary-300/30 text-primary-400 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-500 cursor-pointer rounded-xl transition-200" />
@@ -180,10 +171,10 @@ function Article() {
          />
 
          <div className="w-fit flex flex-col items-center self-center gap-4 bg-secondary dark:bg-primary-200 rounded-3xl px-12 py-12 pb-14 mt-6 text-3xl box-shadow transition-bg_border">
-            {theAuthor?.profile_image ? (
+            {author?.profile_image ? (
                <img
                   className="block size-28 aspect-square object-cover object-center rounded-full dark:opacity-90"
-                  src={theAuthor.profile_image}
+                  src={author.profile_image}
                   alt="User profile image"
                />
             ) : (
@@ -193,18 +184,18 @@ function Article() {
             <div className="flex flex-col gap-6 self-center text-center">
                <div className="flex flex-col">
                   <span className="font-logo text-accent-400 dark:text-accent text-[2.5rem] w-fit self-center">
-                     {theAuthor?.full_name || article.author}
+                     {author?.full_name || article.author}
                   </span>
                   <span className="text-xl text-primary-400">{date}</span>
                </div>
 
                <p className="text-xl px-24 font-creator font-medium">
                   {article.language === 'English'
-                     ? theAuthor?.description_en
-                        ? theAuthor?.description_en
+                     ? author?.description_en
+                        ? author?.description_en
                         : 'Is an author writing for Ethos blog.'
-                     : theAuthor?.description_srb
-                     ? theAuthor?.description_srb
+                     : author?.description_srb
+                     ? author?.description_srb
                      : 'Је аутор који пише за Етос блог.'}
                </p>
             </div>
@@ -212,7 +203,7 @@ function Article() {
 
          <Options
             currentAuthor={currentAuthor}
-            theAuthor={theAuthor}
+            author={author}
             articleID={article.id}
          >
             <button

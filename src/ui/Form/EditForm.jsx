@@ -58,9 +58,7 @@ function EditForm() {
 
    // - Category logic
    const { categories } = useGetCategories();
-   const category = categories?.find(
-      (item) => item.id === articleValues.category_id
-   );
+   const category = article?.categories;
 
    // - LocalStorage logic
    const [localArticle, setLocalArticle] = useLocalStorage(

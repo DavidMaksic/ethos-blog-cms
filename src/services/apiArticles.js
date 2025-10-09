@@ -11,7 +11,9 @@ export async function getArticles({ filter, sortBy, page, search }) {
 
    if (errorAuthor) throw new Error('Author could not be fetched');
 
-   let query = supabase.from('articles').select('*', { count: 'exact' });
+   let query = supabase
+      .from('articles')
+      .select('*, categories(*)', { count: 'exact' });
 
    // 2. Filter
    if (filter) {
@@ -44,6 +46,18 @@ export async function getArticles({ filter, sortBy, page, search }) {
    if (error) throw new Error('Articles could not be loaded');
 
    return { data, count };
+}
+
+export async function getArticle(articleID) {
+   const { data, error } = await supabase
+      .from('articles')
+      .select('*, categories (*), authors (*)')
+      .eq('id', articleID)
+      .single();
+
+   if (error) throw new Error('Article could not be loaded');
+
+   return data;
 }
 
 export async function createArticle(newArticle) {
@@ -80,58 +94,6 @@ export async function deleteArticle(article) {
       .remove([imageName]);
 
    if (image2) throw new Error('Image could not be deleted from database');
-
-   // 3. Fetch all bookmarks in users table
-   const { data: bookmarks, error: error6 } = await supabase
-      .from('users')
-      .select('id, bookmarks');
-
-   if (error6) throw new Error('Bookmarks could not be fetched');
-
-   // 4. Delete article reference in all bookmarks
-   const updatePromise = bookmarks.map(async (user) => {
-      try {
-         const bookmarks = JSON.parse(user.bookmarks);
-         const filtered = bookmarks.filter((item) => item !== article.id);
-
-         const { error } = await supabase
-            .from('users')
-            .update({ bookmarks: filtered })
-            .eq('id', user.id);
-
-         if (error) throw new Error('Bookmark could not be updated');
-      } catch (err) {
-         console.error(err);
-      }
-   });
-
-   await Promise.all(updatePromise);
-
-   // 5. Fetch all likes in users table
-   const { data: likes, error: error7 } = await supabase
-      .from('users')
-      .select('id, liked');
-
-   if (error7) throw new Error('Liked article IDs could not be fetched');
-
-   // 6. Delete article reference in all likes array
-   const updateAllPromises = likes.map(async (user) => {
-      try {
-         const likes = JSON.parse(user.liked);
-         const filtered = likes.filter((item) => item !== article.id);
-
-         const { error } = await supabase
-            .from('users')
-            .update({ liked: filtered })
-            .eq('id', user.id);
-
-         if (error) throw new Error('Liked article IDs could not be updated');
-      } catch (err) {
-         console.error(err);
-      }
-   });
-
-   await Promise.all(updateAllPromises);
 }
 
 export async function updateArticle(article) {
@@ -205,7 +167,7 @@ export async function updateArticle(article) {
 export async function getArticlesAfterDate(date) {
    const { data, error } = await supabase
       .from('articles')
-      .select('created_at, status, category_id, likes')
+      .select('created_at, status, category_id, likes(id, type)')
       .gte('created_at', date)
       .lte('created_at', getToday({ end: true }));
 
@@ -285,30 +247,4 @@ export async function updateFeatures(article) {
       .select();
 
    if (error) throw new Error(error.message);
-
-   // Fetch all categories
-   const { data: categories, error: error2 } = await supabase
-      .from('categories')
-      .select('id, articles');
-
-   if (error2) throw new Error('Categories could not be fetched');
-
-   // Delete article reference in all categories
-   const promises = categories.map(async (category) => {
-      try {
-         const articles = JSON.parse(category.articles);
-         const filtered = articles.filter((item) => item !== article.id);
-
-         const { error } = await supabase
-            .from('categories')
-            .update({ articles: filtered })
-            .eq('id', category.id);
-
-         if (error) throw new Error('Category could not be updated');
-      } catch (err) {
-         console.error(err);
-      }
-   });
-
-   await Promise.all(promises);
 }

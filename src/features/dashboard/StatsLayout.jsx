@@ -10,13 +10,13 @@ function StatsLayout({ articles }) {
    const { users } = useUsers();
    const { comments } = useComments();
 
-   const numAuthors = users?.length;
-   const totalLikes = articles.reduce((sum, item) => sum + item.likes, 0);
+   const numUsers = users?.length;
+   const totalLikes = articles?.flatMap(
+      (article) => article.likes.filter((item) => item.type === 'article') || []
+   ).length;
 
    const totalComments = comments?.length;
-   const totalBookmarks = users
-      ?.map((item) => JSON.parse(item.bookmarks))
-      .flat().length;
+   const totalBookmarks = users?.flatMap((user) => user.bookmarks || []).length;
 
    return (
       <>
@@ -46,7 +46,7 @@ function StatsLayout({ articles }) {
          />
          <Stats
             title="Users"
-            value={numAuthors}
+            value={numUsers}
             icon={<HiOutlineUser className="text-svg-users transition-color" />}
             color="bg-stat-users"
          />

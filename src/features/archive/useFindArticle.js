@@ -1,19 +1,16 @@
-import { getArticles } from '../../services/apiArticles';
+import { getArticle } from '../../services/apiArticles';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 export function useFindArticle() {
    const { id } = useParams();
    let articleID = id;
-
    articleID = id.includes(':') ? id.split(':').at(1) : id;
 
-   const { isPending, data: { data: articles } = {} } = useQuery({
-      queryFn: getArticles,
+   const { isPending, data: article } = useQuery({
       queryKey: ['articles'],
+      queryFn: () => getArticle(articleID),
    });
-
-   const article = articles?.find((item) => item.id === Number(articleID));
 
    return { article, isPending };
 }

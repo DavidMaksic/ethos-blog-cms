@@ -34,7 +34,9 @@ export async function logout() {
 }
 
 export async function getUsers() {
-   const { data, error } = await supabase.from('users').select('id, bookmarks');
+   const { data, error } = await supabase
+      .from('users')
+      .select('id, bookmarks(id)');
 
    if (error) throw new Error(error.message);
 
