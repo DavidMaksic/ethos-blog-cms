@@ -31,6 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: Reset removes flag image, but only in edit
 // TODO: Comment and users table
 
 function App() {

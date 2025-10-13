@@ -44,7 +44,7 @@ import LanguageButton from '../../ui/Buttons/LanguageButton';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
-import srbFlag from '../../../public/srb-flag.png';
+import srbFlag from '../../assets/srb-flag.png';
 import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
@@ -53,20 +53,22 @@ import toast from 'react-hot-toast';
 import Form from '../../ui/Form/Form';
 
 function Creator() {
+   const defaultCode = 'sr';
    const [localArticle, setLocalArticle] = useLocalStorage(
       {
          title: '',
          description: '',
          content: '',
          language: 'Српски',
+         code: defaultCode,
          flag: srbFlag,
       },
       'article'
    );
 
    useEffect(() => {
-      document.documentElement.setAttribute('data-lang', localArticle.language);
-   }, [localArticle]);
+      document.documentElement.setAttribute('data-lang', localArticle.code);
+   }, []); // eslint-disable-line
 
    // - Editor logic
    const [contentHTML, setContentHTML] = useState('');
@@ -125,10 +127,12 @@ function Creator() {
          title: '',
          description: '',
          language: 'Српски',
+         code: 'sr',
          content: '',
          category: categories?.at(0).category,
       });
       setCurrentImage('');
+      document.documentElement.setAttribute('data-lang', defaultCode);
    }
 
    // - Form logic
@@ -169,6 +173,7 @@ function Creator() {
             featured: false,
             main_feature: false,
             language: localArticle.language,
+            code: localArticle.code,
             flag: localArticle.flag,
             slug,
          },
@@ -203,7 +208,8 @@ function Creator() {
             featured: false,
             main_feature: false,
             language: localArticle.language,
-            flag: localArticle.flag,
+            code: localArticle.code,
+            flag: '/' + localArticle.flag,
             slug,
          },
          {

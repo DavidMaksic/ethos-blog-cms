@@ -1,30 +1,47 @@
 import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { useState } from 'react';
 
-import srbFlag from '../../../public/srb-flag.png';
-import enFlag from '../../../public/en-flag.png';
+import srbFlag from '../../assets/srb-flag.png';
+import enFlag from '../../assets/en-flag.png';
 
 const languages = [
    {
       lang: 'Српски',
+      code: 'sr',
       flag: srbFlag,
    },
    {
       lang: 'English',
+      code: 'en',
       flag: enFlag,
    },
 ];
 
-function LanguageButton({ localItem, setLocalItem }) {
+function LanguageButton({
+   localItem,
+   setLocalItem,
+   defaultLang = null,
+   defaultFlag,
+}) {
    const [open, setOpen] = useState(false);
    const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
+
+   const flag =
+      languages.find((item) => item.code === defaultLang)?.flag || srbFlag;
+   const [currentFlag, setCurrentFlag] = useState(flag);
+   const [langChanged, setLangChanged] = useState(false);
+
+   useEffect(() => {
+      if (langChanged) setCurrentFlag(localItem.flag);
+   }, [localItem.flag, langChanged, localItem]);
 
    return (
       <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
          <img
             className="size-11 opacity-80 dark:opacity-70 hover:opacity-100 dark:hover:opacity-85 transition-[opacity]"
-            src={localItem.flag ? localItem.flag : srbFlag}
+            src={currentFlag ? currentFlag : flag}
+            alt="Flag"
             onClick={(e) => {
                e.stopPropagation();
                setOpen((isOpen) => !isOpen);
@@ -45,16 +62,20 @@ function LanguageButton({ localItem, setLocalItem }) {
                   {languages.map((item) => (
                      <li
                         className="flex justify-between items-center relative font-normal rounded-xl py-2 pr-3 pl-5 hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-primary-200 duration-75 [&_img]:opacity-80 dark:[&_img]:opacity-80 group"
-                        key={item.lang}
+                        key={item.code}
                         onClick={() => {
+                           setLangChanged(true);
+
                            setLocalItem({
                               ...localItem,
                               language: item.lang,
+                              code: item.code,
                               flag: item.flag,
                            });
+
                            document.documentElement.setAttribute(
                               'data-lang',
-                              item.lang
+                              item.code
                            );
                         }}
                      >
@@ -62,6 +83,7 @@ function LanguageButton({ localItem, setLocalItem }) {
                         <img
                            className="size-7 border border-primary-300 dark:border-primary-200 rounded-full group-hover:opacity-100 dark:group-hover:opacity-95 transition-[opacity]"
                            src={item.flag}
+                           alt="Flag"
                         />
                      </li>
                   ))}

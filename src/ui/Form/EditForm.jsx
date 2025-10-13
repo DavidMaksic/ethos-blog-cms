@@ -70,8 +70,8 @@ function EditForm() {
    );
 
    useEffect(() => {
-      document.documentElement.setAttribute('data-lang', localArticle.language);
-   }, [localArticle]);
+      document.documentElement.setAttribute('data-lang', localArticle.code);
+   }, []); // eslint-disable-line
 
    // - Status logic
    const articleStatus =
@@ -84,7 +84,7 @@ function EditForm() {
    }, [setLocalArticle, article, category]);
 
    // - Form logic
-   const { register, handleSubmit, formState, reset } = useForm({
+   const { register, handleSubmit, formState } = useForm({
       defaultValues: articleValues,
    });
    const { errors } = formState;
@@ -170,6 +170,7 @@ function EditForm() {
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
          flag: localArticle.flag,
+         code: localArticle.code,
          slug,
       });
 
@@ -361,7 +362,6 @@ function EditForm() {
 
          <ResetButton
             handler={() => {
-               reset();
                setIsDefault(true);
                setCurrentStatus(articleStatus);
                setLocalArticle({
@@ -371,12 +371,15 @@ function EditForm() {
                editor.replaceBlocks(editor.document, contentBlocks);
                setCurrentImage(oldImage);
                setImgReload(true);
+               document.documentElement.setAttribute('data-lang', article.code);
             }}
          />
 
          <LanguageButton
             localItem={localArticle}
             setLocalItem={setLocalArticle}
+            defaultLang={article.code}
+            defaultFlag={article.flag}
          />
 
          <Options isEdit={true} currentAuthor={user}>

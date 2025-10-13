@@ -657,91 +657,91 @@ input:-webkit-autofill {
 
 /* Paragraph font size */
 
-[data-lang='Српски'] .bn-default-styles {
+[data-lang='sr'] .bn-default-styles {
    font-size: 1.38rem !important;
 }
 
-[data-lang='English'] .bn-default-styles {
+[data-lang='en'] .bn-default-styles {
    font-size: 1.48rem !important;
 }
 
 @media (min-width: 2560px) {
-   [data-lang='English'] .bn-default-styles {
+   [data-lang='en'] .bn-default-styles {
       font-size: 1.5rem !important;
    }
 
-   [data-lang='Српски'] .bn-default-styles {
+   [data-lang='sr'] .bn-default-styles {
       font-size: 1.4rem !important;
    }
 }
 
 @media (min-width: 3840px) {
-   [data-lang='English'] .bn-default-styles {
+   [data-lang='en'] .bn-default-styles {
       font-size: 1.505rem !important;
    }
 }
 
 @media (max-width: 1290px) {
-   [data-lang='Српски'] .bn-default-styles {
+   [data-lang='sr'] .bn-default-styles {
       font-size: 20px !important;
    }
 }
 
 /* Paragraph line height */
 
-[data-lang='English'] .bn-container .bn-block-outer {
+[data-lang='en'] .bn-container .bn-block-outer {
    line-height: 1.48 !important;
 }
 
-[data-lang='Српски'] .bn-container .bn-block-outer {
+[data-lang='sr'] .bn-container .bn-block-outer {
    line-height: 1.63 !important;
 }
 
 @media (max-width: 1580px) {
-   [data-lang='English'] .bn-container .bn-block-outer {
+   [data-lang='en'] .bn-container .bn-block-outer {
       line-height: 1.5 !important;
    }
 }
 
 @media (max-width: 1290px) {
-   [data-lang='English'] .bn-container .bn-block-outer {
+   [data-lang='en'] .bn-container .bn-block-outer {
       line-height: 1.48 !important;
    }
 }
 
-[data-lang='Српски'] .bn-block-outer {
+[data-lang='sr'] .bn-block-outer {
    line-height: 1.65 !important;
 }
 
 @media (max-width: 1580px) {
-   [data-lang='Српски'] .bn-default-styles {
+   [data-lang='sr'] .bn-default-styles {
       font-size: 19.4px !important;
    }
 
-   [data-lang='English'] .bn-default-styles {
+   [data-lang='en'] .bn-default-styles {
       font-size: 1.6rem !important;
    }
 }
 
 @media (max-width: 1290px) {
-   [data-lang='Српски'] .bn-default-styles {
+   [data-lang='sr'] .bn-default-styles {
       font-size: 16.6px !important;
    }
 
-   [data-lang='English'] .bn-default-styles {
+   [data-lang='en'] .bn-default-styles {
       font-size: 17.85px !important;
    }
 }
 
 /* Blockquote */
 
-[data-lang='Српски'] .bn-container blockquote {
+[data-lang='sr'] .bn-container blockquote {
    font-size: 1.48rem;
    line-height: 1.5;
    font-family: var(--font-cyrillic) !important;
 }
 
-[data-lang='English'] .bn-container blockquote {
+[data-lang='en'] .bn-container blockquote {
    font-size: 1.625rem;
    line-height: 1.38;
    font-family: var(--font-creator) !important;
@@ -749,37 +749,37 @@ input:-webkit-autofill {
 }
 
 @media (min-width: 2560px) {
-   [data-lang='English'] .bn-container blockquote {
+   [data-lang='en'] .bn-container blockquote {
       font-size: 1.67rem !important;
    }
 
-   [data-lang='Српски'] .bn-container blockquote {
+   [data-lang='sr'] .bn-container blockquote {
       font-size: 1.5rem !important;
    }
 }
 
 @media (min-width: 3840px) {
-   [data-lang='English'] .bn-container blockquote {
+   [data-lang='en'] .bn-container blockquote {
       font-size: 1.7rem !important;
    }
 }
 
 @media (max-width: 1580px) {
-   [data-lang='Српски'] .bn-container blockquote {
+   [data-lang='sr'] .bn-container blockquote {
       font-size: 1.6rem;
    }
 
-   [data-lang='English'] .bn-container blockquote {
+   [data-lang='en'] .bn-container blockquote {
       font-size: 1.745rem;
    }
 }
 
 @media (max-width: 1290px) {
-   [data-lang='Српски'] .bn-container blockquote {
+   [data-lang='sr'] .bn-container blockquote {
       font-size: 1.46rem;
    }
 
-   [data-lang='English'] .bn-container blockquote {
+   [data-lang='en'] .bn-container blockquote {
       font-size: 1.58rem;
    }
 }
@@ -788,11 +788,11 @@ input:-webkit-autofill {
    font-family: var(--font-cyrillic);
 }
 
-[data-lang='English'] .bn-default-styles {
+[data-lang='en'] .bn-default-styles {
    font-family: var(--font-latin);
 }
 
-[data-lang='Српски'] .bn-default-styles {
+[data-lang='sr'] .bn-default-styles {
    font-family: var(--font-cyrillic);
 }
 
