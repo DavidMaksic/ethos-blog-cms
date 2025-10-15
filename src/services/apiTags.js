@@ -45,7 +45,7 @@ export async function updateCategory(updateObject) {
    if (error) throw new Error('Category could not be updated');
 }
 
-export async function updateTagFeature({ selectedID, category_id, boolean }) {
+export async function updateTagFeature({ selectedID, boolean }) {
    const { error } = await supabase
       .from('articles')
       .update({
@@ -55,42 +55,6 @@ export async function updateTagFeature({ selectedID, category_id, boolean }) {
       .select();
 
    if (error) throw new Error('Article could not be featured');
-
-   const {
-      data: [articleIDs],
-      error2,
-   } = await supabase
-      .from('categories')
-      .select('articles')
-      .eq('id', category_id);
-
-   if (error2) {
-      throw new Error('Article IDs could not be fetched');
-   }
-
-   const allIDs = JSON.parse(articleIDs.articles)?.filter(
-      (item) => item !== selectedID
-   );
-
-   if (boolean) {
-      const { error3 } = await supabase
-         .from('categories')
-         .update({ articles: [...allIDs, selectedID] })
-         .eq('id', category_id)
-         .select();
-
-      if (error3) throw new Error('Category table could not be updated');
-   }
-
-   if (!boolean) {
-      const { error4 } = await supabase
-         .from('categories')
-         .update({ articles: [...allIDs] })
-         .eq('id', category_id)
-         .select();
-
-      if (error4) throw new Error('Category table could not be updated');
-   }
 }
 
 export async function updateMainFeature({ selectedID, boolean }) {
