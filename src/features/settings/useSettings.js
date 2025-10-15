@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 
 export function useSettings() {
    const { isPending, data } = useQuery({
-      queryKey: ['settings'],
       queryFn: getSettings,
+      queryKey: ['settings'],
    });
 
    return { isPending, data };

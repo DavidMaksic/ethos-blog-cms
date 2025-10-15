@@ -102,14 +102,17 @@ function Article() {
                      <HiOutlineUserCircle className="size-12 stroke-[0.5px] text-primary-400 dark:text-primary-300" />
                   )}
 
-                  <div className="flex flex-col font-medium leading-6 self-center">
+                  <div className="font-text flex flex-col font-medium leading-6 self-center sm:gap-1">
                      <div className="space-x-1.5">
                         <span>By</span>
-                        <span className="text-accent-500 dark:text-accent-200/90 font-semibold">
+                        <span className="text-accent-500 dark:text-accent-200/90 font-semibold 2xl:text-[1.2rem] md:text-[1.3rem]">
                            {author?.full_name}
                         </span>
                      </div>
-                     <span className="text-base">{date}</span>
+
+                     <span className="text-base 2xl:text-sm md:text-base md:mt-[-2px] sm:mt-[-3px] text-primary-400">
+                        {date}
+                     </span>
                   </div>
                </div>
 
@@ -149,7 +152,7 @@ function Article() {
                   </div>
 
                   <span
-                     className="w-min px-4 py-1 pb-1.5 rounded-full font-bold text-[1.3rem]"
+                     className="w-min px-4 py-1 rounded-full font-bold text-[1.3rem]"
                      style={{
                         backgroundColor: `${bgColor}`,
                         color: `${textColor}`,

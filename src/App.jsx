@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Adding featured articles doesnt work
+// TODO: Compare desktop archive table with laptop version
 // TODO: Comment and users table
 
 function App() {

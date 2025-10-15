@@ -126,8 +126,8 @@ function UpdateForm() {
                error={errors?.description_en?.message}
             >
                <TextareaAutosize
-                  minRows={2}
-                  maxRows={3}
+                  minRows={3}
+                  maxRows={4}
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none scrollbar text-2xl"
                   id="description_en"
                   type="text"
@@ -148,8 +148,8 @@ function UpdateForm() {
                error={errors?.description_srb?.message}
             >
                <TextareaAutosize
-                  minRows={2}
-                  maxRows={3}
+                  minRows={3}
+                  maxRows={4}
                   className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none scrollbar text-2xl"
                   id="description_srb"
                   type="text"
