@@ -12,8 +12,8 @@ export function usePublishedArticles() {
 
    // - Query
    const { isPending, data: articles } = useQuery({
-      queryKey: ['publishedArticles', search],
       queryFn: () => getPublishedArticles({ search }),
+      queryKey: ['publishedArticles', search],
    });
 
    return { isPending, articles };

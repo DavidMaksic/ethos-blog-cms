@@ -1163,6 +1163,7 @@ strong {
 
 [data-content-type='quote'] strong {
    color: #9e6d32d0;
+   font-weight: 600;
 }
 
 [data-theme='dark'] [data-content-type='quote'] strong {

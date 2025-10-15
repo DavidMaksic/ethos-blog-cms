@@ -177,7 +177,10 @@ export async function getArticlesAfterDate(date) {
 }
 
 export async function getPublishedArticles({ search }) {
-   let query = supabase.from('articles').select().eq('status', 'published');
+   let query = supabase
+      .from('articles')
+      .select('id, category_id, title, image')
+      .eq('status', 'published');
    if (search) query = query.ilike('title', `%${search}%`);
 
    const { data, error } = await query;
@@ -190,7 +193,7 @@ export async function getPublishedArticles({ search }) {
 export async function getDraftedArticles() {
    const { data, error } = await supabase
       .from('articles')
-      .select()
+      .select('id, author_id, title, image')
       .eq('status', 'drafted');
 
    if (error) throw new Error('Articles could not be loaded');
@@ -201,8 +204,11 @@ export async function getDraftedArticles() {
 export async function getFeaturedArticles() {
    const { data, error } = await supabase
       .from('articles')
-      .select()
-      .eq('featured', true);
+      .select(
+         'id, title, image, description, category_id, author_id, created_at'
+      )
+      .eq('featured', true)
+      .eq('status', 'published');
 
    if (error) throw new Error('Featured articles could not be loaded');
 
@@ -212,7 +218,7 @@ export async function getFeaturedArticles() {
 export async function getMainFeatureArticles() {
    const { data, error } = await supabase
       .from('articles')
-      .select()
+      .select('id, title, image, description')
       .eq('main_feature', true)
       .eq('status', 'published')
       .order('index');

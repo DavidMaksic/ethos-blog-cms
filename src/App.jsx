@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Reset removes flag image, but only in edit
+// TODO: Adding featured articles doesnt work
 // TODO: Comment and users table
 
 function App() {

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
-import { useGetCategories } from '../features/tags/useGetCategories';
 import { useGetFeaturedArticles } from '../features/features/useGetFeaturedArticles';
+import { useGetCategories } from '../features/tags/useGetCategories';
 
 const EntryContext = createContext();
 
@@ -16,7 +16,7 @@ function EntryProvider({ children }) {
    );
 
    const taggedArticles = articles?.filter(
-      (item) => item.category_id === currentTag?.id && item.featured
+      (item) => item.category_id === currentTag?.id
    );
 
    return (

@@ -22,7 +22,7 @@ function ArchiveRow({ article }) {
    const { user: currentAuthor } = useCurrentAuthor();
    const isAdmin = authors?.find(
       (item) => item.id === currentAuthor?.id
-   ).is_admin;
+   )?.is_admin;
 
    const { isDeleting, deleteArticle } = useDeleteArticle();
    const [openDelete, setOpenDelete] = useState(false);
