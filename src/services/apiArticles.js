@@ -13,7 +13,7 @@ export async function getArticles({ filter, sortBy, page, search }) {
 
    let query = supabase
       .from('articles')
-      .select('*, categories(*)', { count: 'exact' });
+      .select('*, categories(*), authors(*)', { count: 'exact' });
 
    // 2. Filter
    if (filter) {

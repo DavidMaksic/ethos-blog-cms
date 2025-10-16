@@ -13,6 +13,7 @@ import { useFindArticle } from '../features/archive/useFindArticle';
 import { useFullscreen } from '../context/FullscreenContext';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useAuthors } from '../features/authentication/useAuthors';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
@@ -37,7 +38,11 @@ function Article() {
 
    const category = article?.categories;
    const author = article?.authors;
-   const isAdmin = author?.is_admin && author?.email === currentAuthor?.email;
+
+   const { authors } = useAuthors();
+   const isAdmin = authors?.find(
+      (item) => item.id === currentAuthor?.id
+   )?.is_admin;
 
    // - Dark mode logic
    const { isDarkMode, toggleDarkMode } = useDarkMode();

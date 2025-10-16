@@ -27,7 +27,7 @@ function ArchiveRow({ article }) {
    const { isDeleting, deleteArticle } = useDeleteArticle();
    const [openDelete, setOpenDelete] = useState(false);
 
-   const theAuthor = authors?.find((item) => item.id === article?.author_id);
+   const author = article?.authors;
 
    const draftedColor =
       'bg-blue-400/15 text-blue-900/75 dark:bg-blue-400/50 dark:text-blue-100';
@@ -69,9 +69,9 @@ function ArchiveRow({ article }) {
             {status}
          </span>
 
-         <span className="italic text-primary-400">{theAuthor?.full_name}</span>
+         <span className="italic text-primary-400">{author?.full_name}</span>
 
-         {currentAuthor?.email === theAuthor?.email || isAdmin ? (
+         {currentAuthor?.email === author?.email || isAdmin ? (
             <Menus.Menu>
                <Menus.Toggle id={id} />
 

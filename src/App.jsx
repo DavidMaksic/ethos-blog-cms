@@ -31,7 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Default font in creator is bugged
 // TODO: Compare desktop archive table with laptop version
 // TODO: Comment and users table
 
