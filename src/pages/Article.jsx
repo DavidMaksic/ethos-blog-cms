@@ -37,7 +37,7 @@ function Article() {
 
    const category = article?.categories;
    const author = article?.authors;
-   const isAdmin = author?.is_admin;
+   const isAdmin = author?.is_admin && author?.email === currentAuthor?.email;
 
    // - Dark mode logic
    const { isDarkMode, toggleDarkMode } = useDarkMode();
