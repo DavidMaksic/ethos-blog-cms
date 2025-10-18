@@ -36,6 +36,10 @@ function Article() {
    const { article, isPending } = useFindArticle();
    const { user: currentAuthor } = useCurrentAuthor();
 
+   useEffect(() => {
+      document.documentElement.setAttribute('data-lang', article?.code);
+   }, [article]);
+
    const category = article?.categories;
    const author = article?.authors;
 

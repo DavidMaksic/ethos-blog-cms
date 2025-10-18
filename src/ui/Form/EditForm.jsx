@@ -70,7 +70,7 @@ function EditForm() {
    );
 
    useEffect(() => {
-      document.documentElement.setAttribute('data-lang', localArticle.code);
+      document.documentElement.setAttribute('data-lang', article.code);
    }, []); // eslint-disable-line
 
    // - Status logic
@@ -98,8 +98,8 @@ function EditForm() {
       useFullscreen();
 
    // - Editor logic
-   const [contentHTML, setContentHTML] = useState('');
-   const [contentBlocks, setContentBlocks] = useState('');
+   const [contentHTML, setContentHTML] = useState();
+   const [contentBlocks, setContentBlocks] = useState();
    const {
       file,
       audio,
