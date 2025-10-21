@@ -209,7 +209,7 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             code: localArticle.code,
-            flag: '/' + localArticle.flag,
+            flag: localArticle.flag,
             slug,
          },
          {
@@ -403,6 +403,7 @@ function Creator() {
          <LanguageButton
             localItem={localArticle}
             setLocalItem={setLocalArticle}
+            defaultLang={defaultCode}
          />
 
          <Options isEdit={true} currentAuthor={user}>

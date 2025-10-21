@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ImSpinner2 } from 'react-icons/im';
 
 function SubmitButton({
@@ -21,19 +21,19 @@ function SubmitButton({
       isPending && btnClicked ? '!text-accent dark:text-accent/90' : '';
 
    useEffect(() => {
-      if (!to && isSuccess) navigate(-1);
+      if (to && isSuccess) navigate(to);
+      else if (!to && isSuccess) navigate(-1);
    }, [to, isSuccess, navigate]);
 
    return (
       <div
          className={`rounded-full bg-gradient-to-r from-accent-300/80 to-accent-600/70 hover:from-white dark:hover:from-primary-200 hover:to-white dark:hover:to-primary-200 border-2 border-transparent hover:border-accent/80 dark:hover:border-accent/80 shadow-btn hover:shadow-none dark:shadow-none transition-[box-shadow,border,--tw-gradient-from,--tw-gradient-to] duration-300 bg-origin-border ${loadingStyle}`}
       >
-         <Link
-            to={isSuccess && to}
+         <button
             className={`flex items-center gap-5 text-5xl px-10 pr-11 py-4 pt-5 text-white font-logo hover:text-accent hover:drop-shadow-xs dark:hover:text-accent/90 transition-[color] duration-300 disabled:!cursor-default ${loadingTextStyle}`}
             type="submit"
             onClick={() => {
-               handler();
+               if (handler) handler();
                setBtnClicked(true);
             }}
          >
@@ -45,7 +45,7 @@ function SubmitButton({
             ) : (
                <span>{children}</span>
             )}
-         </Link>
+         </button>
       </div>
    );
 }

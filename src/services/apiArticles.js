@@ -125,6 +125,7 @@ export async function updateArticle(article) {
             status: article.status,
             language: article.language,
             flag: article.flag,
+            code: article.code,
             image: imagePath,
             slug: article.slug,
             updated_at: new Date().toISOString(),
@@ -155,6 +156,7 @@ export async function updateArticle(article) {
          status: article.status,
          language: article.language,
          flag: article.flag,
+         code: article.code,
          slug: article.slug,
          updated_at: new Date().toISOString(),
       })

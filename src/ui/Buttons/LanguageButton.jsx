@@ -18,17 +18,11 @@ const languages = [
    },
 ];
 
-function LanguageButton({
-   localItem,
-   setLocalItem,
-   defaultLang = null,
-   defaultFlag,
-}) {
+function LanguageButton({ localItem, setLocalItem, defaultLang = null }) {
    const [open, setOpen] = useState(false);
    const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
 
-   const flag =
-      languages.find((item) => item.code === defaultLang)?.flag || srbFlag;
+   const flag = languages.find((item) => item.code === defaultLang)?.flag;
    const [currentFlag, setCurrentFlag] = useState(flag);
    const [langChanged, setLangChanged] = useState(false);
 

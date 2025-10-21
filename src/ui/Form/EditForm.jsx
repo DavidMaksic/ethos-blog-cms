@@ -379,7 +379,6 @@ function EditForm() {
             localItem={localArticle}
             setLocalItem={setLocalArticle}
             defaultLang={article.code}
-            defaultFlag={article.flag}
          />
 
          <Options isEdit={true} currentAuthor={user}>
