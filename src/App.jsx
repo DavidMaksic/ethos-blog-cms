@@ -31,6 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: In preview in CMS, sr font is used for english articles
 // TODO: Compare desktop archive table with laptop version
 // TODO: Comment and users table
 

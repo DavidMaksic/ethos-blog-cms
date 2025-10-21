@@ -21,7 +21,7 @@ export default defineConfig({
             start_url: '/',
             icons: [
                {
-                  src: '/logo-pwa.png',
+                  src: '/assets/logo-pwa.png',
                   sizes: '192x192',
                   type: 'image/png',
                },

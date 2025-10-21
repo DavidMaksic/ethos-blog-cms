@@ -854,7 +854,8 @@ input:-webkit-autofill {
    color: var(--color-primary-400);
 }
 
-.inline-content a {
+.inline-content a,
+.bn-inline-content a {
    color: var(--color-link);
    text-decoration-color: var(--color-link-border) !important;
    text-decoration: underline;
@@ -864,7 +865,8 @@ input:-webkit-autofill {
    transition: all 0.15s;
 }
 
-.inline-content a:hover {
+.inline-content a:hover,
+.bn-inline-content a:hover {
    color: var(--color-link-hover);
    text-decoration-color: var(--color-link-border-hover) !important;
 }
