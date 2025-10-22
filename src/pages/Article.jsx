@@ -201,7 +201,7 @@ function Article() {
                   <span className="text-xl text-primary-400">{date}</span>
                </div>
 
-               <p className="text-xl px-24 font-creator font-medium">
+               <p className="text-[1.35rem] leading-7.5 px-24 font-creator">
                   {article.language === 'en'
                      ? author?.description_en
                         ? author?.description_en

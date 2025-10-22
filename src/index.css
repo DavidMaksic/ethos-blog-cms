@@ -989,7 +989,7 @@ input:-webkit-autofill {
 }
 
 .alert[data-alert-type='references'] {
-   @apply border border-primary-300/80 dark:border-primary-300/40;
+   @apply text-text border border-primary-300/80 dark:border-primary-300/40;
 
    .alert-icon-wrapper > svg {
       @apply hidden;
