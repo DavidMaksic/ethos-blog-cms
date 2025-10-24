@@ -10,18 +10,19 @@ import SearchAlt from '../../ui/SearchAlt';
 function TagFeatureModal({ currentTag, onClose }) {
    const { isPending, articles } = usePublishedArticles();
 
-   const [selectedID, setSelectedID] = useState('');
+   const [selectedID, setSelectedID] = useState();
    const { isEditing, isSuccess, updateTagFeature } = useUpdateTagFeature();
    const { refetch } = useEntry();
 
-   const [openID, setOpenID] = useState('');
-   const close = () => setOpenID('');
+   const [openID, setOpenID] = useState();
+   const close = () => setOpenID();
    const open = setOpenID;
 
    const boolean = true;
    const category_id = currentTag.id;
 
    const filteredArticles = articles?.filter((item) => item.featured !== true);
+   console.log('filteredArticles: ', filteredArticles);
 
    const taggedArticles = filteredArticles?.filter(
       (item) => item.category_id === currentTag.id

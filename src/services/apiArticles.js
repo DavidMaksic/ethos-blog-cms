@@ -181,7 +181,7 @@ export async function getArticlesAfterDate(date) {
 export async function getPublishedArticles({ search }) {
    let query = supabase
       .from('articles')
-      .select('id, category_id, title, image')
+      .select('id, category_id, title, image, featured')
       .eq('status', 'published');
    if (search) query = query.ilike('title', `%${search}%`);
 
