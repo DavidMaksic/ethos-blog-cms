@@ -31,7 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: In CMS, cant copy text in edit, also darken link text in white mode (to be the same as bold)
 // TODO: Compare desktop archive table with laptop version
 // TODO: Comment and users table
 
