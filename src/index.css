@@ -961,7 +961,7 @@ input:-webkit-autofill {
    justify-content: center;
    align-items: center;
    flex-grow: 1;
-   border-radius: 1rem;
+   border-radius: 1.6rem;
    min-height: 48px;
    padding: 1.5rem 2rem 1.5rem 0.7rem;
    transition: background-color 0.1s;
