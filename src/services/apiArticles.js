@@ -181,10 +181,11 @@ export async function getArticlesAfterDate(date) {
 export async function getPublishedArticles({ search }) {
    let query = supabase
       .from('articles')
-      .select('id, category_id, title, image, featured')
-      .eq('status', 'published');
-   if (search) query = query.ilike('title', `%${search}%`);
+      .select('id, category_id, title, image, main_feature, featured')
+      .eq('status', 'published')
+      .order('id', { ascending: false });
 
+   if (search) query = query.ilike('title', `%${search}%`);
    const { data, error } = await query;
 
    if (error) throw new Error('Articles could not be loaded');
@@ -220,7 +221,7 @@ export async function getFeaturedArticles() {
 export async function getMainFeatureArticles() {
    const { data, error } = await supabase
       .from('articles')
-      .select('id, title, image, description')
+      .select('id, title, image, description, index')
       .eq('main_feature', true)
       .eq('status', 'published')
       .order('index');
