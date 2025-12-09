@@ -245,6 +245,17 @@ export async function getComments() {
    return data;
 }
 
+export async function getLikes() {
+   const { data, error } = await supabase
+      .from('likes')
+      .select('id')
+      .eq('type', 'article');
+
+   if (error) throw new Error(error.message);
+
+   return data;
+}
+
 export async function updateFeatures(article) {
    const { error } = await supabase
       .from('articles')
