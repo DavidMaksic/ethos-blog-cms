@@ -82,12 +82,13 @@ function ArchiveRow({ article }) {
                   >
                      Preview
                   </Menus.Button>
-                  <Menus.Button
-                     icon={<LuPencilLine className="stroke-[1.7px]" />}
-                     handler={() => navigate(`/archive/edit/:${id}`)}
-                  >
-                     Edit
-                  </Menus.Button>
+                  <Link to={`/archive/edit/${id}`}>
+                     <Menus.Button
+                        icon={<LuPencilLine className="stroke-[1.7px]" />}
+                     >
+                        Edit
+                     </Menus.Button>
+                  </Link>
                   <Menus.Button
                      icon={
                         <CgClose className="text-red-600/70 dark:text-red-300" />
