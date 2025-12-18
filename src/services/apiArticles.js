@@ -101,18 +101,14 @@ export async function updateArticle(article) {
 
    // 1. IMAGE WAS CHANGED
    if (isFile) {
-      // - Delete old image from DB
-      const oldImageName = article.oldImage.split('/').pop();
-
-      const { error: imageError } = await supabase.storage
-         .from('article_images')
-         .remove([oldImageName]);
-
-      if (imageError)
-         throw new Error('Image could not be deleted from database');
-
       // - Upload new image
       const [imageName, imagePath] = createImagePath(article);
+
+      const { error: storageError } = await supabase.storage
+         .from('article_images')
+         .upload(imageName, article.image);
+
+      if (storageError) throw new Error('Article image could not be uploaded');
 
       // - Edit article with new image
       const { error } = await supabase
@@ -135,12 +131,21 @@ export async function updateArticle(article) {
 
       if (error) throw new Error('Article could not be updated');
 
-      // - Upload new image
-      const { error: storageError } = await supabase.storage
-         .from('article_images')
-         .upload(imageName, article.image);
+      await fetch('/api/revalidate', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ slug: article.slug }),
+      });
 
-      if (storageError) throw new Error('Article image could not be updated');
+      // - Delete old image from DB
+      const oldImageName = article.oldImage.split('/').pop();
+
+      const { error: imageError } = await supabase.storage
+         .from('article_images')
+         .remove([oldImageName]);
+
+      if (imageError)
+         throw new Error('Image could not be deleted from database');
    }
 
    // 2. IMAGE WASN'T CHANGED
@@ -164,6 +169,12 @@ export async function updateArticle(article) {
       .select();
 
    if (error) throw new Error('Article could not be updated');
+
+   await fetch('/api/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: article.slug }),
+   });
 }
 
 export async function getArticlesAfterDate(date) {

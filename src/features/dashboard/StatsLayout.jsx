@@ -7,11 +7,10 @@ import { useLikes } from '../../hooks/useLikes';
 import { SlHeart } from 'react-icons/sl';
 import Stats from './Stats';
 
-function StatsLayout({ articles }) {
-   console.log('articles: ', articles);
+function StatsLayout() {
    const { users } = useUsers();
-   const { comments } = useComments();
    const { likes } = useLikes();
+   const { comments } = useComments();
 
    const numUsers = users?.length;
    const totalLikes = likes?.length;
