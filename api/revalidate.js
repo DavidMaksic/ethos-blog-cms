@@ -2,7 +2,7 @@ export default async function handler(req, res) {
    if (req.method !== 'POST')
       return res.status(405).json({ error: 'Method not allowed' });
 
-   const { slug, type } = req.body || {};
+   const { slug, changes } = req.body || {};
    if (!slug) return res.status(400).json({ error: 'Missing slug' });
 
    const response = await fetch(
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
          },
-         body: JSON.stringify({ slug, type }),
+         body: JSON.stringify({ slug, changes }),
       }
    );
 

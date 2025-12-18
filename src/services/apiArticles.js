@@ -1,5 +1,5 @@
 import supabase, { supabaseUrl } from './supabase';
-import { createImagePath, getToday } from '../utils/helpers';
+import { createImagePath, getArticleChanges, getToday } from '../utils/helpers';
 import { PAGE_SIZE } from '../utils/constants';
 
 export async function getArticles({ filter, sortBy, page, search }) {
@@ -97,11 +97,20 @@ export async function deleteArticle(article) {
 }
 
 export async function updateArticle(article) {
+   const oldArticle = article.oldArticle;
    const isFile = !article.image?.startsWith?.(supabaseUrl);
 
-   // 1. IMAGE WAS CHANGED
+   // Compute changes
+   const changes = getArticleChanges(oldArticle, article);
+   const relevantChanges = {
+      content: changes.content,
+      metadata: changes.title || changes.description || isFile,
+   };
+
+   // Handle image upload if needed
+   let finalImagePath = oldArticle.image;
+
    if (isFile) {
-      // - Upload new image
       const [imageName, imagePath] = createImagePath(article);
 
       const { error: storageError } = await supabase.storage
@@ -110,47 +119,10 @@ export async function updateArticle(article) {
 
       if (storageError) throw new Error('Article image could not be uploaded');
 
-      // - Edit article with new image
-      const { error } = await supabase
-         .from('articles')
-         .update({
-            title: article.title,
-            description: article.description,
-            content: article.content,
-            category_id: article.category_id,
-            status: article.status,
-            language: article.language,
-            flag: article.flag,
-            code: article.code,
-            image: imagePath,
-            slug: article.slug,
-            updated_at: new Date().toISOString(),
-         })
-         .eq('id', article.id)
-         .select();
-
-      if (error) throw new Error('Article could not be updated');
-
-      await fetch('/api/revalidate', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ slug: article.slug, type: 'multiple-routes' }),
-      });
-
-      // - Delete old image from DB
-      const oldImageName = article.oldImage.split('/').pop();
-
-      const { error: imageError } = await supabase.storage
-         .from('article_images')
-         .remove([oldImageName]);
-
-      if (imageError)
-         throw new Error('Image could not be deleted from database');
+      finalImagePath = imagePath;
    }
 
-   // 2. IMAGE WASN'T CHANGED
-
-   // - Edit article with old image
+   // Update article in database
    const { error } = await supabase
       .from('articles')
       .update({
@@ -163,6 +135,7 @@ export async function updateArticle(article) {
          flag: article.flag,
          code: article.code,
          slug: article.slug,
+         image: finalImagePath,
          updated_at: new Date().toISOString(),
       })
       .eq('id', article.id)
@@ -170,11 +143,26 @@ export async function updateArticle(article) {
 
    if (error) throw new Error('Article could not be updated');
 
+   // Trigger Next.js revalidation
    await fetch('/api/revalidate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug: article.slug, type: 'one-route' }),
+      body: JSON.stringify({
+         slug: article.slug,
+         changes: relevantChanges,
+      }),
    });
+
+   // Delete old image if a new one was uploaded
+   if (isFile && oldArticle.image) {
+      const oldImageName = oldArticle.image.split('/').pop();
+      const { error: imageError } = await supabase.storage
+         .from('article_images')
+         .remove([oldImageName]);
+
+      if (imageError)
+         throw new Error('Old article image could not be deleted from storage');
+   }
 }
 
 export async function getArticlesAfterDate(date) {

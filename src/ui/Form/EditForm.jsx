@@ -160,6 +160,7 @@ function EditForm() {
       );
 
       const slug = toSlug(data.title);
+      const oldArticle = article;
 
       editArticle({
          ...data,
@@ -172,6 +173,7 @@ function EditForm() {
          flag: localArticle.flag,
          code: localArticle.code,
          slug,
+         oldArticle,
       });
 
       if (

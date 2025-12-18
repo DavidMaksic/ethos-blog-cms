@@ -81,3 +81,11 @@ export function toSlug(string) {
       strict: true,
    });
 }
+
+export function getArticleChanges(oldArticle, newArticle) {
+   return {
+      title: oldArticle.title !== newArticle.title,
+      description: oldArticle.description !== newArticle.description,
+      content: oldArticle.content !== newArticle.content,
+   };
+}
