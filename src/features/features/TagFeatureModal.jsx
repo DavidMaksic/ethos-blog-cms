@@ -22,7 +22,6 @@ function TagFeatureModal({ currentTag, onClose }) {
    const category_id = currentTag.id;
 
    const filteredArticles = articles?.filter((item) => item.featured !== true);
-   console.log('filteredArticles: ', filteredArticles);
 
    const taggedArticles = filteredArticles?.filter(
       (item) => item.category_id === currentTag.id

@@ -100,14 +100,14 @@ export async function updateArticle(article) {
    const oldArticle = article.oldArticle;
    const isFile = !article.image?.startsWith?.(supabaseUrl);
 
-   // Compute changes
+   // 1. Compute changes
    const changes = getArticleChanges(oldArticle, article);
    const relevantChanges = {
       content: changes.content,
       metadata: changes.title || changes.description || isFile,
    };
 
-   // Handle image upload if needed
+   // 2. Handle image upload if needed
    let finalImagePath = oldArticle.image;
 
    if (isFile) {
@@ -122,7 +122,7 @@ export async function updateArticle(article) {
       finalImagePath = imagePath;
    }
 
-   // Update article in database
+   // 3. Update article in database
    const { error } = await supabase
       .from('articles')
       .update({
@@ -143,17 +143,19 @@ export async function updateArticle(article) {
 
    if (error) throw new Error('Article could not be updated');
 
-   // Trigger Next.js revalidation
-   await fetch('/api/revalidate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-         slug: article.slug,
-         changes: relevantChanges,
-      }),
-   });
+   // 4. Trigger Next.js revalidation
+   if (article.status === 'published') {
+      await fetch('/api/revalidate', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            slug: article.slug,
+            changes: relevantChanges,
+         }),
+      });
+   }
 
-   // Delete old image if a new one was uploaded
+   // 5. Delete old image if a new one was uploaded
    if (isFile && oldArticle.image) {
       const oldImageName = oldArticle.image.split('/').pop();
       const { error: imageError } = await supabase.storage
