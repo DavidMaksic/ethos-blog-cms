@@ -34,7 +34,7 @@ function MainArticle({ article, refetch, index }) {
          transition={{ duration: 0.3 }}
       >
          <div className="space-y-2 self-center flex flex-col">
-            <h2 className="relative styled_text text-4xl bg-gradient-to-r from-gray-600 to-gray-500/90 dark:from-slate-300 dark:to-slate-300/80 cursor-default! font-article">
+            <h2 className="relative styled_text text-4xl bg-gradient-to-r from-gray-600 to-gray-500/90 dark:from-slate-300 dark:to-slate-300/80 cursor-default! font-article font-semibold">
                {article.title}
             </h2>
             <h3 className="text-lg text-primary-400 cursor-default! font-creator">
