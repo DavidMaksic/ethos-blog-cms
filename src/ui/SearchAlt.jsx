@@ -30,7 +30,7 @@ function SearchAlt() {
             placeholder="Search..."
             autoComplete="one-time-code"
             onChange={(e) => handleChange(e.target.value)}
-            className="h-11 py-4 px-1 w-[22rem] bg-white dark:bg-primary-200 border border-quaternary rounded-full text-xl font-medium font-article outline-none transition-bg_border rounded-l-none border-l-transparent"
+            className="h-11 py-4 px-1 w-[22rem] bg-white dark:bg-primary-200 border border-quaternary rounded-full text-xl font-medium font-creator outline-none transition-bg_border rounded-l-none border-l-transparent"
          />
       </div>
    );

@@ -3,6 +3,7 @@ import { useUpdateTagFeature } from './useUpdateTagFeature';
 import { usePublishedArticles } from '../archive/usePublishedArticles';
 import { ImSpinner2 } from 'react-icons/im';
 import { useEntry } from '../../context/EntryContext';
+import { motion } from 'motion/react';
 
 import ArticleItem from '../../ui/ArticleItem';
 import SearchAlt from '../../ui/SearchAlt';

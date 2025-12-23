@@ -51,11 +51,7 @@ function MainFeatureModal({ onClose }) {
                      />
                   ))
                ) : (
-                  <span
-                     className={`self-center col-span-2 text-primary-400 ${
-                        !filteredArticles?.length && 'mt-33 mb-9'
-                     }`}
-                  >
+                  <span className="self-center col-span-2 text-primary-400">
                      No articles to show...
                   </span>
                )

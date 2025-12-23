@@ -58,7 +58,7 @@ function Search() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.1 }}
-                  className={`h-11 py-4 px-1 w-[22rem] bg-white dark:bg-primary-200 border border-tertiary shadow-2xs rounded-full text-xl font-medium font-article outline-none transition-bg_border ${
+                  className={`h-11 py-4 px-1 w-[22rem] bg-white dark:bg-primary-200 border border-tertiary shadow-2xs rounded-full text-xl font-medium font-creator outline-none transition-bg_border ${
                      open && 'rounded-l-none border-l-transparent'
                   }`}
                />
