@@ -7,14 +7,14 @@ import enFlag from '../../assets/en-flag.png';
 
 const languages = [
    {
-      lang: 'Српски',
-      code: 'sr',
-      flag: srbFlag,
-   },
-   {
       lang: 'English',
       code: 'en',
       flag: enFlag,
+   },
+   {
+      lang: 'Српски',
+      code: 'sr',
+      flag: srbFlag,
    },
 ];
 
@@ -25,6 +25,10 @@ function LanguageButton({ localItem, setLocalItem, defaultLang = null }) {
    const flag = languages.find((item) => item.code === defaultLang)?.flag;
    const [currentFlag, setCurrentFlag] = useState(flag);
    const [langChanged, setLangChanged] = useState(false);
+
+   useEffect(() => {
+      if (localItem) setCurrentFlag(localItem.flag);
+   }, [localItem]);
 
    useEffect(() => {
       if (langChanged) setCurrentFlag(localItem.flag);

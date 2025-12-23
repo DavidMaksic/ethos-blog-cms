@@ -44,7 +44,7 @@ import LanguageButton from '../../ui/Buttons/LanguageButton';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
-import srbFlag from '../../assets/srb-flag.png';
+import enFlag from '../../assets/en-flag.png';
 import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
@@ -53,15 +53,18 @@ import toast from 'react-hot-toast';
 import Form from '../../ui/Form/Form';
 
 function Creator() {
-   const defaultCode = 'sr';
+   const defaultCode = 'en';
    const [localArticle, setLocalArticle] = useLocalStorage(
       {
          title: '',
          description: '',
-         content: '',
-         language: 'Српски',
+         content: [
+            { type: 'paragraph', content: '' },
+            { type: 'paragraph', content: '' },
+         ],
+         language: 'English',
          code: defaultCode,
-         flag: srbFlag,
+         flag: enFlag,
       },
       'article'
    );
@@ -119,20 +122,30 @@ function Creator() {
    };
 
    const { categories } = useGetCategories();
-   const [currentImage, setCurrentImage] = useState();
+   const [currentImage, setCurrentImage] = useState(localArticle.image || null);
 
    // - Reset logic
    function clear() {
       setLocalArticle({
          title: '',
          description: '',
-         language: 'Српски',
-         code: 'sr',
-         content: '',
+         language: 'English',
+         code: 'en',
+         flag: enFlag,
+         content: [
+            { type: 'paragraph', content: '' },
+            { type: 'paragraph', content: '' },
+         ],
          category: categories?.at(0).category,
       });
       setCurrentImage('');
       document.documentElement.setAttribute('data-lang', defaultCode);
+      setTimeout(() => {
+         if (editor) {
+            editor.removeBlocks(editor.document);
+            editor.insertBlocks([{ content: '' }], editor.document[0], 'after');
+         }
+      }, 1);
    }
 
    // - Form logic
@@ -223,12 +236,23 @@ function Creator() {
 
    function handlePreviewImage(e) {
       const img = e.target.files[0];
+      if (!img) return;
       setCurrentImage(img);
 
       if (imageRef?.current) {
          imageRef.current.src = URL.createObjectURL(img);
          imageRef.current.srcset = URL.createObjectURL(img);
       }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+         const base64String = reader.result;
+         setLocalArticle({
+            ...localArticle,
+            image: base64String,
+         });
+      };
+      reader.readAsDataURL(img);
    }
 
    return (
@@ -312,6 +336,7 @@ function Creator() {
                   >
                      <img
                         ref={imageRef}
+                        src={currentImage || undefined}
                         className={`object-cover h-39.5 w-76 object-center rounded-3xl opacity-95 dark:opacity-85 hover:opacity-85 dark:hover:opacity-75 border border-primary-300 dark:border-quaternary transition ${
                            !currentImage && 'hidden'
                         }`}
@@ -437,7 +462,7 @@ function Creator() {
             </button>
          </Options>
 
-         <ClearButton handler={clear} editor={editor} style="right-23" />
+         <ClearButton handler={clear} style="right-23" />
       </Form>
    );
 }

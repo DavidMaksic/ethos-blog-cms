@@ -15,16 +15,16 @@ function DeleteModal({ returnPage, isDeleting, isSuccess, onClose, onDelete }) {
             Delete this article?
          </span>
 
-         <div className="pt-2 space-x-10">
+         <div className="pt-2 mr-5">
             <button
-               className={`relative text-[#ca6565] dark:text-[#e78989] hover:text-[#be6565] ${
+               className={`relative text-[#ca6565] dark:text-[#e78989] rounded-full px-6 cursor-pointer hover:shadow-delete-btn dark:hover:shadow-none transition hover:bg-red-300 dark:hover:bg-red-300/45 hover:text-white dark:hover:text-red-100 mr-5 ${
                   isDeleting && 'pointer-events-none'
                }`}
                onClick={onDelete}
             >
                {isDeleting ? (
                   <>
-                     <ImSpinner2 className="size-6 animate-spin absolute right-17 top-3.5" />
+                     <ImSpinner2 className="size-6 animate-spin absolute right-23 top-3.5" />
                      <span>Yes</span>
                   </>
                ) : (
@@ -36,7 +36,7 @@ function DeleteModal({ returnPage, isDeleting, isSuccess, onClose, onDelete }) {
                /
             </span>
             <button
-               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500"
+               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500 ml-10"
                onClick={onClose}
             >
                No
