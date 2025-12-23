@@ -3,7 +3,6 @@ import { useUpdateTagFeature } from './useUpdateTagFeature';
 import { usePublishedArticles } from '../archive/usePublishedArticles';
 import { ImSpinner2 } from 'react-icons/im';
 import { useEntry } from '../../context/EntryContext';
-import { motion } from 'motion/react';
 
 import ArticleItem from '../../ui/ArticleItem';
 import SearchAlt from '../../ui/SearchAlt';
@@ -36,7 +35,7 @@ function TagFeatureModal({ currentTag, onClose }) {
    }, [isSuccess, refetch, onClose]);
 
    return (
-      <div className="flex flex-col items-center justify-between gap-2 min-h-[28rem]">
+      <div className="flex flex-col items-center justify-between gap-4 min-h-[28rem] mx-12">
          <span className="pb-3">
             <SearchAlt />
          </span>

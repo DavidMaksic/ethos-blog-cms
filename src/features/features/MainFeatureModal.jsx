@@ -31,12 +31,12 @@ function MainFeatureModal({ onClose }) {
    }, [isSuccess, onClose]);
 
    return (
-      <div className="flex flex-col items-center justify-between gap-2 min-h-[28rem]">
+      <div className="flex flex-col items-center justify-between gap-4 min-h-[28rem] mx-12">
          <span className="pb-3">
             <SearchAlt />
          </span>
 
-         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-auto scrollbar max-h-[30rem]">
+         <ul className="py-2 px-2 grid grid-cols-2 gap-x-6 gap-y-4 overflow-auto scrollbar max-h-[29.5rem]">
             {!isPending ? (
                filteredArticles?.length >= 1 ? (
                   filteredArticles?.map((item) => (

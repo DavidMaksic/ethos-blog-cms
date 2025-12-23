@@ -102,7 +102,7 @@ function ArchiveRow({ article }) {
 
          <AnimatePresence>
             {openDelete && (
-               <Modal style="w-[28%]" closeModal={() => setOpenDelete(false)}>
+               <Modal style="w-[32%]" closeModal={() => setOpenDelete(false)}>
                   <DeleteModal
                      isDeleting={isDeleting}
                      onClose={() => setOpenDelete(false)}

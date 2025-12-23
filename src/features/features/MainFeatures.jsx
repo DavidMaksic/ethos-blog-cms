@@ -84,7 +84,7 @@ function MainFeatures() {
                         setSearchParams('');
                         setOpenModal(false);
                      }}
-                     style="w-[60rem]"
+                     style="w-[64rem]"
                   >
                      <MainFeatureModal
                         onClose={() => {
