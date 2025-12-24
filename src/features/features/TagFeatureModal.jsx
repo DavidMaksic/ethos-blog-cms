@@ -3,6 +3,7 @@ import { useUpdateTagFeature } from './useUpdateTagFeature';
 import { usePublishedArticles } from '../archive/usePublishedArticles';
 import { ImSpinner2 } from 'react-icons/im';
 import { useEntry } from '../../context/EntryContext';
+import { motion } from 'motion/react';
 
 import ArticleItem from '../../ui/ArticleItem';
 import SearchAlt from '../../ui/SearchAlt';
@@ -35,7 +36,7 @@ function TagFeatureModal({ currentTag, onClose }) {
    }, [isSuccess, refetch, onClose]);
 
    return (
-      <div className="flex flex-col items-center justify-between gap-4 min-h-[28rem] mx-12">
+      <div className="flex flex-col items-center justify-between gap-4 min-h-[40rem] mx-12">
          <span className="pb-3">
             <SearchAlt />
          </span>
@@ -55,19 +56,25 @@ function TagFeatureModal({ currentTag, onClose }) {
                      />
                   ))
                ) : (
-                  <span className="self-center col-span-2 text-primary-400">
+                  <motion.span
+                     className="self-center col-span-2 text-primary-400"
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     exit={{ opacity: 0 }}
+                     transition={{ duration: 0.3 }}
+                  >
                      No articles to show...
-                  </span>
+                  </motion.span>
                )
             ) : (
-               <>
-                  <li className="h-25.5 w-105 bg-primary-200 dark:bg-primary-300/30 rounded-2xl animate-skeleton" />
-                  <li className="h-25.5 w-105 bg-primary-200 dark:bg-primary-300/30 rounded-2xl animate-skeleton" />
-                  <li className="h-25.5 w-105 bg-primary-200/60 dark:bg-primary-300/15 rounded-2xl animate-skeleton" />
-                  <li className="h-25.5 w-105 bg-primary-200/60 dark:bg-primary-300/15 rounded-2xl animate-skeleton" />
-                  <li className="h-25.5 w-105 bg-primary-200/40 dark:bg-primary-300/5 rounded-2xl animate-skeleton" />
-                  <li className="h-25.5 w-105 bg-primary-200/40 dark:bg-primary-300/5 rounded-2xl animate-skeleton" />
-               </>
+               <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+               >
+                  <ImSpinner2 className="size-20 animate-spin absolute translate-x-[-50%] translate-y-[-40%] fill-white dark:fill-primary-400 z-10" />
+               </motion.div>
             )}
          </ul>
 
