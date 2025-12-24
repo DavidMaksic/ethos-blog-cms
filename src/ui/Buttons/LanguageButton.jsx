@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
-import srbFlag from '../../assets/srb-flag.png';
-import enFlag from '../../assets/en-flag.png';
+import srbFlag from '../../../public/srb-flag.png';
+import enFlag from '../../../public/en-flag.png';
 
 const languages = [
    {

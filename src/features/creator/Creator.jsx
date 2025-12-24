@@ -44,7 +44,7 @@ import LanguageButton from '../../ui/Buttons/LanguageButton';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
-import enFlag from '../../assets/en-flag.png';
+import enFlag from '../../../public/en-flag.png';
 import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
