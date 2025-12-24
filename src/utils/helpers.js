@@ -14,17 +14,6 @@ export function createImagePath(article) {
    return [imageName, imagePath];
 }
 
-export function getDefaults(searchParams, options) {
-   const defaultValue = searchParams.get('sort-by') || options.at(0).value;
-
-   let defaultLabel;
-   options.forEach((item) => {
-      if (defaultValue === item.value) defaultLabel = item.label;
-   });
-
-   return { defaultLabel, defaultValue };
-}
-
 export const getToday = function (options = {}) {
    const today = new Date();
 

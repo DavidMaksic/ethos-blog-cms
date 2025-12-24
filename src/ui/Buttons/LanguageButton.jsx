@@ -20,7 +20,7 @@ const languages = [
 
 function LanguageButton({ localItem, setLocalItem, defaultLang = null }) {
    const [open, setOpen] = useState(false);
-   const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
+   const ref = useOutsideClick(() => setOpen(false), false);
 
    const flag = languages.find((item) => item.code === defaultLang)?.flag;
    const [currentFlag, setCurrentFlag] = useState(flag);

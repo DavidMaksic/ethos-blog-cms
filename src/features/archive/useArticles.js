@@ -44,14 +44,14 @@ export function useArticles() {
 
    if (page < pageCount)
       queryClient.prefetchQuery({
-         queryKey: ['articles', filter, sortBy, page + 1],
-         queryFn: () => getArticles({ filter, sortBy, page: page + 1 }),
+         queryKey: ['articles', filter, sortBy, page + 1, search],
+         queryFn: () => getArticles({ filter, sortBy, page: page + 1, search }),
       });
 
    if (page > 1)
       queryClient.prefetchQuery({
-         queryKey: ['articles', filter, sortBy, page - 1],
-         queryFn: () => getArticles({ filter, sortBy, page: page - 1 }),
+         queryKey: ['articles', filter, sortBy, page - 1, search],
+         queryFn: () => getArticles({ filter, sortBy, page: page - 1, search }),
       });
 
    return { isPending, isPlaceholderData, articles, count };

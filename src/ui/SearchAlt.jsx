@@ -1,29 +1,29 @@
 import { useSearchParams } from 'react-router-dom';
 import { CgSearch } from 'react-icons/cg';
-import { useRef } from 'react';
 
 function SearchAlt() {
    const [searchParams, setSearchParams] = useSearchParams();
    const query = searchParams.get('search') || '';
-   const ref = useRef(null);
 
    function handleChange(value) {
-      searchParams.set('search', value);
-      setSearchParams(searchParams);
+      setSearchParams((prev) => {
+         const params = new URLSearchParams(prev);
+
+         if (value) params.set('search', value);
+         else params.delete('search');
+
+         params.delete('page');
+         return params;
+      });
    }
 
    return (
       <div className="flex items-center">
          <label htmlFor="search">
-            <CgSearch
-               className={`size-11 text-accent-600/85 dark:text-accent-200/90 p-2 pt-2.5 pr-2.5 bg-white dark:bg-primary-200 border border-quaternary rounded-full transition-bg_border cursor-pointer ${
-                  open && 'rounded-r-none border-r-transparent'
-               }`}
-            />
+            <CgSearch className="size-11 text-accent-600/85 dark:text-accent-200/90 p-2 pt-2.5 pr-2.5 rounded-r-none border-r-transparent bg-white dark:bg-primary-200 border border-quaternary rounded-full transition-bg_border cursor-pointer" />
          </label>
 
          <input
-            ref={ref}
             id="search"
             type="text"
             value={query}

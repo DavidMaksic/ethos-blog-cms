@@ -13,7 +13,7 @@ function FormStatus({
    article,
 }) {
    const [open, setOpen] = useState(false);
-   const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
+   const ref = useOutsideClick(() => setOpen(false));
    const statusOptions = ['Published', 'Drafted'];
 
    const articleStatus =

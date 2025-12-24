@@ -10,8 +10,15 @@ function Search() {
    const ref = useRef(null);
 
    function handleChange(value) {
-      searchParams.set('search', value);
-      setSearchParams(searchParams);
+      setSearchParams((prev) => {
+         const params = new URLSearchParams(prev);
+
+         if (value) params.set('search', value);
+         else params.delete('search');
+
+         params.delete('page');
+         return params;
+      });
    }
 
    useEffect(() => {
@@ -19,7 +26,7 @@ function Search() {
    }, []); // eslint-disable-line
 
    useEffect(() => {
-      if (open) ref.current.focus();
+      if (open && ref.current) ref.current.focus();
 
       const handleEnter = ({ key }) => {
          if (key === 'Enter') {

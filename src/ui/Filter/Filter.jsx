@@ -7,9 +7,12 @@ export function Filter({ field, options }) {
    const currentFilter = searchParams.get(field) || options.at(0).value;
 
    function handleClick(value) {
-      searchParams.set(field, value);
-      searchParams.delete('page');
-      setSearchParams(searchParams);
+      setSearchParams((prev) => {
+         const params = new URLSearchParams(prev);
+         params.set(field, value);
+         params.delete('page');
+         return params;
+      });
    }
 
    return (

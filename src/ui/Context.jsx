@@ -8,7 +8,7 @@ import { useState } from 'react';
 function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
    const [open, setOpen] = useState(false);
    const { categories } = useGetCategories();
-   const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
+   const ref = useOutsideClick(() => setOpen(false), false);
 
    return (
       <div className="relative w-max select-none">

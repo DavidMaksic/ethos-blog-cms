@@ -31,8 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Flags are broken in edit
-
 function App() {
    return (
       <QueryClientProvider client={queryClient}>

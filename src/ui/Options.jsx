@@ -18,13 +18,13 @@ function Options({
    children,
 }) {
    const [openMenu, setOpenMenu] = useState(false);
-   const ref = useOutsideClick(() => setOpenMenu((isOpen) => !isOpen), false);
+   const ref = useOutsideClick(() => setOpenMenu(false), false);
 
    const [mounted, setMounted] = useState(false);
    useEffect(() => setMounted(true), []);
 
    const [openTable, setOpenTable] = useState(false);
-   const tableRef = useOutsideClick(() => setOpenTable((isOpen) => !isOpen));
+   const tableRef = useOutsideClick(() => setOpenTable(false));
 
    // - Scroll logic
    const { setScroll: setTopScroll, ref: topRef } = useScroll();

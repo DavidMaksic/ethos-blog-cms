@@ -1,25 +1,28 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import { useSearchParams } from 'react-router-dom';
 import { TbArrowsSort } from 'react-icons/tb';
 import { FaCaretDown } from 'react-icons/fa';
-import { getDefaults } from '../utils/helpers';
+import { useState } from 'react';
 
 function SortBy({ options }) {
    const [open, setOpen] = useState(false);
-   const ref = useOutsideClick(() => setOpen((isOpen) => !isOpen), false);
-
    const [searchParams, setSearchParams] = useSearchParams();
-   const { defaultLabel, defaultValue } = getDefaults(searchParams, options);
+   const ref = useOutsideClick(() => setOpen(false), false);
 
-   const [currentLabel, setCurrentLabel] = useState(defaultLabel);
-   const [currentValue, setCurrentValue] = useState(defaultValue);
+   const sortValue = searchParams.get('sort-by') ?? options[0].value;
+   const currentLabel =
+      options.find((item) => item.value === sortValue)?.label ??
+      options[0].label;
 
-   useEffect(() => {
-      searchParams.set('sort-by', currentValue);
-      setSearchParams(searchParams);
-   }, [searchParams, setSearchParams, currentValue]);
+   function handleClick(item) {
+      setSearchParams((prev) => {
+         const params = new URLSearchParams(prev);
+         params.set('sort-by', item.value);
+         params.delete('page');
+         return params;
+      });
+   }
 
    return (
       <div className="flex items-center gap-2.5 select-none">
@@ -42,7 +45,7 @@ function SortBy({ options }) {
                   <motion.ul
                      className="absolute z-10 mt-2 p-1 max-h-52 w-full rounded-xl bg-white dark:bg-primary-200 border border-tertiary shadow-lg dark:shadow-2xl overflow-auto cursor-pointer transition-bg_border"
                      ref={ref}
-                     onClick={() => setOpen((isOpen) => !isOpen)}
+                     onClick={() => setOpen(false)}
                      initial={{ opacity: 0 }}
                      animate={{ opacity: 1 }}
                      exit={{ opacity: 0 }}
@@ -51,11 +54,7 @@ function SortBy({ options }) {
                      {options.map((item) => (
                         <li
                            key={item.value}
-                           value={item.value}
-                           onClick={() => {
-                              setCurrentLabel(item.label);
-                              setCurrentValue(item.value);
-                           }}
+                           onClick={() => handleClick(item)}
                            className="relative rounded-xl font-normal py-2 pl-6 hover:bg-primary-50 dark:hover:bg-primary-300/12 transition duration-75"
                         >
                            {item.label}
