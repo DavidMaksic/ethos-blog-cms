@@ -142,6 +142,7 @@
    --shadow-filter: 0 0 0.4rem var(--color-accent-300);
    --shadow-link-btn-dark: 0 0 1rem var(--color-accent-900);
    --shadow-chart: #4b5563;
+   --shadow-edit-btn: 0 0 1rem var(--color-accent-200);
    --shadow-delete-btn: 0 0 1rem var(--color-red-200);
 
    --color-editor-bg: #fff;

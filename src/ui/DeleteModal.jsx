@@ -37,7 +37,7 @@ function DeleteModal({ returnPage, isDeleting, isSuccess, onClose, onDelete }) {
             </span>
 
             <button
-               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500 ml-7"
+               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500 ml-7 transition"
                onClick={onClose}
             >
                Cancel

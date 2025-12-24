@@ -67,10 +67,10 @@ function MainFeatureModal({ onClose }) {
             )}
          </ul>
 
-         <div className="flex items-center pt-1.5 space-x-10 z-20">
+         <div className="flex items-center font-medium pt-1.5 mr-6 z-20">
             <button
-               className={`relative text-[#ca6565] dark:text-[#e78989] hover:text-[#be6565] ${
-                  !openID || isEditing ? 'pointer-events-none opacity-30' : ''
+               className={`relative rounded-full p-2 px-6 text-accent hover:bg-accent-400/80 dark:hover:bg-accent-300/55 hover:text-white dark:hover:text-accent-100 hover:shadow-edit-btn dark:hover:shadow-none transition mr-2 ${
+                  !openID || isEditing ? 'pointer-events-none opacity-40' : ''
                }`}
                onClick={() => updateMainFeature({ selectedID, boolean })}
             >
@@ -89,7 +89,7 @@ function MainFeatureModal({ onClose }) {
             </span>
 
             <button
-               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500"
+               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500 transition ml-7"
                onClick={onClose}
             >
                Cancel

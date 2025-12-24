@@ -42,13 +42,13 @@ function AuthorItem({ author, activeUser }) {
                >
                   {full_name}
                </span>
-               <span className="text-sm mt-1 font-extralight text-primary-400">
+               <span className="text-sm mt-1 font-light text-primary-400">
                   {email}
                </span>
             </div>
 
             {description_en ? (
-               <span className="text-xl font-creator">{description_en}</span>
+               <span className="text-xl font-text">{description_en}</span>
             ) : (
                <span className="text-xl font-creator">
                   Your profile description will appear here. Write something
