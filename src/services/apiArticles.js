@@ -131,10 +131,8 @@ export async function updateArticle(article) {
          content: article.content,
          category_id: article.category_id,
          status: article.status,
-         language: article.language,
-         flag: article.flag,
-         code: article.code,
          slug: article.slug,
+         code: article.code,
          image: finalImagePath,
          updated_at: new Date().toISOString(),
       })

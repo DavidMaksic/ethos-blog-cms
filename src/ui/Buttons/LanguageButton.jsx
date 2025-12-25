@@ -3,17 +3,22 @@ import { DEFAULT_LANG, LANGUAGES } from '../../utils/constants';
 import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
-function LanguageButton({ localArticle, setLocalArticle, isEdit = false }) {
+function LanguageButton({
+   localArticle,
+   setLocalArticle,
+   isEdit = false,
+   articleCode = null,
+}) {
    const [open, setOpen] = useState(false);
    const ref = useOutsideClick(() => setOpen(false), false);
 
    const defaultFlag = LANGUAGES.find((item) => {
       if (isEdit) {
-         return item.code === localArticle.code;
+         return item.code === articleCode;
       } else {
          return item.code === DEFAULT_LANG;
       }
-   }).flag;
+   })?.flag;
 
    const [flag, setFlag] = useState(defaultFlag);
 

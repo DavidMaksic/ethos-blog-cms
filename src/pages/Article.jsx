@@ -202,7 +202,7 @@ function Article() {
                </div>
 
                <p className="text-[1.35rem] leading-7.5 px-24 font-text opacity-90">
-                  {article.language === 'English'
+                  {article.code === 'en'
                      ? author?.description_en
                         ? author?.description_en
                         : 'Is an author writing for Ethos blog.'

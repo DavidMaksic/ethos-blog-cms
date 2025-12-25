@@ -15,6 +15,7 @@ import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
+import { LANGUAGES } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -53,7 +54,6 @@ import Form from './Form';
 
 function EditForm() {
    const { article, isPending } = useFindArticle();
-   const { ...articleValues } = article;
    const oldImage = article.image;
 
    // - Category logic
@@ -63,12 +63,13 @@ function EditForm() {
    // - LocalStorage logic
    const [localArticle, setLocalArticle] = useLocalStorage(
       {
-         articleValues,
+         ...article,
          category: category?.category,
       },
       'localArticle'
    );
 
+   // - Set default article code as data-attribute
    useEffect(() => {
       document.documentElement.setAttribute('data-lang', article.code);
    }, []); // eslint-disable-line
@@ -78,14 +79,9 @@ function EditForm() {
       article.status.charAt(0).toUpperCase() + article.status.slice(1);
    const [currentStatus, setCurrentStatus] = useState(articleStatus);
 
-   // - Set category in localStorage on load
-   useEffect(() => {
-      setLocalArticle({ ...article, category: category?.category });
-   }, [setLocalArticle, article, category]);
-
    // - Form logic
-   const { register, handleSubmit, formState } = useForm({
-      defaultValues: articleValues,
+   const { register, handleSubmit, formState, reset } = useForm({
+      defaultValues: article,
    });
    const { errors } = formState;
 
@@ -169,7 +165,6 @@ function EditForm() {
          content: contentHTML,
          category_id,
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
-         language: localArticle.language,
          code: localArticle.code,
          slug,
          oldArticle,
@@ -192,12 +187,23 @@ function EditForm() {
 
    function handlePreviewImage(e) {
       const img = e.target.files[0];
+      if (!img) return;
       setCurrentImage(img);
 
       if (imageRef?.current) {
          imageRef.current.src = URL.createObjectURL(img);
          imageRef.current.srcset = URL.createObjectURL(img);
       }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+         const base64String = reader.result;
+         setLocalArticle({
+            ...localArticle,
+            image: base64String,
+         });
+      };
+      reader.readAsDataURL(img);
    }
 
    const [imgReload, setImgReload] = useState(false);
@@ -209,6 +215,13 @@ function EditForm() {
          setImgReload(false);
       }
    }, [currentImage, oldImage, imgReload]);
+
+   // - Remove data from localStorage after leaving the page
+   useEffect(() => {
+      return () => {
+         localStorage.removeItem('localArticle');
+      };
+   }, []);
 
    const isLoading = isPending || isEditing || isUnFeaturing;
 
@@ -239,12 +252,11 @@ function EditForm() {
 
             <FormItem label="Category" error={errors?.category?.message}>
                <Context
+                  localItem={localArticle}
                   setLocalItem={setLocalArticle}
+                  article={article}
                   isDefault={isDefault}
                   setIsDefault={setIsDefault}
-                  article={article}
-                  localItem={localArticle}
-                  isEdit={true}
                >
                   {category ? (
                      isDefault ? (
@@ -265,6 +277,7 @@ function EditForm() {
                   className="bg-secondary dark:bg-primary-200 text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"
                   minRows={4}
                   maxRows={4}
+                  // value={}
                   id="description"
                   type="text"
                   autoComplete="one-time-code"
@@ -363,12 +376,14 @@ function EditForm() {
 
          <ResetButton
             handler={() => {
+               reset();
                setIsDefault(true);
                setCurrentStatus(articleStatus);
                setLocalArticle({
                   ...article,
                   category: category?.category,
-                  flag: article.code === 'en' ? '/en-flag.png' : '/sr-flag.png',
+                  flag: LANGUAGES.find((item) => item.code === article.code)
+                     .flag,
                });
                editor.replaceBlocks(editor.document, contentBlocks);
                setCurrentImage(oldImage);
@@ -381,6 +396,7 @@ function EditForm() {
             localArticle={localArticle}
             setLocalArticle={setLocalArticle}
             isEdit={true}
+            articleCode={article.code}
          />
 
          <Options isEdit={true} currentAuthor={user}>

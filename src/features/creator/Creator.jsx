@@ -61,7 +61,6 @@ function Creator() {
             { type: 'paragraph', content: '' },
             { type: 'paragraph', content: '' },
          ],
-         language: 'English',
          code: DEFAULT_LANG,
       },
       'article'
@@ -127,7 +126,6 @@ function Creator() {
       setLocalArticle({
          title: '',
          description: '',
-         language: 'English',
          code: 'en',
          flag: FLAGS[DEFAULT_LANG],
          content: [
@@ -183,7 +181,6 @@ function Creator() {
             content: contentHTML,
             featured: false,
             main_feature: false,
-            language: localArticle.language,
             code: localArticle.code,
             slug,
          },
@@ -217,7 +214,6 @@ function Creator() {
             content: contentHTML,
             featured: false,
             main_feature: false,
-            language: localArticle.language,
             code: localArticle.code,
             slug,
          },
@@ -362,7 +358,7 @@ function Creator() {
             </FormItem>
          </FormRow>
 
-         <FormItem label="Content" language={localArticle.language}>
+         <FormItem label="Content">
             <BlockNoteView
                editor={editor}
                onChange={onChange}
