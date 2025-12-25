@@ -13,6 +13,7 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useForm } from 'react-hook-form';
+import { FLAGS } from '../../utils/constants';
 import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
 
@@ -186,7 +187,7 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             code: localArticle.code,
-            flag: localArticle.flag,
+            flag: FLAGS[localArticle.code],
             slug,
          },
          {
@@ -221,7 +222,7 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             code: localArticle.code,
-            flag: localArticle.flag,
+            flag: FLAGS[localArticle.code],
             slug,
          },
          {
