@@ -145,7 +145,6 @@ export async function updateArticle(article) {
 
    // 4. Trigger Next.js revalidation
    if (article.status === 'published') {
-      console.log('true');
       await fetch('/api/revalidate', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },

@@ -44,7 +44,6 @@ import LanguageButton from '../../ui/Buttons/LanguageButton';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
-import enFlag from '../../../public/en-flag.png';
 import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
 import Context from '../../ui/Context';
@@ -64,7 +63,7 @@ function Creator() {
          ],
          language: 'English',
          code: defaultCode,
-         flag: enFlag,
+         flag: '/en-flag.png',
       },
       'article'
    );
@@ -131,7 +130,7 @@ function Creator() {
          description: '',
          language: 'English',
          code: 'en',
-         flag: enFlag,
+         flag: '/en-flag.png',
          content: [
             { type: 'paragraph', content: '' },
             { type: 'paragraph', content: '' },
