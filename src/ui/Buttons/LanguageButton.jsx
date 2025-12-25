@@ -1,41 +1,34 @@
 import { AnimatePresence, motion } from 'motion/react';
+import { DEFAULT_LANG, LANGUAGES } from '../../utils/constants';
 import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
-const languages = [
-   {
-      lang: 'English',
-      code: 'en',
-      flag: '/en-flag.png',
-   },
-   {
-      lang: 'Српски',
-      code: 'sr',
-      flag: '/srb-flag.png',
-   },
-];
-
-function LanguageButton({ localItem, setLocalItem, defaultLang = null }) {
+function LanguageButton({ localArticle, setLocalArticle, isEdit = false }) {
    const [open, setOpen] = useState(false);
    const ref = useOutsideClick(() => setOpen(false), false);
 
-   const flag = languages.find((item) => item.code === defaultLang)?.flag;
-   const [currentFlag, setCurrentFlag] = useState(flag);
-   const [langChanged, setLangChanged] = useState(false);
+   const defaultFlag = LANGUAGES.find((item) => {
+      if (isEdit) {
+         return item.code === localArticle.code;
+      } else {
+         return item.code === DEFAULT_LANG;
+      }
+   }).flag;
+
+   const [flag, setFlag] = useState(defaultFlag);
 
    useEffect(() => {
-      if (localItem) setCurrentFlag(localItem.flag);
-   }, [localItem]);
-
-   useEffect(() => {
-      if (langChanged) setCurrentFlag(localItem.flag);
-   }, [localItem.flag, langChanged, localItem]);
+      setLocalArticle((prev) => ({
+         ...prev,
+         flag,
+      }));
+   }, [setLocalArticle, flag]);
 
    return (
       <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
          <img
             className="size-11 opacity-80 dark:opacity-70 hover:opacity-100 dark:hover:opacity-85 transition-[opacity]"
-            src={currentFlag ? currentFlag : flag}
+            src={localArticle.flag ? localArticle.flag : flag}
             alt="Flag"
             onClick={(e) => {
                e.stopPropagation();
@@ -54,19 +47,19 @@ function LanguageButton({ localItem, setLocalItem, defaultLang = null }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.06 }}
                >
-                  {languages.map((item) => (
+                  {LANGUAGES.map((item) => (
                      <li
                         className="flex justify-between items-center relative font-normal rounded-xl py-2 pr-3 pl-5 hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-primary-200 duration-75 [&_img]:opacity-80 dark:[&_img]:opacity-80 group"
                         key={item.code}
                         onClick={() => {
-                           setLangChanged(true);
+                           // setLangChanged(true);
+                           setFlag(item.flag);
 
-                           setLocalItem({
-                              ...localItem,
+                           setLocalArticle((prev) => ({
+                              ...prev,
                               language: item.lang,
                               code: item.code,
-                              flag: item.flag,
-                           });
+                           }));
 
                            document.documentElement.setAttribute(
                               'data-lang',

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { LuCloudUpload, LuSunMedium } from 'react-icons/lu';
 import { useGetCategories } from '../tags/useGetCategories';
 import { insertAlert, toSlug } from '../../utils/helpers';
+import { DEFAULT_LANG, FLAGS } from '../../utils/constants';
 import { useCreateArticle } from '../archive/useCreateArticle';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -13,7 +14,6 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useForm } from 'react-hook-form';
-import { FLAGS } from '../../utils/constants';
 import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
 
@@ -53,7 +53,6 @@ import toast from 'react-hot-toast';
 import Form from '../../ui/Form/Form';
 
 function Creator() {
-   const defaultCode = 'en';
    const [localArticle, setLocalArticle] = useLocalStorage(
       {
          title: '',
@@ -63,8 +62,7 @@ function Creator() {
             { type: 'paragraph', content: '' },
          ],
          language: 'English',
-         code: defaultCode,
-         flag: '/en-flag.png',
+         code: DEFAULT_LANG,
       },
       'article'
    );
@@ -131,7 +129,7 @@ function Creator() {
          description: '',
          language: 'English',
          code: 'en',
-         flag: '/en-flag.png',
+         flag: FLAGS[DEFAULT_LANG],
          content: [
             { type: 'paragraph', content: '' },
             { type: 'paragraph', content: '' },
@@ -139,7 +137,7 @@ function Creator() {
          category: categories?.at(0).category,
       });
       setCurrentImage('');
-      document.documentElement.setAttribute('data-lang', defaultCode);
+      document.documentElement.setAttribute('data-lang', DEFAULT_LANG);
       setTimeout(() => {
          if (editor) {
             editor.removeBlocks(editor.document);
@@ -187,7 +185,6 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             code: localArticle.code,
-            flag: FLAGS[localArticle.code],
             slug,
          },
          {
@@ -222,7 +219,6 @@ function Creator() {
             main_feature: false,
             language: localArticle.language,
             code: localArticle.code,
-            flag: FLAGS[localArticle.code],
             slug,
          },
          {
@@ -426,9 +422,8 @@ function Creator() {
          </div>
 
          <LanguageButton
-            localItem={localArticle}
-            setLocalItem={setLocalArticle}
-            defaultLang={defaultCode}
+            localArticle={localArticle}
+            setLocalArticle={setLocalArticle}
          />
 
          <Options isEdit={true} currentAuthor={user}>

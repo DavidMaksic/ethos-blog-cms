@@ -16,7 +16,6 @@ import { useDarkMode } from '../../context/DarkModeContext';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
-import { FLAGS } from '../../utils/constants';
 import { Alert } from '../Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
 
@@ -171,7 +170,6 @@ function EditForm() {
          category_id,
          status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
          language: localArticle.language,
-         flag: FLAGS[localArticle.code],
          code: localArticle.code,
          slug,
          oldArticle,
@@ -370,6 +368,7 @@ function EditForm() {
                setLocalArticle({
                   ...article,
                   category: category?.category,
+                  flag: article.code === 'en' ? '/en-flag.png' : '/sr-flag.png',
                });
                editor.replaceBlocks(editor.document, contentBlocks);
                setCurrentImage(oldImage);
@@ -379,9 +378,9 @@ function EditForm() {
          />
 
          <LanguageButton
-            localItem={localArticle}
-            setLocalItem={setLocalArticle}
-            defaultLang={article.code}
+            localArticle={localArticle}
+            setLocalArticle={setLocalArticle}
+            isEdit={true}
          />
 
          <Options isEdit={true} currentAuthor={user}>
