@@ -76,6 +76,18 @@ export async function createArticle(newArticle) {
       .upload(imageName, newArticle.image);
 
    if (storageError) throw new Error('Article image could not be uploaded');
+
+   // - 3. Trigger Next.js revalidation
+   if (newArticle.status === 'published') {
+      await fetch('/api/revalidate', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            slug: newArticle.slug,
+            changes: { action: 'create' },
+         }),
+      });
+   }
 }
 
 export async function deleteArticle(article) {
@@ -94,20 +106,25 @@ export async function deleteArticle(article) {
       .remove([imageName]);
 
    if (image2) throw new Error('Image could not be deleted from database');
+
+   // - 3. Trigger Next.js revalidation
+   if (article.status === 'published') {
+      await fetch('/api/revalidate', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            slug: article.slug,
+            changes: { action: 'delete' },
+         }),
+      });
+   }
 }
 
 export async function updateArticle(article) {
    const oldArticle = article.oldArticle;
    const isFile = !article.image?.startsWith?.(supabaseUrl);
 
-   // 1. Compute changes
-   const changes = getArticleChanges(oldArticle, article);
-   const relevantChanges = {
-      content: changes.content,
-      metadata: changes.title || changes.description || isFile,
-   };
-
-   // 2. Handle image upload if needed
+   // 1. Handle image upload if needed
    let finalImagePath = oldArticle.image;
 
    if (isFile) {
@@ -122,7 +139,7 @@ export async function updateArticle(article) {
       finalImagePath = imagePath;
    }
 
-   // 3. Update article in database
+   // 2. Update article in database
    const { error } = await supabase
       .from('articles')
       .update({
@@ -141,8 +158,15 @@ export async function updateArticle(article) {
 
    if (error) throw new Error('Article could not be updated');
 
-   // 4. Trigger Next.js revalidation
+   // 3. Trigger Next.js revalidation
    if (article.status === 'published') {
+      const changes = getArticleChanges(oldArticle, article);
+      const relevantChanges = {
+         content: changes.content,
+         metadata: changes.title || changes.description || isFile,
+         action: 'update',
+      };
+
       await fetch('/api/revalidate', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
@@ -153,7 +177,7 @@ export async function updateArticle(article) {
       });
    }
 
-   // 5. Delete old image if a new one was uploaded
+   // 4. Delete old image if a new one was uploaded
    if (isFile && oldArticle.image) {
       const oldImageName = oldArticle.image.split('/').pop();
       const { error: imageError } = await supabase.storage
