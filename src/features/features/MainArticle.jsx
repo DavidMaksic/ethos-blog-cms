@@ -25,7 +25,7 @@ function MainArticle({ article, refetch, index }) {
 
    return (
       <motion.div
-         className={`relative grid! grid-cols-[1fr_1.2fr]! gap-10 pl-2 mt-7 mb-2 ${
+         className={`relative grid! grid-cols-[1fr_1.2fr]! gap-10 pl-3 mt-7 mb-2 ${
             isEditing && 'opacity-80! pointer-events-none'
          }`}
          initial={{ opacity: 0 }}
@@ -41,7 +41,7 @@ function MainArticle({ article, refetch, index }) {
                {article.description}
             </h3>
 
-            <div className="self-start mt-4 rounded-full bg-gradient-to-r from-accent-300/80 to-accent-600/70 border-2 border-transparent shadow-btn dark:shadow-none transition-[box-shadow,border] duration-300 bg-origin-border">
+            <div className="self-start mt-4 rounded-full bg-gradient-to-r from-accent-300/80 to-accent-600/70 border-2 border-transparent shadow-link-btn dark:shadow-none transition-[box-shadow,border] duration-300 bg-origin-border">
                <button className="flex articles-center gap-5 text-2xl px-5 pr-5 py-2 text-white transition-[color] duration-300 cursor-pointer font-logo pointer-events-none">
                   Read more
                </button>

@@ -46,10 +46,15 @@ function SortBy({ options }) {
                      className="absolute z-10 mt-2 p-1 max-h-52 w-full rounded-xl bg-white dark:bg-primary-200 border border-tertiary shadow-lg dark:shadow-2xl overflow-auto cursor-pointer transition-bg_border"
                      ref={ref}
                      onClick={() => setOpen(false)}
-                     initial={{ opacity: 0 }}
-                     animate={{ opacity: 1 }}
-                     exit={{ opacity: 0 }}
-                     transition={{ duration: 0.06 }}
+                     initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                     animate={{ opacity: 1, y: 0, scale: 1 }}
+                     exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                     transition={{
+                        type: 'spring',
+                        stiffness: 500,
+                        damping: 30,
+                        duration: 0.12,
+                     }}
                   >
                      {options.map((item) => (
                         <li

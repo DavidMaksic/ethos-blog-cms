@@ -13,7 +13,7 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
    return (
       <div className="relative w-max select-none">
          <div
-            className="px-2 py-2 pl-5 pr-10 text-2xl cursor-pointer rounded-full bg-primary dark:bg-primary-50 hover:bg-primary-100 dark:hover:bg-primary-200 text-primary-500 dark:text-primary-500 border border-quaternary transition-200"
+            className="px-2 py-2 pl-5 pr-10 text-2xl cursor-pointer font-medium rounded-full bg-primary dark:bg-primary-50 hover:bg-primary-100 dark:hover:bg-primary-200 text-primary-500 dark:text-primary-500 border border-quaternary transition-200"
             onClick={(e) => {
                e.stopPropagation();
                setOpen((isOpen) => !isOpen);
@@ -29,10 +29,15 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
                   className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl bg-primary dark:bg-primary-50 border border-quaternary dark:border-tertiary shadow-lg overflow-auto cursor-pointer transition-bg_border scrollbar"
                   ref={ref}
                   onClick={() => setOpen((isOpen) => !isOpen)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.06 }}
+                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                  transition={{
+                     type: 'spring',
+                     stiffness: 500,
+                     damping: 30,
+                     duration: 0.12,
+                  }}
                >
                   {categories.map((item) => (
                      <li

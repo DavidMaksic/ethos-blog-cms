@@ -76,7 +76,7 @@ function MainFeatureModal({ onClose }) {
 
          <div className="flex items-center font-medium pt-1.5 mr-6 z-20">
             <button
-               className={`relative rounded-full p-2 px-6 text-accent hover:bg-accent-400/80 dark:hover:bg-accent-300/55 hover:text-white dark:hover:text-accent-100 hover:shadow-edit-btn dark:hover:shadow-none transition mr-2 ${
+               className={`relative rounded-full p-2 px-6 text-accent hover:bg-accent-400/80 dark:hover:bg-accent-300/55 hover:text-white dark:hover:text-accent-100 hover:shadow-link-btn dark:hover:shadow-none transition mr-2 ${
                   !openID || isEditing ? 'pointer-events-none opacity-40' : ''
                }`}
                onClick={() => updateMainFeature({ selectedID, boolean })}
