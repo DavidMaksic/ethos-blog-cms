@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useOutsideClick } from '../hooks/useOutsideClick';
-import { motion } from 'motion/react';
 
 const MenusContext = createContext();
 
@@ -40,19 +40,26 @@ function List({ id, children }) {
    const { openID, close } = useContext(MenusContext);
    const ref = useOutsideClick(close, false);
 
-   if (openID !== id) return null;
-
    return (
-      <motion.ul
-         className="absolute right-7 top-9 mt-2 p-1 max-h-52 text-lg rounded-2xl bg-white dark:bg-primary border border-quaternary shadow-lg cursor-pointer transition-bg_border z-10 overflow-hidden"
-         ref={ref}
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         exit={{ opacity: 0 }}
-         transition={{ duration: 0.08 }}
-      >
-         {children}
-      </motion.ul>
+      <AnimatePresence>
+         {openID === id && (
+            <motion.ul
+               className="absolute right-7 top-9 will-change-transform mt-2 p-1 max-h-52 text-lg rounded-2xl bg-white dark:bg-primary border border-quaternary shadow-lg cursor-pointer transition-bg_border z-10 overflow-hidden"
+               ref={ref}
+               initial={{ opacity: 0, y: -8, scale: 0.97 }}
+               animate={{ opacity: 1, y: 0, scale: 1 }}
+               exit={{ opacity: 0, y: -8, scale: 0.97 }}
+               transition={{
+                  type: 'spring',
+                  stiffness: 1500,
+                  damping: 60,
+                  duration: 0.12,
+               }}
+            >
+               {children}
+            </motion.ul>
+         )}
+      </AnimatePresence>
    );
 }
 
