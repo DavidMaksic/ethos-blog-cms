@@ -126,7 +126,7 @@ function Options({
                   <AnimatePresence>
                      {openTable && (
                         <motion.div
-                           className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-tertiary rounded-2xl bg-white dark:bg-primary/60 backdrop-blur-3xl overflow-y-auto scrollbar shadow-article dark:shadow-none"
+                           className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-tertiary rounded-2xl bg-white dark:bg-primary/60 backdrop-blur-3xl overflow-y-auto scrollbar shadow-dashboard dark:shadow-none"
                            initial={{ opacity: 0 }}
                            animate={{ opacity: 1 }}
                            exit={{ opacity: 0 }}

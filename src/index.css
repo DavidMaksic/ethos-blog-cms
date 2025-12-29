@@ -134,8 +134,8 @@
    --color-autofill-text: #374151;
    --color-scrollbar: var(--color-primary-300);
 
-   --shadow-article: 0 0 40px 0px #e5e7eba4;
-   --shadow-dashboard: 0 0 40px 0px #dadde2;
+   --shadow-modal: 0 0 40px 0px #e5e7eba4;
+   --shadow-dashboard: 0 0 40px 0px #e5e7eb;
    --shadow-menu-dark: 0 0 40px 0px #0c111b;
    --shadow-toast-btn: 0 0.2rem 0.5rem #e5e7eb;
    --shadow-filter: 0 0 0.4rem var(--color-accent-300);
