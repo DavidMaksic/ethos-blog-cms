@@ -13,7 +13,7 @@ function FormStatus({
    article,
 }) {
    const [open, setOpen] = useState(false);
-   const ref = useOutsideClick(() => setOpen(false));
+   const ref = useOutsideClick(() => setOpen(false), false);
    const statusOptions = ['Published', 'Drafted'];
 
    const articleStatus =
@@ -52,10 +52,15 @@ function FormStatus({
                      className="absolute bottom-18 z-10 right-10 text-2xl rounded-3xl bg-white dark:bg-primary-300/10 backdrop-blur-3xl border border-quaternary dark:border-tertiary shadow-lg overflow-auto cursor-pointer transition-bg_border [&>*:first-child]:border-b [&>*:first-child]:border-b-primary-200 [&>*:first-child]:dark:border-b-primary-200/80 [&>*:last-child]:pb-6"
                      ref={ref}
                      onClick={() => setOpen((isOpen) => !isOpen)}
-                     initial={{ opacity: 0 }}
-                     animate={{ opacity: 1 }}
-                     exit={{ opacity: 0 }}
-                     transition={{ duration: 0.06 }}
+                     initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                     animate={{ opacity: 1, y: 0, scale: 1 }}
+                     exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                     transition={{
+                        type: 'spring',
+                        stiffness: 1500,
+                        damping: 60,
+                        duration: 0.12,
+                     }}
                   >
                      {statusOptions.map((item) => (
                         <li
