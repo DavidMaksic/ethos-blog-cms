@@ -24,7 +24,7 @@ function Options({
    useEffect(() => setMounted(true), []);
 
    const [openTable, setOpenTable] = useState(false);
-   const tableRef = useOutsideClick(() => setOpenTable(false));
+   const tableRef = useOutsideClick(() => setOpenTable(false), false);
 
    // - Scroll logic
    const { setScroll: setTopScroll, ref: topRef } = useScroll();
@@ -75,7 +75,10 @@ function Options({
             className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-primary/60 hover:bg-white/20 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full shadow-dashboard dark:shadow-none transition"
             onClick={(e) => {
                e.stopPropagation();
-               setOpenMenu((isOpen) => !isOpen);
+               setOpenMenu((isOpen) => {
+                  if (isOpen) setOpenTable(false);
+                  return !isOpen;
+               });
             }}
          />
 
