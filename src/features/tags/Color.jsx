@@ -3,7 +3,7 @@ import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { ColorPicker } from 'react-color-palette';
 
 function Color({ label, open, color, setColor, setOpen }) {
-   const ref = useOutsideClick(() => setOpen(false), false);
+   const ref = useOutsideClick(() => setOpen(label), false);
 
    return (
       <>

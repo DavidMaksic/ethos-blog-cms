@@ -13,7 +13,7 @@ import Color from '../../features/tags/Color';
 import Error from '../Error';
 import 'react-color-palette/css';
 
-function CategoryForm() {
+function CategoryCreate() {
    const { isPending, isSuccess, createCategory } = useCreateCategory();
    const { categories } = useGetCategories();
 
@@ -153,4 +153,4 @@ function CategoryForm() {
    );
 }
 
-export default CategoryForm;
+export default CategoryCreate;

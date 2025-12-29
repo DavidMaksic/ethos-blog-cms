@@ -48,11 +48,28 @@ function ColorEditProvider({ children }) {
    );
 
    function togglePicker(context) {
-      if (context === 'LightBg') setOpenLightBg((isOpen) => !isOpen);
-      if (context === 'LightText') setOpenLightText((isOpen) => !isOpen);
-      if (context === 'DarkBg') setOpenDarkBg((isOpen) => !isOpen);
-      if (context === 'DarkText') setOpenDarkText((isOpen) => !isOpen);
-      if (context === 'Chart') setOpenChart((isOpen) => !isOpen);
+      const currentOpen =
+         (context === 'LightBg' && openLightBg) ||
+         (context === 'LightText' && openLightText) ||
+         (context === 'DarkBg' && openDarkBg) ||
+         (context === 'DarkText' && openDarkText) ||
+         (context === 'Chart' && openChart);
+
+      // Close all modals
+      setOpenLightBg(false);
+      setOpenLightText(false);
+      setOpenDarkBg(false);
+      setOpenDarkText(false);
+      setOpenChart(false);
+
+      // Toggle current modal
+      if (!currentOpen) {
+         if (context === 'LightBg') setOpenLightBg(true);
+         if (context === 'LightText') setOpenLightText(true);
+         if (context === 'DarkBg') setOpenDarkBg(true);
+         if (context === 'DarkText') setOpenDarkText(true);
+         if (context === 'Chart') setOpenChart(true);
+      }
    }
 
    return (
