@@ -35,7 +35,7 @@ function MainFeatures() {
 
             {isPending ? (
                <motion.div
-                  className="flex h-[22.75rem] bg-primary-300/30 animate-skeleton rounded-[2.3rem]"
+                  className="flex h-[22.75rem] bg-primary-300/15 animate-skeleton rounded-[2.3rem]"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}

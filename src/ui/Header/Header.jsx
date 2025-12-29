@@ -3,9 +3,8 @@ import HeaderUser from './HeaderUser';
 
 function Header() {
    return (
-      <header className="header fixed z-20 top-0 right-0 w-screen top-element py-2 px-20 border-b flex items-center justify-end gap-5 bg-secondary border-b-tertiary [transition:transform_0.2s,background-color_0.2s,border_0.2s] ease-in-out">
+      <header className="flex flex-col items-center justify-end border border-quaternary bg-white dark:bg-primary-300/10 dark:border-primary-300/10 [transition:transform_0.2s,background-color_0.2s,border_0.2s] ease-in-out mt-auto rounded-2xl py-2">
          <HeaderUser />
-         <span className="text-primary-300 dark:text-primary-400">|</span>
          <HeaderOptions />
       </header>
    );

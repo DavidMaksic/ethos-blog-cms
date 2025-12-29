@@ -31,7 +31,7 @@ function FormStatus({
       <div className="flex justify-center items-center gap-12 select-none">
          <div className="relative w-max pr-10 border-r border-r-primary-300">
             <div
-               className="flex items-center text-4xl cursor-pointer rounded-full bg-white dark:bg-primary-200 border-2 border-primary-300 hover:border-primary-400 transition-200 font-logo dark:shadow-none group"
+               className="flex items-center text-4xl cursor-pointer rounded-full bg-white dark:bg-transparent border-2 border-primary-300 hover:border-primary-400 transition-200 font-logo dark:shadow-none group"
                onClick={(e) => {
                   e.stopPropagation();
                   setOpen((isOpen) => !isOpen);

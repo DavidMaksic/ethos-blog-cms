@@ -31,7 +31,7 @@ function Toggle({ id }) {
 
    return (
       <button className="w-min" onClick={handleClick}>
-         <BsThreeDotsVertical className="text-[2.5rem] p-2.5 rounded-xl transition-[background-color] hover:bg-[#e5e7eb6b] dark:hover:bg-primary cursor-pointer" />
+         <BsThreeDotsVertical className="text-[2.5rem] p-2.5 rounded-xl transition-[background-color] hover:bg-[#e5e7eb6b] dark:hover:bg-primary-300/15 cursor-pointer" />
       </button>
    );
 }
@@ -44,7 +44,7 @@ function List({ id, children }) {
       <AnimatePresence>
          {openID === id && (
             <motion.ul
-               className="absolute right-7 top-9 will-change-transform mt-2 p-1 max-h-52 text-lg rounded-2xl bg-white dark:bg-primary border border-quaternary shadow-lg cursor-pointer transition-bg_border z-10 overflow-hidden"
+               className="absolute right-7 top-9 will-change-transform mt-2 p-1 max-h-52 text-lg rounded-2xl bg-white dark:bg-primary-300/15 backdrop-blur-3xl border border-quaternary shadow-lg cursor-pointer transition-bg_border z-10 overflow-hidden"
                ref={ref}
                initial={{ opacity: 0, y: -8, scale: 0.97 }}
                animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -74,7 +74,7 @@ function Button({ icon, handler, children }) {
    return (
       <li>
          <button
-            className={`flex items-center gap-2.5 rounded-xl w-full font-normal py-2 px-5 pr-9 hover:bg-primary-100/60 dark:hover:bg-primary-200 transition duration-75 ${
+            className={`flex items-center gap-2.5 rounded-xl w-full font-normal py-2 px-5 pr-9 hover:bg-primary-100/60 dark:hover:bg-primary-300/20 transition duration-75 ${
                children?.props?.children === 'Delete' &&
                'text-red-600/60 dark:text-red-300 hover:bg-red-100/30 dark:hover:bg-red-300/10 group'
             } [&_svg]:size-5`}

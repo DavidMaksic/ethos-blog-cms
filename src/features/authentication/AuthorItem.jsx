@@ -21,7 +21,7 @@ function AuthorItem({ author, activeUser }) {
 
    return (
       <li
-         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-200 rounded-3xl px-20 py-12 box-shadow transition-200 h-full ${
+         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-300/10 rounded-3xl px-20 py-12 box-shadow transition-200 h-full ${
             !description_en && 'pb-18'
          }`}
       >
@@ -59,7 +59,7 @@ function AuthorItem({ author, activeUser }) {
 
          {currentAuthor.email === email && (
             <Link to={`${id}`}>
-               <TbSettings className="absolute rounded-full right-2 top-2 p-2 text-5xl text-[#babfc7] dark:text-primary-300 hover:text-[#8c939e] dark:hover:text-primary-400 dark:hover:bg-primary-50 hover:bg-primary-100 stroke-[1.3px] cursor-pointer transition-200" />
+               <TbSettings className="absolute rounded-full right-2 top-2 p-2 text-5xl text-[#babfc7] dark:text-primary-300 hover:text-[#8c939e] dark:hover:text-primary-400 dark:hover:bg-primary-300/20 hover:bg-primary-100 stroke-[1.3px] cursor-pointer transition-200" />
             </Link>
          )}
       </li>

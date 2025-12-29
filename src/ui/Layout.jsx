@@ -27,11 +27,10 @@ function Layout() {
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
       >
-         <Header />
          <Sidebar />
          <motion.main
             ref={mainRef}
-            className={`main px-59 pt-29 py-12 flex flex-col gap-8 transition-200 bg-primary overflow-auto remove-scrollbar h-screen ${
+            className={`main px-59 pt-20 py-12 flex flex-col gap-8 transition-200 bg-primary overflow-auto remove-scrollbar h-screen background-gradient ${
                isFullscreen
                   ? 'px-[21.5rem]! 2xl:px-[16.5rem]!'
                   : 'pl-[28rem] 2xl:pl-[24.5rem] 2xl:pr-[8.5rem]'

@@ -74,7 +74,7 @@ function UpdateForm() {
             <div className="flex items-center justify-between">
                <FormItem label="Full name" error={errors?.full_name?.message}>
                   <input
-                     className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none"
+                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                      id="full_name"
                      type="text"
                      autoComplete="one-time-code"
@@ -128,7 +128,7 @@ function UpdateForm() {
                <TextareaAutosize
                   minRows={3}
                   maxRows={4}
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none scrollbar text-2xl"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none scrollbar text-2xl"
                   id="description_en"
                   type="text"
                   defaultValue={description_en}
@@ -150,7 +150,7 @@ function UpdateForm() {
                <TextareaAutosize
                   minRows={3}
                   maxRows={4}
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none scrollbar text-2xl"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none scrollbar text-2xl"
                   id="description_srb"
                   type="text"
                   defaultValue={description_srb}

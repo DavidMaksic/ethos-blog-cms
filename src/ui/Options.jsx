@@ -72,7 +72,7 @@ function Options({
          <div className="absolute bottom-0 left-0" ref={bottomRef} />
 
          <IoOptions
-            className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-primary/60 hover:bg-white/20 dark:hover:bg-primary-100 cursor-pointer border border-quaternary p-3.5 rounded-full shadow-dashboard dark:shadow-none transition"
+            className="fixed bottom-13 right-24 2xl:right-10 size-16 bg-white dark:bg-transparent hover:bg-white/20 dark:hover:bg-primary-400/10 cursor-pointer border border-quaternary dark:border-primary-300/35 p-3.5 rounded-full shadow-dashboard dark:shadow-none transition"
             onClick={(e) => {
                e.stopPropagation();
                setOpenMenu((isOpen) => {
@@ -85,7 +85,7 @@ function Options({
          <AnimatePresence>
             {openMenu && (
                <motion.ul
-                  className="fixed bottom-32 right-24 2xl:right-10 flex flex-col items-center bg-white dark:bg-primary/60 border border-quaternary rounded-3xl transition [&_svg]:cursor-pointer px-1 shadow-dashboard dark:shadow-none"
+                  className="fixed bottom-32 right-24 2xl:right-10 flex flex-col items-center bg-white dark:bg-transparent border border-quaternary dark:border-primary-300/35 rounded-3xl transition [&_svg]:cursor-pointer px-1 shadow-dashboard dark:shadow-none"
                   ref={ref}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -93,7 +93,7 @@ function Options({
                   transition={{ duration: 0.05 }}
                >
                   <FiChevronUp
-                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-200 rounded-t-[20px] mt-1 rounded-2xl transition"
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-400/10 rounded-t-[20px] mt-1 rounded-2xl transition"
                      onClick={() => {
                         setTopScroll(true);
                         setOpenTable(false);
@@ -105,7 +105,7 @@ function Options({
 
                   {headings.length && !isEdit ? (
                      <LuTableOfContents
-                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-200 transition rounded-2xl  ${
+                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition rounded-2xl  ${
                            currentAuthor?.email !== theAuthor?.email &&
                            'mb-1 mt-0.5'
                         }`}
@@ -119,14 +119,14 @@ function Options({
                   {(currentAuthor?.email === theAuthor?.email && articleID) ||
                   (isAdmin && !isEditPage && !isCreatorPage) ? (
                      <Link to={`/archive/edit/:${articleID}`}>
-                        <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-200 stroke-[1.7px] rounded-2xl transition" />
+                        <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-400/10 stroke-[1.7px] rounded-2xl transition" />
                      </Link>
                   ) : null}
 
                   <AnimatePresence>
                      {openTable && (
                         <motion.div
-                           className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-tertiary rounded-2xl bg-white dark:bg-primary/60 backdrop-blur-3xl overflow-y-auto scrollbar shadow-dashboard dark:shadow-none"
+                           className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-tertiary rounded-2xl bg-white dark:bg-transparent backdrop-blur-3xl overflow-y-auto scrollbar shadow-dashboard dark:shadow-none"
                            initial={{ opacity: 0 }}
                            animate={{ opacity: 1 }}
                            exit={{ opacity: 0 }}
@@ -168,7 +168,7 @@ function Options({
                   </AnimatePresence>
 
                   <FiChevronDown
-                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-200 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl transition"
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-400/10 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl transition"
                      onClick={() => {
                         setBottomScroll(true);
                         setOpenTable(false);

@@ -182,7 +182,7 @@ function Article() {
             dangerouslySetInnerHTML={{ __html: article.content }}
          />
 
-         <div className="w-fit flex flex-col items-center self-center gap-4 bg-secondary dark:bg-primary-200 rounded-3xl px-12 py-12 pb-14 mt-6 text-3xl box-shadow transition-bg_border">
+         <div className="w-fit flex flex-col items-center self-center gap-4 bg-secondary dark:bg-primary-300/13 rounded-3xl px-12 py-12 pb-14 mt-6 text-3xl box-shadow transition-bg_border">
             {author?.profile_image ? (
                <img
                   className="block size-28 aspect-square object-cover object-center rounded-full dark:opacity-90"
@@ -219,7 +219,7 @@ function Article() {
             articleID={article.id}
          >
             <button
-               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 my-0.5 rounded-2xl transition"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 my-0.5 rounded-2xl transition"
                onClick={(e) => {
                   e.stopPropagation();
                   setLocalFullscreen((isOpen) => !isOpen);
@@ -234,7 +234,7 @@ function Article() {
             </button>
 
             <button
-               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 transition-bg mt-0.5 rounded-2xl"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition-bg mt-0.5 rounded-2xl"
                onClick={(e) => {
                   e.stopPropagation();
                   toggleDarkMode((isOpen) => !isOpen);

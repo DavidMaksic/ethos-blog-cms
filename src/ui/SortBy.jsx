@@ -30,7 +30,7 @@ function SortBy({ options }) {
 
          <div className="relative w-32">
             <div
-               className="relative px-3 py-[0.6rem] pl-5 cursor-pointer rounded-xl bg-white dark:bg-primary-200 dark:hover:bg-primary-200/50 text-primary-500 border border-tertiary shadow-2xs transition-200"
+               className="relative px-3 py-[0.6rem] pl-5 cursor-pointer rounded-xl bg-white dark:bg-primary-200 dark:hover:bg-primary-300/10 text-primary-500 border border-tertiary dark:border-primary-300/10 shadow-2xs transition-200"
                onClick={(e) => {
                   e.stopPropagation();
                   setOpen((isOpen) => !isOpen);
@@ -43,7 +43,7 @@ function SortBy({ options }) {
             <AnimatePresence>
                {open && (
                   <motion.ul
-                     className="absolute z-10 mt-2 p-1 max-h-52 w-full rounded-xl bg-white dark:bg-primary-200 border border-tertiary shadow-lg dark:shadow-2xl overflow-auto cursor-pointer transition-bg_border"
+                     className="absolute z-10 mt-2 p-1 max-h-52 w-full rounded-xl bg-white dark:bg-primary-200 border border-tertiary dark:border-primary-300/10 shadow-lg dark:shadow-2xl overflow-auto cursor-pointer transition-bg_border"
                      ref={ref}
                      onClick={() => setOpen(false)}
                      initial={{ opacity: 0, y: -8, scale: 0.97 }}

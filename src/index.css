@@ -248,7 +248,7 @@
       --shadow-toast-btn: 0 0.2rem 0.5rem #1c242c;
       --shadow-chart: #cbd5e1;
 
-      --color-editor-bg: var(--color-primary-200);
+      --color-editor-bg: transparent;
       --color-editor-text: var(--color-text);
       --color-editor-menu: var(--color-primary);
       --color-editor-shadow: var(--color-primary);
@@ -310,11 +310,11 @@
    }
 
    .nav-link {
-      @apply flex items-center gap-3 text-base font-medium py-3 px-7 rounded-xl text-primary-600 dark:text-primary-400 hover:text-accent hover:bg-gray-50 dark:hover:bg-[#131c2479];
+      @apply flex items-center gap-3 text-base font-medium py-3 px-7 rounded-xl text-primary-600 dark:text-primary-400 hover:text-accent hover:bg-gray-100 dark:hover:bg-primary-300/10;
    }
 
    .box-shadow {
-      @apply border border-quaternary/70 dark:border-tertiary shadow-dashboard dark:shadow-none;
+      @apply border border-quaternary/70 dark:border-primary-300/15 shadow-dashboard dark:shadow-none;
    }
 
    .icons {
@@ -332,6 +332,19 @@
    .bn-block-group:first-child > div:first-child .bn-inline-content {
       @apply first-letter:font-creator first-letter:text-[8rem] first-letter:leading-24 first-letter:float-left first-letter:pr-4 first-letter:pt-1.5 first-letter:font-medium first-letter:text-accent-600/60 dark:first-letter:text-accent-200/70;
    }
+}
+
+[data-theme='dark'] .background-gradient {
+   background-image: radial-gradient(
+         3000px 1400px at -1050px -340px,
+         #3b2e1aff 0px,
+         transparent 78%
+      ),
+      radial-gradient(
+         3000px 1400px at 2800px 1100px,
+         #28202bff 0px,
+         transparent 55%
+      );
 }
 
 button,
@@ -623,6 +636,10 @@ input:-webkit-autofill {
    padding-top: 30px;
    padding-bottom: 30px;
    transition: background-color 1s !important;
+}
+
+[data-theme='dark'] .bn-container {
+   @apply border-b-primary-300/35;
 }
 
 .bn-editor {

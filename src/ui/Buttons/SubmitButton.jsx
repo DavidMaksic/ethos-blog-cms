@@ -15,7 +15,7 @@ function SubmitButton({
 
    const loadingStyle =
       isPending && btnClicked
-         ? 'from-white dark:from-primary-200 to-white dark:to-primary-200 !border-accent/80 dark:border-accent/80 shadow-none'
+         ? 'from-white dark:from-transparent to-white dark:to-transparent !border-accent/80 dark:border-accent/80 shadow-none'
          : '';
    const loadingTextStyle =
       isPending && btnClicked ? '!text-accent dark:text-accent/90' : '';
@@ -27,7 +27,7 @@ function SubmitButton({
 
    return (
       <div
-         className={`rounded-full bg-gradient-to-r from-accent-300/80 to-accent-600/70 hover:from-white dark:hover:from-primary-200 hover:to-white dark:hover:to-primary-200 border-2 border-transparent hover:border-accent/80 dark:hover:border-accent/80 shadow-link-btn hover:shadow-none dark:shadow-none transition-[box-shadow,border,--tw-gradient-from,--tw-gradient-to] duration-300 bg-origin-border ${loadingStyle}`}
+         className={`rounded-full bg-gradient-to-r from-accent-300/80 to-accent-600/70 hover:from-white dark:hover:from-transparent hover:to-white dark:hover:to-transparent border-2 border-transparent hover:border-accent/80 dark:hover:border-accent/80 shadow-link-btn hover:shadow-none dark:shadow-none transition-[box-shadow,border,--tw-gradient-from,--tw-gradient-to] duration-300 bg-origin-border ${loadingStyle}`}
       >
          <button
             className={`flex items-center gap-5 text-5xl px-10 pr-11 py-4 pt-5 text-white font-logo hover:text-accent dark:hover:text-accent/90 transition-[color] duration-300 disabled:!cursor-default ${loadingTextStyle}`}

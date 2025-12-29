@@ -6,7 +6,7 @@ function HeaderUser() {
    const { full_name, profile_image } = user.user_metadata;
 
    return (
-      <div className="flex gap-3 items-center p-2 px-1 text-[0.94rem] font-medium">
+      <div className="flex gap-3 items-center p-3 pb-5 px-1 text-[0.94rem] font-medium border-b border-b-quaternary dark:border-b-primary-300/30">
          {profile_image ? (
             <img
                className="block size-9 aspect-square object-cover object-center rounded-[50%] dark:opacity-90 transition-200"

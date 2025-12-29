@@ -230,7 +230,7 @@ function EditForm() {
          <FormRow columns="4k:grid-cols-[1.8fr_1fr]! grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
                   minRows={1}
                   maxRows={2}
                   id="title"
@@ -274,10 +274,9 @@ function EditForm() {
          <FormRow columns="4k:grid-cols-[1.8fr_1fr]! grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
-                  className="bg-secondary dark:bg-primary-200 text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"
+                  className="bg-secondary dark:bg-transparent text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"
                   minRows={4}
                   maxRows={4}
-                  // value={}
                   id="description"
                   type="text"
                   autoComplete="one-time-code"
@@ -300,7 +299,7 @@ function EditForm() {
                   <img
                      ref={imageRef}
                      src={currentImage}
-                     className="object-cover h-39.5 w-76 object-center rounded-3xl opacity-95 dark:opacity-85 hover:opacity-85 dark:hover:opacity-75 border border-primary-300 dark:border-quaternary transition-border cursor-pointer transition"
+                     className="object-cover h-39.5 w-76 object-center rounded-3xl opacity-95 dark:opacity-85 hover:opacity-85 dark:hover:opacity-70 border border-primary-300 dark:border-quaternary transition-border cursor-pointer transition"
                   />
 
                   <input
@@ -401,7 +400,7 @@ function EditForm() {
 
          <Options isEdit={true} currentAuthor={user}>
             <button
-               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 mb-0.5 rounded-2xl transition"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 mb-0.5 rounded-2xl transition"
                onClick={(e) => {
                   e.stopPropagation();
                   setLocalFullscreen((isOpen) => !isOpen);
@@ -416,7 +415,7 @@ function EditForm() {
             </button>
 
             <button
-               className="hover:bg-primary-100/80 dark:hover:bg-primary-200 transition my-0.5 rounded-2xl"
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition my-0.5 rounded-2xl"
                onClick={(e) => {
                   e.stopPropagation();
                   toggleDarkMode((isOpen) => !isOpen);

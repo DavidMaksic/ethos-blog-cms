@@ -13,7 +13,7 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
    return (
       <div className="relative w-max select-none">
          <div
-            className="px-2 py-2 pl-5 pr-10 text-2xl cursor-pointer font-medium rounded-full bg-primary dark:bg-primary-50 hover:bg-primary-100 dark:hover:bg-primary-200 text-primary-500 dark:text-primary-500 border border-quaternary transition-200"
+            className="px-2 py-2 pl-5 pr-10 text-2xl cursor-pointer font-medium rounded-full bg-primary dark:bg-primary-300/15 hover:bg-primary-100 dark:hover:bg-primary-300/5 text-primary-500 dark:text-primary-500/90 border border-quaternary dark:border-primary-300/30 transition-200"
             onClick={(e) => {
                e.stopPropagation();
                setOpen((isOpen) => !isOpen);
@@ -26,7 +26,7 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
          <AnimatePresence>
             {open && (
                <motion.ul
-                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl bg-primary dark:bg-primary-50 border border-quaternary dark:border-tertiary shadow-lg overflow-auto cursor-pointer transition-bg_border scrollbar"
+                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl bg-primary dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border scrollbar"
                   ref={ref}
                   onClick={() => setOpen((isOpen) => !isOpen)}
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -43,7 +43,7 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
                      <li
                         key={item.category}
                         value={item.category}
-                        className="relative font-normal first:rounded-t-[20px]! last:rounded-b-[20px]! rounded-2xl py-2 pl-5 hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-primary-200 duration-75"
+                        className="relative font-normal first:rounded-t-[20px]! last:rounded-b-[20px]! rounded-2xl py-2 pl-5 hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-primary-300/20 duration-75"
                         onClick={() => {
                            setIsDefault?.(false);
                            setLocalItem({

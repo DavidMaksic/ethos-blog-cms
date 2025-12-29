@@ -69,7 +69,7 @@ function CategoryCreate() {
                <label className="self-start">Name</label>
                <div className="flex items-center">
                   <input
-                     className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none pt-2 text-2xl transition-bg_border"
+                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none pt-2 text-2xl transition-bg_border"
                      id="category"
                      type="text"
                      autoComplete="one-time-code"

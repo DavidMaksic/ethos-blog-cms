@@ -39,7 +39,7 @@ function SignupForm() {
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Full name" error={errors?.full_name?.message}>
                <input
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                   id="full_name"
                   type="text"
                   {...register('full_name', {
@@ -60,7 +60,7 @@ function SignupForm() {
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Email address" error={errors?.email?.message}>
                <input
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                   id="email"
                   type="text"
                   autoComplete="username"
@@ -78,7 +78,7 @@ function SignupForm() {
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Password" error={errors?.password?.message}>
                <input
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none mb-2"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2"
                   id="password"
                   type="password"
                   autoComplete="one-time-code"
@@ -103,7 +103,7 @@ function SignupForm() {
                error={errors?.passwordConfirm?.message}
             >
                <input
-                  className="bg-secondary dark:bg-primary-200 border-b border-b-quaternary transition-bg_border outline-none mb-2"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2"
                   id="passwordConfirm"
                   type="password"
                   autoComplete="one-time-code"

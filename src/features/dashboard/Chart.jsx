@@ -73,11 +73,11 @@ function Chart({ articles, numDays }) {
    }
 
    return (
-      <div className="col-span-full space-y-6 bg-white dark:bg-primary-200 rounded-xl py-8 2k:pl-8 2k:pr-12 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
+      <div className="col-span-full space-y-6 bg-white dark:bg-primary-300/10 rounded-xl py-8 2k:pl-8 2k:pr-12 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
          <Heading type="h2">
             <div className="flex justify-between items-center">
                Articles statistics
-               <span className="bg-primary py-1 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
+               <span className="bg-primary-300/20 py-1 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
                   {format(allDates.at(0), 'MMM dd, yyyy')} &mdash;{' '}
                   {format(allDates.at(-1), 'MMM dd, yyyy')}{' '}
                </span>
