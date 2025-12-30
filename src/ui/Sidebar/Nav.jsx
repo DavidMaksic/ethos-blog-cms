@@ -69,7 +69,7 @@ function NavItem({ to, children }) {
             <NavLink
                className={({ isActive }) =>
                   isActive
-                     ? 'nav-link group rounded-xl bg-gray-100 dark:bg-primary-300/10 !text-accent [&_svg]:!text-accent transition-bg_color'
+                     ? 'nav-link group rounded-xl bg-gray-200/40 dark:bg-primary-300/10 !text-accent [&_svg]:!text-accent transition-bg_color'
                      : `nav-link group transition-bg_color`
                }
                to={to}

@@ -17,7 +17,7 @@ function PageNotFound() {
 
             <Link
                onClick={moveBack}
-               className="flex items-center gap-2 text-3xl w-max self-center text-primary-400 border-b-3 border-primary-400 hover:border-transparent dark:hover:border-transparent transition-all"
+               className="flex items-center gap-2 text-3xl w-max self-center text-primary-400 border-b-2 border-primary-400 hover:opacity-75 transition-all"
             >
                <LuArrowLeft />
                <span>Go back</span>

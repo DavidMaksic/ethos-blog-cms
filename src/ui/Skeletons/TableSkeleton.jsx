@@ -1,9 +1,9 @@
-import TableRowSkeleton from './TableRowSkeleton';
+import { PAGE_SIZE } from '../../utils/constants';
 import { motion } from 'motion/react';
+import TableRowSkeleton from './TableRowSkeleton';
 
 function TableSkeleton() {
-   const rowNumber = 6;
-   const rows = Array.from({ length: rowNumber }, (_, i) => i);
+   const rows = Array.from({ length: PAGE_SIZE }, (_, i) => i);
 
    return (
       <motion.div
@@ -14,8 +14,8 @@ function TableSkeleton() {
       >
          <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary transition duration-150" />
 
-         <div className="space-y-6">
-            <div className="h-14.5 bg-primary-200 dark:bg-skeleton rounded-2xl!" />
+         <div className="space-y-5">
+            <div className="h-14 skeleton rounded-2xl!" />
             {rows.map((item) => (
                <TableRowSkeleton key={item} />
             ))}

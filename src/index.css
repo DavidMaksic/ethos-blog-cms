@@ -129,7 +129,6 @@
    --color-table: #f3f4f6;
    --color-text: #5d6673;
    --color-toast: #fff;
-   --color-skeleton: #e5e7eb;
    --color-autofill-bg: #fff;
    --color-autofill-text: #374151;
    --color-scrollbar: var(--color-primary-300);
@@ -239,7 +238,6 @@
 
       --color-table: var(--color-primary-50);
       --color-text: #99a2ad;
-      --color-skeleton: #222a33e5;
       --color-toast: #252e36;
       --color-autofill-bg: var(--color-primary-200);
       --color-autofill-text: #cbd5e1;
@@ -310,7 +308,7 @@
    }
 
    .nav-link {
-      @apply flex items-center gap-3 text-base font-medium py-3 px-7 rounded-xl text-primary-600 dark:text-primary-400 hover:text-accent hover:bg-gray-100 dark:hover:bg-primary-300/10;
+      @apply flex items-center gap-3 text-base font-medium py-3 px-7 rounded-xl text-primary-600 dark:text-primary-400 hover:text-accent hover:bg-gray-200/40 dark:hover:bg-primary-300/10;
    }
 
    .box-shadow {
@@ -331,6 +329,10 @@
 
    .bn-block-group:first-child > div:first-child .bn-inline-content {
       @apply first-letter:font-creator first-letter:text-[8rem] first-letter:leading-24 first-letter:float-left first-letter:pr-4 first-letter:pt-1.5 first-letter:font-medium first-letter:text-accent-600/60 dark:first-letter:text-accent-200/70;
+   }
+
+   .skeleton {
+      @apply bg-primary-200 dark:bg-primary-300/15;
    }
 }
 
