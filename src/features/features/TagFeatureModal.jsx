@@ -6,7 +6,7 @@ import { useEntry } from '../../context/EntryContext';
 import { motion } from 'motion/react';
 
 import ArticleItem from '../../ui/ArticleItem';
-import SearchAlt from '../../ui/SearchAlt';
+import SearchAlt from '../../ui/operations/SearchAlt';
 
 function TagFeatureModal({ currentTag, onClose }) {
    const { isPending, articles } = usePublishedArticles();

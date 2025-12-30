@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { LuListFilter } from 'react-icons/lu';
-import FilterButton from '../Filter/FilterButton';
+import FilterButton from './FilterButton';
 
 export function Filter({ field, options }) {
    const [searchParams, setSearchParams] = useSearchParams();

@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useModal } from '../hooks/useModal';
+import { useModal } from '../../hooks/useModal';
 import { motion } from 'motion/react';
 
 function Modal({ closeModal, style, children }) {

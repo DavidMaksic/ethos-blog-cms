@@ -45,10 +45,10 @@ import TextareaAutosize from 'react-textarea-autosize';
 import LanguageButton from '../Buttons/LanguageButton';
 import SubmitButton from '../Buttons/SubmitButton';
 import ResetButton from '../Buttons/ResetButton';
+import Categories from '../Categories';
 import FormStatus from './FormStatus';
 import FormItem from './FormItem';
-import Context from '../Context';
-import Options from '../Options';
+import Options from '../Operations/Options';
 import FormRow from './FormRow';
 import Form from './Form';
 
@@ -251,7 +251,7 @@ function EditForm() {
             </FormItem>
 
             <FormItem label="Category" error={errors?.category?.message}>
-               <Context
+               <Categories
                   localItem={localArticle}
                   setLocalItem={setLocalArticle}
                   article={article}
@@ -267,7 +267,7 @@ function EditForm() {
                   ) : (
                      <ImSpinner2 className="size-6 animate-spin self-center mx-5 ml-7 my-1" />
                   )}
-               </Context>
+               </Categories>
             </FormItem>
          </FormRow>
 

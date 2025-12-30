@@ -3,10 +3,10 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useEntry } from '../../context/EntryContext';
 import { useEffect } from 'react';
 
+import Categories from '../../ui/Categories';
 import EmptyEntry from './EmptyEntry';
 import TagEntry from './TagEntry';
 import TagForm from '../../ui/Form/TagForm';
-import Context from '../../ui/Context';
 
 function TagFeatures() {
    const { categories } = useGetCategories();
@@ -34,11 +34,14 @@ function TagFeatures() {
                <div className="flex flex-col gap-3 2k:w-50 w-60 xl:w-54 self-start">
                   <label className="ml-1">Select tag</label>
                   <div className="font-creator">
-                     <Context setLocalItem={setLocalTag} localItem={localTag}>
+                     <Categories
+                        setLocalItem={setLocalTag}
+                        localItem={localTag}
+                     >
                         {!localTag.category
                            ? categories?.at(0).category
                            : localTag.category}
-                     </Context>
+                     </Categories>
                   </div>
                </div>
 

@@ -1,13 +1,13 @@
 import { LuPencilLine, LuTableOfContents } from 'react-icons/lu';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useOutsideClick } from '../hooks/useOutsideClick';
-import { useFullscreen } from '../context/FullscreenContext';
-import { useAuthors } from '../features/authentication/useAuthors';
-import { useScroll } from '../hooks/useScroll';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useFullscreen } from '../../context/FullscreenContext';
+import { useAuthors } from '../../features/authentication/useAuthors';
+import { useScroll } from '../../hooks/useScroll';
 import { IoOptions } from 'react-icons/io5';
 
 function Options({

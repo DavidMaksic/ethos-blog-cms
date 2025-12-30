@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { useOutsideClick } from '../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useSearchParams } from 'react-router-dom';
 import { TbArrowsSort } from 'react-icons/tb';
 import { FaCaretDown } from 'react-icons/fa';
@@ -43,7 +43,7 @@ function SortBy({ options }) {
             <AnimatePresence>
                {open && (
                   <motion.ul
-                     className="absolute z-10 mt-2 p-1 max-h-52 w-full rounded-xl bg-white dark:bg-primary-200 border border-tertiary dark:border-primary-300/10 shadow-lg dark:shadow-2xl overflow-auto cursor-pointer transition-bg_border"
+                     className="absolute z-10 mt-2 p-1 max-h-52 w-full rounded-xl bg-white will-change-transform dark:bg-primary-200 border border-tertiary dark:border-primary-300/10 shadow-lg dark:shadow-2xl overflow-auto cursor-pointer transition-bg_border"
                      ref={ref}
                      onClick={() => setOpen(false)}
                      initial={{ opacity: 0, y: -8, scale: 0.97 }}

@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import ColorTableCol from '../../features/tags/ColorTableCol';
 import ColorsTable from '../../features/tags/ColorsTable';
+import Categories from '../Categories';
 import TagButton from '../Buttons/TagButton';
-import Context from '../Context';
 import TagForm from './TagForm';
 import Color from '../../features/tags/Color';
 import Error from '../Error';
@@ -96,11 +96,14 @@ function CategoryUpdate() {
                <div className="flex flex-col gap-3 w-60">
                   <label className="ml-1">Select tag</label>
                   <div className="font-creator">
-                     <Context setLocalItem={setLocalTag} localItem={localTag}>
+                     <Categories
+                        setLocalItem={setLocalTag}
+                        localItem={localTag}
+                     >
                         {!localTag.category
                            ? categories?.at(0).category
                            : localTag.category}
-                     </Context>
+                     </Categories>
                   </div>
                </div>
 

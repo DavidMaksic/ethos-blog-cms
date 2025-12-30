@@ -1,4 +1,4 @@
-import Error from '../Error';
+import Error from '../Error/Error';
 
 function FormItem({ label, error, children }) {
    return (

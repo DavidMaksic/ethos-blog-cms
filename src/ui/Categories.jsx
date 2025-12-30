@@ -5,7 +5,13 @@ import { FaCaretDown } from 'react-icons/fa';
 import { GiCheckMark } from 'react-icons/gi';
 import { useState } from 'react';
 
-function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
+function Categories({
+   setLocalItem,
+   setIsDefault,
+   article,
+   localItem,
+   children,
+}) {
    const [open, setOpen] = useState(false);
    const { categories } = useGetCategories();
    const ref = useOutsideClick(() => setOpen(false), false);
@@ -26,7 +32,7 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
          <AnimatePresence>
             {open && (
                <motion.ul
-                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl bg-primary dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border scrollbar"
+                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl will-change-transform bg-primary dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border scrollbar"
                   ref={ref}
                   onClick={() => setOpen((isOpen) => !isOpen)}
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -67,4 +73,4 @@ function Context({ setLocalItem, setIsDefault, article, localItem, children }) {
    );
 }
 
-export default Context;
+export default Categories;

@@ -45,9 +45,9 @@ import LanguageButton from '../../ui/Buttons/LanguageButton';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
+import Categories from '../../ui/Categories';
 import FormItem from '../../ui/Form/FormItem';
 import FormRow from '../../ui/Form/FormRow';
-import Context from '../../ui/Context';
 import Options from '../../ui/Options';
 import toast from 'react-hot-toast';
 import Form from '../../ui/Form/Form';
@@ -280,11 +280,14 @@ function Creator() {
             </FormItem>
 
             <FormItem label="Category" error={errors?.category?.message}>
-               <Context setLocalItem={setLocalArticle} localItem={localArticle}>
+               <Categories
+                  setLocalItem={setLocalArticle}
+                  localItem={localArticle}
+               >
                   {!localArticle.category
                      ? categories?.at(0).category
                      : localArticle.category}
-               </Context>
+               </Categories>
             </FormItem>
          </FormRow>
 

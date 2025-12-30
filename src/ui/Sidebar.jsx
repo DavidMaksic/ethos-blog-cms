@@ -4,6 +4,8 @@ import Nav from './Nav';
 
 // TODO: Add space between grid items
 // TODO: Add background gradients for each media query
+// TODO: Rename header component
+// TODO: Redesign skeletons
 
 function Sidebar() {
    return (

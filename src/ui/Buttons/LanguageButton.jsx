@@ -44,7 +44,7 @@ function LanguageButton({
          <AnimatePresence>
             {open && (
                <motion.ul
-                  className="absolute z-10 mt-2 p-1 min-w-[10rem] text-2xl rounded-2xl bg-white dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border"
+                  className="absolute z-10 mt-2 p-1 min-w-[10rem] text-2xl rounded-2xl will-change-transform bg-white dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border"
                   ref={ref}
                   onClick={() => setOpen(false)}
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
