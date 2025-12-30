@@ -160,8 +160,6 @@
 
    --header-opacity: 100%;
    --color-code: #374151;
-   --color-add-file: var(--color-primary-100);
-   --color-add-file-hover: #e5e7ebc7;
 
    --color-link: var(--color-accent-600);
    --color-link-border: var(--color-accent-500);
@@ -837,6 +835,10 @@ input:-webkit-autofill {
    background-color: var(--color-editor-icon-bg) !important;
 }
 
+.bn-inline-content {
+   color: var(--color-text);
+}
+
 .bn-inline-content:empty {
    height: 24px;
 }
@@ -1070,18 +1072,17 @@ article .alert-icon-wrapper {
 }
 
 [data-file-block] .bn-add-file-button {
+   @apply bg-white dark:bg-primary-300/15! text-primary-400/80! border border-quaternary shadow-modal dark:shadow-none dark:border-primary-300/15!;
    flex-direction: column;
-   color: var(--color-primary-400);
-   background-color: var(--color-add-file);
    border-radius: 28px;
    padding: 12% 20%;
    margin: 0 auto;
    gap: 4px;
-   transition: 0.15s;
+   transition: 0.3s;
 }
 
 [data-file-block] .bn-add-file-button:hover {
-   background-color: var(--color-add-file-hover) !important;
+   @apply bg-white! dark:bg-primary-300/20! dark:scale-100 shadow-none! dark:shadow-none! border-primary-300/80 dark:border-primary-300/15!;
 }
 
 [data-file-block] .bn-add-file-button .bn-add-file-button-text {
@@ -1097,11 +1098,13 @@ article .alert-icon-wrapper {
 
 .bn-panel {
    background-color: var(--color-editor-menu) !important;
-   box-shadow: 0 5px 15px -5px var(--color-editor-toolbar-shadow) !important;
-   border-radius: 14px !important;
-   padding: 6px 16px !important;
-   margin-top: 2px;
-   width: 400px !important;
+   @apply shadow-2xl!;
+   /* bg-primary-300/40! backdrop-blur-2xl */
+   border-radius: 28px !important;
+   padding: 0.4rem 1.2rem 0.8rem 1.2rem !important;
+   margin-top: 0.4rem;
+   margin-left: 2.2rem;
+   width: 29rem !important;
 }
 
 .bn-panel .mantine-Tabs-panel {
@@ -1109,35 +1112,41 @@ article .alert-icon-wrapper {
 }
 
 .bn-panel .bn-tab-panel {
-   gap: 10px !important;
+   gap: 1.4rem !important;
 }
 
 .bn-panel .mantine-Input-input.mantine-TextInput-input {
    border-radius: 8px !important;
    padding: 0 20px !important;
+   font-size: 0.8rem;
 }
 
 .bn-panel .bn-button {
    width: min-content !important;
-   padding: 0 14px !important;
-   font-size: 14px;
+   height: 3.4rem !important;
+   padding: 0.4rem 1.2rem !important;
+
+   font-family: var(--font-logo);
+   font-size: 1.75rem;
    font-weight: normal;
 
    color: #fff;
-   background-color: var(--color-accent-500) !important;
-   border: 2px solid var(--color-accent-500) !important;
-   border-radius: 20px;
-   opacity: 70%;
+   border-radius: 20rem;
    transition: 0.2s;
+   @apply bg-accent-400/90! dark:bg-accent-300/70! border-2! border-transparent! shadow-link-btn! dark:shadow-none!;
 }
 
 .bn-panel .bn-button:hover {
    color: var(--color-accent-700) !important;
-   background-color: var(--color-primary) !important;
+   background-color: #fff !important;
+   box-shadow: none !important;
+   @apply border-accent/80!;
 }
 
 [data-theme='dark'] .bn-panel .bn-button:hover {
    color: var(--color-accent-300) !important;
+   background-color: var(--color-primary) !important;
+   @apply dark:hover:border-accent/80!;
 }
 
 .mantine-Tabs-list {
