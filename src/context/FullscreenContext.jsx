@@ -13,21 +13,17 @@ function FullscreenProvider({ children }) {
    useEffect(() => setIsFullscreen(false), [setIsFullscreen]);
 
    useEffect(() => {
-      const headerEl = document.querySelector('.header');
       const sidebarEl = document.querySelector('.sidebar');
       const mainEl = document.querySelector('.main');
 
-      const elementsExist = headerEl && sidebarEl && mainEl;
+      const elementsExist = sidebarEl && mainEl;
 
       if (!elementsExist) return;
 
       if (isFullscreen) {
-         headerEl.style.transform = 'translate(0px, -6rem)';
          sidebarEl.style.transform = 'translate(-18rem, 0px)';
          mainEl.style.paddingLeft = '16rem';
-         mainEl.style.paddingTop = '3rem';
       } else {
-         headerEl.style.transform = 'translate(0px, 0px)';
          sidebarEl.style.transform = 'translate(0px, 0px)';
          mainEl.style.paddingLeft = '';
          mainEl.style.paddingTop = '';

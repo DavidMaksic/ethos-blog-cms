@@ -2,13 +2,13 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { useAuthors } from '../features/authentication/useAuthors';
 
+import EditProfileForm from '../features/authentication/EditProfileForm';
 import PasswordForm from '../features/authentication/PasswordForm';
-import UpdateForm from '../features/authentication/UpdateForm';
 import Heading from '../ui/Heading';
 import Spinner from '../ui/Spinner';
 import Row from '../ui/Row';
 
-function UpdateAuthor() {
+function EditProfile() {
    const navigate = useNavigate();
 
    const { isPending: isLoading, user } = useCurrentAuthor();
@@ -45,7 +45,7 @@ function UpdateAuthor() {
                </Row>
 
                <Row type="horizontal">
-                  <UpdateForm />
+                  <EditProfileForm />
                </Row>
             </div>
          </Row>
@@ -61,4 +61,4 @@ function UpdateAuthor() {
    );
 }
 
-export default UpdateAuthor;
+export default EditProfile;

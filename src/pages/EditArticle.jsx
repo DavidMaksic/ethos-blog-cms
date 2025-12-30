@@ -3,14 +3,14 @@ import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
 import { useFindArticle } from '../features/archive/useFindArticle';
 import { useAuthors } from '../features/authentication/useAuthors';
 
+import EditArticleForm from '../ui/Forms/EditArticleForm';
 import ArticleNotFound from '../ui/ArticleNotFound';
 import EditSkeleton from '../ui/Skeletons/EditSkeleton';
-import EditForm from '../ui/Forms/EditForm';
 import Heading from '../ui/Heading';
 import Spinner from '../ui/Spinner';
 import Row from '../ui/Row';
 
-function Edit() {
+function EditArticle() {
    const navigate = useNavigate();
    const { article, isPending } = useFindArticle();
 
@@ -62,10 +62,10 @@ function Edit() {
          </Row>
 
          <Row>
-            <EditForm />
+            <EditArticleForm />
          </Row>
       </>
    );
 }
 
-export default Edit;
+export default EditArticle;

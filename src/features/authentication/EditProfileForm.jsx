@@ -3,7 +3,7 @@ import { updateUsersTable } from '../../services/apiAuth';
 import { useRef, useState } from 'react';
 import { useCurrentAuthor } from './useCurrentAuthor';
 import { useUpdateAuthor } from './useUpdateAuthor';
-import { useAuthors } from '../authentication/useAuthors';
+import { useAuthors } from './useAuthors';
 import { LuPencil } from 'react-icons/lu';
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +13,7 @@ import FormItem from '../../ui/Forms/FormItem';
 import FormRow from '../../ui/Forms/FormRow';
 import Form from '../../ui/Forms/Form';
 
-function UpdateForm() {
+function EditProfileForm() {
    const { user: currentAuthor } = useCurrentAuthor();
    const { isPending, updateAuthor } = useUpdateAuthor();
    const { register, handleSubmit, formState } = useForm();
@@ -179,4 +179,4 @@ function UpdateForm() {
    );
 }
 
-export default UpdateForm;
+export default EditProfileForm;

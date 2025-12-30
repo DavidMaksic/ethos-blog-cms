@@ -52,7 +52,7 @@ import Options from '../Operations/Options';
 import FormRow from './FormRow';
 import Form from './Form';
 
-function EditForm() {
+function EditArticleForm() {
    const { article, isPending } = useFindArticle();
    const oldImage = article.image;
 
@@ -432,4 +432,4 @@ function EditForm() {
    );
 }
 
-export default EditForm;
+export default EditArticleForm;

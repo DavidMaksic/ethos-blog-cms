@@ -1,9 +1,9 @@
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { useCurrentAuthor } from '../features/authentication/useCurrentAuthor';
+import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { HiOutlineHashtag } from 'react-icons/hi';
 import { HiOutlineUsers } from 'react-icons/hi2';
-import { useAuthors } from '../features/authentication/useAuthors';
+import { useAuthors } from '../../features/authentication/useAuthors';
 import { BiHomeAlt2 } from 'react-icons/bi';
 import { CgMathPlus } from 'react-icons/cg';
 import { LuLibrary } from 'react-icons/lu';

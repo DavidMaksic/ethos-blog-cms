@@ -3,7 +3,7 @@ import { useAuthors } from './useAuthors';
 import { motion } from 'motion/react';
 
 import AuthorSkeleton from '../../ui/Skeletons/AuthorSkeleton';
-import AuthorItem from './AuthorItem';
+import Author from './Author';
 
 function AuthorList() {
    const { user } = useCurrentAuthor();
@@ -19,9 +19,9 @@ function AuthorList() {
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
       >
-         <AuthorItem author={theAuthor} />
+         <Author author={theAuthor} />
          {authors.map((item) => (
-            <AuthorItem author={item} key={item.id} activeUser={user} />
+            <Author author={item} key={item.id} activeUser={user} />
          ))}
       </motion.ul>
    );

@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { ImSpinner2 } from 'react-icons/im';
 import { useLogout } from '../../features/authentication/useLogout';
 import { motion } from 'motion/react';
-import HeaderButton from './HeaderButton';
+import AuthorButton from './AuthorButton';
 
-function HeaderOptions() {
+function AuthorOptions() {
    const { isDarkMode, toggleDarkMode } = useDarkMode();
    const { isPending, logout } = useLogout();
    const { user: currentAuthor } = useCurrentAuthor();
@@ -18,34 +18,34 @@ function HeaderOptions() {
    return (
       <div className="flex items-center gap-2.5 ml-1 rounded-md py-2 pb-1">
          <motion.span whileTap={{ scale: 0.85 }}>
-            <HeaderButton handler={toggleDarkMode}>
+            <AuthorButton handler={toggleDarkMode}>
                {isDarkMode ? (
                   <IoMoonOutline className="size-[1.73rem]! p-0.5" />
                ) : (
                   <LuSunMedium className="size-[1.73rem]! stroke-[1.7px]" />
                )}
-            </HeaderButton>
+            </AuthorButton>
          </motion.span>
 
          <motion.span whileTap={{ scale: 0.85 }}>
-            <HeaderButton
+            <AuthorButton
                handler={() => navigate(`authors/${currentAuthor.id}`)}
             >
                <LuUserRoundPen className="size-[1.73rem]! stroke-[1.6px] p-0.5" />
-            </HeaderButton>
+            </AuthorButton>
          </motion.span>
 
          <motion.span whileTap={{ scale: 0.85 }}>
-            <HeaderButton handler={logout} isPending={isPending}>
+            <AuthorButton handler={logout} isPending={isPending}>
                {!isPending ? (
                   <AiOutlineLogout className="size-7! p-0.5!" />
                ) : (
                   <ImSpinner2 className="size-7! p-[3px]! animate-spin" />
                )}
-            </HeaderButton>
+            </AuthorButton>
          </motion.span>
       </div>
    );
 }
 
-export default HeaderOptions;
+export default AuthorOptions;

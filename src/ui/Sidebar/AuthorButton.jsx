@@ -1,4 +1,4 @@
-function HeaderButton({ handler, loading, children }) {
+function AuthorButton({ handler, loading, children }) {
    const disableClick = loading && 'pointer-events-none';
 
    return (
@@ -11,4 +11,4 @@ function HeaderButton({ handler, loading, children }) {
    );
 }
 
-export default HeaderButton;
+export default AuthorButton;

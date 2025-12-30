@@ -11,7 +11,8 @@ import { Toaster } from 'react-hot-toast';
 import ProtectedRoute from './ui/ProtectedRoute';
 import AuthorCreator from './pages/AuthorCreator';
 import PageNotFound from './pages/PageNotFound';
-import UpdateAuthor from './pages/UpdateAuthor';
+import EditProfile from './pages/EditProfile';
+import EditArticle from './pages/EditArticle';
 import AdminRoute from './pages/AdminRoute';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
@@ -22,7 +23,6 @@ import Authors from './pages/Authors';
 import Article from './pages/Article';
 import Layout from './ui/Layout';
 import Login from './pages/Login';
-import Edit from './pages/Edit';
 import Tags from './pages/Tags';
 
 const queryClient = new QueryClient({
@@ -68,7 +68,7 @@ function App() {
                                  />
                                  <Route
                                     path="archive/edit/:id"
-                                    element={<Edit />}
+                                    element={<EditArticle />}
                                  />
                                  <Route
                                     path="features"
@@ -89,7 +89,7 @@ function App() {
                                  <Route path="authors" element={<Authors />} />
                                  <Route
                                     path="authors/:id"
-                                    element={<UpdateAuthor />}
+                                    element={<EditProfile />}
                                  />
                                  <Route
                                     path="authors/author-creator"
