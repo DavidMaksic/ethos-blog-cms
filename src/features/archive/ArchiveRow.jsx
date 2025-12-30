@@ -10,9 +10,9 @@ import { CgClose } from 'react-icons/cg';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
 
-import DeleteModal from '../../ui/DeleteModal';
+import DeleteModal from '../../ui/Modal/DeleteModal';
+import Modal from '../../ui/Modal/Modal';
 import Menus from '../../ui/Menus';
-import Modal from '../../ui/Modal';
 
 function ArchiveRow({ article }) {
    const navigate = useNavigate();

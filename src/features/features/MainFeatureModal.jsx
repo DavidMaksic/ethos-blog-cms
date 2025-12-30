@@ -5,7 +5,7 @@ import { ImSpinner2 } from 'react-icons/im';
 import { motion } from 'motion/react';
 
 import ArticleItem from '../../ui/ArticleItem';
-import SearchAlt from '../../ui/SearchAlt';
+import SearchAlt from '../../ui/Operations/SearchAlt';
 import toast from 'react-hot-toast';
 
 function MainFeatureModal({ onClose }) {

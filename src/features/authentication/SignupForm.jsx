@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
-import FormItem from '../../ui/Form/FormItem';
-import FormRow from '../../ui/Form/FormRow';
-import Form from '../../ui/Form/Form';
+import FormItem from '../../ui/Forms/FormItem';
+import FormRow from '../../ui/Forms/FormRow';
+import Form from '../../ui/Forms/Form';
 
 function SignupForm() {
    const { isPending, isSuccess, signup } = useSignup();

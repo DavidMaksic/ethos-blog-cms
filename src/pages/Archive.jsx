@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import ArchiveTable from '../features/archive/ArchiveTable';
 import ArchiveOps from '../features/archive/ArchiveOps';
 import Heading from '../ui/Heading';
-import Search from '../ui/Search';
+import Search from '../ui/Operations/Search';
 import Row from '../ui/Row';
 
 function Archive() {

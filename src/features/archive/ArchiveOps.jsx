@@ -1,5 +1,5 @@
-import Filter from '../../ui/Filter/Filter';
-import SortBy from '../../ui/SortBy';
+import Filter from '../../ui/Operations/Filter';
+import SortBy from '../../ui/Operations/SortBy';
 
 function ArchiveOps() {
    return (

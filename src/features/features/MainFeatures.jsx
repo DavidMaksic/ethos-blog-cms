@@ -9,8 +9,8 @@ import { motion } from 'motion/react';
 
 import MainFeatureModal from './MainFeatureModal';
 import MainArticle from './MainArticle';
-import TagForm from '../../ui/Form/TagForm';
-import Modal from '../../ui/Modal';
+import TagForm from '../../ui/Forms/TagForm';
+import Modal from '../../ui/Modal/Modal';
 
 // Import Swiper styles
 import 'swiper/css';

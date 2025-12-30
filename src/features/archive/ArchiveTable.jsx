@@ -2,7 +2,7 @@ import { useArticles } from './useArticles';
 import ArticleNotFound from '../../ui/ArticleNotFound';
 import TableSkeleton from '../../ui/Skeletons/TableSkeleton';
 import TableHeader from '../../ui/Table/TableHeader';
-import Pagination from '../../ui/Pagination/Pagination';
+import Pagination from '../../ui/Operations/Pagination';
 import ArchiveRow from './ArchiveRow';
 import Table from '../../ui/Table/Table';
 import Menus from '../../ui/Menus';

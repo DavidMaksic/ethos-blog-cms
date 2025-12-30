@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { motion } from 'motion/react';
 
 import SubmitButton from '../../ui/Buttons/SubmitButton';
-import FormItem from '../../ui/Form/FormItem';
-import FormRow from '../../ui/Form/FormRow';
+import FormItem from '../../ui/Forms/FormItem';
+import FormRow from '../../ui/Forms/FormRow';
 
 function LoginForm() {
    const { register, handleSubmit, formState, reset } = useForm();

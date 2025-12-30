@@ -11,7 +11,7 @@ import Categories from '../Categories';
 import TagButton from '../Buttons/TagButton';
 import TagForm from './TagForm';
 import Color from '../../features/tags/Color';
-import Error from '../Error';
+import Error from '../Error/Error';
 
 function CategoryUpdate() {
    const {

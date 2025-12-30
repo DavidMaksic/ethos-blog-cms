@@ -46,11 +46,11 @@ import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import DraftButton from '../../ui/Buttons/DraftButton';
 import Categories from '../../ui/Categories';
-import FormItem from '../../ui/Form/FormItem';
-import FormRow from '../../ui/Form/FormRow';
-import Options from '../../ui/Options';
+import FormItem from '../../ui/Forms/FormItem';
+import FormRow from '../../ui/Forms/FormRow';
+import Options from '../../ui/Operations/Options';
 import toast from 'react-hot-toast';
-import Form from '../../ui/Form/Form';
+import Form from '../../ui/Forms/Form';
 
 function Creator() {
    const [localArticle, setLocalArticle] = useLocalStorage(

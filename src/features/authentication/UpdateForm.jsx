@@ -9,9 +9,9 @@ import { useForm } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
 import SubmitButton from '../../ui/Buttons/SubmitButton';
-import FormItem from '../../ui/Form/FormItem';
-import FormRow from '../../ui/Form/FormRow';
-import Form from '../../ui/Form/Form';
+import FormItem from '../../ui/Forms/FormItem';
+import FormRow from '../../ui/Forms/FormRow';
+import Form from '../../ui/Forms/Form';
 
 function UpdateForm() {
    const { user: currentAuthor } = useCurrentAuthor();

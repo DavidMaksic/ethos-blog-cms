@@ -2,7 +2,7 @@ import { useFullscreen } from '../context/FullscreenContext';
 import { useEffect } from 'react';
 
 import UpdateSettings from '../features/settings/UpdateSettings';
-import SettingsForm from '../ui/Form/SettingsForm';
+import SettingsForm from '../ui/Forms/SettingsForm';
 import Heading from '../ui/Heading';
 import Row from '../ui/Row';
 

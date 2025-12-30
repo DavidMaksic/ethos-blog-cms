@@ -3,9 +3,9 @@ import { useUpdateAuthor } from './useUpdateAuthor';
 import { useForm } from 'react-hook-form';
 
 import PasswordButton from '../../ui/Buttons/PasswordButton';
-import FormItem from '../../ui/Form/FormItem';
-import FormRow from '../../ui/Form/FormRow';
-import Form from '../../ui/Form/Form';
+import FormItem from '../../ui/Forms/FormItem';
+import FormRow from '../../ui/Forms/FormRow';
+import Form from '../../ui/Forms/Form';
 
 function PasswordForm() {
    const { isPending, updateAuthor } = useUpdateAuthor();

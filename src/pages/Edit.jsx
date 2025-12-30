@@ -5,7 +5,7 @@ import { useAuthors } from '../features/authentication/useAuthors';
 
 import ArticleNotFound from '../ui/ArticleNotFound';
 import EditSkeleton from '../ui/Skeletons/EditSkeleton';
-import EditForm from '../ui/Form/EditForm';
+import EditForm from '../ui/Forms/EditForm';
 import Heading from '../ui/Heading';
 import Spinner from '../ui/Spinner';
 import Row from '../ui/Row';

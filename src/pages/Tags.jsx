@@ -2,8 +2,8 @@ import { useFullscreen } from '../context/FullscreenContext';
 import { useEffect } from 'react';
 
 import UpdateSettings from '../features/settings/UpdateSettings';
-import CategoryCreate from '../ui/Form/CategoryCreate';
-import CategoryUpdate from '../ui/Form/CategoryUpdate';
+import CategoryCreate from '../ui/Forms/CategoryCreate';
+import CategoryUpdate from '../ui/Forms/CategoryUpdate';
 import Heading from '../ui/Heading';
 import Row from '../ui/Row';
 

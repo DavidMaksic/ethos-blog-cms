@@ -326,7 +326,7 @@
    }
 
    .label {
-      @apply [&_label]:uppercase [&_label]:text-[#8a919e] dark:[&_label]:text-primary-400;
+      @apply [&_label]:uppercase [&_label]:text-[#8a919e] dark:[&_label]:text-primary-400 leading-9;
    }
 
    .bn-block-group:first-child > div:first-child .bn-inline-content {
@@ -1296,15 +1296,16 @@ strong {
 }
 
 .rcp-body {
-   background-color: var(--color-primary);
-   border: 1px solid var(--color-quaternary);
+   @apply bg-primary! dark:bg-primary-300/20!;
+   border: 1px solid var(--color-quaternary) !important;
    padding: 1.6rem 2.7rem;
    gap: 2.2rem;
+   backdrop-filter: blur(45px);
 
    border-bottom-left-radius: 40px !important;
    border-bottom-right-radius: 40px !important;
 
-   transition: background-color 0.2s, border 0.2s;
+   transition: background-color 0.2s, border 1s !important;
    z-index: 10 !important;
 }
 

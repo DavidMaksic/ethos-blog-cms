@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import Categories from '../../ui/Categories';
 import EmptyEntry from './EmptyEntry';
 import TagEntry from './TagEntry';
-import TagForm from '../../ui/Form/TagForm';
+import TagForm from '../../ui/Forms/TagForm';
 
 function TagFeatures() {
    const { categories } = useGetCategories();

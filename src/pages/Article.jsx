@@ -19,10 +19,10 @@ import { Link } from 'react-router-dom';
 
 import ArticleNotFound from '../ui/ArticleNotFound';
 import ArticleSkeleton from '../ui/Skeletons/ArticleSkeleton';
-import DeleteModal from '../ui/DeleteModal';
+import DeleteModal from '../ui/Modal/DeleteModal';
 import BackButton from '../ui/Buttons/BackButton';
-import Options from '../ui/Options';
-import Modal from '../ui/Modal';
+import Options from '../ui/Operations/Options';
+import Modal from '../ui/Modal/Modal';
 
 function Article() {
    const { isDeleting, isSuccess, deleteArticle } = useDeleteArticle();

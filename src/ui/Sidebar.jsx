@@ -6,6 +6,7 @@ import Nav from './Nav';
 // TODO: Add background gradients for each media query
 // TODO: Rename header component
 // TODO: Redesign skeletons
+// TODO: Add new shadow for embded image in CMS
 
 function Sidebar() {
    return (

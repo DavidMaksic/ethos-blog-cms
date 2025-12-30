@@ -10,7 +10,7 @@ import ColorsTable from '../../features/tags/ColorsTable';
 import TagButton from '../Buttons/TagButton';
 import TagForm from './TagForm';
 import Color from '../../features/tags/Color';
-import Error from '../Error';
+import Error from '../Error/Error';
 import 'react-color-palette/css';
 
 function CategoryCreate() {

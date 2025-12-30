@@ -4,7 +4,7 @@ import { CgMathPlus } from 'react-icons/cg';
 import { useState } from 'react';
 
 import TagFeatureModal from './TagFeatureModal';
-import Modal from '../../ui/Modal';
+import Modal from '../../ui/Modal/Modal';
 
 function EmptyEntry({ currentTag }) {
    const [openModal, setOpenModal] = useState(false);
