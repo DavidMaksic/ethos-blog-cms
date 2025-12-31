@@ -19,7 +19,7 @@ export function Filter({ field, options }) {
       <div className="flex items-center gap-4">
          <LuListFilter className="size-5 text-accent dark:text-accent-200" />
 
-         <div className="flex gap-2 bg-white dark:bg-primary-200 py-2 px-3 border border-tertiary dark:border-primary-300/10 rounded-xl shadow-2xs transition-bg_color_border">
+         <div className="flex gap-2 bg-white dark:bg-primary-300/15 py-2 px-3 border border-tertiary dark:border-primary-300/10 rounded-xl shadow-2xs transition-bg_color_border z-10">
             {options.map((item) => (
                <FilterButton
                   handler={() => handleClick(item.value)}

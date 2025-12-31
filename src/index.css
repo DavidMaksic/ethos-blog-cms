@@ -13,8 +13,6 @@
 @custom-variant sm (@media (max-width: 640px));
 @custom-variant xs (@media (max-width: 450px));
 
-
-
 @media (max-width: 2000px) {
    html {
       font-size: 15px;
@@ -144,8 +142,8 @@
    --color-editor-toolbar-active: var(--color-accent-500);
    --color-editor-header: var(--color-primary-500);
    --color-editor-line: #e5e7eb;
-      --color-toolbar: #fff;
-      --color-toolbar-border: var(--color-quaternary)
+   --color-toolbar: #fff;
+   --color-toolbar-border: var(--color-quaternary);
 
    --header-opacity: 100%;
    --color-code: #374151;
@@ -335,6 +333,36 @@
          #28202bff 0px,
          transparent 55%
       );
+}
+
+@media (max-width: 1580px) {
+   [data-theme='dark'] .background-gradient {
+      background-image: radial-gradient(
+            3000px 1400px at -950px -340px,
+            #3b2e1aff 0px,
+            transparent 78%
+         ),
+         radial-gradient(
+            3000px 1400px at 2400px 1100px,
+            #28202bff 0px,
+            transparent 55%
+         );
+   }
+}
+
+@media (max-width: 1290px) {
+   [data-theme='dark'] .background-gradient {
+      background-image: radial-gradient(
+            3000px 1400px at -850px -340px,
+            #3b2e1aff 0px,
+            transparent 78%
+         ),
+         radial-gradient(
+            3000px 1400px at 2200px 1100px,
+            #28202bff 0px,
+            transparent 55%
+         );
+   }
 }
 
 button,
@@ -527,7 +555,7 @@ input:-webkit-autofill {
    @apply dark:bg-toolbar! dark:border-toolbar-border!;
 }
 
-.bn-mantine .bn-form-popover > div > div > div> input {
+.bn-mantine .bn-form-popover > div > div > div > input {
    @apply dark:bg-toolbar!;
 }
 
@@ -740,7 +768,6 @@ input:-webkit-autofill {
    font-family: var(--font-creator) !important;
    font-weight: 600;
 }
-
 
 @media (max-width: 1580px) {
    [data-lang='sr'] .bn-container blockquote {
@@ -1229,7 +1256,6 @@ strong {
    opacity: 80%;
 }
 
-
 .bn-block-content.ProseMirror-selectednode > *,
 .ProseMirror-selectednode > .bn-block-content > * {
    outline: none !important;
@@ -1277,7 +1303,6 @@ strong {
    gap: 16px;
 }
 
-
 @media (max-width: 1580px) {
    .rcp-root {
       width: 38rem;
@@ -1294,14 +1319,12 @@ strong {
    border-top-right-radius: 40px !important;
 }
 
-
 .rcp-field-input {
    border-color: var(--color-primary-300);
    color: var(--color-primary-500);
    transition: border-color 0.2s;
    font-size: 1.07rem !important;
 }
-
 
 .rcp-field-label {
    color: var(--color-primary-400);
