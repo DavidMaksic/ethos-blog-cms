@@ -87,15 +87,10 @@ function Options({
                <motion.ul
                   className="fixed bottom-32 right-24 2xl:right-10 flex flex-col items-center bg-white dark:bg-transparent border border-quaternary dark:border-primary-300/35 rounded-3xl [&_svg]:cursor-pointer px-1 shadow-dashboard dark:shadow-none"
                   ref={ref}
-                  initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                  transition={{
-                     type: 'spring',
-                     stiffness: 500,
-                     damping: 30,
-                     duration: 0.12,
-                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.06 }}
                >
                   <FiChevronUp
                      className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-400/10 rounded-t-[20px] mt-1 rounded-2xl transition"
@@ -133,15 +128,10 @@ function Options({
                         <motion.div
                            className="absolute bottom-0 font-text max-h-[32.5rem] left-[-21.5rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-primary-300/35 rounded-2xl bg-white dark:bg-transparent backdrop-blur-3xl overflow-y-auto scrollbar shadow-dashboard dark:shadow-none"
                            ref={tableRef}
-                           initial={{ opacity: 0, x: 8, scale: 0.97 }}
-                           animate={{ opacity: 1, x: 0, scale: 1 }}
-                           exit={{ opacity: 0, x: 8, scale: 0.97 }}
-                           transition={{
-                              type: 'spring',
-                              stiffness: 500,
-                              damping: 30,
-                              duration: 0.12,
-                           }}
+                           initial={{ opacity: 0 }}
+                           animate={{ opacity: 1 }}
+                           exit={{ opacity: 0 }}
+                           transition={{ duration: 0.06 }}
                         >
                            <span className="pb-3 mb-2 mx-6 border-b border-b-primary-400/25 text-primary-400 select-none">
                               Table of contents

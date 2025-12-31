@@ -44,7 +44,7 @@ function LanguageButton({
          <AnimatePresence>
             {open && (
                <motion.ul
-                  className="absolute z-10 mt-2 p-1 min-w-[10rem] text-2xl rounded-2xl will-change-transform bg-white dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border"
+                  className="absolute z-10 mt-2 p-1 min-w-[10rem] text-2xl rounded-2xl bg-white dark:bg-toolbar border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer transition-bg_border"
                   ref={ref}
                   onClick={() => setOpen(false)}
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -59,10 +59,9 @@ function LanguageButton({
                >
                   {LANGUAGES.map((item) => (
                      <li
-                        className="flex justify-between items-center relative font-normal rounded-xl py-2 pr-3 pl-5 hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-primary-300/20 duration-75 [&_img]:opacity-80 dark:[&_img]:opacity-80 group"
+                        className="flex justify-between items-center relative font-medium rounded-xl py-2 pr-3 pl-5 hover:bg-primary-100/70 text-primary-500 dark:text-primary-500/90 dark:hover:bg-primary-300/20 duration-75 [&_img]:opacity-80 dark:[&_img]:opacity-80 group"
                         key={item.code}
                         onClick={() => {
-                           // setLangChanged(true);
                            setFlag(item.flag);
 
                            setLocalArticle((prev) => ({

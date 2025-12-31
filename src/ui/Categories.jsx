@@ -32,7 +32,7 @@ function Categories({
          <AnimatePresence>
             {open && (
                <motion.ul
-                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl will-change-transform bg-primary dark:bg-primary-300/20 backdrop-blur-3xl border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer scrollbar"
+                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl bg-white dark:bg-toolbar border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer scrollbar"
                   ref={ref}
                   onClick={() => setOpen((isOpen) => !isOpen)}
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -49,7 +49,7 @@ function Categories({
                      <li
                         key={item.category}
                         value={item.category}
-                        className="relative font-normal first:rounded-t-[20px]! last:rounded-b-[20px]! rounded-2xl py-2 pl-5 hover:bg-primary-100 dark:text-primary-500 dark:hover:bg-primary-300/20 duration-75"
+                        className="relative font-medium first:rounded-t-[20px]! last:rounded-b-[20px]! rounded-2xl py-2 pl-5 hover:bg-primary-100/70 text-primary-500 dark:text-primary-500/90 dark:hover:bg-primary-300/20 duration-75"
                         onClick={() => {
                            setIsDefault?.(false);
                            setLocalItem({

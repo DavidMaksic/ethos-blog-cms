@@ -3,7 +3,6 @@ import Logo from './Logo';
 import Nav from './Nav';
 
 // TODO: Add background gradients for each media query
-// TODO: Try to add backdrop blur for Blocknote modals
 
 function Sidebar() {
    return (
