@@ -35,7 +35,7 @@ function MainFeatures() {
 
             {isPending ? (
                <motion.div
-                  className="flex h-[22.75rem] bg-primary-300/15 animate-skeleton rounded-[2.3rem]"
+                  className="flex h-[22.75rem] bg-primary-100 dark:bg-primary-300/15 animate-skeleton rounded-[2.3rem]"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -64,16 +64,16 @@ function MainFeatures() {
                   </Swiper>
 
                   <CgMathPlus
-                     className="absolute right-1 self-center size-11! p-2 border border-primary-300 rounded-full  text-primary-400/80! hover:border-accent-300 dark:hover:border-accent-400/80! hover:text-accent-300! dark:hover:text-accent-400/80! cursor-pointer transition"
+                     className="absolute right-1 self-center size-11! p-2 border border-primary-300 rounded-full text-primary-400/80! hover:border-accent-300 dark:hover:border-accent-300! hover:text-accent-300! dark:hover:text-accent-300! cursor-pointer transition"
                      onClick={() => setOpenModal((isOpen) => !isOpen)}
                   />
                </>
             ) : (
                <div
-                  className="relative flex justify-center h-[22.7rem] w-full border rounded-[2.3rem] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/10 dark:hover:bg-primary-200 border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
+                  className="relative flex justify-center h-[22.7rem] w-full border rounded-[2.3rem] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/20 dark:hover:bg-transparent border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
                   onClick={() => setOpenModal((isOpen) => !isOpen)}
                >
-                  <CgMathPlus className="absolute icons self-center size-11! text-primary-400/80! group-hover:text-accent-300! dark:group-hover:text-accent-400/80!" />
+                  <CgMathPlus className="absolute icons self-center size-11! text-primary-400/80! group-hover:text-accent-400! dark:group-hover:text-accent-300/90!" />
                </div>
             )}
 
