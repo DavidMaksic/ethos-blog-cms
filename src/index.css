@@ -536,14 +536,10 @@ input:-webkit-autofill {
 }
 
 .bn-toolbar {
-   background-color: var(--color-editor-menu) !important;
+   @apply dark:bg-toolbar! dark:border-toolbar-border!;
    padding: 6px 12px 6px 8px !important;
    border-radius: 12px !important;
    box-shadow: 0 5px 15px -5px var(--color-editor-toolbar-shadow) !important;
-}
-
-.bn-formatting-toolbar {
-   @apply dark:bg-toolbar! dark:border-toolbar-border!;
 }
 
 .bn-toolbar .mantine-ActionIcon-root {
