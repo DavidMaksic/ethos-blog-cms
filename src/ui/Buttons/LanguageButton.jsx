@@ -1,7 +1,8 @@
-import { AnimatePresence, motion } from 'motion/react';
 import { DEFAULT_LANG, LANGUAGES } from '../../utils/constants';
+import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import clsx from 'clsx';
 
 function LanguageButton({
    localArticle,
@@ -10,6 +11,7 @@ function LanguageButton({
    articleCode = null,
 }) {
    const [open, setOpen] = useState(false);
+   const [loadedMain, setLoadedMain] = useState(false);
    const ref = useOutsideClick(() => setOpen(false), false);
 
    const defaultFlag = LANGUAGES.find((item) => {
@@ -32,9 +34,13 @@ function LanguageButton({
    return (
       <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
          <img
-            className="size-11 opacity-80 dark:opacity-70 hover:opacity-100 dark:hover:opacity-85 transition-[opacity]"
+            className={clsx(
+               'size-11 hover:opacity-100 dark:hover:opacity-85 transition-[opacity]',
+               loadedMain ? 'opacity-80 dark:opacity-70' : 'opacity-0'
+            )}
             src={localArticle.flag ? localArticle.flag : flag}
             alt="Flag"
+            onLoad={() => setLoadedMain(true)}
             onClick={(e) => {
                e.stopPropagation();
                setOpen((isOpen) => !isOpen);
