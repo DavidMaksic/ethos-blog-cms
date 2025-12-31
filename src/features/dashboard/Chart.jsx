@@ -73,7 +73,7 @@ function Chart({ articles, numDays }) {
    }
 
    return (
-      <div className="col-span-full space-y-6 bg-white dark:bg-primary-300/10 rounded-2xl py-8 2k:pl-8 2k:pr-12 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
+      <div className="col-span-full space-y-6 bg-white dark:bg-primary-300/10 rounded-2xl py-8 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
          <Heading type="h2">
             <div className="flex justify-between items-center">
                Articles statistics

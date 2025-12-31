@@ -1,6 +1,6 @@
 function ArticleSkeleton() {
    return (
-      <div className="relative 4k:translate-x-[10.3%]! 2k:translate-x-[11.8%] translate-x-[16%] xl:translate-x-[6.5%] max-w-5xl flex flex-col gap-8 px-24 pt-4 [&_div]:rounded-full animate-skeleton transition-200">
+      <div className="relative translate-x-[16%] xl:translate-x-[6.5%] max-w-5xl flex flex-col gap-8 px-24 pt-4 [&_div]:rounded-full animate-skeleton transition-200">
          <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary" />
 
          <div className="flex flex-col gap-6">

@@ -31,7 +31,7 @@ function TagFeatures() {
       <TagForm>
          <div className="flex flex-col items-center [&_label]:text-primary-400 [&_label]:font-extralight [&_label]:text-base [&_label]:uppercase">
             <section className="flex items-center self-start">
-               <div className="flex flex-col gap-3 2k:w-50 w-60 xl:w-54 self-start">
+               <div className="flex flex-col gap-3 w-60 xl:w-54 self-start">
                   <label className="ml-1">Select tag</label>
                   <div className="font-creator">
                      <Categories

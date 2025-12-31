@@ -227,7 +227,7 @@ function EditArticleForm() {
 
    return (
       <Form isPending={isLoading}>
-         <FormRow columns="4k:grid-cols-[1.8fr_1fr]! grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
+         <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-transparent border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
@@ -271,7 +271,7 @@ function EditArticleForm() {
             </FormItem>
          </FormRow>
 
-         <FormRow columns="4k:grid-cols-[1.8fr_1fr]! grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
+         <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
                   className="bg-secondary dark:bg-transparent text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"

@@ -45,7 +45,7 @@ function ArchiveRow({ article }) {
          transition={{ duration: 0.3 }}
       >
          <img
-            className="w-full 2k:h-28 h-24 2xl:h-23 xl:h-30 object-cover opacity-90 dark:opacity-70"
+            className="w-full h-24 2xl:h-23 xl:h-30 object-cover opacity-90 dark:opacity-70"
             src={image}
             alt={title}
          />

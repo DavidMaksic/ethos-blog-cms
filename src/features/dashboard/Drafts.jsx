@@ -37,7 +37,7 @@ function Drafts() {
                   ))}
                </>
             ) : (
-               <div className="flex flex-col items-center gap-3 justify-self-center 2k:mt-18 mt-16 2xl:mt-20 xl:mt-22">
+               <div className="flex flex-col items-center gap-3 justify-self-center mt-16 2xl:mt-20 xl:mt-22">
                   <BsStack className="text-6xl text-primary-200 dark:text-primary-300 transition-color" />
                   <span className="text-2xl italic text-primary-300 transition-color">
                      No drafted articles...

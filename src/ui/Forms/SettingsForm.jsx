@@ -18,7 +18,7 @@ function SettingsForm() {
             <label htmlFor="comment_length">Comment length</label>
 
             {isPending ? (
-               <div className="2k:h-[2.05rem] h-[2.1rem] w-63 bg-primary-100 dark:bg-primary-100 rounded-xl animate-skeleton" />
+               <div className="h-[2.1rem] w-63 bg-primary-100 dark:bg-primary-100 rounded-xl animate-skeleton" />
             ) : (
                <input
                   className={`bg-secondary dark:bg-transparent border-b border-primary-300/80 dark:border-b-primary-300/30 transition-bg_border outline-none text-2xl ${

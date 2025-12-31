@@ -35,7 +35,7 @@ function TagEntry({ article }) {
       <>
          {article ? (
             <motion.li
-               className={`relative flex h-[24rem] 2xl:h-[23rem] xl:h-[22rem] 4k:w-[18.5rem] w-[19rem] 2xl:w-[17rem] xl:w-[16rem] border rounded-3xl group transition p-8 2xl:p-7 xl:p-6 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center hover:border-primary-200 dark:opacity-95! ${
+               className={`relative flex h-[24rem] 2xl:h-[23rem] xl:h-[22rem] w-[19rem] 2xl:w-[17rem] xl:w-[16rem] border rounded-3xl group transition p-8 2xl:p-7 xl:p-6 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center hover:border-primary-200 dark:opacity-95! ${
                   isDeleting && 'opacity-80! pointer-events-none'
                }`}
                initial={{ opacity: 0 }}

@@ -29,7 +29,7 @@ function Tags() {
             </Row>
          </div>
 
-         <div className="2k:mb-105 mb-40 2xl:mb-96 xl:mb-150">
+         <div className="mb-40 2xl:mb-96 xl:mb-150">
             <Row>
                <UpdateSettings>
                   <CategoryUpdate />

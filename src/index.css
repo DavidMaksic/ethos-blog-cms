@@ -5,8 +5,6 @@
    --breakpoint-*: initial;
 }
 
-@custom-variant 4k (@media (min-width: 3840px));
-@custom-variant 2k (@media (min-width: 2560px));
 @custom-variant 2xl (@media (max-width: 1580px));
 @custom-variant xl (@media (max-width: 1290px));
 @custom-variant lg (@media (max-width: 1024px));
@@ -15,17 +13,7 @@
 @custom-variant sm (@media (max-width: 640px));
 @custom-variant xs (@media (max-width: 450px));
 
-@media (min-width: 2560px) {
-   html {
-      font-size: 22px !important;
-   }
-}
 
-@media (min-width: 3840px) {
-   html {
-      font-size: 32px !important;
-   }
-}
 
 @media (max-width: 2000px) {
    html {
@@ -664,18 +652,6 @@ input:-webkit-autofill {
 
 /* Padding inline */
 
-@media (min-width: 3840px) {
-   .bn-editor {
-      padding-inline: 230px !important;
-   }
-}
-
-@media (min-width: 2560px) {
-   .bn-editor {
-      padding-inline: 120px;
-   }
-}
-
 @media (max-width: 1580px) {
    .bn-editor {
       padding-inline: 121px;
@@ -696,22 +672,6 @@ input:-webkit-autofill {
 
 [data-lang='en'] .bn-default-styles {
    font-size: 1.48rem !important;
-}
-
-@media (min-width: 2560px) {
-   [data-lang='en'] .bn-default-styles {
-      font-size: 1.5rem !important;
-   }
-
-   [data-lang='sr'] .bn-default-styles {
-      font-size: 1.4rem !important;
-   }
-}
-
-@media (min-width: 3840px) {
-   [data-lang='en'] .bn-default-styles {
-      font-size: 1.505rem !important;
-   }
 }
 
 @media (max-width: 1290px) {
@@ -781,21 +741,6 @@ input:-webkit-autofill {
    font-weight: 600;
 }
 
-@media (min-width: 2560px) {
-   [data-lang='en'] .bn-container blockquote {
-      font-size: 1.67rem !important;
-   }
-
-   [data-lang='sr'] .bn-container blockquote {
-      font-size: 1.5rem !important;
-   }
-}
-
-@media (min-width: 3840px) {
-   [data-lang='en'] .bn-container blockquote {
-      font-size: 1.7rem !important;
-   }
-}
 
 @media (max-width: 1580px) {
    [data-lang='sr'] .bn-container blockquote {
@@ -1284,18 +1229,6 @@ strong {
    opacity: 80%;
 }
 
-@media (min-width: 2560px) {
-   [data-theme='dark'] [data-content-type='quote'] blockquote {
-      border-left: 4px solid #b49269a9 !important;
-      padding: 0px 48px !important;
-   }
-}
-
-@media (min-width: 3840px) {
-   [data-theme='dark'] [data-content-type='quote'] blockquote {
-      padding: 0px 60px !important;
-   }
-}
 
 .bn-block-content.ProseMirror-selectednode > *,
 .ProseMirror-selectednode > .bn-block-content > * {
@@ -1315,12 +1248,6 @@ strong {
    width: 34rem;
    box-shadow: 0 10px 35px -3px var(--color-editor-shadow) !important;
    transition: box-shadow 0.2s;
-}
-
-@media (min-width: 2560px) {
-   .rcp-root {
-      width: 28rem;
-   }
 }
 
 [data-theme='dark'] .rcp-root {
@@ -1350,21 +1277,6 @@ strong {
    gap: 16px;
 }
 
-@media (min-width: 3840px) {
-   .rcp-root {
-      width: 26rem;
-   }
-}
-
-@media (min-width: 2560px) {
-   .rcp-root {
-      width: 32rem;
-   }
-
-   .rcp-field-label {
-      font-size: 1rem !important;
-   }
-}
 
 @media (max-width: 1580px) {
    .rcp-root {
@@ -1382,33 +1294,6 @@ strong {
    border-top-right-radius: 40px !important;
 }
 
-@media (min-width: 3840px) {
-   .rcp {
-      border-radius: 80px !important;
-   }
-
-   .rcp-saturation {
-      border-top-left-radius: 80px !important;
-      border-top-right-radius: 80px !important;
-   }
-
-   .rcp-body {
-      border-bottom-left-radius: 80px !important;
-      border-bottom-right-radius: 80px !important;
-   }
-
-   .rcp-hue {
-      height: 22px;
-   }
-
-   .rcp-alpha {
-      height: 22px;
-   }
-
-   .rcp-section {
-      gap: 24px !important;
-   }
-}
 
 .rcp-field-input {
    border-color: var(--color-primary-300);
@@ -1417,11 +1302,6 @@ strong {
    font-size: 1.07rem !important;
 }
 
-@media (min-width: 2560px) {
-   .rcp-saturation {
-      height: 13rem !important;
-   }
-}
 
 .rcp-field-label {
    color: var(--color-primary-400);
@@ -1575,28 +1455,6 @@ strong {
 .bn-block-group h2,
 .bn-block-group h3 {
    scroll-margin-top: 44px;
-}
-
-@media (min-width: 2560px) {
-   .bn-inline-content:empty {
-      height: 2rem !important;
-   }
-
-   .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis,
-   .recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
-      font-size: 20px !important;
-   }
-}
-
-@media (min-width: 3840px) {
-   .bn-inline-content:empty {
-      height: 2.5rem !important;
-   }
-
-   .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis,
-   .recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
-      font-size: 26px !important;
-   }
 }
 
 /* Bullet list dot styles */
