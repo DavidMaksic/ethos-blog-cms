@@ -44,7 +44,7 @@ function Search() {
       <div className="flex items-center">
          <label htmlFor="search">
             <CgSearch
-               className={`size-11 text-accent-600/85 dark:text-accent-200/90 p-2 pt-2.5 pr-2.5 bg-white dark:bg-primary-300/15 border border-tertiary dark:border-primary-300/10 shadow-2xs rounded-full transition-bg_border cursor-pointer ${
+               className={`size-11 text-accent-600/85 dark:text-accent-200/90 p-2 pt-2.5 pr-2.5 bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full transition-bg_border cursor-pointer z-10 ${
                   open &&
                   'rounded-r-none border-r-transparent dark:border-r-transparent'
                }`}
@@ -66,7 +66,7 @@ function Search() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.1 }}
-                  className={`h-11 py-4 px-1 w-[22rem] bg-white dark:bg-primary-300/15 border border-tertiary dark:border-primary-300/10 shadow-2xs rounded-full text-xl font-medium font-creator outline-none transition-bg_border ${
+                  className={`h-11 py-4 px-1 w-[22rem] xl:w-[16rem] bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full text-xl font-medium font-creator outline-none transition-bg_border z-10 ${
                      open &&
                      'rounded-l-none border-l-transparent dark:border-l-transparent'
                   }`}

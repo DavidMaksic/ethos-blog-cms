@@ -64,7 +64,7 @@ function CategoryCreate() {
 
    return (
       <TagForm cols="0.5_1fr" isPending={isPending}>
-         <div className="flex flex-col gap-12 items-center [&_label]:text-primary-400 [&_label]:font-extralight [&_label]:text-base [&_label]:uppercase">
+         <div className="flex flex-col gap-12 items-center [&_label]:text-primary-400 [&_label]:font-light [&_label]:text-base [&_label]:uppercase">
             <section className="flex flex-col gap-2 items-center self-start">
                <label className="self-start">Name</label>
                <div className="flex items-center">

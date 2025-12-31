@@ -50,7 +50,7 @@ function Author({ author, activeUser }) {
             {description_en ? (
                <span className="text-xl font-text">{description_en}</span>
             ) : (
-               <span className="text-xl font-creator">
+               <span className="text-xl font-text">
                   Your profile description will appear here. Write something
                   about yourself!
                </span>
@@ -59,7 +59,7 @@ function Author({ author, activeUser }) {
 
          {currentAuthor.email === email && (
             <Link to={`${id}`}>
-               <TbSettings className="absolute rounded-full right-2 top-2 p-2 text-5xl text-[#babfc7] dark:text-primary-300 hover:text-[#8c939e] dark:hover:text-primary-400 dark:hover:bg-primary-300/20 hover:bg-primary-100 stroke-[1.3px] cursor-pointer transition-200" />
+               <TbSettings className="absolute rounded-full right-2 top-2 p-2 text-5xl text-[#babfc7] dark:text-primary-400/80 hover:text-[#8c939e] dark:hover:text-primary-400 dark:hover:bg-primary-300/20 hover:bg-primary-100 stroke-[1.3px] cursor-pointer transition-200" />
             </Link>
          )}
       </li>

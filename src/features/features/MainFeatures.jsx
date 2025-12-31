@@ -29,7 +29,7 @@ function MainFeatures() {
    return (
       <TagForm>
          <div className="grid grid-cols-[0.5fr_2.3fr] gap-12 items-center pr-16">
-            <span className="font-extralight text-primary-400 text-base uppercase ml-1">
+            <span className="font-light text-primary-400 text-base uppercase ml-1">
                Choose articles:
             </span>
 

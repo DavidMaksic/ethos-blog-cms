@@ -128,7 +128,7 @@ function EditProfileForm() {
                <TextareaAutosize
                   minRows={3}
                   maxRows={4}
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none scrollbar text-2xl"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border  font-text font-normal outline-none scrollbar text-2xl"
                   id="description_en"
                   type="text"
                   defaultValue={description_en}
@@ -150,7 +150,7 @@ function EditProfileForm() {
                <TextareaAutosize
                   minRows={3}
                   maxRows={4}
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none scrollbar text-2xl"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border font-text font-normal outline-none scrollbar text-2xl"
                   id="description_srb"
                   type="text"
                   defaultValue={description_srb}
