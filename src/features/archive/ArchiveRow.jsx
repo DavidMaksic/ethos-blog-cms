@@ -17,6 +17,7 @@ import Menus from '../../ui/Menus';
 function ArchiveRow({ article }) {
    const navigate = useNavigate();
    const { id, created_at, image, title, status } = article;
+   const [loaded, setLoaded] = useState(false);
 
    const { authors } = useAuthors();
    const { user: currentAuthor } = useCurrentAuthor();
@@ -45,7 +46,10 @@ function ArchiveRow({ article }) {
          transition={{ duration: 0.3 }}
       >
          <img
-            className="w-full h-24 2xl:h-23 xl:h-30 object-cover opacity-90 dark:opacity-70"
+            className={`w-full h-24 2xl:h-23 xl:h-30 object-cover transition-200 ${
+               loaded ? 'opacity-90 dark:opacity-70' : 'opacity-0'
+            }`}
+            onLoad={() => setLoaded(true)}
             src={image}
             alt={title}
          />
