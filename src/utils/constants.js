@@ -1,4 +1,8 @@
-export const PAGE_SIZE = 7;
+const itemHeight = 130; // px
+const viewportHeight = window.innerHeight;
+const itemsPerPage = Math.floor(viewportHeight / itemHeight);
+export const PAGE_SIZE = itemsPerPage;
+
 export const DEFAULT_LANG = 'en';
 export const FLAGS = {
    en: '/en-flag.png',
