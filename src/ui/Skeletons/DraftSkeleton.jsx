@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 function DraftSkeleton() {
    return (
       <motion.div
-         className="grid gap-y-3.5 mb-14 [&_div]:rounded-2xl animate-skeleton"
+         className="grid gap-y-3.5 [&_div]:rounded-2xl animate-skeleton"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          exit={{ opacity: 0 }}

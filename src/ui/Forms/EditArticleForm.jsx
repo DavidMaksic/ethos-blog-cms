@@ -13,6 +13,7 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
+import { useDebounce } from '../../hooks/useDebounce';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { LANGUAGES } from '../../utils/constants';
@@ -66,7 +67,7 @@ function EditArticleForm() {
          ...article,
          category: category?.category,
       },
-      'localArticle'
+      'editArticle'
    );
 
    // - Set default article code as data-attribute
@@ -80,10 +81,34 @@ function EditArticleForm() {
    const [currentStatus, setCurrentStatus] = useState(articleStatus);
 
    // - Form logic
-   const { register, handleSubmit, formState, reset } = useForm({
-      defaultValues: article,
+   const { register, handleSubmit, formState, reset, watch } = useForm({
+      defaultValues: localArticle,
    });
    const { errors } = formState;
+
+   useEffect(() => {
+      // Check if the API article exists AND it differs from one in storage
+      if (article?.id && article.id !== localArticle.id) {
+         const freshArticle = {
+            ...article,
+            category: article.categories?.category,
+         };
+
+         setLocalArticle(freshArticle);
+         reset(freshArticle);
+      }
+   }, [article, reset, localArticle.id, setLocalArticle]);
+
+   useEffect(() => {
+      const subscription = watch((value) => {
+         setLocalArticle((prev) => ({
+            ...prev,
+            ...value,
+         }));
+      });
+
+      return () => subscription.unsubscribe();
+   }, [watch, setLocalArticle]);
 
    // - Other
    const [isDefault, setIsDefault] = useState(true);
@@ -131,6 +156,18 @@ function EditArticleForm() {
       },
    });
 
+   // - Debounce article content
+   const debouncedContent = useDebounce(contentHTML, 10000);
+   useEffect(() => {
+      if (debouncedContent) {
+         setLocalArticle((prev) => ({
+            ...prev,
+            content: debouncedContent,
+         }));
+      }
+   }, [debouncedContent, setLocalArticle]);
+
+   // - Blocknote Editor
    const onChange = async () => {
       const html = await editor.blocksToFullHTML(editor.document);
       setContentHTML(html);
@@ -158,17 +195,25 @@ function EditArticleForm() {
       const slug = toSlug(data.title);
       const oldArticle = article;
 
-      editArticle({
-         ...data,
-         image: currentImage,
-         oldImage,
-         content: contentHTML,
-         category_id,
-         status: currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
-         code: localArticle.code,
-         slug,
-         oldArticle,
-      });
+      editArticle(
+         {
+            ...data,
+            image: currentImage,
+            oldImage,
+            content: contentHTML,
+            category_id,
+            status:
+               currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
+            code: localArticle.code,
+            slug,
+            oldArticle,
+         },
+         {
+            onSuccess: () => {
+               localStorage.removeItem('editArticle');
+            },
+         }
+      );
 
       if (
          currentStatus !== articleStatus ||
@@ -215,13 +260,6 @@ function EditArticleForm() {
          setImgReload(false);
       }
    }, [currentImage, oldImage, imgReload]);
-
-   // - Remove data from localStorage after leaving the page
-   useEffect(() => {
-      return () => {
-         localStorage.removeItem('localArticle');
-      };
-   }, []);
 
    const isLoading = isPending || isEditing || isUnFeaturing;
 

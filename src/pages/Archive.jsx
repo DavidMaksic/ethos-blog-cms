@@ -23,11 +23,9 @@ function Archive() {
             <ArchiveOps />
          </Row>
 
-         <div className="mb-24">
-            <Row>
-               <ArchiveTable />
-            </Row>
-         </div>
+         <Row>
+            <ArchiveTable />
+         </Row>
       </>
    );
 }

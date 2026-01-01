@@ -16,6 +16,7 @@ function Dashboard() {
             <Heading type="h1">Dashboard</Heading>
             <DashboardFilter />
          </Row>
+
          <DashboardLayout />
       </>
    );
