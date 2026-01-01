@@ -46,7 +46,7 @@ function ArchiveRow({ article }) {
          transition={{ duration: 0.3 }}
       >
          <img
-            className={`w-full h-24 2xl:h-23 xl:h-30 object-cover transition-200 ${
+            className={`w-full h-24 2xl:h-23 xl:h-30 object-cover transition-300 ${
                loaded ? 'opacity-90 dark:opacity-70' : 'opacity-0'
             }`}
             onLoad={() => setLoaded(true)}
