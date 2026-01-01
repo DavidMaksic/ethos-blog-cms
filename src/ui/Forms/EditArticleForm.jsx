@@ -295,7 +295,7 @@ function EditArticleForm() {
             </FormItem>
 
             <FormItem label="Image" error={errors?.image?.message}>
-               <label htmlFor="image">
+               <label htmlFor="image" className="w-fit rounded-3xl">
                   <img
                      ref={imageRef}
                      src={currentImage}

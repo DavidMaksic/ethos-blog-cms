@@ -322,7 +322,7 @@ function Creator() {
             </FormItem>
 
             <FormItem label="Image" error={errors?.image?.message}>
-               <label htmlFor="image">
+               <label htmlFor="image" className="w-fit rounded-3xl">
                   <div
                      className={`relative h-39.5 w-76 rounded-3xl cursor-pointer transition ${
                         !currentImage &&
@@ -340,7 +340,7 @@ function Creator() {
                      {!currentImage && (
                         <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex flex-col items-center gap-0.5">
                            <LuCloudUpload className="size-8" />
-                           <span className="normal-case text-xl">
+                           <span className="normal-case text-xl select-none">
                               Upload image
                            </span>
                         </div>
