@@ -187,7 +187,9 @@ function EditArticleForm() {
    }, [editor, article]);
 
    // - React Query logic
-   const [currentImage, setCurrentImage] = useState(oldImage);
+   const [currentImage, setCurrentImage] = useState(
+      localArticle.image || oldImage
+   );
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 

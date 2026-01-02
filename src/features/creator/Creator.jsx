@@ -51,6 +51,7 @@ import FormRow from '../../ui/Forms/FormRow';
 import Options from '../../ui/Operations/Options';
 import toast from 'react-hot-toast';
 import Form from '../../ui/Forms/Form';
+import { useDebounce } from '../../hooks/useDebounce';
 
 function Creator() {
    const [localArticle, setLocalArticle] = useLocalStorage(
@@ -108,14 +109,20 @@ function Creator() {
       },
    });
 
+   // - Debounce article content
+   const debouncedContent = useDebounce(contentHTML, 10000);
+   useEffect(() => {
+      if (debouncedContent) {
+         setLocalArticle((prev) => ({
+            ...prev,
+            content: debouncedContent,
+         }));
+      }
+   }, [debouncedContent, setLocalArticle]);
+
    const onChange = async () => {
       const html = await editor.blocksToFullHTML(editor.document);
-
       setContentHTML(html);
-      setLocalArticle({
-         ...localArticle,
-         content: editor.document,
-      });
    };
 
    const { categories } = useGetCategories();
