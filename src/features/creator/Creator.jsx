@@ -69,7 +69,7 @@ function Creator() {
 
    useEffect(() => {
       document.documentElement.setAttribute('data-lang', localArticle.code);
-   }, []); // eslint-disable-line
+   }, [localArticle.code]);
 
    // - Editor logic
    const [contentHTML, setContentHTML] = useState('');
@@ -110,15 +110,16 @@ function Creator() {
    });
 
    // - Debounce article content
-   const debouncedContent = useDebounce(contentHTML, 10000);
+   const debouncedContent = useDebounce(contentHTML, 1000);
+
    useEffect(() => {
       if (debouncedContent) {
          setLocalArticle((prev) => ({
             ...prev,
-            content: debouncedContent,
+            content: editor.document,
          }));
       }
-   }, [debouncedContent, setLocalArticle]);
+   }, [debouncedContent, setLocalArticle]); // eslint-disable-line
 
    const onChange = async () => {
       const html = await editor.blocksToFullHTML(editor.document);

@@ -72,8 +72,8 @@ function EditArticleForm() {
 
    // - Set default article code as data-attribute
    useEffect(() => {
-      document.documentElement.setAttribute('data-lang', article.code);
-   }, []); // eslint-disable-line
+      document.documentElement.setAttribute('data-lang', localArticle.code);
+   }, [localArticle.code]);
 
    // - Status logic
    const articleStatus =
@@ -154,15 +154,15 @@ function EditArticleForm() {
       }
    }, [debouncedContent, setLocalArticle]);
 
-   // - Blocknote Editor
+   // - Blocknote Editor logic
    const onChange = async () => {
       const html = await editor.blocksToFullHTML(editor.document);
       setContentHTML(html);
    };
 
-   // - Two effects for initial sync between inputs and localStorage
+   // - 3 effects for initial sync between inputs and localStorage
    useEffect(() => {
-      // - Check if the API article exists AND it differs from one in storage
+      // - Check if the API article differs from one in storage
       if (article?.id && article.id !== localArticle.id) {
          const freshArticle = {
             ...article,
@@ -188,10 +188,14 @@ function EditArticleForm() {
          setContentBlocks(blocks);
       };
       getBlocks();
-   }, []);
+   }, []); // eslint-disable-line
+
+   useEffect(() => {
+      setCurrentImage(localArticle?.image || oldImage);
+   }, [localArticle?.image, oldImage]);
 
    // - React Query logic
-   const [currentImage, setCurrentImage] = useState(oldImage);
+   const [currentImage, setCurrentImage] = useState();
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 
@@ -241,12 +245,9 @@ function EditArticleForm() {
    function handlePreviewImage(e) {
       const img = e.target.files[0];
       if (!img) return;
-      setCurrentImage(img);
 
-      if (imageRef?.current) {
-         imageRef.current.src = URL.createObjectURL(img);
-         imageRef.current.srcset = URL.createObjectURL(img);
-      }
+      const objectUrl = URL.createObjectURL(img);
+      setCurrentImage(objectUrl);
 
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -258,16 +259,6 @@ function EditArticleForm() {
       };
       reader.readAsDataURL(img);
    }
-
-   const [imgReload, setImgReload] = useState(false);
-
-   useEffect(() => {
-      if (imgReload) {
-         imageRef.current.src = oldImage;
-         imageRef.current.srcset = oldImage;
-         setImgReload(false);
-      }
-   }, [currentImage, oldImage, imgReload]);
 
    const isLoading = isPending || isEditing || isUnFeaturing;
 
@@ -432,7 +423,6 @@ function EditArticleForm() {
                });
                editor.replaceBlocks(editor.document, contentBlocks);
                setCurrentImage(oldImage);
-               setImgReload(true);
                document.documentElement.setAttribute('data-lang', article.code);
             }}
          />
