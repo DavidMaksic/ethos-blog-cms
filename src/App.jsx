@@ -31,8 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Use React Compiler
-
 function App() {
    return (
       <QueryClientProvider client={queryClient}>

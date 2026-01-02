@@ -72,11 +72,7 @@ function EditArticleForm() {
 
    // - Set default article code as data-attribute
    useEffect(() => {
-      if (localArticle?.code) {
-         document.documentElement.setAttribute('data-lang', localArticle.code);
-      } else {
-         document.documentElement.setAttribute('data-lang', article.code);
-      }
+      document.documentElement.setAttribute('data-lang', article.code);
    }, []); // eslint-disable-line
 
    // - Status logic
@@ -89,19 +85,6 @@ function EditArticleForm() {
       defaultValues: localArticle,
    });
    const { errors } = formState;
-
-   useEffect(() => {
-      // Check if the API article exists AND it differs from one in storage
-      if (article?.id && article.id !== localArticle.id) {
-         const freshArticle = {
-            ...article,
-            category: article.categories?.category,
-         };
-
-         setLocalArticle(freshArticle);
-         reset(freshArticle);
-      }
-   }, [article, reset, localArticle.id, setLocalArticle]);
 
    useEffect(() => {
       const subscription = watch((value) => {
@@ -161,7 +144,7 @@ function EditArticleForm() {
    });
 
    // - Debounce article content
-   const debouncedContent = useDebounce(contentHTML, 10000);
+   const debouncedContent = useDebounce(contentHTML, 1000);
    useEffect(() => {
       if (debouncedContent) {
          setLocalArticle((prev) => ({
@@ -177,19 +160,38 @@ function EditArticleForm() {
       setContentHTML(html);
    };
 
+   // - Two effects for initial sync between inputs and localStorage
    useEffect(() => {
+      // - Check if the API article exists AND it differs from one in storage
+      if (article?.id && article.id !== localArticle.id) {
+         const freshArticle = {
+            ...article,
+            category: article.categories?.category,
+         };
+
+         setLocalArticle(freshArticle);
+         reset(freshArticle);
+      }
+   }, [article, reset, localArticle.id, setLocalArticle]);
+
+   useEffect(() => {
+      // - Populate content with correct data
       const getBlocks = async () => {
-         const blocks = await editor.tryParseHTMLToBlocks(article.content);
+         let blocks;
+
+         if (article?.id && article.id !== localArticle.id) {
+            blocks = await editor.tryParseHTMLToBlocks(article.content);
+         } else {
+            blocks = await editor.tryParseHTMLToBlocks(localArticle.content);
+         }
          editor.replaceBlocks(editor.document, blocks);
          setContentBlocks(blocks);
       };
       getBlocks();
-   }, [editor, article]);
+   }, []);
 
    // - React Query logic
-   const [currentImage, setCurrentImage] = useState(
-      localArticle.image || oldImage
-   );
+   const [currentImage, setCurrentImage] = useState(oldImage);
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 

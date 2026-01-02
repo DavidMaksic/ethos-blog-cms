@@ -13,6 +13,7 @@ import { useFullscreen } from '../../context/FullscreenContext';
 import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
+import { useDebounce } from '../../hooks/useDebounce';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -51,7 +52,6 @@ import FormRow from '../../ui/Forms/FormRow';
 import Options from '../../ui/Operations/Options';
 import toast from 'react-hot-toast';
 import Form from '../../ui/Forms/Form';
-import { useDebounce } from '../../hooks/useDebounce';
 
 function Creator() {
    const [localArticle, setLocalArticle] = useLocalStorage(
