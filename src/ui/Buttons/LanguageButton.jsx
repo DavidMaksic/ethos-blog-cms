@@ -23,7 +23,7 @@ function LanguageButton({
    return (
       <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
          <img
-            className={`size-11 hover:opacity-100 dark:hover:opacity-85 transition-[opacity] ${
+            className={`size-11 hover:opacity-100 dark:hover:opacity-85 transition-[opacity] duration-200 ${
                loadedMain ? 'opacity-80 dark:opacity-70' : 'opacity-0'
             }`}
             src={localArticle.flag ? localArticle.flag : flag}
@@ -71,7 +71,7 @@ function LanguageButton({
                      >
                         {item.lang}
                         <img
-                           className={`size-7 border border-primary-300 dark:border-primary-200 rounded-full group-hover:opacity-100 dark:group-hover:opacity-95 transition-[opacity] ${
+                           className={`size-7 border border-primary-300 dark:border-primary-200 rounded-full group-hover:opacity-100 dark:group-hover:opacity-95 transition-[opacity] duration-200 ${
                               !loaded && 'opacity-0'
                            }`}
                            onLoad={() => setLoaded(true)}

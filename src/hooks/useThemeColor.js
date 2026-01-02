@@ -6,7 +6,7 @@ export function useThemeColor() {
 
       const updateThemeColor = () => {
          const theme = document.documentElement.getAttribute('data-theme');
-         const color = theme === 'dark' ? '#1c242c' : '#fff';
+         const color = theme === 'dark' ? '#131C24' : '#fff';
 
          let meta = document.querySelector('meta[name="theme-color"]');
          if (meta) {
