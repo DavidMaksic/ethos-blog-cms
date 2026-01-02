@@ -32,6 +32,11 @@ function Article() {
    const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
       useFullscreen();
 
+   useEffect(() => {
+      setLocalFullscreen(true);
+      setIsFullscreen(true);
+   }, []); // eslint-disable-line
+
    // - Data fetching
    const { article, isPending } = useFindArticle();
    const { user: currentAuthor } = useCurrentAuthor();

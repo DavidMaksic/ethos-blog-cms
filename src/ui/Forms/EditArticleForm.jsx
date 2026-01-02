@@ -105,6 +105,11 @@ function EditArticleForm() {
    const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
       useFullscreen();
 
+   useEffect(() => {
+      setLocalFullscreen(true);
+      setIsFullscreen(true);
+   }, []); // eslint-disable-line
+
    // - Editor logic
    const [contentHTML, setContentHTML] = useState();
    const [contentBlocks, setContentBlocks] = useState();
