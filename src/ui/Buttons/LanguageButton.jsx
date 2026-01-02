@@ -1,7 +1,7 @@
 import { DEFAULT_LANG, LANGUAGES } from '../../utils/constants';
 import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useState } from 'react';
 
 function LanguageButton({
    localArticle,
@@ -12,22 +12,11 @@ function LanguageButton({
    const [open, setOpen] = useState(false);
    const ref = useOutsideClick(() => setOpen(false), false);
 
-   const defaultFlag = LANGUAGES.find((item) => {
-      if (isEdit) {
-         return item.code === articleCode;
-      } else {
-         return item.code === DEFAULT_LANG;
-      }
-   })?.flag;
-
-   const [flag, setFlag] = useState(defaultFlag);
-
-   useEffect(() => {
-      setLocalArticle((prev) => ({
-         ...prev,
-         flag,
-      }));
-   }, [setLocalArticle, flag]);
+   const flag =
+      localArticle.flag ??
+      LANGUAGES.find((item) =>
+         isEdit ? item.code === articleCode : item.code === DEFAULT_LANG
+      )?.flag;
 
    return (
       <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
@@ -62,10 +51,9 @@ function LanguageButton({
                         className="flex justify-between items-center relative font-medium rounded-xl py-2 pr-3 pl-5 hover:bg-primary-100/70 text-primary-500 dark:text-primary-500/90 dark:hover:bg-primary-300/20 duration-75 [&_img]:opacity-80 dark:[&_img]:opacity-80 group"
                         key={item.code}
                         onClick={() => {
-                           setFlag(item.flag);
-
                            setLocalArticle((prev) => ({
                               ...prev,
+                              flag: item.flag,
                               language: item.lang,
                               code: item.code,
                            }));

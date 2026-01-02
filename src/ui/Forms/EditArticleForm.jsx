@@ -72,7 +72,11 @@ function EditArticleForm() {
 
    // - Set default article code as data-attribute
    useEffect(() => {
-      document.documentElement.setAttribute('data-lang', article.code);
+      if (localArticle?.code) {
+         document.documentElement.setAttribute('data-lang', localArticle.code);
+      } else {
+         document.documentElement.setAttribute('data-lang', article.code);
+      }
    }, []); // eslint-disable-line
 
    // - Status logic
