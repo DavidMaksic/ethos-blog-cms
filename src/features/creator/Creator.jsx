@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
+import { CONTENT_DEBOUNCE, DEFAULT_LANG, FLAGS } from '../../utils/constants';
 import { useEffect, useRef, useState } from 'react';
 import { LuCloudUpload, LuSunMedium } from 'react-icons/lu';
 import { insertAlert, toSlug } from '../../utils/helpers';
-import { DEFAULT_LANG, FLAGS } from '../../utils/constants';
 import { useCreateArticle } from '../archive/useCreateArticle';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useGetCategories } from '../tags/useGetCategories';
@@ -110,7 +110,7 @@ function Creator() {
    });
 
    // - Debounce article content
-   const debouncedContent = useDebounce(contentHTML, 1000);
+   const debouncedContent = useDebounce(contentHTML, CONTENT_DEBOUNCE);
 
    useEffect(() => {
       if (debouncedContent) {

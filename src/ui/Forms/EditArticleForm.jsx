@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
+import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
 import { useEffect, useRef, useState } from 'react';
 import { insertAlert, toSlug } from '../../utils/helpers';
 import { useGetCategories } from '../../features/tags/useGetCategories';
@@ -16,7 +17,6 @@ import { useDarkMode } from '../../context/DarkModeContext';
 import { useDebounce } from '../../hooks/useDebounce';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
-import { LANGUAGES } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
 import { Alert } from '../Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -144,7 +144,7 @@ function EditArticleForm() {
    });
 
    // - Debounce article content
-   const debouncedContent = useDebounce(contentHTML, 1000);
+   const debouncedContent = useDebounce(contentHTML, CONTENT_DEBOUNCE);
    useEffect(() => {
       if (debouncedContent) {
          setLocalArticle((prev) => ({

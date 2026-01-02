@@ -13,6 +13,7 @@ const itemHeight = getItemHeight();
 const viewportHeight = window.innerHeight;
 export const PAGE_SIZE = Math.floor(viewportHeight / itemHeight);
 
+export const CONTENT_DEBOUNCE = 10000;
 export const DEFAULT_LANG = 'en';
 export const FLAGS = {
    en: '/en-flag.png',
