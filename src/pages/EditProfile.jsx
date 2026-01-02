@@ -28,35 +28,24 @@ function EditProfile() {
    }
 
    return (
-      <div className="flex justify-center gap-10">
-         <Row>
-            <div className="space-y-8">
-               <Row type="horizontal">
-                  <div className="flex gap-5 items-center">
-                     <Heading type="h1">Edit your profile</Heading>
-                     <span className="text-primary-400">|</span>
-                     <button
-                        onClick={() => navigate(-1)}
-                        className="underlined-return text-primary-400"
-                     >
-                        return
-                     </button>
-                  </div>
-               </Row>
-
-               <Row type="horizontal">
-                  <EditProfileForm />
-               </Row>
+      <div className="flex flex-col gap-8 my-auto">
+         <Row type="horizontal">
+            <div className="flex gap-5 items-center">
+               <Heading type="h1">Edit your profile</Heading>
+               <span className="text-primary-400">|</span>
+               <button
+                  onClick={() => navigate(-1)}
+                  className="underlined-return text-primary-400"
+               >
+                  return
+               </button>
             </div>
          </Row>
 
-         <Row>
-            <div className="mt-15">
-               <Row type="horizontal">
-                  <PasswordForm />
-               </Row>
-            </div>
-         </Row>
+         <div className="flex gap-8">
+            <EditProfileForm />
+            <PasswordForm />
+         </div>
       </div>
    );
 }

@@ -32,21 +32,26 @@ function Article() {
    const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
       useFullscreen();
 
-   useEffect(() => {
-      setLocalFullscreen(true);
-      setIsFullscreen(true);
-   }, []); // eslint-disable-line
-
    // - Data fetching
    const { article, isPending } = useFindArticle();
    const { user: currentAuthor } = useCurrentAuthor();
+
+   // - Two effects for sync
+   useEffect(() => {
+      if (!isPending && article) {
+         setLocalFullscreen(true);
+         setIsFullscreen(true);
+      }
+   }, [isPending]); // eslint-disable-line
 
    useEffect(() => {
       document.documentElement.setAttribute('data-lang', article?.code);
    }, [article]);
 
+   // - Other data
    const category = article?.categories;
    const author = article?.authors;
+   const date = format(new Date(article.created_at), 'MMM dd, yyyy');
 
    const { authors } = useAuthors();
    const isAdmin = authors?.find(
@@ -77,9 +82,6 @@ function Article() {
             Article you are looking for does not exist!
          </ArticleNotFound>
       );
-
-   // - Other logic
-   const date = format(new Date(article.created_at), 'MMM dd, yyyy');
 
    return (
       <motion.article

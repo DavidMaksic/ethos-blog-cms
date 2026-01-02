@@ -18,7 +18,7 @@ function Authors() {
    const currentAuthor = authors?.find((item) => item.id === user.id);
 
    return (
-      <div className="-translate-y-10 flex flex-col gap-8">
+      <div className="-translate-y-10 flex flex-col gap-8 my-auto">
          <Row type="horizontal">
             <div className="flex gap-5 items-center">
                <Heading type="h1">Authors</Heading>

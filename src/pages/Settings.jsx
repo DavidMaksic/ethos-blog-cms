@@ -11,7 +11,7 @@ function Settings() {
    useEffect(() => setIsFullscreen(false), [setIsFullscreen]);
 
    return (
-      <>
+      <div className="-translate-y-20 flex flex-col gap-8 my-auto">
          <Row type="horizontal">
             <Heading type="h1">Settings</Heading>
          </Row>
@@ -21,7 +21,7 @@ function Settings() {
                <SettingsForm />
             </UpdateSettings>
          </Row>
-      </>
+      </div>
    );
 }
 

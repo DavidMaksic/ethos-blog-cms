@@ -11,7 +11,7 @@ function AuthorCreator() {
    }
 
    return (
-      <div className="space-y-8 self-center">
+      <div className="space-y-8 self-center my-auto">
          <Row type="vertical">
             <div className="flex items-center gap-6">
                <Heading type="h1">Create new author</Heading>

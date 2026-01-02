@@ -1,6 +1,7 @@
 import { useCurrentAuthor } from './useCurrentAuthor';
 import { useUpdateAuthor } from './useUpdateAuthor';
 import { useForm } from 'react-hook-form';
+import { motion } from 'motion/react';
 
 import PasswordButton from '../../ui/Buttons/PasswordButton';
 import FormItem from '../../ui/Forms/FormItem';
@@ -19,7 +20,7 @@ function PasswordForm() {
 
    return (
       <div className="space-y-8">
-         <Form isPending={isPending} hasMargin={false}>
+         <Form isPending={isPending}>
             <FormRow columns="grid-cols-[24rem]">
                <FormItem label="New password" error={errors?.password?.message}>
                   <input
@@ -71,10 +72,15 @@ function PasswordForm() {
             </FormRow>
          </Form>
 
-         <div className="label w-fit flex flex-col gap-3 font-creator bg-secondary dark:bg-primary-300/10 rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium box-shadow transition-200 px-20 pr-24 pt-7 pb-10">
+         <motion.div
+            className="label w-fit flex flex-col gap-3 font-creator bg-secondary dark:bg-primary-300/10 rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium box-shadow transition-200 px-20 pr-24 pt-7 pb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+         >
             <label>Email</label>
             <span className="text-2xl">{user.email}</span>
-         </div>
+         </motion.div>
       </div>
    );
 }

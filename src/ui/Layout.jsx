@@ -28,7 +28,7 @@ function Layout() {
          <Sidebar />
          <motion.main
             ref={mainRef}
-            className={`main px-59 pt-20 py-12 flex flex-col gap-8 transition-all duration-400 ease-in-out bg-primary overflow-auto remove-scrollbar h-screen background-gradient ${
+            className={`main px-59 py-[7.8dvh] flex flex-col gap-8 transition-all duration-400 ease-in-out bg-primary overflow-auto remove-scrollbar h-screen background-gradient ${
                isFullscreen
                   ? 'px-[21.5rem]!'
                   : 'pl-[28rem] 2xl:pl-[24.5rem] 2xl:pr-[8.5rem]'
