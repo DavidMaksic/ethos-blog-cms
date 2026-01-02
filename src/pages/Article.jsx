@@ -51,7 +51,6 @@ function Article() {
    // - Other data
    const category = article?.categories;
    const author = article?.authors;
-   const date = format(new Date(article?.created_at), 'MMM dd, yyyy');
 
    const { authors } = useAuthors();
    const isAdmin = authors?.find(
@@ -82,6 +81,8 @@ function Article() {
             Article you are looking for does not exist!
          </ArticleNotFound>
       );
+
+   const date = format(new Date(article.created_at), 'MMM dd, yyyy');
 
    return (
       <motion.article
