@@ -43,8 +43,6 @@ function CategoryChart({ articles, numDays }) {
            shadow: 'rgba(0, 0, 0, 0.1)',
         };
 
-   const is4k = useMediaQuery({ maxWidth: 3840 });
-   const is2k = useMediaQuery({ maxWidth: 2560 });
    const isFullHD = useMediaQuery({ maxWidth: 1920 });
    const is2xl = useMediaQuery({ maxWidth: 1580 });
 
@@ -52,16 +50,6 @@ function CategoryChart({ articles, numDays }) {
    let innerRadius;
    let outerRadius;
 
-   if (is4k) {
-      size = 540;
-      innerRadius = 170;
-      outerRadius = 220;
-   }
-   if (is2k) {
-      size = 355;
-      innerRadius = 115;
-      outerRadius = 150;
-   }
    if (isFullHD) {
       size = 240;
       innerRadius = 85;

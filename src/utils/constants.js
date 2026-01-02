@@ -1,7 +1,17 @@
-const itemHeight = 130; // px
+const FULL_HD = 1912;
+const XXL = 1530;
+
+function getItemHeight() {
+   const width = window.innerWidth;
+
+   if (width >= FULL_HD) return 125;
+   if (width >= XXL) return 120;
+   return 125;
+}
+
+const itemHeight = getItemHeight();
 const viewportHeight = window.innerHeight;
-const itemsPerPage = Math.floor(viewportHeight / itemHeight);
-export const PAGE_SIZE = itemsPerPage;
+export const PAGE_SIZE = Math.floor(viewportHeight / itemHeight);
 
 export const DEFAULT_LANG = 'en';
 export const FLAGS = {

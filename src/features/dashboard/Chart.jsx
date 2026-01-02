@@ -52,19 +52,11 @@ function Chart({ articles, numDays }) {
            border: '#e5e7eb',
         };
 
-   const is4k = useMediaQuery({ maxWidth: 3840 });
-   const is2k = useMediaQuery({ maxWidth: 2560 });
    const isFullHD = useMediaQuery({ maxWidth: 1920 });
    const isXl = useMediaQuery({ maxWidth: 1290 });
 
    let size;
 
-   if (is4k) {
-      size = 400;
-   }
-   if (is2k) {
-      size = 300;
-   }
    if (isFullHD) {
       size = 300;
    }
