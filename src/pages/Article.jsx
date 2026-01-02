@@ -51,7 +51,7 @@ function Article() {
    // - Other data
    const category = article?.categories;
    const author = article?.authors;
-   const date = format(new Date(article.created_at), 'MMM dd, yyyy');
+   const date = format(new Date(article?.created_at), 'MMM dd, yyyy');
 
    const { authors } = useAuthors();
    const isAdmin = authors?.find(
