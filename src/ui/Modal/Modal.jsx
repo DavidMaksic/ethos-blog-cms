@@ -14,7 +14,7 @@ function Modal({ closeModal, style, children }) {
          transition={{ duration: 0.1 }}
       >
          <motion.div
-            className={`fixed top-[50%] left-1/2 px-4 py-12 pt-14 translate-x-[-50%] translate-y-[-50%] font-creator shadow-modal dark:shadow-none flex flex-col gap-4 items-center text-[2.4rem] rounded-4xl bg-white/90 dark:bg-primary/90 border border-quaternary dark:border-tertiary overflow-hidden ${style}`}
+            className={`fixed top-[55%] left-1/2 px-4 py-12 pt-14 translate-x-[-50%] translate-y-[-50%] font-creator shadow-modal dark:shadow-none flex flex-col gap-4 items-center text-[2.4rem] rounded-4xl bg-white/90 dark:bg-primary/90 border border-quaternary dark:border-tertiary overflow-hidden ${style}`}
             layout
             transition={{ duration: 0.3 }}
             ref={ref}
