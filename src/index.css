@@ -637,6 +637,14 @@ input:-webkit-autofill {
    border-radius: 8px !important;
 }
 
+.bn-suggestion-menu-label {
+   padding: 0 0.7rem !important;
+}
+
+.mantine-Menu-label {
+   padding: 0 0.75rem !important;
+}
+
 .bn-suggestion-menu-label:not(:first-child) {
    margin-top: 8px;
 }

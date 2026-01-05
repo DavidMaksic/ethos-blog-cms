@@ -40,7 +40,7 @@ function ArchiveRow({ article }) {
 
    return (
       <motion.div
-         className="grid-table bg-white dark:bg-primary-300/2 odd:bg-primary-50 dark:odd:bg-primary-300/10 transition-bg last:rounded-b-2xl last:[&_img]:rounded-bl-2xl"
+         className="grid-table bg-white dark:bg-primary-300/2 odd:bg-primary-100/50 dark:odd:bg-primary-300/13 transition-bg last:rounded-b-2xl last:[&_img]:rounded-bl-2xl"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}

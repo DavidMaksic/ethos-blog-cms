@@ -111,8 +111,6 @@ function EditArticleForm() {
    }, []); // eslint-disable-line
 
    // - Editor logic
-   const [contentHTML, setContentHTML] = useState();
-   const [contentBlocks, setContentBlocks] = useState();
    const {
       file,
       audio,
@@ -149,6 +147,7 @@ function EditArticleForm() {
    });
 
    // - Debounce article content
+   const [contentHTML, setContentHTML] = useState();
    const debouncedContent = useDebounce(contentHTML, CONTENT_DEBOUNCE);
    useEffect(() => {
       if (debouncedContent) {
@@ -159,7 +158,7 @@ function EditArticleForm() {
       }
    }, [debouncedContent, setLocalArticle]);
 
-   // - Blocknote Editor logic
+   // - When article content changes, store it as html
    const onChange = async () => {
       const html = await editor.blocksToFullHTML(editor.document);
       setContentHTML(html);
@@ -181,18 +180,17 @@ function EditArticleForm() {
 
    useEffect(() => {
       // - Populate content with correct data
-      const getBlocks = async () => {
-         let blocks;
+      const loadBlocks = async () => {
+         const html =
+            article?.id && article.id !== localArticle.id
+               ? article.content
+               : localArticle.content;
 
-         if (article?.id && article.id !== localArticle.id) {
-            blocks = await editor.tryParseHTMLToBlocks(article.content);
-         } else {
-            blocks = await editor.tryParseHTMLToBlocks(localArticle.content);
-         }
+         const blocks = await editor.tryParseHTMLToBlocks(html);
          editor.replaceBlocks(editor.document, blocks);
-         setContentBlocks(blocks);
       };
-      getBlocks();
+
+      loadBlocks();
    }, []); // eslint-disable-line
 
    useEffect(() => {
@@ -416,17 +414,23 @@ function EditArticleForm() {
          </FormStatus>
 
          <ResetButton
-            handler={() => {
+            handler={async () => {
                reset();
                setIsDefault(true);
                setCurrentStatus(articleStatus);
+
                setLocalArticle({
                   ...article,
                   category: category?.category,
                   flag: LANGUAGES.find((item) => item.code === article.code)
                      .flag,
                });
-               editor.replaceBlocks(editor.document, contentBlocks);
+
+               const blocks = await editor.tryParseHTMLToBlocks(
+                  article.content
+               );
+               editor.replaceBlocks(editor.document, blocks);
+
                setCurrentImage(oldImage);
                document.documentElement.setAttribute('data-lang', article.code);
             }}
