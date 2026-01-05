@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
-import { useEffect, useRef, useState } from 'react';
 import { insertAlert, toSlug } from '../../utils/helpers';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
@@ -111,24 +111,19 @@ function EditArticleForm() {
    }, []); // eslint-disable-line
 
    // - Editor logic
-   const {
-      file,
-      audio,
-      emoji,
-      checkListItem,
-      codeBlock,
-      table,
-      ...remainingBlockSpecs
-   } = defaultBlockSpecs;
+   const schema = useMemo(() => {
+      const { file, audio, emoji, checkListItem, codeBlock, table, ...rest } =
+         defaultBlockSpecs;
 
-   const schema = withMultiColumn(
-      BlockNoteSchema.create({
-         blockSpecs: {
-            ...remainingBlockSpecs,
-            alert: Alert,
-         },
-      })
-   );
+      return withMultiColumn(
+         BlockNoteSchema.create({
+            blockSpecs: {
+               ...rest,
+               alert: Alert,
+            },
+         })
+      );
+   }, []);
 
    const locale = en;
 

@@ -586,7 +586,7 @@ input:-webkit-autofill {
    border-radius: 14px !important;
    padding: 4px 6px !important;
    gap: 3px;
-   border-color: #68686825 !important;
+   @apply border-primary-400/20! dark:border-primary-300/15!;
 
    &::-webkit-scrollbar {
       width: 2px;
@@ -601,10 +601,6 @@ input:-webkit-autofill {
       margin-top: 8px;
       margin-bottom: 8px;
    }
-}
-
-[data-theme='dark'] .bn-suggestion-menu {
-   border-color: #28333b25 !important;
 }
 
 .mantine-Menu-dropdown {

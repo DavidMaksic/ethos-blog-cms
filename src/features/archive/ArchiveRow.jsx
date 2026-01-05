@@ -14,7 +14,7 @@ import DeleteModal from '../../ui/Modal/DeleteModal';
 import Modal from '../../ui/Modal/Modal';
 import Menus from '../../ui/Menus';
 
-function ArchiveRow({ article }) {
+function ArchiveRow({ article, isFirst, isLast }) {
    const navigate = useNavigate();
    const { id, created_at, image, title, status } = article;
    const [loaded, setLoaded] = useState(false);
@@ -47,8 +47,10 @@ function ArchiveRow({ article }) {
       >
          <img
             className={`w-full h-24 2xl:h-23 xl:h-30 object-cover transition-300 ${
-               loaded ? 'opacity-90 dark:opacity-70' : 'opacity-0'
-            }`}
+               loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'
+            } ${loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'}
+               ${isFirst ? 'rounded-tr-2xl' : ''}
+               ${isLast ? 'rounded-br-2xl' : ''}`}
             onLoad={() => setLoaded(true)}
             src={image}
             alt={title}

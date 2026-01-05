@@ -25,8 +25,13 @@ function ArchiveTable() {
                <div>Author</div>
             </TableHeader>
 
-            {articles.map((article) => (
-               <ArchiveRow article={article} key={article.id} />
+            {articles.map((article, index) => (
+               <ArchiveRow
+                  article={article}
+                  key={article.id}
+                  isFirst={index === 0}
+                  isLast={index === articles.length - 1}
+               />
             ))}
 
             {articles.length && <Pagination count={count} />}
