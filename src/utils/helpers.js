@@ -1,5 +1,13 @@
-import { insertOrUpdateBlock } from '@blocknote/core';
+/* eslint-disable no-unused-vars */
+
+import {
+   BlockNoteSchema,
+   defaultBlockSpecs,
+   insertOrUpdateBlock,
+} from '@blocknote/core';
+import { withMultiColumn } from '@blocknote/xl-multi-column';
 import { supabaseUrl } from '../services/supabase';
+import { Alert } from '../ui/Alert';
 import slugify, { extend } from 'slugify';
 
 export function createImagePath(article) {
@@ -78,3 +86,15 @@ export function getArticleChanges(oldArticle, newArticle) {
       content: oldArticle.content !== newArticle.content,
    };
 }
+
+const { file, audio, emoji, checkListItem, codeBlock, table, ...rest } =
+   defaultBlockSpecs;
+
+export const blockNoteSchema = withMultiColumn(
+   BlockNoteSchema.create({
+      blockSpecs: {
+         ...rest,
+         alert: Alert,
+      },
+   })
+);

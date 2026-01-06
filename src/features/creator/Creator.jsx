@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { CONTENT_DEBOUNCE, DEFAULT_LANG, FLAGS } from '../../utils/constants';
+import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
 import { useEffect, useRef, useState } from 'react';
 import { LuCloudUpload, LuSunMedium } from 'react-icons/lu';
-import { insertAlert, toSlug } from '../../utils/helpers';
 import { useCreateArticle } from '../archive/useCreateArticle';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useGetCategories } from '../tags/useGetCategories';
@@ -15,7 +14,6 @@ import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useForm } from 'react-hook-form';
-import { Alert } from '../../ui/Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
 
 import '@blocknote/core/fonts/inter.css';
@@ -28,14 +26,8 @@ import {
    useCreateBlockNote,
    FormattingToolbar,
 } from '@blocknote/react';
+import { combineByGroup, filterSuggestionItems } from '@blocknote/core';
 import {
-   BlockNoteSchema,
-   combineByGroup,
-   defaultBlockSpecs,
-   filterSuggestionItems,
-} from '@blocknote/core';
-import {
-   withMultiColumn,
    multiColumnDropCursor,
    getMultiColumnSlashMenuItems,
    locales as multiColumnLocales,
@@ -67,43 +59,22 @@ function Creator() {
       'article'
    );
 
-   useEffect(() => {
-      document.documentElement.setAttribute('data-lang', localArticle.code);
-   }, [localArticle.code]);
+   // - Form logic
+   const { register, handleSubmit, formState } = useForm();
+   const { errors } = formState;
 
    // - Editor logic
    const [contentHTML, setContentHTML] = useState('');
 
-   const {
-      file,
-      audio,
-      emoji,
-      checkListItem,
-      codeBlock,
-      table,
-      ...remainingBlockSpecs
-   } = defaultBlockSpecs;
-
-   const schema = withMultiColumn(
-      BlockNoteSchema.create({
-         blockSpecs: {
-            ...remainingBlockSpecs,
-            alert: Alert,
-         },
-      })
-   );
-
-   const locale = en;
-
    const editor = useCreateBlockNote({
       initialContent: localArticle.content,
-      schema,
+      schema: blockNoteSchema,
       dropCursor: multiColumnDropCursor,
       dictionary: {
-         ...locale,
+         ...en,
          multi_column: multiColumnLocales.en,
          placeholders: {
-            ...locale.placeholders,
+            ...en.placeholders,
             default: 'Write...',
          },
       },
@@ -129,40 +100,29 @@ function Creator() {
    const { categories } = useGetCategories();
    const [currentImage, setCurrentImage] = useState(localArticle.image || null);
 
-   // - Reset logic
-   function clear() {
-      setLocalArticle({
-         title: '',
-         description: '',
-         code: 'en',
-         flag: FLAGS[DEFAULT_LANG],
-         content: [
-            { type: 'paragraph', content: '' },
-            { type: 'paragraph', content: '' },
-         ],
-         category: categories?.at(0).category,
-      });
-      setCurrentImage('');
-      document.documentElement.setAttribute('data-lang', DEFAULT_LANG);
-      setTimeout(() => {
-         if (editor) {
-            editor.removeBlocks(editor.document);
-            editor.insertBlocks([{ content: '' }], editor.document[0], 'after');
-         }
-      }, 1);
+   // - Image select logic
+   const imageRef = useRef(null);
+
+   function handlePreviewImage(e) {
+      const img = e.target.files[0];
+      if (!img) return;
+      setCurrentImage(img);
+
+      if (imageRef?.current) {
+         imageRef.current.src = URL.createObjectURL(img);
+         imageRef.current.srcset = URL.createObjectURL(img);
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+         const base64String = reader.result;
+         setLocalArticle({
+            ...localArticle,
+            image: base64String,
+         });
+      };
+      reader.readAsDataURL(img);
    }
-
-   // - Form logic
-   const { register, handleSubmit, formState } = useForm();
-   const { errors } = formState;
-
-   // - Other
-   const { user } = useCurrentAuthor();
-   const { isDarkMode, toggleDarkMode } = useDarkMode();
-   const { isPending, createArticle } = useCreateArticle();
-
-   const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
-      useFullscreen();
 
    // - Submit functions
    function onSubmit(data) {
@@ -231,29 +191,41 @@ function Creator() {
       );
    }
 
-   // Upload image logic
-   const imageRef = useRef(null);
-
-   function handlePreviewImage(e) {
-      const img = e.target.files[0];
-      if (!img) return;
-      setCurrentImage(img);
-
-      if (imageRef?.current) {
-         imageRef.current.src = URL.createObjectURL(img);
-         imageRef.current.srcset = URL.createObjectURL(img);
-      }
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-         const base64String = reader.result;
-         setLocalArticle({
-            ...localArticle,
-            image: base64String,
-         });
-      };
-      reader.readAsDataURL(img);
+   // - Reset logic
+   function clear() {
+      setLocalArticle({
+         title: '',
+         description: '',
+         code: 'en',
+         flag: FLAGS[DEFAULT_LANG],
+         content: [
+            { type: 'paragraph', content: '' },
+            { type: 'paragraph', content: '' },
+         ],
+         category: categories?.at(0).category,
+      });
+      setCurrentImage('');
+      document.documentElement.setAttribute('data-lang', DEFAULT_LANG);
+      setTimeout(() => {
+         if (editor) {
+            editor.removeBlocks(editor.document);
+            editor.insertBlocks([{ content: '' }], editor.document[0], 'after');
+         }
+      }, 1);
    }
+
+   // - Set default article code as data-attribute
+   useEffect(() => {
+      document.documentElement.setAttribute('data-lang', localArticle.code);
+   }, [localArticle.code]);
+
+   // - Other
+   const { user } = useCurrentAuthor();
+   const { isDarkMode, toggleDarkMode } = useDarkMode();
+   const { isPending, createArticle } = useCreateArticle();
+
+   const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
+      useFullscreen();
 
    return (
       <Form isPending={isPending}>

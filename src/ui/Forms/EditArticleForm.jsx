@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
-import { insertAlert, toSlug } from '../../utils/helpers';
+import { useEffect, useRef, useState } from 'react';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -18,7 +18,6 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
-import { Alert } from '../Alert';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
 
 import {
@@ -29,14 +28,8 @@ import {
    useCreateBlockNote,
    FormattingToolbar,
 } from '@blocknote/react';
+import { combineByGroup, filterSuggestionItems } from '@blocknote/core';
 import {
-   BlockNoteSchema,
-   combineByGroup,
-   defaultBlockSpecs,
-   filterSuggestionItems,
-} from '@blocknote/core';
-import {
-   withMultiColumn,
    multiColumnDropCursor,
    getMultiColumnSlashMenuItems,
    locales as multiColumnLocales,
@@ -111,31 +104,15 @@ function EditArticleForm() {
    }, []); // eslint-disable-line
 
    // - Editor logic
-   const schema = useMemo(() => {
-      const { file, audio, emoji, checkListItem, codeBlock, table, ...rest } =
-         defaultBlockSpecs;
-
-      return withMultiColumn(
-         BlockNoteSchema.create({
-            blockSpecs: {
-               ...rest,
-               alert: Alert,
-            },
-         })
-      );
-   }, []);
-
-   const locale = en;
-
    const editor = useCreateBlockNote({
       trailingBlock: false,
-      schema,
+      schema: blockNoteSchema,
       dropCursor: multiColumnDropCursor,
       dictionary: {
-         ...locale,
+         ...en,
          multi_column: multiColumnLocales.en,
          placeholders: {
-            ...locale.placeholders,
+            ...en.placeholders,
             default: 'Write...',
          },
       },
