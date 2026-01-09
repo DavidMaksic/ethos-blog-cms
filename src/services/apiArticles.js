@@ -1,5 +1,11 @@
 import supabase, { supabaseUrl } from './supabase';
-import { createImagePath, getArticleChanges, getToday } from '../utils/helpers';
+import {
+   base64ToFile,
+   createImagePath,
+   getArticleChanges,
+   getToday,
+   isBase64Image,
+} from '../utils/helpers';
 import { PAGE_SIZE } from '../utils/constants';
 
 export async function getArticles({ filter, sortBy, page, search }) {
@@ -122,17 +128,28 @@ export async function deleteArticle(article) {
 
 export async function updateArticle(article) {
    const oldArticle = article.oldArticle;
-   const isFile = !article.image?.startsWith?.(supabaseUrl);
 
    // 1. Handle image upload if needed
    let finalImagePath = oldArticle.image;
+   let imageFile = article.image;
 
-   if (isFile) {
-      const [imageName, imagePath] = createImagePath(article);
+   if (isBase64Image(article.image)) {
+      imageFile = base64ToFile(article.image, `image-${Date.now()}.jpg`);
+   }
+
+   if (
+      typeof article.image === 'string' &&
+      article.image.startsWith(supabaseUrl)
+   ) {
+      imageFile = null;
+   }
+
+   if (imageFile) {
+      const [imageName, imagePath] = createImagePath(imageFile);
 
       const { error: storageError } = await supabase.storage
          .from('article_images')
-         .upload(imageName, article.image);
+         .upload(imageName, imageFile);
 
       if (storageError) throw new Error('Article image could not be uploaded');
 
@@ -163,7 +180,7 @@ export async function updateArticle(article) {
       const changes = getArticleChanges(oldArticle, article);
       const relevantChanges = {
          content: changes.content,
-         metadata: changes.title || changes.description || isFile,
+         metadata: changes.title || changes.description || imageFile,
          action: 'update',
       };
 
@@ -178,7 +195,7 @@ export async function updateArticle(article) {
    }
 
    // 4. Delete old image if a new one was uploaded
-   if (isFile && oldArticle.image) {
+   if (imageFile && oldArticle.image) {
       const oldImageName = oldArticle.image.split('/').pop();
       const { error: imageError } = await supabase.storage
          .from('article_images')

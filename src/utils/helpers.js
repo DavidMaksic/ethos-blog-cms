@@ -10,16 +10,31 @@ import { supabaseUrl } from '../services/supabase';
 import { Alert } from '../ui/Alert';
 import slugify, { extend } from 'slugify';
 
-export function createImagePath(article) {
-   const imageNameOld = `${Math.random()}-${article.image.name}`.replaceAll(
-      '/',
-      ''
-   );
-   const imageName = imageNameOld.replaceAll(' ', '');
+export function createImagePath(file) {
+   if (!file || !file.type) throw new Error('Invalid file provided');
 
+   const ext = file.type.split('/')[1];
+   const imageName = `${Date.now()}.${ext}`;
    const imagePath = `${supabaseUrl}/storage/v1/object/public/article_images/${imageName}`;
 
    return [imageName, imagePath];
+}
+
+export function isBase64Image(value) {
+   return typeof value === 'string' && value.startsWith('data:image/');
+}
+
+export function base64ToFile(base64, filename) {
+   const [meta, data] = base64.split(',');
+   const mime = meta.match(/:(.*?);/)[1];
+   const binary = atob(data);
+
+   const array = new Uint8Array(binary.length);
+   for (let i = 0; i < binary.length; i++) {
+      array[i] = binary.charCodeAt(i);
+   }
+
+   return new File([array], filename, { type: mime });
 }
 
 export const getToday = function (options = {}) {

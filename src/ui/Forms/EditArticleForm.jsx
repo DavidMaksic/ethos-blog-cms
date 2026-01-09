@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
@@ -165,12 +164,11 @@ function EditArticleForm() {
       loadBlocks();
    }, []); // eslint-disable-line
 
-   useEffect(() => {
-      setCurrentImage(localArticle?.image || oldImage);
-   }, [localArticle?.image, oldImage]);
-
    // - React Query logic
-   const [currentImage, setCurrentImage] = useState();
+   const [currentImage, setCurrentImage] = useState(
+      localArticle.image || oldImage
+   );
+
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 
@@ -179,21 +177,18 @@ function EditArticleForm() {
          (item) => item.category === localArticle.category
       );
 
-      const slug = toSlug(data.title);
-      const oldArticle = article;
-
       editArticle(
          {
             ...data,
-            image: currentImage,
+            image: localArticle.image,
             oldImage,
             content: contentHTML,
             category_id,
             status:
                currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
             code: localArticle.code,
-            slug,
-            oldArticle,
+            slug: toSlug(data.title),
+            oldArticle: article,
          },
          {
             onSuccess: () => {
@@ -221,16 +216,16 @@ function EditArticleForm() {
       const img = e.target.files[0];
       if (!img) return;
 
-      const objectUrl = URL.createObjectURL(img);
-      setCurrentImage(objectUrl);
-
       const reader = new FileReader();
       reader.onloadend = () => {
-         const base64String = reader.result;
-         setLocalArticle({
-            ...localArticle,
-            image: base64String,
-         });
+         const base64 = reader.result;
+
+         setCurrentImage(base64);
+         setLocalArticle((prev) => ({
+            ...prev,
+            image: base64,
+            imageMeta: { name: img.name, type: img.type },
+         }));
       };
       reader.readAsDataURL(img);
    }
