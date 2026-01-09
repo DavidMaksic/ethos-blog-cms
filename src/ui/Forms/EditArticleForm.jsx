@@ -164,11 +164,12 @@ function EditArticleForm() {
       loadBlocks();
    }, []); // eslint-disable-line
 
-   // - React Query logic
-   const [currentImage, setCurrentImage] = useState(
-      localArticle.image || oldImage
-   );
+   const [currentImage, setCurrentImage] = useState();
+   useEffect(() => {
+      setCurrentImage(localArticle?.image || oldImage);
+   }, [localArticle?.image, oldImage]);
 
+   // - React Query logic
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 
