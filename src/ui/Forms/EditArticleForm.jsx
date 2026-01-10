@@ -234,7 +234,7 @@ function EditArticleForm() {
    const isLoading = isPending || isEditing || isUnFeaturing;
 
    return (
-      <Form isPending={isLoading} isEdit={true}>
+      <Form isPending={isLoading}>
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
@@ -411,7 +411,7 @@ function EditArticleForm() {
             articleCode={article.code}
          />
 
-         <Options isEdit={true} currentAuthor={user}>
+         <Options editor={editor} currentAuthor={user}>
             <button
                className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 mb-0.5 rounded-2xl transition"
                onClick={(e) => {

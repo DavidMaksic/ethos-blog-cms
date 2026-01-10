@@ -43,7 +43,7 @@ function EditArticle() {
    }
 
    return (
-      <>
+      <div className="flex flex-col gap-8 my-auto w-[84.5rem] xl:w-[73rem] self-center">
          <Row type="horizontal">
             <div className="flex items-center gap-6">
                <Heading type="h1">
@@ -64,7 +64,7 @@ function EditArticle() {
          <Row>
             <EditArticleForm />
          </Row>
-      </>
+      </div>
    );
 }
 

@@ -405,7 +405,7 @@ function Creator() {
             setLocalArticle={setLocalArticle}
          />
 
-         <Options isEdit={true} currentAuthor={user}>
+         <Options editor={editor} currentAuthor={user}>
             <button
                className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 mt-0.5 rounded-2xl transition"
                onClick={(e) => {

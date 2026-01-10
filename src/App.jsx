@@ -31,10 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Fix width of the article in edit mode (for PWA)
-// TODO: Try to add backdrop blur to Table of contents, also add it in edit
-// TODO: Limit blocknote content in edit (to remove options on the left from showing when cursor is outside of content)
-
 function App() {
    return (
       <QueryClientProvider client={queryClient}>

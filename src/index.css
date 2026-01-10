@@ -1473,15 +1473,19 @@ strong {
    margin-top: 10px;
 }
 
-/* Margin above headers */
-
+/* For preview mode headings */
 .bn-block-group h2,
 .bn-block-group h3 {
-   scroll-margin-top: 44px;
+   scroll-margin-top: 44px !important;
+}
+
+/* For BlockNote editor mode - target the block container */
+.bn-block-group [data-node-type='heading'],
+.bn-block-group div[data-id] {
+   scroll-margin-top: 32px !important;
 }
 
 /* Bullet list dot styles */
-
 .bn-block-outer:not([data-prev-type])
    > .bn-block
    > .bn-block-content[data-content-type='bulletListItem']:before,
@@ -1519,4 +1523,48 @@ strong {
    margin-top: 5px;
    margin-bottom: 5px;
    gap: 0.6em !important;
+}
+
+.bn-container .bn-side-menu {
+   display: none;
+}
+
+/* Optional: Animated movement for side menu */
+
+/* .bn-container .bn-side-menu {
+   transition: all 0.075s;
+   opacity: 0;
+   pointer-events: none;
+}
+
+.bn-container:hover .bn-side-menu {
+   opacity: 1;
+   pointer-events: auto;
+}
+
+[data-floating-ui-focusable] {
+   transition: transform 120ms ease-out, opacity 0ms !important;
+} */
+
+/* Zoom image */
+
+.medium-zoom-overlay {
+   backdrop-filter: saturate(150%) blur(30px);
+   background: transparent !important;
+   z-index: 30;
+}
+
+[data-theme='dark'] .medium-zoom-overlay {
+   backdrop-filter: saturate(150%) blur(40px) !important;
+   background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.medium-zoom-image--opened {
+   @apply opacity-95 dark:opacity-55;
+   border-radius: 1.35rem;
+   z-index: 40;
+}
+
+.main-image.medium-zoom-image--opened {
+   @apply opacity-90 dark:opacity-75;
 }

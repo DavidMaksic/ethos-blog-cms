@@ -21,6 +21,7 @@ import ArticleNotFound from '../ui/ArticleNotFound';
 import ArticleSkeleton from '../ui/Skeletons/ArticleSkeleton';
 import DeleteModal from '../ui/Modal/DeleteModal';
 import BackButton from '../ui/Buttons/BackButton';
+import ImageZoom from '../ui/ImageZoom';
 import Options from '../ui/Operations/Options';
 import Modal from '../ui/Modal/Modal';
 
@@ -100,9 +101,9 @@ function Article() {
             </h3>
          </div>
 
-         <div className="flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-dashboard dark:shadow-menu-dark transition-bg_border">
+         <div className="image-container flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-dashboard dark:shadow-menu-dark transition-bg_border">
             <img
-               className="rounded-3xl h-[24rem] object-cover opacity-95 dark:opacity-75"
+               className="main-image rounded-3xl h-[24rem] object-cover opacity-90 dark:opacity-75"
                src={article.image}
                alt={article.title}
             />
@@ -182,7 +183,7 @@ function Article() {
          </div>
 
          <div
-            className={`text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
+            className={`image-container text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
                article.code === 'en'
                   ? `font-latin text-2xl 2xl:text-[1.5rem] [&_p]:leading-[1.55]! [&_blockquote>*]:font-creator [&_blockquote>*]:font-semibold [&_blockquote>*]:text-[1.65rem] 2xl:[&_blockquote>*]:text-[1.6rem] [&_blockquote>*]:leading-[1.3]`
                   : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.6]! [&_blockquote>*]:font-cyrillic [&_blockquote>*]:font-normal [&_blockquote]:text-[1.51rem] [&_blockquote>*]:leading-[1.3]!`
@@ -255,6 +256,8 @@ function Article() {
                )}
             </button>
          </Options>
+
+         <ImageZoom />
 
          <AnimatePresence>
             {openDelete && (

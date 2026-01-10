@@ -30,7 +30,7 @@ function Layout() {
             ref={mainRef}
             className={`main px-59 py-[7.8dvh] flex flex-col gap-8 transition-all duration-400 ease-in-out bg-primary overflow-auto remove-scrollbar h-screen background-gradient ${
                isFullscreen
-                  ? 'px-[21.5rem]!'
+                  ? 'px-[21.5rem]! 2xl:px-[16.5rem]!'
                   : 'pl-[28rem] 2xl:pl-[24.5rem] 2xl:pr-[8.5rem]'
             }`}
             initial={{ opacity: 0 }}
