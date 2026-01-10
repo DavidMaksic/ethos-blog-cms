@@ -49,7 +49,6 @@ function TagFeatureModal({ currentTag, onClose }) {
                         open={open}
                         close={close}
                         openID={openID}
-                        isLink={false}
                         article={item}
                         setSelectedID={setSelectedID}
                         key={item.id}

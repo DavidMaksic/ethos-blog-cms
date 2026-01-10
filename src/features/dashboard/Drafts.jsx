@@ -33,7 +33,7 @@ function Drafts() {
             myArticles.length > 0 ? (
                <>
                   {myArticles.map((item) => (
-                     <ArticleItem article={item} key={item.id} />
+                     <ArticleItem article={item} isLink={true} key={item.id} />
                   ))}
                </>
             ) : (
