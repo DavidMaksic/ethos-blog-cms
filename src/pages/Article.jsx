@@ -186,7 +186,7 @@ function Article() {
             className={`image-container text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
                article.code === 'en'
                   ? `font-latin text-2xl 2xl:text-[1.5rem] [&_p]:leading-[1.55]! [&_blockquote>*]:font-creator [&_blockquote>*]:font-semibold [&_blockquote>*]:text-[1.65rem] 2xl:[&_blockquote>*]:text-[1.6rem] [&_blockquote>*]:leading-[1.3]`
-                  : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.6]! [&_blockquote>*]:font-cyrillic [&_blockquote>*]:font-normal [&_blockquote]:text-[1.51rem] [&_blockquote>*]:leading-[1.3]!`
+                  : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.6]! [&_blockquote>*]:font-cyrillic [&_blockquote]:text-[1.51rem] [&_blockquote>*]:leading-[1.3]!`
             }`}
             dangerouslySetInnerHTML={{ __html: article.content }}
          />

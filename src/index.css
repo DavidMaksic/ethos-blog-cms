@@ -1181,32 +1181,6 @@ article .bn-file-block-content-wrapper {
    }
 }
 
-/* Bold styles */
-
-strong {
-   @apply text-primary-600/90 dark:text-primary-600/70;
-}
-
-[data-content-type='quote'] strong {
-   font-weight: 700;
-}
-
-[data-lang='en'] [data-content-type='quote'] strong {
-   color: #b47323;
-}
-
-[data-lang='sr'] [data-content-type='quote'] strong {
-   color: #9e6d32d0;
-}
-
-[data-lang='en'][data-theme='dark'] [data-content-type='quote'] strong {
-   color: #f1d7b6;
-}
-
-[data-lang='sr'][data-theme='dark'] [data-content-type='quote'] strong {
-   color: #e9caa5;
-}
-
 .bn-block-group h2 > strong,
 .bn-block-group h3 > strong {
    color: var(--color-editor-header);
@@ -1242,18 +1216,53 @@ strong {
    height: 33px;
 }
 
+/* Quote styles */
+
 [data-content-type='quote'] blockquote {
-   border-left: 2px solid #ca995ea1;
-   color: #c9914d;
-   padding: 0px 38px 3px 38px;
-   margin-top: 8px;
-   margin-bottom: 11px;
+   border-left: 2px solid #be8a4aa1 !important;
+   @apply text-[#c9914d]! dark:text-accent-200!;
+   padding: 0px 38px 3px 38px !important;
+   margin-top: 8px !important;
+   margin-bottom: 11px !important;
+
+   strong {
+      @apply text-[#b47323]! dark:text-[#ddc8ad]!;
+   }
 }
 
 [data-theme='dark'] [data-content-type='quote'] blockquote {
-   border-left: 2px solid #b49269a9;
-   color: var(--color-accent-200);
-   opacity: 80%;
+   border-left: 2px solid #b49269a9 !important;
+   opacity: 80% !important;
+}
+
+[data-content-type='quote'] blockquote strong {
+   -webkit-text-stroke: 0.5px currentColor;
+}
+
+[data-lang='sr'] [data-content-type='quote'] blockquote strong {
+   -webkit-text-stroke: 0px;
+}
+
+[data-theme='dark'] [data-content-type='quote'] blockquote strong {
+   -webkit-text-stroke: 0.3px currentColor;
+}
+
+[data-lang='sr'][data-theme='dark']
+   [data-content-type='quote']
+   blockquote
+   strong {
+   -webkit-text-stroke: 0px;
+}
+
+[data-lang='sr'] blockquote strong {
+   color: #9e6d32d0 !important;
+}
+
+[data-lang='sr'][data-theme='dark']
+   [data-content-type='quote']
+   blockquote
+   strong {
+   color: #e9caa5 !important;
 }
 
 .bn-block-content.ProseMirror-selectednode > *,
@@ -1567,4 +1576,8 @@ strong {
 
 .main-image.medium-zoom-image--opened {
    @apply opacity-90 dark:opacity-75;
+}
+
+strong {
+   @apply text-primary-600/90 dark:text-primary-600/73;
 }
