@@ -383,7 +383,7 @@ function EditArticleForm() {
 
          <ResetButton
             handler={async () => {
-               reset();
+               reset(article);
                setIsDefault(true);
                setCurrentStatus(articleStatus);
 
