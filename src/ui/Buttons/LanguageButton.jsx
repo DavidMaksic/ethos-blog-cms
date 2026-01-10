@@ -9,10 +9,10 @@ function LanguageButton({
    isEdit = false,
    articleCode = null,
 }) {
+   const [loadedMain, setLoadedMain] = useState(false);
+   const [loaded, setLoaded] = useState(false);
    const [open, setOpen] = useState(false);
    const ref = useOutsideClick(() => setOpen(false), false);
-   const [loaded, setLoaded] = useState(false);
-   const [loadedMain, setLoadedMain] = useState(false);
 
    const flag =
       localArticle.flag ??
@@ -72,7 +72,7 @@ function LanguageButton({
                         {item.lang}
                         <img
                            className={`size-7 border border-primary-300 dark:border-primary-200 rounded-full group-hover:opacity-100 dark:group-hover:opacity-95 transition-[opacity] duration-200 ${
-                              !loaded && 'opacity-0'
+                              loaded ? 'opacity-100' : 'opacity-0'
                            }`}
                            onLoad={() => setLoaded(true)}
                            src={item.flag}

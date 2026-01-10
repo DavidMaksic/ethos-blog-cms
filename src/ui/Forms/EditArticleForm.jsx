@@ -234,7 +234,7 @@ function EditArticleForm() {
    const isLoading = isPending || isEditing || isUnFeaturing;
 
    return (
-      <Form isPending={isLoading}>
+      <Form isPending={isLoading} isEdit={true}>
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize

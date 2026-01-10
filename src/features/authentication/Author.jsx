@@ -1,10 +1,12 @@
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { useCurrentAuthor } from './useCurrentAuthor';
 import { TbSettings } from 'react-icons/tb';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Author({ author, activeUser }) {
    const { user: currentAuthor } = useCurrentAuthor();
+   const [loaded, setLoaded] = useState(false);
 
    if (activeUser?.id === author?.id) return;
 
@@ -27,7 +29,10 @@ function Author({ author, activeUser }) {
       >
          {profile_image ? (
             <img
-               className="block size-30 aspect-square object-cover object-center rounded-[50%] dark:opacity-90"
+               className={`block size-30 aspect-square object-cover object-center rounded-[50%] dark:opacity-90 transition-[opacity] duration-200 ${
+                  loaded ? 'opacity-100' : 'opacity-0'
+               }`}
+               onLoad={() => setLoaded(true)}
                src={profile_image}
                alt="User image"
             />

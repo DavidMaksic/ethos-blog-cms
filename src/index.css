@@ -674,7 +674,7 @@ input:-webkit-autofill {
 }
 
 .bn-editor {
-   padding-inline: 170px;
+   padding-inline: 11.25rem;
    transition: background-color 0.2s;
 }
 

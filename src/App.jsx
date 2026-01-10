@@ -31,11 +31,9 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: In drafts, go directly to edit instead of article preview
+// TODO: Fix width of the article in edit mode (for PWA)
 // TODO: Try to add backdrop blur to Table of contents, also add it in edit
 // TODO: Limit blocknote content in edit (to remove options on the left from showing when cursor is outside of content)
-// TODO: In CMS, fix width of the article in edit mode (for PWA)
-// TODO: Animate author images in CMS
 
 function App() {
    return (
