@@ -43,6 +43,7 @@ import FormStatus from './FormStatus';
 import FormItem from './FormItem';
 import Options from '../Operations/Options';
 import FormRow from './FormRow';
+import toast from 'react-hot-toast';
 import Form from './Form';
 
 function EditArticleForm() {
@@ -231,6 +232,24 @@ function EditArticleForm() {
       reader.readAsDataURL(img);
    }
 
+   // - Validation logic
+   function onInvalid(errors) {
+      Object.entries(errors).forEach(([name, err]) => {
+         if (!err?.message) return;
+
+         const label = name
+            .replace(/([A-Z])/g, ' $1')
+            .replace(/^./, (c) => c.toUpperCase());
+
+         const message =
+            err.message === '*'
+               ? `${label} is required`
+               : `${label}: ${err.message}`;
+
+         toast.error(message);
+      });
+   }
+
    const isLoading = isPending || isEditing || isUnFeaturing;
 
    return (
@@ -373,7 +392,7 @@ function EditArticleForm() {
             isDefault={isDefault}
          >
             <SubmitButton
-               handler={handleSubmit(onSubmit)}
+               handler={handleSubmit(onSubmit, onInvalid)}
                isPending={isLoading}
                loadingText="Saving"
             >

@@ -60,7 +60,7 @@ function Creator() {
    );
 
    // - Form logic
-   const { register, handleSubmit, formState } = useForm();
+   const { register, handleSubmit, formState, reset } = useForm();
    const { errors } = formState;
 
    // - Editor logic
@@ -98,7 +98,6 @@ function Creator() {
    };
 
    const { categories } = useGetCategories();
-   const [currentImage, setCurrentImage] = useState(localArticle.image || null);
 
    // - Image select logic
    const imageRef = useRef(null);
@@ -106,20 +105,16 @@ function Creator() {
    function handlePreviewImage(e) {
       const img = e.target.files[0];
       if (!img) return;
-      setCurrentImage(img);
-
-      if (imageRef?.current) {
-         imageRef.current.src = URL.createObjectURL(img);
-         imageRef.current.srcset = URL.createObjectURL(img);
-      }
 
       const reader = new FileReader();
       reader.onloadend = () => {
-         const base64String = reader.result;
-         setLocalArticle({
-            ...localArticle,
-            image: base64String,
-         });
+         const base64 = reader.result;
+
+         setLocalArticle((prev) => ({
+            ...prev,
+            image: base64,
+            imageMeta: { name: img.name, type: img.type },
+         }));
       };
       reader.readAsDataURL(img);
    }
@@ -132,17 +127,12 @@ function Creator() {
       )?.id;
       if (!category_id) category_id = categories[0].id;
 
-      if (!currentImage) {
-         toast.error("Image doesn't exist!");
-         throw new Error("Image doesn't exist!");
-      }
-
       const slug = toSlug(data.title);
 
       createArticle(
          {
             ...data,
-            image: currentImage,
+            image: localArticle.image,
             category_id,
             status: 'published',
             author_id: user.id,
@@ -165,17 +155,12 @@ function Creator() {
       )?.id;
       if (!category_id) category_id = categories[0].id;
 
-      if (!currentImage) {
-         toast.error("Image doesn't exist!");
-         throw new Error("Image doesn't exist!");
-      }
-
       const slug = toSlug(data.title);
 
       createArticle(
          {
             ...data,
-            image: currentImage,
+            image: localArticle.image,
             category_id,
             status: 'drafted',
             author_id: user.id,
@@ -193,9 +178,11 @@ function Creator() {
 
    // - Reset logic
    function clear() {
+      reset();
       setLocalArticle({
          title: '',
          description: '',
+         image: '',
          code: 'en',
          flag: FLAGS[DEFAULT_LANG],
          content: [
@@ -204,7 +191,6 @@ function Creator() {
          ],
          category: categories?.at(0).category,
       });
-      setCurrentImage('');
       document.documentElement.setAttribute('data-lang', DEFAULT_LANG);
       setTimeout(() => {
          if (editor) {
@@ -226,6 +212,24 @@ function Creator() {
 
    const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
       useFullscreen();
+
+   // - Validation logic
+   function onInvalid(errors) {
+      Object.entries(errors).forEach(([name, err]) => {
+         if (!err?.message) return;
+
+         const label = name
+            .replace(/([A-Z])/g, ' $1')
+            .replace(/^./, (c) => c.toUpperCase());
+
+         const message =
+            err.message === '*'
+               ? `${label} is required`
+               : `${label}: ${err.message}`;
+
+         toast.error(message);
+      });
+   }
 
    return (
       <Form isPending={isPending}>
@@ -305,19 +309,19 @@ function Creator() {
                <label htmlFor="image" className="w-fit rounded-3xl">
                   <div
                      className={`relative h-39.5 w-76 rounded-3xl cursor-pointer transition ${
-                        !currentImage &&
+                        !localArticle.image &&
                         'border-2 border-dashed border-primary-300 dark:border-primary-300/60 hover:bg-primary-300/10 dark:hover:bg-primary-300/5'
                      }`}
                   >
                      <img
                         ref={imageRef}
-                        src={currentImage || undefined}
+                        src={localArticle.image || undefined}
                         className={`object-cover h-39.5 w-76 object-center rounded-3xl opacity-95 dark:opacity-85 hover:opacity-85 dark:hover:opacity-75 border border-primary-300 dark:border-quaternary transition ${
-                           !currentImage && 'hidden'
+                           !localArticle.image && 'hidden'
                         }`}
                      />
 
-                     {!currentImage && (
+                     {!localArticle.image && (
                         <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex flex-col items-center gap-0.5">
                            <LuCloudUpload className="size-8" />
                            <span className="normal-case text-xl select-none">
@@ -333,7 +337,10 @@ function Creator() {
                      accept="image/*"
                      type="file"
                      {...register('image', {
-                        required: '*',
+                        validate: () => {
+                           if (!localArticle.image) return '*';
+                           return true;
+                        },
                      })}
                      onChange={handlePreviewImage}
                   />
@@ -385,9 +392,22 @@ function Creator() {
             </BlockNoteView>
          </FormItem>
 
+         <input
+            type="hidden"
+            {...register('content', {
+               validate: () => {
+                  if (!editor.document[0]?.content) {
+                     return '*';
+                  }
+                  return true;
+               },
+            })}
+            value={contentHTML}
+         />
+
          <div className="flex justify-center items-center gap-8">
             <SubmitButton
-               handler={handleSubmit(onSubmit)}
+               handler={handleSubmit(onSubmit, onInvalid)}
                isPending={isPending}
                loadingText="Publishing"
             >
@@ -395,7 +415,7 @@ function Creator() {
             </SubmitButton>
             <span className="italic text-4xl text-primary-400">or</span>
             <DraftButton
-               handler={handleSubmit(onSubmitDraft)}
+               handler={handleSubmit(onSubmitDraft, onInvalid)}
                isPending={isPending}
             />
          </div>

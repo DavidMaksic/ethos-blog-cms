@@ -69,7 +69,7 @@ function EditProfileForm() {
    }
 
    return (
-      <Form isPending={isPending}>
+      <Form isProfileEdit={true} isPending={isPending}>
          <FormRow columns="grid-cols-[32rem]">
             <div className="flex items-center justify-between">
                <FormItem label="Full name" error={errors?.full_name?.message}>

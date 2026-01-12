@@ -73,7 +73,7 @@ function PasswordForm() {
          </Form>
 
          <motion.div
-            className="label w-fit flex flex-col gap-3 font-creator bg-secondary dark:bg-primary-300/10 rounded-3xl text-lg text-[#4d525c] dark:text-slate-300/80 font-medium box-shadow transition-200 px-20 pr-24 pt-7 pb-10"
+            className="label w-fit flex flex-col gap-3 font-creator bg-secondary dark:bg-primary-300/10 rounded-3xl text-lg text-primary-600 dark:text-slate-300/80 font-medium box-shadow transition-200 px-20 pr-24 pt-7 pb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}

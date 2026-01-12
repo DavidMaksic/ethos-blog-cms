@@ -12,6 +12,7 @@ function ArticleItem({
 }) {
    const { id, image, title } = article;
 
+   const [loaded, setLoaded] = useState(false);
    const [searchParams, setSearchParams] = useSearchParams();
    const [isSelected, setIsSelected] = useState(false);
    const [isUnSelected, setIsUnSelected] = useState(false);
@@ -53,7 +54,10 @@ function ArticleItem({
             </h2>
 
             <img
-               className="w-full h-25 object-cover opacity-80 rounded-2xl z-0 group-hover:opacity-100 transition-200 border-l border-primary-200"
+               className={`w-full h-25 object-cover opacity-80 rounded-2xl z-0 group-hover:opacity-100 transition-200 border-l border-primary-200 ${
+                  loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'
+               }`}
+               onLoad={() => setLoaded(true)}
                src={image}
                alt={title}
             />

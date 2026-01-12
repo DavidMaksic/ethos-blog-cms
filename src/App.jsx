@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Add toaster notification if validation fails in article forms
+// TODO: Remove transition from bn-suggestion-menu
 
 function App() {
    return (

@@ -1540,8 +1540,8 @@ article .bn-file-block-content-wrapper {
 
 /* Optional: Animated movement for side menu */
 
-/* .bn-container .bn-side-menu {
-   transition: all 0.075s;
+.bn-container .bn-side-menu {
+   transition: opacity 0.075s;
    opacity: 0;
    pointer-events: none;
 }
@@ -1550,10 +1550,6 @@ article .bn-file-block-content-wrapper {
    opacity: 1;
    pointer-events: auto;
 }
-
-[data-floating-ui-focusable] {
-   transition: transform 120ms ease-out, opacity 0ms !important;
-} */
 
 /* Zoom image */
 

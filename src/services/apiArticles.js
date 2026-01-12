@@ -67,7 +67,13 @@ export async function getArticle(articleID) {
 }
 
 export async function createArticle(newArticle) {
-   const [imageName, imagePath] = createImagePath(newArticle);
+   let imageFile = newArticle.image;
+
+   if (isBase64Image(newArticle.image)) {
+      imageFile = base64ToFile(newArticle.image, `image-${Date.now()}.jpg`);
+   }
+
+   const [imageName, imagePath] = createImagePath(imageFile);
 
    // - 1. Create article
    const { error } = await supabase
@@ -79,7 +85,7 @@ export async function createArticle(newArticle) {
    // - 2. Upload image
    const { error: storageError } = await supabase.storage
       .from('article_images')
-      .upload(imageName, newArticle.image);
+      .upload(imageName, imageFile);
 
    if (storageError) throw new Error('Article image could not be uploaded');
 
@@ -96,36 +102,6 @@ export async function createArticle(newArticle) {
    }
 }
 
-export async function deleteArticle(article) {
-   // 1. Delete article
-   const { error } = await supabase
-      .from('articles')
-      .delete()
-      .eq('id', article.id);
-
-   if (error) throw new Error('Article could not be deleted');
-
-   // 2. Delete image from DB
-   const imageName = article.image.split('/').pop();
-   const { error: image2 } = await supabase.storage
-      .from('article_images')
-      .remove([imageName]);
-
-   if (image2) throw new Error('Image could not be deleted from database');
-
-   // - 3. Trigger Next.js revalidation
-   if (article.status === 'published') {
-      await fetch('/api/revalidate', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({
-            slug: article.slug,
-            changes: { action: 'delete' },
-         }),
-      });
-   }
-}
-
 export async function updateArticle(article) {
    const oldArticle = article.oldArticle;
 
@@ -137,10 +113,7 @@ export async function updateArticle(article) {
       imageFile = base64ToFile(article.image, `image-${Date.now()}.jpg`);
    }
 
-   if (
-      typeof article.image === 'string' &&
-      article.image.startsWith(supabaseUrl)
-   ) {
+   if (article.image.startsWith(supabaseUrl)) {
       imageFile = null;
    }
 
@@ -203,6 +176,36 @@ export async function updateArticle(article) {
 
       if (imageError)
          throw new Error('Old article image could not be deleted from storage');
+   }
+}
+
+export async function deleteArticle(article) {
+   // 1. Delete article
+   const { error } = await supabase
+      .from('articles')
+      .delete()
+      .eq('id', article.id);
+
+   if (error) throw new Error('Article could not be deleted');
+
+   // 2. Delete image from DB
+   const imageName = article.image.split('/').pop();
+   const { error: image2 } = await supabase.storage
+      .from('article_images')
+      .remove([imageName]);
+
+   if (image2) throw new Error('Image could not be deleted from database');
+
+   // - 3. Trigger Next.js revalidation
+   if (article.status === 'published') {
+      await fetch('/api/revalidate', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            slug: article.slug,
+            changes: { action: 'delete' },
+         }),
+      });
    }
 }
 
