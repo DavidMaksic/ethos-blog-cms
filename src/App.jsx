@@ -31,6 +31,8 @@ const queryClient = new QueryClient({
    },
 });
 
+// TODO: Add toaster notification if validation fails in article forms
+
 function App() {
    return (
       <QueryClientProvider client={queryClient}>
