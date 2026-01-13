@@ -31,8 +31,6 @@ const queryClient = new QueryClient({
    },
 });
 
-// TODO: Remove transition from bn-suggestion-menu
-
 function App() {
    return (
       <QueryClientProvider client={queryClient}>

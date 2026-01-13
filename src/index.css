@@ -506,12 +506,12 @@ input:-webkit-autofill {
 }
 
 .bn-suggestion-menu {
-   background-color: rgba(255, 255, 255, 0.8) !important;
+   background-color: #ffffffcc !important;
    backdrop-filter: saturate(150%) blur(40px);
 }
 
 [data-theme='dark'] .bn-suggestion-menu {
-   background-color: rgba(34, 40, 47, 0.6) !important;
+   background-color: #22282f99 !important;
 }
 
 .bn-mantine .bn-suggestion-menu-item:hover {
@@ -728,10 +728,6 @@ input:-webkit-autofill {
    [data-lang='en'] .bn-container .bn-block-outer {
       line-height: 1.48 !important;
    }
-}
-
-[data-lang='sr'] .bn-block-outer {
-   line-height: 1.65 !important;
 }
 
 @media (max-width: 1580px) {
@@ -980,20 +976,24 @@ input:-webkit-autofill {
    color: #ffffff9f;
 }
 
+[data-content-type='alert'] strong {
+   color: inherit !important;
+}
+
 .alert[data-alert-type='info'] {
-   @apply bg-[#e6ebffd5] dark:bg-[#535e8d86];
+   @apply bg-[#e6ebffd5] dark:bg-[#535e8d86] text-[#5e678d] dark:text-[#d9def3d5];
 }
 
 .alert[data-alert-type='warning'] {
-   @apply bg-[#fff3dd] dark:bg-[#c6996371];
+   @apply bg-[#fff3dd] dark:bg-[#c6996371] text-[#7c674d] dark:text-[#dbd2c2];
 }
 
 .alert[data-alert-type='error'] {
-   @apply bg-[#ffe6e6b6] dark:bg-[#8d565679];
+   @apply bg-[#ffe6e6b6] dark:bg-[#8d565679] text-[#885a5a] dark:text-[#ffe6e6b6];
 }
 
 .alert[data-alert-type='success'] {
-   @apply bg-[#d8f7d8b4] dark:bg-[#608a6086];
+   @apply bg-[#d8f7d8b4] dark:bg-[#608a6086] text-[#627262] dark:text-[#efffefb4];
 }
 
 .alert[data-alert-type='references'] {
@@ -1443,7 +1443,7 @@ article .bn-file-block-content-wrapper {
 }
 
 [data-background-color='orange'] {
-   @apply bg-[#e0d2c4] dark:bg-[#644e39] text-[#533f29]! dark:text-[#dfc9b3]!;
+   @apply bg-[#e4d3bb] dark:bg-[#685240] text-[#533f29]! dark:text-[#dfc9b3]!;
 }
 
 [data-background-color='yellow'] {
@@ -1534,11 +1534,11 @@ article .bn-file-block-content-wrapper {
    gap: 0.6em !important;
 }
 
-/* .bn-container .bn-side-menu {
-   display: none;
-} */
+/* Side menu */
 
-/* Optional: Animated movement for side menu */
+.bn-container .bn-side-menu > button:first-child {
+   display: none;
+}
 
 .bn-container .bn-side-menu {
    transition: opacity 0.075s;
@@ -1565,7 +1565,7 @@ article .bn-file-block-content-wrapper {
 }
 
 .medium-zoom-image--opened {
-   @apply opacity-95 dark:opacity-55;
+   @apply opacity-95 dark:opacity-80;
    border-radius: 1.35rem;
    z-index: 40;
 }
