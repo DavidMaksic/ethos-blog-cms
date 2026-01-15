@@ -997,10 +997,14 @@ input:-webkit-autofill {
 }
 
 .alert[data-alert-type='references'] {
-   @apply text-text border border-primary-300/80 dark:border-primary-300/40;
+   @apply text-text border border-primary-300/80 dark:border-primary-300/40 text-start pl-12 pr-10 py-6;
 
-   .alert-icon-wrapper > svg {
-      @apply hidden;
+   .alert-icon-wrapper {
+      display: none !important;
+   }
+
+   strong {
+      @apply text-primary-600/90! dark:text-primary-600/73!;
    }
 }
 

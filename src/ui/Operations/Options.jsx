@@ -11,7 +11,7 @@ import { IoOptions } from 'react-icons/io5';
 
 function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
    const [openMenu, setOpenMenu] = useState(false);
-   const ref = useOutsideClick(() => setOpenMenu(false), false);
+   const ref = useOutsideClick(() => setOpenMenu(false), true);
 
    const [mounted, setMounted] = useState(false);
    useEffect(() => setMounted(true), []);
@@ -282,7 +282,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
 
                   {headings.length ? (
                      <LuTableOfContents
-                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition rounded-2xl  ${
+                        className={`py-1 px-3.5 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition rounded-2xl ${
                            currentAuthor?.email !== theAuthor?.email &&
                            'mb-1 mt-0.5'
                         }`}
@@ -341,7 +341,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
                   </AnimatePresence>
 
                   <FiChevronDown
-                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-400/10 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl transition"
+                     className="py-3 size-13.5 stroke-[1.8px] hover:bg-primary-100/80 dark:hover:bg-primary-400/10 rounded-b-[20px] mb-1 mt-0.5 rounded-2xl transition order-1"
                      onClick={() => {
                         setBottomScroll(true);
                         setOpenTable(false);

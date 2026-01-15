@@ -14,7 +14,7 @@ import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useDebounce } from '../../hooks/useDebounce';
-import { LuSunMedium } from 'react-icons/lu';
+import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -45,6 +45,7 @@ import Options from '../Operations/Options';
 import FormRow from './FormRow';
 import toast from 'react-hot-toast';
 import Form from './Form';
+import Spinner from '../Spinner';
 
 function EditArticleForm() {
    const { article, isPending } = useFindArticle();
@@ -457,6 +458,17 @@ function EditArticleForm() {
                   <IoMoonOutline className="py-1 px-3.5 size-13.5" />
                ) : (
                   <LuSunMedium className="py-1 px-3.5 size-13.5" />
+               )}
+            </button>
+
+            <button
+               className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition my-0.5 rounded-2xl order-1"
+               onClick={handleSubmit(onSubmit, onInvalid)}
+            >
+               {isEditing ? (
+                  <ImSpinner2 className="py-1 px-3.5 size-13.5 animate-spin" />
+               ) : (
+                  <LuSave className="py-1 px-3.5 size-13.5 stroke-[1.5px]" />
                )}
             </button>
          </Options>
