@@ -16,7 +16,7 @@ function Drafts() {
    const currentAuthor = authors?.find((item) => item.id === user.id);
 
    const myArticles = articles?.filter(
-      (item) => item.author_id === currentAuthor.id
+      (item) => item.author_id === currentAuthor.id,
    );
 
    return (

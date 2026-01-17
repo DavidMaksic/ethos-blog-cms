@@ -240,7 +240,8 @@ export async function getDraftedArticles() {
    const { data, error } = await supabase
       .from('articles')
       .select('id, author_id, title, image')
-      .eq('status', 'drafted');
+      .eq('status', 'drafted')
+      .order('created_at', { ascending: false });
 
    if (error) throw new Error('Articles could not be loaded');
 
@@ -251,7 +252,7 @@ export async function getFeaturedArticles() {
    const { data, error } = await supabase
       .from('articles')
       .select(
-         'id, title, image, description, category_id, author_id, created_at'
+         'id, title, image, description, category_id, author_id, created_at',
       )
       .eq('featured', true)
       .eq('status', 'published');
