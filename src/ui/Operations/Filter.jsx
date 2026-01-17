@@ -44,11 +44,7 @@ export function Filter({ field, options }) {
                               layoutId="filter-pill"
                               initial={false}
                               className="absolute inset-0 bg-accent-400 dark:bg-accent-300/60 rounded-xl z-0 shadow-filter dark:shadow-link-btn-dark"
-                              transition={{
-                                 type: 'spring',
-                                 stiffness: 1000,
-                                 damping: 60,
-                              }}
+                              transition={{ duration: 0.12 }}
                            />
                         )}
 

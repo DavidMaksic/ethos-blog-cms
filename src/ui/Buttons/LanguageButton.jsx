@@ -17,7 +17,7 @@ function LanguageButton({
    const flag =
       localArticle.flag ??
       LANGUAGES.find((item) =>
-         isEdit ? item.code === articleCode : item.code === DEFAULT_LANG
+         isEdit ? item.code === articleCode : item.code === DEFAULT_LANG,
       )?.flag;
 
    return (
@@ -44,12 +44,7 @@ function LanguageButton({
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                  transition={{
-                     type: 'spring',
-                     stiffness: 500,
-                     damping: 30,
-                     duration: 0.12,
-                  }}
+                  transition={{ duration: 0.12 }}
                >
                   {LANGUAGES.map((item) => (
                      <li
@@ -65,7 +60,7 @@ function LanguageButton({
 
                            document.documentElement.setAttribute(
                               'data-lang',
-                              item.code
+                              item.code,
                            );
                         }}
                      >
