@@ -282,15 +282,22 @@
    }
 
    .transition-bg_border {
-      transition: background-color 0.2s, border 0.2s;
+      transition:
+         background-color 0.2s,
+         border 0.2s;
    }
 
    .transition-bg_color {
-      transition: background-color 0.2s, color 0.2s;
+      transition:
+         background-color 0.2s,
+         color 0.2s;
    }
 
    .transition-bg_color_border {
-      transition: background-color 0.2s, color 0.2s, border 0.2s;
+      transition:
+         background-color 0.2s,
+         color 0.2s,
+         border 0.2s;
    }
 
    .nav-link {
@@ -323,7 +330,8 @@
 }
 
 [data-theme='dark'] .background-gradient {
-   background-image: radial-gradient(
+   background-image:
+      radial-gradient(
          3000px 1400px at -1050px -340px,
          #3b2e1aff 0px,
          transparent 78%
@@ -337,7 +345,8 @@
 
 @media (max-width: 1580px) {
    [data-theme='dark'] .background-gradient {
-      background-image: radial-gradient(
+      background-image:
+         radial-gradient(
             3000px 1400px at -950px -340px,
             #3b2e1aff 0px,
             transparent 78%
@@ -352,7 +361,8 @@
 
 @media (max-width: 1290px) {
    [data-theme='dark'] .background-gradient {
-      background-image: radial-gradient(
+      background-image:
+         radial-gradient(
             3000px 1400px at -850px -340px,
             #3b2e1aff 0px,
             transparent 78%
@@ -997,7 +1007,7 @@ input:-webkit-autofill {
 }
 
 .alert[data-alert-type='references'] {
-   @apply text-text border border-primary-300/80 dark:border-primary-300/40 text-start pl-12 pr-10 py-6;
+   @apply text-text border border-primary-300/80 dark:border-primary-300/40 pl-12 pr-10 py-6;
 
    .alert-icon-wrapper {
       display: none !important;
@@ -1303,7 +1313,9 @@ article .bn-file-block-content-wrapper {
    border-bottom-left-radius: 40px !important;
    border-bottom-right-radius: 40px !important;
 
-   transition: background-color 0.2s, border 1s !important;
+   transition:
+      background-color 0.2s,
+      border 1s !important;
    z-index: 10 !important;
 }
 
