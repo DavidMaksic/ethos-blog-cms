@@ -180,10 +180,6 @@ function EditArticleForm() {
          (item) => item.category === localArticle.category,
       );
 
-      const status =
-         currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1);
-      const slug = toSlug(data.title);
-
       editArticle(
          {
             ...data,
@@ -191,9 +187,10 @@ function EditArticleForm() {
             oldImage,
             content: contentHTML,
             category_id,
-            status,
+            status:
+               currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
             code: localArticle.code,
-            slug,
+            slug: toSlug(data.title),
             oldArticle: article,
          },
          {
@@ -211,8 +208,6 @@ function EditArticleForm() {
             id: article.id,
             featured: false,
             main_feature: false,
-            status,
-            slug,
          });
       }
    }

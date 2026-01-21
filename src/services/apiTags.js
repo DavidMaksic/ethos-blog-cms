@@ -45,11 +45,12 @@ export async function updateCategory(updateObject) {
    if (error) throw new Error('Category could not be updated');
 }
 
-export async function updateTagFeature({ selectedID, boolean }) {
+export async function updateMainFeature({ selectedID, boolean }) {
    const { error } = await supabase
       .from('articles')
       .update({
-         featured: boolean,
+         main_feature: boolean,
+         index: null,
       })
       .eq('id', selectedID)
       .select();
@@ -57,12 +58,11 @@ export async function updateTagFeature({ selectedID, boolean }) {
    if (error) throw new Error('Article could not be featured');
 }
 
-export async function updateMainFeature({ selectedID, boolean }) {
+export async function updateTagFeature({ selectedID, boolean }) {
    const { error } = await supabase
       .from('articles')
       .update({
-         main_feature: boolean,
-         index: null,
+         featured: boolean,
       })
       .eq('id', selectedID)
       .select();
