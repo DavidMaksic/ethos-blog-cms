@@ -311,4 +311,15 @@ export async function updateFeatures(article) {
       .select();
 
    if (error) throw new Error(error.message);
+
+   if (article.status === 'published') {
+      await fetch('/api/revalidate', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            slug: article.slug,
+            changes: { action: 'featureUpdate' },
+         }),
+      });
+   }
 }

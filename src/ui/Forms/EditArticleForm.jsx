@@ -61,7 +61,7 @@ function EditArticleForm() {
          ...article,
          category: category?.category,
       },
-      'editArticle'
+      'editArticle',
    );
 
    // - Set default article code as data-attribute
@@ -177,8 +177,12 @@ function EditArticleForm() {
 
    function onSubmit(data) {
       const { id: category_id } = categories.find(
-         (item) => item.category === localArticle.category
+         (item) => item.category === localArticle.category,
       );
+
+      const status =
+         currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1);
+      const slug = toSlug(data.title);
 
       editArticle(
          {
@@ -187,17 +191,16 @@ function EditArticleForm() {
             oldImage,
             content: contentHTML,
             category_id,
-            status:
-               currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
+            status,
             code: localArticle.code,
-            slug: toSlug(data.title),
+            slug,
             oldArticle: article,
          },
          {
             onSuccess: () => {
                localStorage.removeItem('editArticle');
             },
-         }
+         },
       );
 
       if (
@@ -208,6 +211,8 @@ function EditArticleForm() {
             id: article.id,
             featured: false,
             main_feature: false,
+            status,
+            slug,
          });
       }
    }
@@ -371,14 +376,14 @@ function EditArticleForm() {
                         [
                            ...combineByGroup(
                               getDefaultReactSlashMenuItems(editor),
-                              getMultiColumnSlashMenuItems(editor)
+                              getMultiColumnSlashMenuItems(editor),
                            ),
                            insertAlert(
                               editor,
-                              <HiOutlineInbox className="size-5 stroke-2" />
+                              <HiOutlineInbox className="size-5 stroke-2" />,
                            ),
                         ],
-                        query
+                        query,
                      )
                   }
                />
@@ -415,7 +420,7 @@ function EditArticleForm() {
                });
 
                const blocks = await editor.tryParseHTMLToBlocks(
-                  article.content
+                  article.content,
                );
                editor.replaceBlocks(editor.document, blocks);
 
