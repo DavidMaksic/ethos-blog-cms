@@ -55,7 +55,7 @@ function Article() {
 
    const { authors } = useAuthors();
    const isAdmin = authors?.find(
-      (item) => item.id === currentAuthor?.id
+      (item) => item.id === currentAuthor?.id,
    )?.is_admin;
 
    // - Dark mode logic
@@ -101,12 +101,14 @@ function Article() {
             </h3>
          </div>
 
-         <div className="image-container flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-dashboard dark:shadow-menu-dark transition-bg_border">
-            <img
-               className="main-image rounded-3xl h-[24rem] object-cover opacity-90 dark:opacity-75"
-               src={article.image}
-               alt={article.title}
-            />
+         <div className="flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-dashboard dark:shadow-menu-dark transition-bg_border">
+            <div className="image-container">
+               <img
+                  className="main-image rounded-3xl w-full h-[24rem] object-cover opacity-90 dark:opacity-75"
+                  src={article.image}
+                  alt={article.title}
+               />
+            </div>
 
             <div className="flex items-center justify-between gap-6 px-6 py-4">
                <div className="flex gap-4 items-center">
@@ -216,8 +218,8 @@ function Article() {
                         ? author?.description_en
                         : 'Is an author writing for Ethos blog.'
                      : author?.description_srb
-                     ? author?.description_srb
-                     : 'Је аутор који пише за Етос блог.'}
+                       ? author?.description_srb
+                       : 'Је аутор који пише за Етос блог.'}
                </p>
             </div>
          </div>

@@ -3,9 +3,13 @@ import mediumZoom from 'medium-zoom';
 
 export default function ImageZoom() {
    useEffect(() => {
-      const zoom = mediumZoom('.image-container img', {
-         margin: 60,
-      });
+      let zoom;
+
+      setTimeout(() => {
+         zoom = mediumZoom('.image-container img', {
+            margin: 60,
+         });
+      }, 300);
 
       return () => {
          zoom.detach();
