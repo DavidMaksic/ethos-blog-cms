@@ -106,7 +106,7 @@ function NavItem({
                id={tooltipId}
                place="right"
                noArrow
-               className="bg-white! text-primary-500! font-medium dark:bg-[#21282f]! z-30! rounded-2xl! transition-all! duration-300! ease-out! px-5! border! shadow-dashboard! dark:shadow-none! border-quaternary dark:border-primary-300/20!"
+               className="bg-white! text-primary-500! font-medium dark:bg-primary-300/20! backdrop-blur-3xl! z-30! rounded-2xl! transition-all! duration-300! ease-out! px-5! border! shadow-dashboard! dark:shadow-none! border-quaternary dark:border-primary-300/20!"
             >
                <div className="flex items-center space-x-2">
                   <RiErrorWarningLine className="stroke-[0.3px] text-xl" />
