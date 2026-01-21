@@ -44,7 +44,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
             .filter(
                (block) =>
                   block.type === 'heading' &&
-                  (block.props.level === 2 || block.props.level === 3)
+                  (block.props.level === 2 || block.props.level === 3),
             )
             .map((block, index) => {
                // Get text content from block
@@ -76,7 +76,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
                .filter(
                   (block) =>
                      block.type === 'heading' &&
-                     (block.props.level === 2 || block.props.level === 3)
+                     (block.props.level === 2 || block.props.level === 3),
                )
                .map((block, index) => {
                   const text =
@@ -103,7 +103,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
          // Preview mode - work with DOM
          const start = 2;
          const headingElementsRaw = Array.from(
-            document.querySelectorAll('h2, h3')
+            document.querySelectorAll('h2, h3'),
          ).slice(start);
 
          const headingElements = headingElementsRaw.map((item, index) => {
@@ -143,13 +143,14 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
             if (entry.isIntersecting) {
                const headingId = editor
                   ? headings.find(
-                       (h) => h.blockId === entry.target.getAttribute('data-id')
+                       (h) =>
+                          h.blockId === entry.target.getAttribute('data-id'),
                     )?.id
                   : entry.target.id;
 
                if (headingId) {
                   const headingIndex = headings.findIndex(
-                     (h) => h.id === headingId
+                     (h) => h.id === headingId,
                   );
                   intersectingHeadings.push({
                      id: headingId,
@@ -193,7 +194,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
          // Observe BlockNote blocks
          headings.forEach((heading) => {
             const element = document.querySelector(
-               `[data-id="${heading.blockId}"]`
+               `[data-id="${heading.blockId}"]`,
             );
             if (element) observer.observe(element);
          });
@@ -212,7 +213,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
 
    const { authors } = useAuthors();
    const isAdmin = authors?.find(
-      (item) => item.id === currentAuthor?.id
+      (item) => item.id === currentAuthor?.id,
    )?.is_admin;
 
    const handleHeadingClick = (e, item) => {
@@ -225,7 +226,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
          // Optionally scroll the block into view
          setTimeout(() => {
             const blockEl = document.querySelector(
-               `[data-id="${item.blockId}"]`
+               `[data-id="${item.blockId}"]`,
             );
             if (blockEl) {
                blockEl.scrollIntoView({ behavior: 'smooth' });
@@ -303,7 +304,7 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
                   <AnimatePresence>
                      {openTable && (
                         <motion.div
-                           className="absolute bottom-0 font-text max-h-[32.5rem] right-[4.95rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-primary-300/35 rounded-2xl bg-white dark:bg-transparent backdrop-blur-3xl overflow-y-auto scrollbar shadow-dashboard dark:shadow-none"
+                           className="absolute bottom-0 font-text max-h-[32rem] right-[4.95rem] flex flex-col py-4 pb-2 px-2 border border-primary-300/50 dark:border-primary-300/35 rounded-2xl bg-white dark:bg-transparent backdrop-blur-3xl overflow-y-auto scrollbar shadow-dashboard dark:shadow-none"
                            ref={tableRef}
                            initial={{ opacity: 0, x: 3 }}
                            animate={{ opacity: 1, x: 0 }}
