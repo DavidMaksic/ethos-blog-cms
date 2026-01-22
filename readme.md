@@ -1,6 +1,6 @@
 # Ethos Blog CMS
 
-### A Content Management System (CMS) app for managing blog website. Only authors have access to enter the app. Contains WYSIWYG text editor.
+A Content Management System (CMS) app for managing blog website. Only authors have access to enter the app. Contains WYSIWYG text editor.
 
 <br>
 
@@ -45,7 +45,6 @@ Only an admin can create new author profiles, feature articles, create and edit 
 ![admin permissions](https://davidmaksic.vercel.app/assets/admin-permissions-DhjzlD_c.png)
 
 <br />
-<br />
 
 ## Article creator
 
@@ -54,13 +53,11 @@ Here authors can write their articles. There are a lot of options, such as choos
 ![article creator](https://davidmaksic.vercel.app/assets/cms-3-Cb-pDhZP.png)
 
 <br />
-<br />
 
 Fullscreen option temporarily hides sidebar and header, which gives more space for easier writing. As for the article's content, thanks to the WYSIWYG text editor, author has many options for styling the text.
 
 ![article creator 2](https://davidmaksic.vercel.app/assets/cms-4-SMTieGdc.png)
 
-<br />
 <br />
 
 ## Article management
@@ -70,13 +67,11 @@ Arhive is the major part of the app. Here authors can see basic information rega
 ![archive](https://davidmaksic.vercel.app/assets/cms-5-DVDg0b3q.png)
 
 <br />
-<br />
 
 If they click on article's title, they can see how an article looks. Main image card contains edit and delete options.
 
 ![article page](https://davidmaksic.vercel.app/assets/cms-6-CZNZZK8i.png)
 
-<br />
 <br />
 
 While inspecting the article, author can use basic options on the right. For example, table of contents.
@@ -84,20 +79,17 @@ While inspecting the article, author can use basic options on the right. For exa
 ![article page options](https://davidmaksic.vercel.app/assets/cms-7-DGJtZRrP.png)
 
 <br />
-<br />
 
 Authors can edit their articles, with the same options as in article creator.
 
 ![article edit page](https://davidmaksic.vercel.app/assets/cms-8-JX3rxQdt.png)
 
 <br />
-<br />
 
 When they are done with editing, authors can also change current status of the article.
 
 ![article edit page 2](https://davidmaksic.vercel.app/assets/cms-9-UV_0KLjA.png)
 
-<br />
 <br />
 
 ## Features
@@ -107,20 +99,17 @@ This page has two parts: main and tag features. Here authors can decide which ar
 ![main features](https://davidmaksic.vercel.app/assets/cms-10-CybqXPGM.png)
 
 <br />
-<br />
 
 "Tag features" is a collection of 3 articles; each tag can have up to 3 featured articles. If there are only 2 featured articles here, they won't be displayed; 3 articles are a minimum.
 
 ![tag features](https://davidmaksic.vercel.app/assets/cms-11-QkaFqpZf.png)
 
 <br />
-<br />
 
 When adding articles, this modal will show up. Author can search and choose which article to feature.
 
 ![feature modal](https://davidmaksic.vercel.app/assets/cms-12-CTMPiTec.png)
 
-<br />
 <br />
 
 ## Tag creator
@@ -130,13 +119,11 @@ On this page authors can create new tags (categories). They can choose colors, a
 ![tag creator](https://davidmaksic.vercel.app/assets/cms-13-CbWgD21s.png)
 
 <br />
-<br />
 
 Same options are provided when editing existing tags. When choosing a color, a modal pops up that provides plenty of options.
 
 ![tag edit](https://davidmaksic.vercel.app/assets/cms-14-CZXJEkGz.png)
 
-<br />
 <br />
 
 ## Author list
@@ -146,20 +133,17 @@ All authors are displayed here, with some basic information about them.
 ![authors page](https://davidmaksic.vercel.app/assets/cms-15-DntLoSll.png)
 
 <br />
-<br />
 
 If the gear icon is clicked, author will be navigated to the profile settings page. Here they can change their full name, description, image or password.
 
 ![profile edit](https://davidmaksic.vercel.app/assets/cms-16-CTCVEbxV.png)
 
 <br />
-<br />
 
 When creating a new author, all the standard information is required. In all inputs of the app, validation is implemented; in this case, passwords need to match, and other fields must not be empty.
 
 ![author creator](https://davidmaksic.vercel.app/assets/cms-17-BccPW7SM.png)
 
-<br />
 <br />
 
 ## Settings
@@ -174,5 +158,4 @@ Currently, there is only one setting here: the comment length.
 
 Special thanks to **[Jonas Schmedtmann](https://www.udemy.com/user/jonasschmedtmann/)**, thanks to whom I learned everything I know; his work was an inspiration for most of my projects. If you are new at learning web development check him out!
 
-<br />
 <br />
