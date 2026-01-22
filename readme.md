@@ -2,8 +2,6 @@
 
 A Content Management System (CMS) app for managing blog website. Only authors have access to enter the app. Contains WYSIWYG text editor.
 
-<br>
-
 Installation:
 ```
 npm i
