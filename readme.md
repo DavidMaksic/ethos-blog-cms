@@ -36,8 +36,6 @@ Upon logging in, new author will see the dashboard page, which contains all the 
 
 This project is showcased with a profile which has admin permissions. Image bellow shows restricted navigation sidebar of the usual (non-admin) author. Protected routes cannot be accessed.
 
-<br />
-
 Only an admin can create new author profiles, feature articles, create and edit tags, and manage settings. Admins can also edit and delete any article.
 
 ![admin permissions](https://davidmaksic.vercel.app/assets/admin-permissions-DhjzlD_c.png)
