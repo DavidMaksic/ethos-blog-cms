@@ -14,6 +14,7 @@ This is the internal application for the Ethos blog, only accessable to the auth
 
 Authentication, authorization and admin permissions are implemented using **Supabase Auth**. For writing articles, **BlockNote** text editor is used. As for responsive design, desktops and laptops are supported. Application data is stored in **Supabase** database. Deployed on **Vercel**.
 
+<br />
 
 ## Log in screen
 
