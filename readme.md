@@ -14,8 +14,6 @@ npm run dev
 
 This is the internal application for the Ethos blog, only accessable to the authors of the blog. It's a singe-page application powered by **React**, providing users with fast navigation.
 
-<br />
-
 Authentication, authorization and admin permissions are implemented using **Supabase Auth**. For writing articles, **BlockNote** text editor is used. As for responsive design, desktops and laptops are supported. Application data is stored in **Supabase** database. Deployed on **Vercel**.
 
 <br />
