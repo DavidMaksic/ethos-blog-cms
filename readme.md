@@ -27,7 +27,6 @@ First of all, only approved users can log in. Existing authors are the only ones
 ![log in screen](https://davidmaksic.vercel.app/assets/cms-1-D2IGTwo4.png)
 
 <br />
-<br />
 
 ## Dashboard
 
@@ -35,7 +34,6 @@ Upon logging in, new author will see the dashboard page, which contains all the 
 
 ![dashboard](https://davidmaksic.vercel.app/assets/cms-2-B5KFKNDd.png)
 
-<br />
 <br />
 
 ## Admin permissions
