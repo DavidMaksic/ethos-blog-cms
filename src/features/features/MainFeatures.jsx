@@ -70,7 +70,7 @@ function MainFeatures() {
                </>
             ) : (
                <div
-                  className="relative flex justify-center h-[22.7rem] w-full border rounded-[2.3rem] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/20 dark:hover:bg-transparent border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
+                  className="relative flex justify-center h-[22.75rem] w-full border rounded-[2.3rem] group transition px-5 py-5 bg-cover cursor-pointer hover:bg-accent-100/20 dark:hover:bg-transparent border-quaternary hover:border-accent-300 dark:hover:border-accent-400/80"
                   onClick={() => setOpenModal((isOpen) => !isOpen)}
                >
                   <CgMathPlus className="absolute icons self-center size-11! text-primary-400/80! group-hover:text-accent-400! dark:group-hover:text-accent-300/90!" />

@@ -69,10 +69,11 @@ function ColorsTable({ input, isEdit = false, localTag, children }) {
 
             <section className="border border-quaternary dark:border-primary-300/30  rounded-2xl py-21.5 px-20 xl:px-14 transition-[border]">
                <span
-                  className={`font-article w-min px-7 py-2.5 pb-3 rounded-full font-bold text-2xl transition-bg`}
+                  className={`font-article w-min px-7 py-2.5 pb-3 rounded-full font-bold text-2xl transition-bg border`}
                   style={{
                      backgroundColor: `${bgColor?.hex}`,
                      color: `${textColor?.hex}`,
+                     borderColor: `color-mix(in srgb, currentColor ${isDarkMode ? '0' : '15'}%, transparent)`,
                   }}
                >
                   {!isEdit
@@ -80,8 +81,8 @@ function ColorsTable({ input, isEdit = false, localTag, children }) {
                         ? input
                         : 'History'
                      : input
-                     ? input
-                     : localTag?.category}
+                       ? input
+                       : localTag?.category}
                </span>
             </section>
          </div>

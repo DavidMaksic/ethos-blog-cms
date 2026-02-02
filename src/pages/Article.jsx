@@ -143,7 +143,7 @@ function Article() {
                   />
 
                   <div
-                     className={`text-primary-300 text-2xl pointer-events-none ${
+                     className={`text-primary-300 text-2xl pointer-events-none select-none ${
                         currentAuthor?.email !== author?.email && !isAdmin
                            ? 'hidden'
                            : ''
@@ -165,17 +165,16 @@ function Article() {
                      </div>
                   ) : null}
 
-                  <div
-                     className={`text-primary-300 text-2xl pointer-events-none `}
-                  >
+                  <div className="text-primary-300 text-2xl pointer-events-none select-none">
                      |
                   </div>
 
                   <span
-                     className="w-min px-4 py-1 rounded-full font-bold text-[1.3rem]"
+                     className="w-min px-4 py-1 rounded-full font-bold text-[1.3rem] select-none border"
                      style={{
                         backgroundColor: `${bgColor}`,
                         color: `${textColor}`,
+                        borderColor: `color-mix(in srgb, currentColor ${isDarkMode ? '0' : '15'}%, transparent)`,
                      }}
                   >
                      {category?.category}
