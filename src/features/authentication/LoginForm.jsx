@@ -21,7 +21,7 @@ function LoginForm() {
                   email: '',
                   password: '',
                }),
-         }
+         },
       );
    }
 
@@ -65,7 +65,7 @@ function LoginForm() {
          <FormRow className="grid-cols-[auto]">
             <div className="flex justify-self-center">
                <SubmitButton isPending={isPending} loadingText="Logging in">
-                  Login
+                  Log in
                </SubmitButton>
             </div>
          </FormRow>
