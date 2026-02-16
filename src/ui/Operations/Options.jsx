@@ -2,7 +2,7 @@ import { LuPencilLine, LuTableOfContents } from 'react-icons/lu';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useFullscreen } from '../../context/FullscreenContext';
 import { useAuthors } from '../../features/authentication/useAuthors';
@@ -32,6 +32,16 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
 
    const { setIsFullscreen } = useFullscreen();
    useEffect(() => setIsFullscreen(false), [setIsFullscreen]);
+
+   const navigate = useNavigate();
+
+   const goToEdit = () => {
+      const container = document.querySelector('main');
+      if (container) {
+         sessionStorage.setItem('articleScrollY', container.scrollTop);
+      }
+      navigate(`/archive/edit/${articleID}`);
+   };
 
    useEffect(() => {
       if (!mounted) return;
@@ -296,9 +306,10 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
 
                   {(currentAuthor?.email === theAuthor?.email && articleID) ||
                   (isAdmin && !isEditPage && !isCreatorPage) ? (
-                     <Link to={`/archive/edit/:${articleID}`}>
-                        <LuPencilLine className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-400/10 stroke-[1.7px] rounded-2xl transition" />
-                     </Link>
+                     <LuPencilLine
+                        className="py-4 mt-1 size-13.5 hover:bg-primary-100/80 dark:hover:bg-primary-400/10 stroke-[1.7px] rounded-2xl transition"
+                        onClick={goToEdit}
+                     />
                   ) : null}
 
                   <AnimatePresence>

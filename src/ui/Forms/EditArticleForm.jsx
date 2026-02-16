@@ -2,6 +2,7 @@ import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
 import { useEffect, useRef, useState } from 'react';
+import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -14,7 +15,6 @@ import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useDebounce } from '../../hooks/useDebounce';
-import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -45,7 +45,6 @@ import Options from '../Operations/Options';
 import FormRow from './FormRow';
 import toast from 'react-hot-toast';
 import Form from './Form';
-import Spinner from '../Spinner';
 
 function EditArticleForm() {
    const { article, isPending } = useFindArticle();
@@ -161,6 +160,13 @@ function EditArticleForm() {
 
          const blocks = await editor.tryParseHTMLToBlocks(html);
          editor.replaceBlocks(editor.document, blocks);
+
+         const container = document.querySelector('main');
+         const savedScrollY = sessionStorage.getItem('articleScrollY') - 110;
+         if (container && savedScrollY) {
+            container.scrollTo({ top: Number(savedScrollY), behavior: 'auto' });
+            sessionStorage.removeItem('articleScrollY');
+         }
       };
 
       loadBlocks();
@@ -258,7 +264,7 @@ function EditArticleForm() {
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary transition-bg_border text-3xl outline-none scrollbar mt-3 text-text"
                   minRows={1}
                   maxRows={2}
                   id="title"
@@ -302,7 +308,7 @@ function EditArticleForm() {
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
-                  className="bg-secondary dark:bg-transparent text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3"
+                  className="bg-secondary dark:bg-transparent text-3xl border-b border-b-quaternary transition-bg_border outline-none scrollbar mt-3 text-text"
                   minRows={4}
                   maxRows={4}
                   id="description"

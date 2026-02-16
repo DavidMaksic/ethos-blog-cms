@@ -56,7 +56,7 @@ function Creator() {
          ],
          code: DEFAULT_LANG,
       },
-      'article'
+      'article',
    );
 
    // - Form logic
@@ -123,7 +123,7 @@ function Creator() {
    function onSubmit(data) {
       let category_id;
       category_id = categories.find(
-         (item) => item.category === localArticle?.category
+         (item) => item.category === localArticle?.category,
       )?.id;
       if (!category_id) category_id = categories[0].id;
 
@@ -144,14 +144,14 @@ function Creator() {
          },
          {
             onSuccess: clear,
-         }
+         },
       );
    }
 
    function onSubmitDraft(data) {
       let category_id;
       category_id = categories.find(
-         (item) => item.category === localArticle?.category
+         (item) => item.category === localArticle?.category,
       )?.id;
       if (!category_id) category_id = categories[0].id;
 
@@ -172,7 +172,7 @@ function Creator() {
          },
          {
             onSuccess: clear,
-         }
+         },
       );
    }
 
@@ -236,7 +236,7 @@ function Creator() {
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border text-3xl outline-none scrollbar mt-3"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border text-3xl outline-none scrollbar mt-3 text-text"
                   minRows={1}
                   maxRows={2}
                   id="title"
@@ -278,7 +278,7 @@ function Creator() {
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Description" error={errors?.description?.message}>
                <TextareaAutosize
-                  className="bg-secondary dark:bg-transparent text-3xl border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none scrollbar mt-3"
+                  className="bg-secondary dark:bg-transparent text-3xl border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none scrollbar mt-3 text-text"
                   minRows={4}
                   maxRows={4}
                   id="description"
@@ -378,14 +378,14 @@ function Creator() {
                         [
                            ...combineByGroup(
                               getDefaultReactSlashMenuItems(editor),
-                              getMultiColumnSlashMenuItems(editor)
+                              getMultiColumnSlashMenuItems(editor),
                            ),
                            insertAlert(
                               editor,
-                              <HiOutlineInbox className="size-5 stroke-2" />
+                              <HiOutlineInbox className="size-5 stroke-2" />,
                            ),
                         ],
-                        query
+                        query,
                      )
                   }
                />

@@ -64,8 +64,8 @@ function LoginForm() {
 
          <FormRow className="grid-cols-[auto]">
             <div className="flex justify-self-center">
-               <SubmitButton isPending={isPending} loadingText="Logging in">
-                  Log in
+               <SubmitButton isPending={isPending} loadingText="Signing in">
+                  Sign in
                </SubmitButton>
             </div>
          </FormRow>

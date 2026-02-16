@@ -1,13 +1,9 @@
-import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CgSearch } from 'react-icons/cg';
 
 function Search() {
    const [searchParams, setSearchParams] = useSearchParams();
-   const [open, setOpen] = useState(false);
    const query = searchParams.get('search') || '';
-   const ref = useRef(null);
 
    function handleChange(value) {
       setSearchParams((prev) => {
@@ -21,58 +17,21 @@ function Search() {
       });
    }
 
-   useEffect(() => {
-      if (query) setOpen(true);
-   }, []); // eslint-disable-line
-
-   useEffect(() => {
-      if (open && ref.current) ref.current.focus();
-
-      const handleEnter = ({ key }) => {
-         if (key === 'Enter') {
-            setOpen((isOpen) => !isOpen);
-         }
-      };
-      document.addEventListener('keydown', handleEnter, true);
-
-      return () => {
-         document.removeEventListener('keydown', handleEnter, true);
-      };
-   }, [open]);
-
    return (
       <div className="flex items-center">
          <label htmlFor="search">
-            <CgSearch
-               className={`size-11 text-accent-600/85 dark:text-accent-200/90 p-2 pt-2.5 pr-2.5 bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full transition-bg_border cursor-pointer z-10 ${
-                  open &&
-                  'rounded-r-none border-r-transparent dark:border-r-transparent'
-               }`}
-               onClick={() => setOpen((isOpen) => !isOpen)}
-            />
+            <CgSearch className="size-11 text-accent-600/85 dark:text-accent-200/90 p-2 pt-2.5 pr-2.5 bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full rounded-r-none border-r-transparent dark:border-r-transparent transition-bg_border select-none z-10" />
          </label>
 
-         <AnimatePresence>
-            {open && (
-               <motion.input
-                  ref={ref}
-                  id="search"
-                  type="text"
-                  value={query}
-                  placeholder="Search..."
-                  autoComplete="new-password"
-                  onChange={(e) => handleChange(e.target.value)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.1 }}
-                  className={`h-11 py-4 px-1 w-[22rem] xl:w-[16rem] bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full text-xl font-medium font-creator outline-none transition-bg_border z-10 ${
-                     open &&
-                     'rounded-l-none border-l-transparent dark:border-l-transparent'
-                  }`}
-               />
-            )}
-         </AnimatePresence>
+         <input
+            id="search"
+            type="text"
+            value={query}
+            placeholder="Search..."
+            autoComplete="new-password"
+            onChange={(e) => handleChange(e.target.value)}
+            className="h-11 py-4 px-1 w-[22rem] xl:w-[16rem] bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full rounded-l-none border-l-transparent dark:border-l-transparent text-xl font-medium font-creator outline-none transition-bg_border z-10"
+         />
       </div>
    );
 }
