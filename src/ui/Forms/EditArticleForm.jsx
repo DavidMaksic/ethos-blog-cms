@@ -2,6 +2,7 @@ import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -14,7 +15,6 @@ import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useDebounce } from '../../hooks/useDebounce';
-import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -39,6 +39,7 @@ import {
 
 import TextareaAutosize from 'react-textarea-autosize';
 import LanguageButton from '../Buttons/LanguageButton';
+import EditSkeleton from '../Skeletons/EditSkeleton';
 import SubmitButton from '../Buttons/SubmitButton';
 import ResetButton from '../Buttons/ResetButton';
 import Categories from '../Categories';
@@ -186,18 +187,22 @@ function EditArticleForm() {
 
    useEffect(() => {
       if (editor) {
-         // - Restore scroll position after editor is loaded
-         const container = document.querySelector('main');
-         const savedScrollY = sessionStorage.getItem('articleScrollY');
-         if (container && savedScrollY) {
-            const scrollPosition = Number(savedScrollY) - 110;
-            container.scrollTo({ top: scrollPosition, behavior: 'auto' });
-            sessionStorage.removeItem('articleScrollY');
-         }
-
          // - Set fullscreen by default when editor loads
          setLocalFullscreen(true);
          setIsFullscreen(true);
+
+         // - Restore scroll position
+         requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+               const container = document.querySelector('main');
+               const savedScrollY = sessionStorage.getItem('articleScrollY');
+               if (container && savedScrollY) {
+                  const scrollPosition = Number(savedScrollY) - 110;
+                  container.scrollTo({ top: scrollPosition, behavior: 'auto' });
+                  sessionStorage.removeItem('articleScrollY');
+               }
+            });
+         });
       }
    }, [editor]); // eslint-disable-line
 
@@ -283,13 +288,8 @@ function EditArticleForm() {
 
    const isLoading = isPending || isEditing || isUnFeaturing;
 
-   // Show loading state while editor is being created
    if (!editor) {
-      return (
-         <div className="flex items-center justify-center h-screen">
-            <ImSpinner2 className="size-12 animate-spin" />
-         </div>
-      );
+      return <EditSkeleton isForm={true} />;
    }
 
    return (
