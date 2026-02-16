@@ -1,8 +1,7 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
-import { useEffect, useRef, useState } from 'react';
-import { LuSave, LuSunMedium } from 'react-icons/lu';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -15,6 +14,7 @@ import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useDebounce } from '../../hooks/useDebounce';
+import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -24,10 +24,13 @@ import {
    FormattingToolbarController,
    SuggestionMenuController,
    blockTypeSelectItems,
-   useCreateBlockNote,
    FormattingToolbar,
 } from '@blocknote/react';
-import { combineByGroup, filterSuggestionItems } from '@blocknote/core';
+import {
+   combineByGroup,
+   filterSuggestionItems,
+   BlockNoteEditor,
+} from '@blocknote/core';
 import {
    multiColumnDropCursor,
    getMultiColumnSlashMenuItems,
@@ -95,28 +98,49 @@ function EditArticleForm() {
    const { isDarkMode, toggleDarkMode } = useDarkMode();
    const { user } = useCurrentAuthor();
 
-   const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
-      useFullscreen();
+   // - Load initial content asynchronously
+   const [initialContent, setInitialContent] = useState('loading');
 
    useEffect(() => {
-      setLocalFullscreen(true);
-      setIsFullscreen(true);
-   }, []); // eslint-disable-line
+      const loadInitialBlocks = async () => {
+         const html =
+            article?.id && article.id !== localArticle.id
+               ? article.content
+               : localArticle.content;
 
-   // - Editor logic
-   const editor = useCreateBlockNote({
-      trailingBlock: false,
-      schema: blockNoteSchema,
-      dropCursor: multiColumnDropCursor,
-      dictionary: {
-         ...en,
-         multi_column: multiColumnLocales.en,
-         placeholders: {
-            ...en.placeholders,
-            default: 'Write...',
+         // Create a temporary editor just to parse HTML
+         const tempEditor = BlockNoteEditor.create({
+            schema: blockNoteSchema,
+         });
+
+         const blocks = await tempEditor.tryParseHTMLToBlocks(html);
+         setInitialContent(blocks);
+      };
+
+      loadInitialBlocks();
+   }, [article?.id, article?.content, localArticle.id, localArticle.content]);
+
+   // - Editor logic with useMemo
+   const editor = useMemo(() => {
+      if (initialContent === 'loading') {
+         return undefined;
+      }
+
+      return BlockNoteEditor.create({
+         initialContent,
+         trailingBlock: false,
+         schema: blockNoteSchema,
+         dropCursor: multiColumnDropCursor,
+         dictionary: {
+            ...en,
+            multi_column: multiColumnLocales.en,
+            placeholders: {
+               ...en.placeholders,
+               default: 'Write...',
+            },
          },
-      },
-   });
+      });
+   }, [initialContent]);
 
    // - Debounce article content
    const [contentHTML, setContentHTML] = useState();
@@ -132,11 +156,12 @@ function EditArticleForm() {
 
    // - When article content changes, store it as html
    const onChange = async () => {
+      if (!editor) return;
       const html = await editor.blocksToFullHTML(editor.document);
       setContentHTML(html);
    };
 
-   // - 3 effects for initial sync between inputs and localStorage
+   // - Sync between inputs and localStorage
    useEffect(() => {
       // - Check if the API article differs from one in storage
       if (article?.id && article.id !== localArticle.id) {
@@ -150,32 +175,31 @@ function EditArticleForm() {
       }
    }, [article, reset, localArticle.id, setLocalArticle]);
 
-   useEffect(() => {
-      // - Populate content with correct data
-      const loadBlocks = async () => {
-         const html =
-            article?.id && article.id !== localArticle.id
-               ? article.content
-               : localArticle.content;
-
-         const blocks = await editor.tryParseHTMLToBlocks(html);
-         editor.replaceBlocks(editor.document, blocks);
-
-         const container = document.querySelector('main');
-         const savedScrollY = sessionStorage.getItem('articleScrollY') - 110;
-         if (container && savedScrollY) {
-            container.scrollTo({ top: Number(savedScrollY), behavior: 'auto' });
-            sessionStorage.removeItem('articleScrollY');
-         }
-      };
-
-      loadBlocks();
-   }, []); // eslint-disable-line
-
    const [currentImage, setCurrentImage] = useState();
    useEffect(() => {
       setCurrentImage(localArticle?.image || oldImage);
    }, [localArticle?.image, oldImage]);
+
+   // - Fullscreen and scroll logic
+   const { setLocalFullscreen, isFullscreen, setIsFullscreen } =
+      useFullscreen();
+
+   useEffect(() => {
+      if (editor) {
+         // - Restore scroll position after editor is loaded
+         const container = document.querySelector('main');
+         const savedScrollY = sessionStorage.getItem('articleScrollY');
+         if (container && savedScrollY) {
+            const scrollPosition = Number(savedScrollY) - 110;
+            container.scrollTo({ top: scrollPosition, behavior: 'auto' });
+            sessionStorage.removeItem('articleScrollY');
+         }
+
+         // - Set fullscreen by default when editor loads
+         setLocalFullscreen(true);
+         setIsFullscreen(true);
+      }
+   }, [editor]); // eslint-disable-line
 
    // - React Query logic
    const { isUnFeaturing, unFeature } = useUnFeature();
@@ -258,6 +282,15 @@ function EditArticleForm() {
    }
 
    const isLoading = isPending || isEditing || isUnFeaturing;
+
+   // Show loading state while editor is being created
+   if (!editor) {
+      return (
+         <div className="flex items-center justify-center h-screen">
+            <ImSpinner2 className="size-12 animate-spin" />
+         </div>
+      );
+   }
 
    return (
       <Form isPending={isLoading}>

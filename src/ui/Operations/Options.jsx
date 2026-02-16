@@ -1,8 +1,8 @@
 import { LuPencilLine, LuTableOfContents } from 'react-icons/lu';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useFullscreen } from '../../context/FullscreenContext';
 import { useAuthors } from '../../features/authentication/useAuthors';
