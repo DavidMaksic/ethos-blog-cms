@@ -1567,3 +1567,15 @@ article .bn-file-block-content-wrapper {
 strong {
    @apply text-primary-600/90 dark:text-primary-600/73;
 }
+
+/* Make middle column wider */
+.bn-block-column-list:has(> .bn-block-column:nth-child(3):last-child):has(
+      > .bn-block-column:first-child .ProseMirror-trailingBreak,
+      > .bn-block-column:first-child p.bn-inline-content:empty
+   ):has(
+      > .bn-block-column:last-child .ProseMirror-trailingBreak,
+      > .bn-block-column:last-child p.bn-inline-content:empty
+   )
+   > .bn-block-column:nth-child(2) {
+   flex: 4 1 0% !important;
+}

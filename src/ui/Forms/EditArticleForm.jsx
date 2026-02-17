@@ -101,6 +101,7 @@ function EditArticleForm() {
 
    // - Load initial content asynchronously
    const [initialContent, setInitialContent] = useState('loading');
+   const hasLoadedRef = useRef(false);
 
    useEffect(() => {
       const loadInitialBlocks = async () => {
@@ -118,8 +119,11 @@ function EditArticleForm() {
          setInitialContent(blocks);
       };
 
+      if (hasLoadedRef.current) return;
+      hasLoadedRef.current = true;
+
       loadInitialBlocks();
-   }, [article?.id, article?.content, localArticle.id, localArticle.content]);
+   }, []); // eslint-disable-line
 
    // - Editor logic with useMemo
    const editor = useMemo(() => {

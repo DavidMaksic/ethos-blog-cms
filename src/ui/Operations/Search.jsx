@@ -28,7 +28,7 @@ function Search() {
             type="text"
             value={query}
             placeholder="Search..."
-            autoComplete="new-password"
+            autoComplete="one-time-code"
             onChange={(e) => handleChange(e.target.value)}
             className="h-11 py-4 px-1 w-[22rem] xl:w-[16rem] bg-white dark:bg-primary-300/15 border border-tertiary dark:border-transparent shadow-2xs rounded-full rounded-l-none border-l-transparent dark:border-l-transparent text-xl font-medium font-creator outline-none transition-bg_border z-10"
          />
