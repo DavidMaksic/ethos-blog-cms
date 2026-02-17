@@ -22,7 +22,7 @@ function SubmitButton({
 
    useEffect(() => {
       if (to && isSuccess) navigate(to);
-      else if (!to && isSuccess) navigate(-1);
+      if (!to && isSuccess) navigate(-1);
    }, [to, isSuccess, navigate]);
 
    return (

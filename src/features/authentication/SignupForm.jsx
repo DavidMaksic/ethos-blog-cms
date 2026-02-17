@@ -5,6 +5,7 @@ import SubmitButton from '../../ui/Buttons/SubmitButton';
 import ClearButton from '../../ui/Buttons/ClearButton';
 import FormItem from '../../ui/Forms/FormItem';
 import FormRow from '../../ui/Forms/FormRow';
+import toast from 'react-hot-toast';
 import Form from '../../ui/Forms/Form';
 
 function SignupForm() {
@@ -20,8 +21,11 @@ function SignupForm() {
             password,
          },
          {
-            onSettled: resetInputs,
-         }
+            onSettled: () => {
+               toast.success('Account successfully created!');
+               resetInputs();
+            },
+         },
       );
    }
 
@@ -42,6 +46,7 @@ function SignupForm() {
                   className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                   id="full_name"
                   type="text"
+                  autoComplete="one-time-code"
                   {...register('full_name', {
                      required: '*',
                      minLength: {
@@ -63,7 +68,6 @@ function SignupForm() {
                   className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                   id="email"
                   type="text"
-                  autoComplete="username"
                   {...register('email', {
                      required: '*',
                      pattern: {
@@ -125,7 +129,7 @@ function SignupForm() {
                   loadingText="Signing up"
                   handler={handleSubmit(onSubmit)}
                >
-                  Sign up
+                  Sign Up
                </SubmitButton>
             </div>
          </FormRow>

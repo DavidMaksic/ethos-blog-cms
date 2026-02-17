@@ -23,7 +23,7 @@ function Author({ author, activeUser }) {
 
    return (
       <li
-         className={`relative flex flex-col items-center self-center gap-2 bg-secondary dark:bg-primary-300/10 rounded-3xl px-20 py-12 box-shadow transition-200 h-full ${
+         className={`relative flex flex-col items-center justify-center self-center gap-2 bg-secondary dark:bg-primary-300/10 rounded-3xl px-20 py-12 box-shadow transition-200 h-full ${
             !description_en && 'pb-18'
          }`}
       >
@@ -56,8 +56,9 @@ function Author({ author, activeUser }) {
                <span className="text-xl font-text">{description_en}</span>
             ) : (
                <span className="text-xl font-text">
-                  Your profile description will appear here. Write something
-                  about yourself!
+                  {currentAuthor.email === email
+                     ? 'Your profile description will appear here. Write something about yourself!'
+                     : 'This author has no profile description yet.'}
                </span>
             )}
          </div>

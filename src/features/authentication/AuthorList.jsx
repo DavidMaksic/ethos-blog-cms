@@ -20,9 +20,11 @@ function AuthorList() {
          transition={{ duration: 0.3 }}
       >
          <Author author={theAuthor} />
-         {authors.map((item) => (
-            <Author author={item} key={item.id} activeUser={user} />
-         ))}
+         {authors
+            .map((item) => (
+               <Author author={item} key={item.id} activeUser={user} />
+            ))
+            .reverse()}
       </motion.ul>
    );
 }
