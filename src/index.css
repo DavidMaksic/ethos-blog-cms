@@ -115,8 +115,6 @@
    --color-table: #f3f4f6;
    --color-text: #5d6673;
    --color-toast: #fff;
-   --color-autofill-bg: #fff;
-   --color-autofill-text: #374151;
    --color-scrollbar: var(--color-primary-300);
 
    --shadow-modal: 0 0 40px 0px #e5e7eba4;
@@ -224,8 +222,6 @@
       --color-table: var(--color-primary-50);
       --color-text: #99a2ad;
       --color-toast: #252e36;
-      --color-autofill-bg: var(--color-primary-200);
-      --color-autofill-text: #cbd5e1;
       --color-scrollbar: #313a42;
 
       --shadow-toast-btn: 0 0.2rem 0.5rem #1c242c;
@@ -484,18 +480,6 @@ button,
       margin-top: 16px;
       margin-bottom: 16px;
    }
-}
-
-/* Style autofill */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-   -webkit-box-shadow: 0 0 0 30px var(--color-autofill-bg) inset !important;
-}
-
-input:-webkit-autofill {
-   -webkit-text-fill-color: var(--color-autofill-text) !important;
 }
 
 /* Editor styles */
@@ -1566,6 +1550,17 @@ article .bn-file-block-content-wrapper {
 
 strong {
    @apply text-primary-600/90 dark:text-primary-600/73;
+}
+
+/* Remove autofill */
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0) inset !important;
+   -webkit-text-fill-color: var(--color-primary-600) !important;
+   transition: background-color 9999s ease-in-out 0s !important;
+}
+
+[data-theme='dark'] input:-webkit-autofill {
+   -webkit-text-fill-color: #cbd5e1cc !important;
 }
 
 /* Make middle column wider */
