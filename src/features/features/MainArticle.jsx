@@ -41,8 +41,8 @@ function MainArticle({ article, refetch, index }) {
                {article.description}
             </h3>
 
-            <div className="self-start mt-4 rounded-full bg-gradient-to-r from-accent-300/80 to-accent-600/70 border-2 border-transparent shadow-link-btn dark:shadow-none transition-[box-shadow,border] duration-300 bg-origin-border">
-               <button className="flex articles-center gap-5 text-2xl px-5 pr-5 py-2 text-white transition-[color] duration-300 cursor-pointer font-logo pointer-events-none">
+            <div className="self-start mt-4 rounded-full bg-gradient-to-r from-accent-300/80 dark:from-accent-300/60 to-accent-600/70 dark:to-accent-600/50 border-2 border-transparent shadow-link-btn dark:shadow-none transition-[box-shadow,border] duration-300 bg-origin-border">
+               <button className="flex articles-center gap-5 text-2xl px-5 pr-5 py-2 text-white dark:text-accent-100 transition-[color] duration-300 cursor-pointer font-logo pointer-events-none">
                   Read more
                </button>
             </div>
