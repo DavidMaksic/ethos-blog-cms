@@ -8,6 +8,7 @@ import { motion } from 'motion/react';
 function MainArticle({ article, refetch, index }) {
    const { isEditing, isSuccess, updateMainFeature } = useUpdateMainFeature();
    const boolean = false;
+
    const id = article.id;
    const { setIndex } = useSetIndex();
 

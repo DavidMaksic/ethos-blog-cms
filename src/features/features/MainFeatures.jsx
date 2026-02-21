@@ -8,8 +8,8 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 
 import MainFeatureModal from './MainFeatureModal';
+import FeaturesWrapper from '../../ui/FeaturesWrapper';
 import MainArticle from './MainArticle';
-import TagForm from '../../ui/Forms/TagForm';
 import Modal from '../../ui/Modal/Modal';
 
 // Import Swiper styles
@@ -27,7 +27,7 @@ function MainFeatures() {
    refetch();
 
    return (
-      <TagForm>
+      <FeaturesWrapper>
          <div className="grid grid-cols-[0.5fr_2.3fr] gap-12 items-center pr-16">
             <span className="font-light text-primary-400 text-base uppercase ml-1">
                Choose articles:
@@ -96,7 +96,7 @@ function MainFeatures() {
                )}
             </AnimatePresence>
          </div>
-      </TagForm>
+      </FeaturesWrapper>
    );
 }
 

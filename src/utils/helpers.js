@@ -111,5 +111,5 @@ export const blockNoteSchema = withMultiColumn(
          ...rest,
          alert: Alert,
       },
-   })
+   }),
 );

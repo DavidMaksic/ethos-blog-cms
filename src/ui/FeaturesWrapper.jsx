@@ -1,19 +1,18 @@
 import { motion } from 'motion/react';
 
-function TagForm({ isPending, onSubmit, children }) {
+function FeaturesWrapper({ isPending, children }) {
    const disableClick = isPending && 'pointer-events-none !opacity-70';
 
    return (
-      <motion.form
+      <motion.div
          className={`relative py-10 pb-12 px-6 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-b-primary-100 ${disableClick}`}
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
-         onSubmit={onSubmit}
       >
          {children}
-      </motion.form>
+      </motion.div>
    );
 }
 
-export default TagForm;
+export default FeaturesWrapper;

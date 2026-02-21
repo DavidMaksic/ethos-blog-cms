@@ -3,10 +3,10 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useEntry } from '../../context/EntryContext';
 import { useEffect } from 'react';
 
+import FeaturesWrapper from '../../ui/FeaturesWrapper';
 import Categories from '../../ui/Categories';
 import EmptyEntry from './EmptyEntry';
 import TagEntry from './TagEntry';
-import TagForm from '../../ui/Forms/TagForm';
 
 function TagFeatures() {
    const { categories } = useGetCategories();
@@ -14,7 +14,7 @@ function TagFeatures() {
       {
          category: 'History',
       },
-      'featureTag'
+      'featureTag',
    );
 
    const { setContextTag, taggedArticles } = useEntry();
@@ -24,11 +24,11 @@ function TagFeatures() {
    }, [localTag, setContextTag]);
 
    const currentTag = categories?.find(
-      (item) => item.category === localTag.category
+      (item) => item.category === localTag.category,
    );
 
    return (
-      <TagForm>
+      <FeaturesWrapper>
          <div className="flex flex-col items-center [&_label]:text-primary-400 [&_label]:font-light [&_label]:text-base [&_label]:uppercase">
             <section className="flex items-center self-start">
                <div className="flex flex-col gap-3 w-60 xl:w-54 self-start">
@@ -75,7 +75,7 @@ function TagFeatures() {
                </ul>
             </section>
          </div>
-      </TagForm>
+      </FeaturesWrapper>
    );
 }
 
