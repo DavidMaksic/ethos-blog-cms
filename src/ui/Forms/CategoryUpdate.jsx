@@ -64,12 +64,12 @@ function CategoryUpdate() {
 
    useEffect(() => setCurrentTag(localTag), [setCurrentTag, localTag]);
 
-   function handleCategory({ category }) {
+   function handleCategory({ categoryUpdate }) {
       const { id } = categories.find(
          (item) => item.category === localTag.category,
       );
       const updateObject = {
-         category,
+         category: categoryUpdate,
          id,
          colorLightBg,
          colorLightText,

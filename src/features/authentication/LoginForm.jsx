@@ -9,7 +9,6 @@ import FormRow from '../../ui/Forms/FormRow';
 function LoginForm() {
    const { register, handleSubmit, formState, reset } = useForm();
    const { errors } = formState;
-
    const { isPending, login } = useLogin();
 
    function onSubmit({ email, password }) {
