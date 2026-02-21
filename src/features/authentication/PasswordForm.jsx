@@ -44,7 +44,7 @@ function PasswordForm() {
 
             <FormRow columns="grid-cols-[24rem]">
                <FormItem
-                  label="Repeat password"
+                  label="Confirm password"
                   error={errors?.passwordConfirm?.message}
                >
                   <input
