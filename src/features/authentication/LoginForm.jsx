@@ -1,10 +1,10 @@
 import { useLogin } from './useLogin';
 import { useForm } from 'react-hook-form';
-import { motion } from 'motion/react';
 
 import SubmitButton from '../../ui/Buttons/SubmitButton';
 import FormItem from '../../ui/Forms/FormItem';
 import FormRow from '../../ui/Forms/FormRow';
+import Form from '../../ui/Forms/Form';
 
 function LoginForm() {
    const { register, handleSubmit, formState, reset } = useForm();
@@ -25,15 +25,7 @@ function LoginForm() {
    }
 
    return (
-      <motion.form
-         className={`label font-creator relative flex flex-col gap-8 bg-secondary dark:bg-primary-300/10 rounded-3xl text-lg text-primary-600 dark:text-slate-300/80 font-medium px-20 py-12 [&_input]:text-3xl box-shadow transition-200 ${
-            isPending && 'pointer-events-none opacity-80'
-         }`}
-         onSubmit={handleSubmit(onSubmit)}
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         transition={{ duration: 0.3 }}
-      >
+      <Form isPending={isPending} onSubmit={handleSubmit(onSubmit)}>
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Email address" error={errors?.email?.message}>
                <input
@@ -42,6 +34,10 @@ function LoginForm() {
                   type="text"
                   {...register('email', {
                      required: '*',
+                     pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: 'Invalid email address',
+                     },
                   })}
                />
             </FormItem>
@@ -68,7 +64,7 @@ function LoginForm() {
                </SubmitButton>
             </div>
          </FormRow>
-      </motion.form>
+      </Form>
    );
 }
 
