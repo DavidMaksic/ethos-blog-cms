@@ -31,7 +31,7 @@ function CategoryUpdate() {
       {
          category: 'History',
       },
-      'updateTag'
+      'updateTag',
    );
 
    const [localArticle, setLocalArticle] = useLocalStorage(null, 'article');
@@ -67,7 +67,7 @@ function CategoryUpdate() {
 
    function handleCategory({ category }) {
       const { id } = categories.find(
-         (item) => item.category === localTag.category
+         (item) => item.category === localTag.category,
       );
       const updateObject = {
          category,
@@ -131,7 +131,7 @@ function CategoryUpdate() {
                      />
 
                      <div className="ml-4">
-                        {error && <Error>{error}</Error>}
+                        <Error error={error} />
                      </div>
                   </div>
                </div>

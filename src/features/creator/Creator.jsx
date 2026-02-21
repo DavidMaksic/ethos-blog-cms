@@ -101,8 +101,11 @@ function Creator() {
 
    // - Image select logic
    const imageRef = useRef(null);
+   const imageRegister = register('image', { required: '*' });
 
    function handlePreviewImage(e) {
+      imageRegister.onChange(e);
+
       const img = e.target.files[0];
       if (!img) return;
 
@@ -177,6 +180,8 @@ function Creator() {
    }
 
    // - Reset logic
+   const [activeButton, setActiveButton] = useState(null);
+
    function clear() {
       reset();
       setLocalArticle({
@@ -192,6 +197,8 @@ function Creator() {
          category: categories?.at(0).category,
       });
       document.documentElement.setAttribute('data-lang', DEFAULT_LANG);
+      document.getElementById('image').value = '';
+      setActiveButton(null);
       setTimeout(() => {
          if (editor) {
             editor.removeBlocks(editor.document);
@@ -336,12 +343,7 @@ function Creator() {
                      id="image"
                      accept="image/*"
                      type="file"
-                     {...register('image', {
-                        validate: () => {
-                           if (!localArticle.image) return '*';
-                           return true;
-                        },
-                     })}
+                     {...imageRegister}
                      onChange={handlePreviewImage}
                   />
                </label>
@@ -408,15 +410,17 @@ function Creator() {
          <div className="flex justify-center items-center gap-8">
             <SubmitButton
                handler={handleSubmit(onSubmit, onInvalid)}
-               isPending={isPending}
+               isPending={isPending && activeButton === 'publish'}
                loadingText="Publishing"
+               onClick={() => setActiveButton('publish')}
             >
                Publish
             </SubmitButton>
             <span className="italic text-4xl text-primary-400">or</span>
             <DraftButton
                handler={handleSubmit(onSubmitDraft, onInvalid)}
-               isPending={isPending}
+               isPending={isPending && activeButton === 'draft'}
+               onClick={() => setActiveButton('draft')}
             />
          </div>
 

@@ -1,12 +1,21 @@
-function Error({ children }) {
+import { AnimatePresence, motion } from 'motion/react';
+
+function Error({ error }) {
    return (
-      <div
-         className={`text-red-400/90 dark:text-red-300 font-semibold dark:font-normal rounded-full ${
-            children === '*' ? 'text-xl' : ''
-         }`}
-      >
-         {children === '*' ? children : `* ${children}`}
-      </div>
+      <AnimatePresence mode="wait">
+         {error && (
+            <motion.p
+               key={`${error}-error`}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               exit={{ opacity: 0 }}
+               transition={{ duration: 0.075 }}
+               className="text-red-600/50 dark:text-red-300/80 text-lg font-bold dark:font-medium select-none pointer-events-none font-secondary"
+            >
+               {error === '*' ? error : `*${error}`}
+            </motion.p>
+         )}
+      </AnimatePresence>
    );
 }
 

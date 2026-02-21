@@ -91,7 +91,9 @@ function CategoryCreate() {
                      handleCategory={handleCategory}
                   />
 
-                  <div className="ml-4">{error && <Error>{error}</Error>}</div>
+                  <div className="ml-4">
+                     <Error error={error} />
+                  </div>
                </div>
             </section>
 

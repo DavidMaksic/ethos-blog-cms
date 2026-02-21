@@ -3,9 +3,9 @@ import Error from '../Error/Error';
 function FormItem({ label, error, children }) {
    return (
       <div className="flex flex-col gap-2.5 custom-select">
-         <div className={`flex ${error === '*' ? 'gap-1.5' : 'gap-7'}`}>
+         <div className="flex items-center gap-3">
             <label htmlFor={children.props.id}>{label}</label>
-            {error && <Error>{error}</Error>}
+            <Error error={error} />
          </div>
 
          {children}
