@@ -39,9 +39,9 @@ function SignupForm() {
    }
 
    return (
-      <Form isPending={isPending}>
+      <Form isPending={isPending} onSubmit={handleSubmit(onSubmit)}>
          <FormRow columns="grid-cols-[32rem]">
-            <FormItem label="Full name" error={errors?.full_name?.message}>
+            <FormItem label="Name" error={errors?.full_name?.message}>
                <input
                   className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                   id="full_name"
@@ -54,8 +54,19 @@ function SignupForm() {
                         message: 'Minimum of 2 characters',
                      },
                      maxLength: {
-                        value: 40,
-                        message: 'Maximum of 40 characters',
+                        value: 25,
+                        message: 'Maximum of 25 characters',
+                     },
+                     validate: {
+                        allNumbers: (val) =>
+                           !/^\d+$/.test(val) ||
+                           'The username must contain letters',
+                        consecutiveUnderscores: (val) =>
+                           !/__/.test(val) || 'No consecutive underscores',
+                        startUnderscore: (val) =>
+                           !/^_/.test(val) || "Can't start with an underscore",
+                        endUnderscore: (val) =>
+                           !/_$/.test(val) || "Can't end with an underscore",
                      },
                   })}
                />
@@ -63,7 +74,7 @@ function SignupForm() {
          </FormRow>
 
          <FormRow columns="grid-cols-[32rem]">
-            <FormItem label="Email address" error={errors?.email?.message}>
+            <FormItem label="Email" error={errors?.email?.message}>
                <input
                   className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
                   id="email"
@@ -94,7 +105,7 @@ function SignupForm() {
                      },
                      maxLength: {
                         value: 128,
-                        message: 'Minimum of 128 characters',
+                        message: 'Maximum of 128 characters',
                      },
                   })}
                />
@@ -103,7 +114,7 @@ function SignupForm() {
 
          <FormRow columns="grid-cols-[32rem]">
             <FormItem
-               label="Repeat password"
+               label="Confirm password"
                error={errors?.passwordConfirm?.message}
             >
                <input
@@ -127,7 +138,6 @@ function SignupForm() {
                   isPending={isPending}
                   isSuccess={isSuccess}
                   loadingText="Signing up"
-                  handler={handleSubmit(onSubmit)}
                >
                   Sign Up
                </SubmitButton>

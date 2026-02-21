@@ -239,7 +239,7 @@ function Creator() {
    }
 
    return (
-      <Form isPending={isPending}>
+      <Form isDiv={true} isPending={isPending}>
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize

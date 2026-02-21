@@ -20,7 +20,7 @@ function PasswordForm() {
 
    return (
       <div className="space-y-8">
-         <Form isPending={isPending}>
+         <Form isPending={isPending} onSubmit={handleSubmit(onSubmit)}>
             <FormRow columns="grid-cols-[24rem]">
                <FormItem label="New password" error={errors?.password?.message}>
                   <input
@@ -35,7 +35,7 @@ function PasswordForm() {
                         },
                         maxLength: {
                            value: 128,
-                           message: 'Minimum of 128 characters',
+                           message: 'Maximum of 128 characters',
                         },
                      })}
                   />
@@ -62,11 +62,7 @@ function PasswordForm() {
             </FormRow>
 
             <FormRow className="grid-cols-[auto]">
-               <PasswordButton
-                  handler={handleSubmit(onSubmit)}
-                  isPending={isPending}
-                  loadingText="Changing"
-               >
+               <PasswordButton isPending={isPending} loadingText="Changing">
                   Change
                </PasswordButton>
             </FormRow>

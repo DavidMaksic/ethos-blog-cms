@@ -18,10 +18,7 @@ function CategoryCreate() {
    const { categories } = useGetCategories();
 
    // - Form logic
-   const { register, handleSubmit, watch, formState, reset } = useForm({
-      mode: 'onSubmit',
-      reValidateMode: 'onChange',
-   });
+   const { register, handleSubmit, watch, formState, reset } = useForm();
    const input = watch('categoryCreate', '');
 
    const { errors } = formState;

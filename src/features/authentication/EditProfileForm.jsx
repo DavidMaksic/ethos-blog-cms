@@ -51,15 +51,16 @@ function EditProfileForm() {
 
    function onSubmit({ full_name, description_en, description_srb }) {
       const profile_image = currentImage;
+      const name = full_name.trim().replace(/\s+/g, ' ');
 
       updateAuthor({
-         full_name,
+         full_name: name,
          description_en,
          description_srb,
          profile_image,
       });
       updateUsersTable({
-         full_name,
+         full_name: name,
          profile_image,
          description_en,
          description_srb,
@@ -69,7 +70,7 @@ function EditProfileForm() {
    }
 
    return (
-      <Form isProfileEdit={true} isPending={isPending}>
+      <Form isPending={isPending} onSubmit={handleSubmit(onSubmit)}>
          <FormRow columns="grid-cols-[32rem]">
             <div className="flex items-center justify-between">
                <FormItem label="Full name" error={errors?.full_name?.message}>
@@ -80,13 +81,26 @@ function EditProfileForm() {
                      autoComplete="one-time-code"
                      defaultValue={full_name}
                      {...register('full_name', {
+                        required: '*',
                         minLength: {
                            value: 2,
                            message: 'Minimum of 2 characters',
                         },
                         maxLength: {
-                           value: 40,
-                           message: 'Maximum of 40 characters',
+                           value: 25,
+                           message: 'Maximum of 25 characters',
+                        },
+                        validate: {
+                           allNumbers: (val) =>
+                              !/^\d+$/.test(val) ||
+                              'The username must contain letters',
+                           consecutiveUnderscores: (val) =>
+                              !/__/.test(val) || 'No consecutive underscores',
+                           startUnderscore: (val) =>
+                              !/^_/.test(val) ||
+                              "Can't start with an underscore",
+                           endUnderscore: (val) =>
+                              !/_$/.test(val) || "Can't end with an underscore",
                         },
                      })}
                   />
@@ -133,9 +147,14 @@ function EditProfileForm() {
                   type="text"
                   defaultValue={description_en}
                   {...register('description_en', {
+                     required: '*',
                      minLength: {
                         value: 30,
                         message: 'Minimum of 30 characters',
+                     },
+                     maxLength: {
+                        value: 300,
+                        message: 'Maximum of 300 characters',
                      },
                   })}
                />
@@ -155,9 +174,14 @@ function EditProfileForm() {
                   type="text"
                   defaultValue={description_srb}
                   {...register('description_srb', {
+                     required: '*',
                      minLength: {
                         value: 30,
                         message: 'Minimum of 30 characters',
+                     },
+                     maxLength: {
+                        value: 300,
+                        message: 'Maximum of 300 characters',
                      },
                   })}
                />
@@ -165,12 +189,8 @@ function EditProfileForm() {
          </FormRow>
 
          <FormRow className="grid-cols-[auto]">
-            <div className="flex justify-self-center mt-6">
-               <SubmitButton
-                  isPending={isPending}
-                  loadingText="Updating"
-                  handler={handleSubmit(onSubmit)}
-               >
+            <div className="flex justify-self-center mt-2">
+               <SubmitButton isPending={isPending} loadingText="Updating">
                   Update
                </SubmitButton>
             </div>

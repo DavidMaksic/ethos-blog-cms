@@ -297,7 +297,7 @@ function EditArticleForm() {
    }
 
    return (
-      <Form isPending={isLoading}>
+      <Form isDiv={true} isPending={isLoading}>
          <FormRow columns="grid-cols-[2fr_1fr] 2xl:grid-cols-[1.8fr_1fr]">
             <FormItem label="Title" error={errors?.title?.message}>
                <TextareaAutosize

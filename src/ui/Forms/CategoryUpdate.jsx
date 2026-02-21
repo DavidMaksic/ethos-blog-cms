@@ -22,10 +22,7 @@ function CategoryUpdate() {
 
    const { categories } = useGetCategories();
 
-   const { register, handleSubmit, watch, formState, reset } = useForm({
-      mode: 'onSubmit',
-      reValidateMode: 'onChange',
-   });
+   const { register, handleSubmit, watch, formState, reset } = useForm();
    const input = watch('categoryUpdate', '');
 
    const { errors } = formState;
