@@ -13,11 +13,12 @@ import Form from '../../ui/Forms/Form';
 
 function SignupForm() {
    const { isPending, isSuccess, signup } = useSignup();
-   const { register, handleSubmit, formState, reset } = useForm();
+   const { register, handleSubmit, formState, reset, watch } = useForm();
    const { errors } = formState;
 
    const [showPassword, setShowPassword] = useState(false);
-   const [passwordValue, setPasswordValue] = useState('');
+
+   const passwordValue = watch('password', '');
 
    function onSubmit({ full_name, email, password }) {
       signup(
@@ -37,7 +38,6 @@ function SignupForm() {
 
    function resetInputs() {
       setShowPassword(false);
-      setPasswordValue('');
       reset({
          full_name: '',
          email: '',
@@ -115,14 +115,9 @@ function SignupForm() {
                            value: 128,
                            message: 'Maximum of 128 characters',
                         },
-                        validate: (val) => {
-                           setPasswordValue(val);
-                           return (
-                              /[0-9]/.test(val) ||
-                              'Must contain at least one number'
-                           );
-                        },
-                        onChange: (e) => setPasswordValue(e.target.value),
+                        validate: (val) =>
+                           /[0-9]/.test(val) ||
+                           'Must contain at least one number',
                      })}
                   />
                   <AnimatePresence>
