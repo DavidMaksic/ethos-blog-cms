@@ -1,4 +1,7 @@
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { motion, AnimatePresence } from 'motion/react';
 import { useSignup } from './useSignup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import SubmitButton from '../../ui/Buttons/SubmitButton';
@@ -10,8 +13,11 @@ import Form from '../../ui/Forms/Form';
 
 function SignupForm() {
    const { isPending, isSuccess, signup } = useSignup();
-   const { register, handleSubmit, formState, getValues, reset } = useForm();
+   const { register, handleSubmit, formState, reset } = useForm();
    const { errors } = formState;
+
+   const [showPassword, setShowPassword] = useState(false);
+   const [passwordValue, setPasswordValue] = useState('');
 
    function onSubmit({ full_name, email, password }) {
       signup(
@@ -30,11 +36,12 @@ function SignupForm() {
    }
 
    function resetInputs() {
+      setShowPassword(false);
+      setPasswordValue('');
       reset({
          full_name: '',
          email: '',
          password: '',
-         passwordConfirm: '',
       });
    }
 
@@ -43,7 +50,7 @@ function SignupForm() {
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Name" error={errors?.full_name?.message}>
                <input
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none pb-1.5"
                   id="full_name"
                   type="text"
                   autoComplete="one-time-code"
@@ -76,7 +83,7 @@ function SignupForm() {
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Email" error={errors?.email?.message}>
                <input
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
+                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none pb-1.5"
                   id="email"
                   type="text"
                   {...register('email', {
@@ -92,43 +99,52 @@ function SignupForm() {
 
          <FormRow columns="grid-cols-[32rem]">
             <FormItem label="Password" error={errors?.password?.message}>
-               <input
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2"
-                  id="password"
-                  type="password"
-                  autoComplete="one-time-code"
-                  {...register('password', {
-                     required: '*',
-                     minLength: {
-                        value: 8,
-                        message: 'Minimum of 8 characters',
-                     },
-                     maxLength: {
-                        value: 128,
-                        message: 'Maximum of 128 characters',
-                     },
-                  })}
-               />
-            </FormItem>
-         </FormRow>
-
-         <FormRow columns="grid-cols-[32rem]">
-            <FormItem
-               label="Confirm password"
-               error={errors?.passwordConfirm?.message}
-            >
-               <input
-                  className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2"
-                  id="passwordConfirm"
-                  type="password"
-                  autoComplete="one-time-code"
-                  {...register('passwordConfirm', {
-                     required: '*',
-                     validate: (value) =>
-                        value === getValues().password ||
-                        'Passwords need to match',
-                  })}
-               />
+               <div className="relative flex items-center">
+                  <input
+                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-1.5 w-full"
+                     id="password"
+                     type={showPassword ? 'text' : 'password'}
+                     autoComplete="one-time-code"
+                     {...register('password', {
+                        required: '*',
+                        minLength: {
+                           value: 8,
+                           message: 'Minimum of 8 characters',
+                        },
+                        maxLength: {
+                           value: 128,
+                           message: 'Maximum of 128 characters',
+                        },
+                        validate: (val) => {
+                           setPasswordValue(val);
+                           return (
+                              /[0-9]/.test(val) ||
+                              'Must contain at least one number'
+                           );
+                        },
+                        onChange: (e) => setPasswordValue(e.target.value),
+                     })}
+                  />
+                  <AnimatePresence>
+                     {passwordValue.length > 0 && (
+                        <motion.button
+                           type="button"
+                           initial={{ opacity: 0 }}
+                           animate={{ opacity: 1 }}
+                           exit={{ opacity: 0 }}
+                           transition={{ duration: 0.075 }}
+                           onClick={() => setShowPassword((prev) => !prev)}
+                           className="absolute right-1 bottom-4 text-primary-600/50 hover:text-primary-700/70 transition cursor-pointer"
+                        >
+                           {showPassword ? (
+                              <AiOutlineEyeInvisible className="size-8" />
+                           ) : (
+                              <AiOutlineEye className="size-8" />
+                           )}
+                        </motion.button>
+                     )}
+                  </AnimatePresence>
+               </div>
             </FormItem>
          </FormRow>
 

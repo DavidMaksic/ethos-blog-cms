@@ -24,7 +24,7 @@ function PasswordForm() {
             <FormRow columns="grid-cols-[24rem]">
                <FormItem label="New password" error={errors?.password?.message}>
                   <input
-                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2"
+                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-1.5"
                      id="password"
                      type="password"
                      {...register('password', {
@@ -48,7 +48,7 @@ function PasswordForm() {
                   error={errors?.passwordConfirm?.message}
                >
                   <input
-                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2"
+                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-1.5"
                      id="passwordConfirm"
                      type="password"
                      {...register('passwordConfirm', {

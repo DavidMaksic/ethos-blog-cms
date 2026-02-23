@@ -10,7 +10,7 @@ function Author({ author, activeUser }) {
 
    if (activeUser?.id === author?.id) return;
 
-   const { full_name, email, description_en, profile_image } = author;
+   const { full_name, email, description_en, profile_image, is_admin } = author;
    const currentFullName = currentAuthor.user_metadata.full_name;
    const id = currentAuthor.id;
 
@@ -63,7 +63,7 @@ function Author({ author, activeUser }) {
             )}
          </div>
 
-         {currentAuthor.email === email && (
+         {is_admin && (
             <Link to={`${id}`}>
                <TbSettings className="absolute rounded-full right-2 top-2 p-2 text-5xl text-[#babfc7] dark:text-primary-400/80 hover:text-[#8c939e] dark:hover:text-primary-400 dark:hover:bg-primary-300/20 hover:bg-primary-100 stroke-[1.3px] cursor-pointer transition-200" />
             </Link>

@@ -75,7 +75,7 @@ function EditProfileForm() {
             <div className="flex items-center justify-between">
                <FormItem label="Name" error={errors?.full_name?.message}>
                   <input
-                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none"
+                     className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none pb-1.5"
                      id="full_name"
                      type="text"
                      autoComplete="one-time-code"
