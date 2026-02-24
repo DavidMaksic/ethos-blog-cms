@@ -3,6 +3,7 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
+import { EXCLUDED_HEADINGS } from '../../utils/constants';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useFullscreen } from '../../context/FullscreenContext';
 import { useAuthors } from '../../features/authentication/useAuthors';
@@ -56,6 +57,13 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
                   block.type === 'heading' &&
                   (block.props.level === 2 || block.props.level === 3),
             )
+            .filter((block) => {
+               const text =
+                  block.content?.map((c) => c.text || '').join('') || '';
+               return !EXCLUDED_HEADINGS.some((word) =>
+                  text.trim().toLowerCase().includes(word),
+               );
+            })
             .map((block, index) => {
                // Get text content from block
                const text =
@@ -88,6 +96,13 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
                      block.type === 'heading' &&
                      (block.props.level === 2 || block.props.level === 3),
                )
+               .filter((block) => {
+                  const text =
+                     block.content?.map((c) => c.text || '').join('') || '';
+                  return !EXCLUDED_HEADINGS.some((word) =>
+                     text.trim().toLowerCase().includes(word),
+                  );
+               })
                .map((block, index) => {
                   const text =
                      block.content?.map((c) => c.text || '').join('') || '';
@@ -116,21 +131,26 @@ function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
             document.querySelectorAll('h2, h3'),
          ).slice(start);
 
-         const headingElements = headingElementsRaw.map((item, index) => {
-            const slug = item.innerText
-               .toLowerCase()
-               .replace(/\s+/g, '-')
-               .replace(/[^\w-]+/g, '');
+         const headingElements = headingElementsRaw
+            .filter((item) => {
+               const text = item.innerText.trim().toLowerCase();
+               return !EXCLUDED_HEADINGS.some((word) => text.includes(word));
+            })
+            .map((item, index) => {
+               const slug = item.innerText
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^\w\-]+/g, '');
 
-            const id = `${slug}-${index}`;
-            item.setAttribute('id', id);
+               const id = `${slug}-${index}`;
+               item.setAttribute('id', id);
 
-            return {
-               id,
-               innerText: item.innerText,
-               localName: item.localName,
-            };
-         });
+               return {
+                  id,
+                  innerText: item.innerText,
+                  localName: item.localName,
+               };
+            });
 
          setHeadings(headingElements);
       }

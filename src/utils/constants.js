@@ -31,3 +31,5 @@ export const LANGUAGES = [
       flag: '/sr-flag.png',
    },
 ];
+
+export const EXCLUDED_HEADINGS = ['песма', 'тропар', 'кондак'];
