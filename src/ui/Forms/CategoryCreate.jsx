@@ -78,7 +78,7 @@ function CategoryCreate() {
                <FormItem label="Name" error={error} id="name">
                   <div className="flex items-center">
                      <input
-                        className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none pt-2 text-2xl transition-bg_border pb-1.5"
+                        className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none pt-2 text-3xl transition-bg_border pb-0.5 font-text"
                         id="name"
                         type="text"
                         autoComplete="one-time-code"

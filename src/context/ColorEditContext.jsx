@@ -12,21 +12,27 @@ function ColorEditProvider({ children }) {
    );
 
    const [openLightBg, setOpenLightBg] = useState(false);
-   const [colorLightBg, setColorLightBg] = useColor(currentCategory.bg_light);
+   const [colorLightBg, setColorLightBg] = useColor(
+      currentCategory?.bg_light ?? '#fff',
+   );
    const [openLightText, setOpenLightText] = useState(false);
    const [colorLightText, setColorLightText] = useColor(
-      currentCategory.text_light,
+      currentCategory?.text_light ?? '#fff',
    );
 
    const [openDarkBg, setOpenDarkBg] = useState(false);
-   const [colorDarkBg, setColorDarkBg] = useColor(currentCategory.bg_dark);
+   const [colorDarkBg, setColorDarkBg] = useColor(
+      currentCategory?.bg_dark ?? '#fff',
+   );
    const [openDarkText, setOpenDarkText] = useState(false);
    const [colorDarkText, setColorDarkText] = useColor(
-      currentCategory.text_dark,
+      currentCategory?.text_dark ?? '#fff',
    );
 
    const [openChart, setOpenChart] = useState(false);
-   const [colorChart, setColorChart] = useColor(currentCategory.chart_color);
+   const [colorChart, setColorChart] = useColor(
+      currentCategory?.chart_color ?? '#fff',
+   );
 
    function togglePicker(context) {
       const currentOpen =

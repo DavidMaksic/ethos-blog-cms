@@ -33,7 +33,7 @@ function PasswordForm() {
                <FormItem label="New password" error={errors?.password?.message}>
                   <div className="relative flex items-center">
                      <input
-                        className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-1.5 w-full"
+                        className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-0.5 w-full"
                         id="password"
                         type={showPassword ? 'text' : 'password'}
                         {...register('password', {
@@ -81,7 +81,7 @@ function PasswordForm() {
                >
                   <div className="relative flex items-center">
                      <input
-                        className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-1.5 w-full"
+                        className="bg-secondary dark:bg-transparent border-b border-b-quaternary dark:border-b-primary-300/30 transition-bg_border outline-none mb-2 pb-0.5 w-full"
                         id="passwordConfirm"
                         type={showConfirm ? 'text' : 'password'}
                         {...register('passwordConfirm', {
