@@ -48,14 +48,18 @@ function CategoryCreate() {
    } = useColorContext();
 
    function handleCategory(data) {
+      const cyrillicPattern = /\p{Script=Cyrillic}/u;
+
       const finalData = {
-         category: data.category,
+         category: data.categoryCreate,
          bg_light: colorLightBg.hex,
          bg_dark: colorDarkBg.hex,
          text_light: colorLightText.hex,
          text_dark: colorDarkText.hex,
          chart_color: colorChart.hex,
+         code: cyrillicPattern.test(data.categoryCreate) ? 'sr' : 'en',
       };
+
       createCategory(finalData);
    }
 

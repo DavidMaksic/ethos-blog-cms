@@ -32,7 +32,7 @@ function Categories({
          <AnimatePresence>
             {open && (
                <motion.ul
-                  className="absolute z-10 mt-2 p-1 max-h-[15.3rem] min-w-[11.4rem] text-2xl rounded-3xl bg-white dark:bg-toolbar border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer scrollbar"
+                  className="absolute z-10 mt-2 p-1 max-h-[15.7rem] min-w-[11.4rem] text-2xl rounded-3xl bg-white dark:bg-toolbar border border-quaternary dark:border-primary-300/10 shadow-lg overflow-auto cursor-pointer scrollbar"
                   ref={ref}
                   onClick={() => setOpen((isOpen) => !isOpen)}
                   initial={{ opacity: 0, y: -8, scale: 0.97 }}

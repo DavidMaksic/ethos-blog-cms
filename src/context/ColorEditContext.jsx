@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useGetCategories } from '../features/tags/useGetCategories';
-import { hexToColor } from '../utils/helpers';
 import { useColor } from 'react-color-palette';
 
 const ColorEditContext = createContext();
@@ -8,32 +7,26 @@ const ColorEditContext = createContext();
 function ColorEditProvider({ children }) {
    const [currentTag, setCurrentTag] = useState('');
    const { categories } = useGetCategories();
+   const currentCategory = categories?.find(
+      (item) => currentTag.category === item.category,
+   );
 
    const [openLightBg, setOpenLightBg] = useState(false);
-   const [colorLightBg, setColorLightBg] = useColor('#fff');
+   const [colorLightBg, setColorLightBg] = useColor(currentCategory.bg_light);
    const [openLightText, setOpenLightText] = useState(false);
-   const [colorLightText, setColorLightText] = useColor('#fff');
+   const [colorLightText, setColorLightText] = useColor(
+      currentCategory.text_light,
+   );
 
    const [openDarkBg, setOpenDarkBg] = useState(false);
-   const [colorDarkBg, setColorDarkBg] = useColor('#fff');
+   const [colorDarkBg, setColorDarkBg] = useColor(currentCategory.bg_dark);
    const [openDarkText, setOpenDarkText] = useState(false);
-   const [colorDarkText, setColorDarkText] = useColor('#fff');
+   const [colorDarkText, setColorDarkText] = useColor(
+      currentCategory.text_dark,
+   );
 
    const [openChart, setOpenChart] = useState(false);
-   const [colorChart, setColorChart] = useColor('#fff');
-
-   useEffect(() => {
-      const currentCategory = categories?.find(
-         (item) => currentTag.category === item.category,
-      );
-      if (!currentCategory) return;
-
-      setColorLightBg(hexToColor(currentCategory.bg_light));
-      setColorLightText(hexToColor(currentCategory.text_light));
-      setColorDarkBg(hexToColor(currentCategory.bg_dark));
-      setColorDarkText(hexToColor(currentCategory.text_dark));
-      setColorChart(hexToColor(currentCategory.chart_color));
-   }, [categories, currentTag]); // eslint-disable-line
+   const [colorChart, setColorChart] = useColor(currentCategory.chart_color);
 
    function togglePicker(context) {
       const currentOpen =

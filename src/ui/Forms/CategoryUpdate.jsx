@@ -20,9 +20,8 @@ function CategoryUpdate() {
       updateCategory,
    } = useUpdateCategory();
 
-   const { categories } = useGetCategories();
-
    const { register, handleSubmit, watch, formState, reset } = useForm();
+   const { categories } = useGetCategories();
    const input = watch('categoryUpdate', '');
 
    const { errors } = formState;
@@ -149,6 +148,7 @@ function CategoryUpdate() {
                      setOpen={togglePicker}
                      color={colorLightBg}
                      setColor={setColorLightBg}
+                     isEdit={true}
                   />
                   <Color
                      label="LightText"
@@ -156,6 +156,7 @@ function CategoryUpdate() {
                      setOpen={togglePicker}
                      color={colorLightText}
                      setColor={setColorLightText}
+                     isEdit={true}
                   />
                </ColorTableCol>
 
@@ -166,6 +167,7 @@ function CategoryUpdate() {
                      setOpen={togglePicker}
                      color={colorDarkBg}
                      setColor={setColorDarkBg}
+                     isEdit={true}
                   />
                   <Color
                      label="DarkText"
@@ -173,6 +175,7 @@ function CategoryUpdate() {
                      setOpen={togglePicker}
                      color={colorDarkText}
                      setColor={setColorDarkText}
+                     isEdit={true}
                   />
                </ColorTableCol>
 
@@ -187,6 +190,7 @@ function CategoryUpdate() {
                      setOpen={togglePicker}
                      color={colorChart}
                      setColor={setColorChart}
+                     isEdit={true}
                   />
                </ColorTableCol>
             </ColorsTable>
