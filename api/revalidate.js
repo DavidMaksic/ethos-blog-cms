@@ -5,17 +5,14 @@ export default async function handler(req, res) {
    const { slug, changes } = req.body || {};
    if (!slug) return res.status(400).json({ error: 'Missing slug' });
 
-   const response = await fetch(
-      'https://ethos-blog.vercel.app/api/revalidate',
-      {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
-         },
-         body: JSON.stringify({ slug, changes }),
-      }
-   );
+   const response = await fetch('https://ethos-blog.com/api/revalidate', {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
+      },
+      body: JSON.stringify({ slug, changes }),
+   });
 
    if (!response.ok)
       return res.status(500).json({ error: 'Next.js revalidate failed' });
