@@ -1,11 +1,11 @@
 const FULL_HD = 1912;
-const XXL = 1530;
+const XXL = 1300;
 
 function getItemHeight() {
    const width = window.innerWidth;
 
    if (width >= FULL_HD) return 125;
-   if (width >= XXL) return 97;
+   if (width >= XXL) return 108;
    return 125;
 }
 
