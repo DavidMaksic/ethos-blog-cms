@@ -136,6 +136,7 @@ export async function updateArticle(article) {
          title: article.title,
          description: article.description,
          content: article.content,
+         content_blur_map: article.content_blur_map,
          category_id: article.category_id,
          status: article.status,
          slug: article.slug,

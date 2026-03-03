@@ -128,6 +128,26 @@ function Creator() {
       };
       reader.readAsDataURL(img);
    }
+   async function generateBlurDataURLFromURL(src) {
+      const cleanSrc = src.split('?')[0];
+      const res = await fetch(cleanSrc);
+      const blob = await res.blob();
+
+      const blurDataURL = await generateBlurDataURL(blob);
+
+      const bitmap = await createImageBitmap(blob);
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(bitmap, 0, 0);
+      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const isTransparent = Array.from(data).some(
+         (val, i) => i % 4 === 3 && val < 255,
+      );
+
+      return { blurDataURL, isTransparent };
+   }
 
    // - Submit functions
    async function onSubmit(data) {
@@ -141,6 +161,20 @@ function Creator() {
       const html = await editor.blocksToFullHTML(editor.document);
       const htmlWithDimensions = await appendDimensionsToHTML(html);
 
+      const imgSrcs = [
+         ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
+      ].map((m) => m[1].replaceAll('&amp;', '&'));
+
+      const blurEntries = await Promise.all(
+         imgSrcs.map(async (src) => {
+            const cleanSrc = src.split('?')[0];
+            const { blurDataURL, isTransparent } =
+               await generateBlurDataURLFromURL(src);
+            return [cleanSrc, { blurDataURL, isTransparent }];
+         }),
+      );
+      const contentBlurMap = Object.fromEntries(blurEntries);
+
       createArticle(
          {
             ...data,
@@ -150,6 +184,7 @@ function Creator() {
             status: 'published',
             author_id: user.id,
             content: htmlWithDimensions,
+            content_blur_map: contentBlurMap,
             featured: false,
             main_feature: false,
             code: localArticle.code,
@@ -172,6 +207,21 @@ function Creator() {
       const html = await editor.blocksToFullHTML(editor.document);
       const htmlWithDimensions = await appendDimensionsToHTML(html);
 
+      // Extract all img srcs from content and generate blur data
+      const imgSrcs = [
+         ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
+      ].map((m) => m[1].replaceAll('&amp;', '&'));
+
+      const blurEntries = await Promise.all(
+         imgSrcs.map(async (src) => {
+            const cleanSrc = src.split('?')[0];
+            const { blurDataURL, isTransparent } =
+               await generateBlurDataURLFromURL(src);
+            return [cleanSrc, { blurDataURL, isTransparent }];
+         }),
+      );
+      const contentBlurMap = Object.fromEntries(blurEntries);
+
       createArticle(
          {
             ...data,
@@ -181,6 +231,7 @@ function Creator() {
             status: 'drafted',
             author_id: user.id,
             content: htmlWithDimensions,
+            content_blur_map: contentBlurMap,
             featured: false,
             main_feature: false,
             code: localArticle.code,

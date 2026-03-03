@@ -6,8 +6,8 @@ import {
    insertAlert,
    toSlug,
 } from '../../utils/helpers';
-import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
 import { LuSave, LuSunMedium } from 'react-icons/lu';
 import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useCurrentAuthor } from '../../features/authentication/useCurrentAuthor';
@@ -220,12 +220,65 @@ function EditArticleForm() {
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 
+   async function generateBlurDataURLFromURL(src) {
+      const cleanSrc = src.split('?')[0];
+      const res = await fetch(cleanSrc);
+      const blob = await res.blob();
+
+      const blurDataURL = await generateBlurDataURL(blob);
+
+      const bitmap = await createImageBitmap(blob);
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(bitmap, 0, 0);
+      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const isTransparent = Array.from(data).some(
+         (val, i) => i % 4 === 3 && val < 255,
+      );
+
+      return { blurDataURL, isTransparent };
+   }
+
    async function onSubmit(data) {
       const { id: category_id } = categories.find(
          (item) => item.category === localArticle.category,
       );
       const html = await editor.blocksToFullHTML(editor.document);
       const htmlWithDimensions = await appendDimensionsToHTML(html);
+
+      const imgSrcs = [
+         ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
+      ].map((m) => m[1].replaceAll('&amp;', '&'));
+
+      const existingBlurMap = article.content_blur_map ?? {};
+      const cleanImgSrcs = new Set(imgSrcs.map((src) => src.split('?')[0]));
+
+      // Remove stale keys
+      const prunedBlurMap = Object.fromEntries(
+         Object.entries(existingBlurMap).filter(([key]) =>
+            cleanImgSrcs.has(key),
+         ),
+      );
+
+      const newSrcs = imgSrcs.filter(
+         (src) => !prunedBlurMap[src.split('?')[0]],
+      );
+
+      const newEntries = await Promise.all(
+         newSrcs.map(async (src) => {
+            const cleanSrc = src.split('?')[0];
+            const { blurDataURL, isTransparent } =
+               await generateBlurDataURLFromURL(src);
+            return [cleanSrc, { blurDataURL, isTransparent }];
+         }),
+      );
+
+      const contentBlurMap = {
+         ...prunedBlurMap,
+         ...Object.fromEntries(newEntries),
+      };
 
       editArticle(
          {
@@ -234,6 +287,7 @@ function EditArticleForm() {
             image_blur: localArticle.imageBlur ?? article.image_blur,
             oldImage,
             content: htmlWithDimensions,
+            content_blur_map: contentBlurMap,
             category_id,
             status:
                currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
