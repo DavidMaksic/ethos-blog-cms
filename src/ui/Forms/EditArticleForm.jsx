@@ -1,5 +1,11 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
-import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
+import {
+   appendDimensionsToHTML,
+   blockNoteSchema,
+   generateBlurDataURL,
+   insertAlert,
+   toSlug,
+} from '../../utils/helpers';
 import { CONTENT_DEBOUNCE, LANGUAGES } from '../../utils/constants';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { LuSave, LuSunMedium } from 'react-icons/lu';
@@ -214,17 +220,20 @@ function EditArticleForm() {
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 
-   function onSubmit(data) {
+   async function onSubmit(data) {
       const { id: category_id } = categories.find(
          (item) => item.category === localArticle.category,
       );
+      const html = await editor.blocksToFullHTML(editor.document);
+      const htmlWithDimensions = await appendDimensionsToHTML(html);
 
       editArticle(
          {
             ...data,
             image: localArticle.image,
+            image_blur: localArticle.imageBlur ?? article.image_blur,
             oldImage,
-            content: contentHTML,
+            content: htmlWithDimensions,
             category_id,
             status:
                currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
@@ -254,18 +263,20 @@ function EditArticleForm() {
    // Upload image logic
    const imageRef = useRef(null);
 
-   function handlePreviewImage(e) {
+   async function handlePreviewImage(e) {
       const img = e.target.files[0];
       if (!img) return;
+
+      const blurDataURL = await generateBlurDataURL(img);
 
       const reader = new FileReader();
       reader.onloadend = () => {
          const base64 = reader.result;
-
          setCurrentImage(base64);
          setLocalArticle((prev) => ({
             ...prev,
             image: base64,
+            imageBlur: blurDataURL,
             imageMeta: { name: img.name, type: img.type },
          }));
       };

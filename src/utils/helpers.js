@@ -113,3 +113,48 @@ export const blockNoteSchema = withMultiColumn(
       },
    }),
 );
+
+export const getImageDimensions = (url) =>
+   new Promise((resolve) => {
+      const img = new window.Image();
+      img.onload = () =>
+         resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      img.onerror = () => resolve({ width: 1920, height: 1080 });
+      img.src = url;
+   });
+
+export const appendDimensionsToHTML = async (html) => {
+   const parser = new DOMParser();
+   const doc = parser.parseFromString(html, 'text/html');
+   const images = doc.querySelectorAll('img');
+
+   await Promise.all(
+      [...images].map(async (img) => {
+         const src = img.getAttribute('src');
+         if (!src || src.includes('?w=')) return; // already processed
+
+         const { width, height } = await getImageDimensions(src);
+         const separator = src.includes('?') ? '&' : '?';
+         img.setAttribute('src', `${src}${separator}w=${width}&h=${height}`);
+      }),
+   );
+
+   return doc.body.innerHTML;
+};
+
+export async function generateBlurDataURL(file) {
+   return new Promise((resolve) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+         const canvas = document.createElement('canvas');
+         canvas.width = 10;
+         canvas.height = 10;
+         const ctx = canvas.getContext('2d');
+         ctx.drawImage(img, 0, 0, 10, 10); // squish to 10x10
+         URL.revokeObjectURL(url);
+         resolve(canvas.toDataURL('image/jpeg', 0.5)); // tiny base64
+      };
+      img.src = url;
+   });
+}

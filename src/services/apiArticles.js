@@ -141,6 +141,7 @@ export async function updateArticle(article) {
          slug: article.slug,
          code: article.code,
          image: finalImagePath,
+         image_blur: article.image_blur,
          updated_at: new Date().toISOString(),
       })
       .eq('id', article.id)

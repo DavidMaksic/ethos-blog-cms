@@ -1,6 +1,12 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { CONTENT_DEBOUNCE, DEFAULT_LANG, FLAGS } from '../../utils/constants';
-import { blockNoteSchema, insertAlert, toSlug } from '../../utils/helpers';
+import {
+   appendDimensionsToHTML,
+   blockNoteSchema,
+   generateBlurDataURL,
+   insertAlert,
+   toSlug,
+} from '../../utils/helpers';
 import { useEffect, useRef, useState } from 'react';
 import { LuCloudUpload, LuSunMedium } from 'react-icons/lu';
 import { useCreateArticle } from '../archive/useCreateArticle';
@@ -103,19 +109,20 @@ function Creator() {
    const imageRef = useRef(null);
    const imageRegister = register('image', { required: '*' });
 
-   function handlePreviewImage(e) {
+   async function handlePreviewImage(e) {
       imageRegister.onChange(e);
-
       const img = e.target.files[0];
       if (!img) return;
 
+      // Generate blur hash client-side immediately
+      const blurDataURL = await generateBlurDataURL(img);
+
       const reader = new FileReader();
       reader.onloadend = () => {
-         const base64 = reader.result;
-
          setLocalArticle((prev) => ({
             ...prev,
-            image: base64,
+            image: reader.result,
+            imageBlur: blurDataURL, // <-- store alongside image
             imageMeta: { name: img.name, type: img.type },
          }));
       };
@@ -123,7 +130,7 @@ function Creator() {
    }
 
    // - Submit functions
-   function onSubmit(data) {
+   async function onSubmit(data) {
       let category_id;
       category_id = categories.find(
          (item) => item.category === localArticle?.category,
@@ -131,15 +138,18 @@ function Creator() {
       if (!category_id) category_id = categories[0].id;
 
       const slug = toSlug(data.title);
+      const html = await editor.blocksToFullHTML(editor.document);
+      const htmlWithDimensions = await appendDimensionsToHTML(html);
 
       createArticle(
          {
             ...data,
             image: localArticle.image,
+            image_blur: localArticle.imageBlur,
             category_id,
             status: 'published',
             author_id: user.id,
-            content: contentHTML,
+            content: htmlWithDimensions,
             featured: false,
             main_feature: false,
             code: localArticle.code,
@@ -151,7 +161,7 @@ function Creator() {
       );
    }
 
-   function onSubmitDraft(data) {
+   async function onSubmitDraft(data) {
       let category_id;
       category_id = categories.find(
          (item) => item.category === localArticle?.category,
@@ -159,15 +169,18 @@ function Creator() {
       if (!category_id) category_id = categories[0].id;
 
       const slug = toSlug(data.title);
+      const html = await editor.blocksToFullHTML(editor.document);
+      const htmlWithDimensions = await appendDimensionsToHTML(html);
 
       createArticle(
          {
             ...data,
             image: localArticle.image,
+            image_blur: localArticle.imageBlur,
             category_id,
             status: 'drafted',
             author_id: user.id,
-            content: contentHTML,
+            content: htmlWithDimensions,
             featured: false,
             main_feature: false,
             code: localArticle.code,
