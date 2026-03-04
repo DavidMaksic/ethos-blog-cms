@@ -153,7 +153,9 @@ export async function generateBlurDataURLFromURL(src) {
 
    const res = await fetch(fetchUrl);
    const arrayBuffer = await res.arrayBuffer();
-   const contentType = res.headers.get('content-type') || 'image/jpeg';
+
+   const rawContentType = res.headers.get('content-type') || 'image/jpeg';
+   const contentType = rawContentType.split(';')[0].trim();
 
    console.log('status:', res.status);
    console.log('contentType:', contentType);
