@@ -10,19 +10,19 @@ import { CgClose } from 'react-icons/cg';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
 
+import ArchiveRowImage from '../../ui/Images/ArchiveRowImage';
 import DeleteModal from '../../ui/Modal/DeleteModal';
 import Modal from '../../ui/Modal/Modal';
 import Menus from '../../ui/Menus';
 
 function ArchiveRow({ article, isFirst, isLast }) {
    const navigate = useNavigate();
-   const { id, created_at, image, title, status } = article;
-   const [loaded, setLoaded] = useState(false);
+   const { id, created_at, image, image_blur, title, status } = article;
 
    const { authors } = useAuthors();
    const { user: currentAuthor } = useCurrentAuthor();
    const isAdmin = authors?.find(
-      (item) => item.id === currentAuthor?.id
+      (item) => item.id === currentAuthor?.id,
    )?.is_admin;
 
    const { isDeleting, deleteArticle } = useDeleteArticle();
@@ -45,15 +45,12 @@ function ArchiveRow({ article, isFirst, isLast }) {
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
       >
-         <img
-            className={`w-full h-24 2xl:h-23 xl:h-30 object-cover transition-300 ${
-               loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'
-            }
-               ${isFirst ? 'rounded-tr-2xl' : ''}
-               ${isLast ? 'rounded-br-2xl' : ''}`}
-            onLoad={() => setLoaded(true)}
+         <ArchiveRowImage
             src={image}
             alt={title}
+            blurDataURL={image_blur}
+            isFirst={isFirst}
+            isLast={isLast}
          />
 
          <Link

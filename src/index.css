@@ -1141,11 +1141,6 @@ article .bn-file-block-content-wrapper {
 
 [data-file-block] .bn-visual-media {
    border-radius: 1.6rem !important;
-   opacity: 95% !important;
-}
-
-[data-theme='dark'] [data-file-block] .bn-visual-media {
-   opacity: 80% !important;
 }
 
 @container (max-width: 550px) {
@@ -1540,13 +1535,9 @@ article .bn-file-block-content-wrapper {
 }
 
 .medium-zoom-image--opened {
-   @apply opacity-95 dark:opacity-80;
+   @apply opacity-90 dark:opacity-75;
    border-radius: 1.35rem;
    z-index: 40;
-}
-
-.main-image.medium-zoom-image--opened {
-   @apply opacity-90 dark:opacity-75;
 }
 
 strong {

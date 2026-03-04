@@ -17,13 +17,15 @@ import { useAuthors } from '../features/authentication/useAuthors';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+import MainArticleImage from '../ui/Images/MainArticleImage';
 import ArticleNotFound from '../ui/ArticleNotFound';
 import ArticleSkeleton from '../ui/Skeletons/ArticleSkeleton';
+import ArticleImage from '../ui/Images/ArticleImage';
 import DeleteModal from '../ui/Modal/DeleteModal';
 import BackButton from '../ui/Buttons/BackButton';
-import ImageZoom from '../ui/ImageZoom';
 import Options from '../ui/Operations/Options';
 import Modal from '../ui/Modal/Modal';
+import parse from 'html-react-parser';
 
 function Article() {
    const { isDeleting, isSuccess, deleteArticle } = useDeleteArticle();
@@ -102,13 +104,11 @@ function Article() {
          </div>
 
          <div className="flex flex-col border bg-white/50 dark:bg-primary-300/5 border-primary-300/70 dark:border-primary-300/15 rounded-3xl mt-3 shadow-dashboard dark:shadow-menu-dark transition-bg_border">
-            <div className="image-container">
-               <img
-                  className="main-image rounded-3xl w-full h-[24rem] object-cover opacity-90 dark:opacity-75"
-                  src={article.image}
-                  alt={article.title}
-               />
-            </div>
+            <MainArticleImage
+               src={article.image}
+               blurDataURL={article.image_blur}
+               alt={article.title}
+            />
 
             <div className="flex items-center justify-between gap-6 px-6 py-4">
                <div className="flex gap-4 items-center">
@@ -189,8 +189,26 @@ function Article() {
                   ? `font-latin text-2xl 2xl:text-[1.5rem] [&_p]:leading-[1.49]! [&_blockquote>*]:font-creator [&_blockquote>*]:font-semibold [&_blockquote>*]:text-[1.65rem] 2xl:[&_blockquote>*]:text-[1.6rem] [&_blockquote>*]:leading-[1.23]`
                   : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.6]! [&_blockquote>*]:font-cyrillic [&_blockquote]:text-[1.51rem] [&_blockquote>*]:leading-[1.5]!`
             }`}
-            dangerouslySetInnerHTML={{ __html: article.content }}
-         />
+         >
+            {parse(article.content, {
+               replace: (domNode) => {
+                  if (domNode.name === 'img' && domNode.attribs?.src) {
+                     const src = domNode.attribs.src;
+                     const cleanSrc = src.split('?')[0];
+                     const entry = article.content_blur_map?.[cleanSrc];
+
+                     return (
+                        <ArticleImage
+                           src={src}
+                           className={domNode.attribs.class}
+                           blurDataURL={entry?.blurDataURL}
+                           isTransparent={entry?.isTransparent}
+                        />
+                     );
+                  }
+               },
+            })}
+         </div>
 
          <div className="w-fit flex flex-col items-center self-center gap-4 bg-secondary dark:bg-primary-300/13 rounded-3xl px-12 py-12 pb-14 mt-6 text-3xl box-shadow transition-bg_border">
             {author?.profile_image ? (
@@ -258,7 +276,7 @@ function Article() {
             </button>
          </Options>
 
-         <ImageZoom />
+         {/* <ImageZoom /> */}
 
          <AnimatePresence>
             {openDelete && (
