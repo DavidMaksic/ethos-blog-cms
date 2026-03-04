@@ -220,78 +220,88 @@ function EditArticleForm() {
    // - React Query logic
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
+   const [isProcessing, setIsProcessing] = useState(false);
 
    // - Submit logic
    async function onSubmit(data) {
-      const { id: category_id } = categories.find(
-         (item) => item.category === localArticle.category,
-      );
-      const html = await editor.blocksToFullHTML(editor.document);
-      const htmlWithDimensions = await appendDimensionsToHTML(html);
+      setIsProcessing(true);
 
-      const imgSrcs = [
-         ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
-      ].map((m) => m[1].replaceAll('&amp;', '&'));
+      try {
+         const { id: category_id } = categories.find(
+            (item) => item.category === localArticle.category,
+         );
+         const html = await editor.blocksToFullHTML(editor.document);
+         const htmlWithDimensions = await appendDimensionsToHTML(html);
 
-      const existingBlurMap = article.content_blur_map ?? {};
-      const cleanImgSrcs = new Set(imgSrcs.map((src) => src.split('?')[0]));
+         const imgSrcs = [
+            ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
+         ].map((m) => m[1].replaceAll('&amp;', '&'));
 
-      // Remove stale keys
-      const prunedBlurMap = Object.fromEntries(
-         Object.entries(existingBlurMap).filter(([key]) =>
-            cleanImgSrcs.has(key),
-         ),
-      );
+         const existingBlurMap = article.content_blur_map ?? {};
+         const cleanImgSrcs = new Set(imgSrcs.map((src) => src.split('?')[0]));
 
-      const newSrcs = imgSrcs.filter(
-         (src) => !prunedBlurMap[src.split('?')[0]],
-      );
+         // Remove stale keys
+         const prunedBlurMap = Object.fromEntries(
+            Object.entries(existingBlurMap).filter(([key]) =>
+               cleanImgSrcs.has(key),
+            ),
+         );
 
-      const newEntries = await Promise.all(
-         newSrcs.map(async (src) => {
-            const cleanSrc = src.split('?')[0];
-            const { blurDataURL, isTransparent } =
-               await generateBlurDataURLFromURL(src);
-            return [cleanSrc, { blurDataURL, isTransparent }];
-         }),
-      );
+         const newSrcs = imgSrcs.filter(
+            (src) => !prunedBlurMap[src.split('?')[0]],
+         );
 
-      const contentBlurMap = {
-         ...prunedBlurMap,
-         ...Object.fromEntries(newEntries),
-      };
+         const newEntries = await Promise.all(
+            newSrcs.map(async (src) => {
+               const cleanSrc = src.split('?')[0];
+               const { blurDataURL, isTransparent } =
+                  await generateBlurDataURLFromURL(src);
+               return [cleanSrc, { blurDataURL, isTransparent }];
+            }),
+         );
 
-      editArticle(
-         {
-            ...data,
-            image: localArticle.image,
-            image_blur: localArticle.imageBlur ?? article.image_blur,
-            oldImage,
-            content: htmlWithDimensions,
-            content_blur_map: contentBlurMap,
-            category_id,
-            status:
-               currentStatus.charAt(0).toLowerCase() + currentStatus.slice(1),
-            code: localArticle.code,
-            slug: toSlug(data.title),
-            oldArticle: article,
-         },
-         {
-            onSuccess: () => {
-               localStorage.removeItem('editArticle');
+         const contentBlurMap = {
+            ...prunedBlurMap,
+            ...Object.fromEntries(newEntries),
+         };
+
+         editArticle(
+            {
+               ...data,
+               image: localArticle.image,
+               image_blur: localArticle.imageBlur ?? article.image_blur,
+               oldImage,
+               content: htmlWithDimensions,
+               content_blur_map: contentBlurMap,
+               category_id,
+               status:
+                  currentStatus.charAt(0).toLowerCase() +
+                  currentStatus.slice(1),
+               code: localArticle.code,
+               slug: toSlug(data.title),
+               oldArticle: article,
             },
-         },
-      );
+            {
+               onSuccess: () => {
+                  localStorage.removeItem('editArticle');
+                  setIsProcessing(false);
+               },
+               onError: () => setIsProcessing(false),
+            },
+         );
 
-      if (
-         currentStatus !== articleStatus ||
-         category.category !== localArticle.category
-      ) {
-         unFeature({
-            id: article.id,
-            featured: false,
-            main_feature: false,
-         });
+         if (
+            currentStatus !== articleStatus ||
+            category.category !== localArticle.category
+         ) {
+            unFeature({
+               id: article.id,
+               featured: false,
+               main_feature: false,
+            });
+         }
+      } catch {
+         setIsProcessing(false);
       }
    }
 
@@ -336,7 +346,7 @@ function EditArticleForm() {
       });
    }
 
-   const isLoading = isPending || isEditing || isUnFeaturing;
+   const isLoading = isPending || isEditing || isUnFeaturing || isProcessing;
 
    if (!editor) {
       return <EditSkeleton isForm={true} />;
@@ -554,7 +564,7 @@ function EditArticleForm() {
                className="hover:bg-primary-100/80 dark:hover:bg-primary-400/10 transition my-0.5 rounded-2xl order-1"
                onClick={handleSubmit(onSubmit, onInvalid)}
             >
-               {isEditing ? (
+               {isLoading ? (
                   <ImSpinner2 className="py-1 px-3.5 size-13.5 animate-spin" />
                ) : (
                   <LuSave className="py-1 px-3.5 size-13.5 stroke-[1.5px]" />

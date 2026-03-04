@@ -144,8 +144,18 @@ export const appendDimensionsToHTML = async (html) => {
 };
 
 export async function generateBlurDataURLFromURL(src) {
-   const res = await fetch(src.split('?')[0]);
-   const blob = await res.blob();
+   const cleanSrc = src.split('?')[0];
+   const isExternal = !cleanSrc.startsWith(supabaseUrl);
+
+   const fetchUrl = isExternal
+      ? `https://ethos-blog.com/api/proxy?url=${encodeURIComponent(cleanSrc)}`
+      : cleanSrc;
+
+   const res = await fetch(fetchUrl);
+   const arrayBuffer = await res.arrayBuffer();
+   const contentType =
+      res.headers.get('content-type')?.split(';')[0].trim() || 'image/jpeg';
+   const blob = new Blob([arrayBuffer], { type: contentType });
    return await generateBlurDataURL(blob);
 }
 

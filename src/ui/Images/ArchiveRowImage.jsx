@@ -14,7 +14,7 @@ function ArchiveRowImage({ src, alt, blurDataURL, isFirst, isLast }) {
       >
          <div
             className={`absolute inset-0 scale-110 transition-opacity duration-300 ${
-               !loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
+               loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
             }`}
             style={{
                backgroundImage: blurDataURL ? `url(${blurDataURL})` : undefined,

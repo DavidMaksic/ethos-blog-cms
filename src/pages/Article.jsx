@@ -184,7 +184,7 @@ function Article() {
          </div>
 
          <div
-            className={`image-container text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
+            className={`text-text my-3 [&_:is(h1,h2,h3)]:font-text [&_h1]:leading-[1.25]! [&_h2]:leading-[1.3]! [&_h3]:leading-[1.4]! ${
                article.code === 'en'
                   ? `font-latin text-2xl 2xl:text-[1.5rem] [&_p]:leading-[1.49]! [&_blockquote>*]:font-creator [&_blockquote>*]:font-semibold [&_blockquote>*]:text-[1.65rem] 2xl:[&_blockquote>*]:text-[1.6rem] [&_blockquote>*]:leading-[1.23]`
                   : `font-cyrillic text-[1.4rem] [&_p]:leading-[1.6]! [&_blockquote>*]:font-cyrillic [&_blockquote]:text-[1.51rem] [&_blockquote>*]:leading-[1.5]!`
@@ -194,6 +194,9 @@ function Article() {
                replace: (domNode) => {
                   if (domNode.name === 'img' && domNode.attribs?.src) {
                      const src = domNode.attribs.src;
+                     const url = new URL(src);
+                     const width = Number(url.searchParams.get('w')) || 1920;
+                     const height = Number(url.searchParams.get('h')) || 1080;
                      const cleanSrc = src.split('?')[0];
                      const entry = article.content_blur_map?.[cleanSrc];
 
@@ -201,6 +204,8 @@ function Article() {
                         <ArticleImage
                            src={src}
                            className={domNode.attribs.class}
+                           width={width}
+                           height={height}
                            blurDataURL={entry?.blurDataURL}
                            isTransparent={entry?.isTransparent}
                         />

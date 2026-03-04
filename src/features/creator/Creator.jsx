@@ -130,98 +130,119 @@ function Creator() {
       reader.readAsDataURL(img);
    }
 
+   const [isProcessing, setIsProcessing] = useState(false);
+
    // - Submit functions
    async function onSubmit(data) {
-      let category_id;
-      category_id = categories.find(
-         (item) => item.category === localArticle?.category,
-      )?.id;
-      if (!category_id) category_id = categories[0].id;
+      setIsProcessing(true);
 
-      const slug = toSlug(data.title);
-      const html = await editor.blocksToFullHTML(editor.document);
-      const htmlWithDimensions = await appendDimensionsToHTML(html);
+      try {
+         let category_id;
+         category_id = categories.find(
+            (item) => item.category === localArticle?.category,
+         )?.id;
+         if (!category_id) category_id = categories[0].id;
 
-      const imgSrcs = [
-         ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
-      ].map((m) => m[1].replaceAll('&amp;', '&'));
+         const slug = toSlug(data.title);
+         const html = await editor.blocksToFullHTML(editor.document);
+         const htmlWithDimensions = await appendDimensionsToHTML(html);
 
-      const blurEntries = await Promise.all(
-         imgSrcs.map(async (src) => {
-            const cleanSrc = src.split('?')[0];
-            const { blurDataURL, isTransparent } =
-               await generateBlurDataURLFromURL(src);
-            return [cleanSrc, { blurDataURL, isTransparent }];
-         }),
-      );
-      const contentBlurMap = Object.fromEntries(blurEntries);
+         const imgSrcs = [
+            ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
+         ].map((m) => m[1].replaceAll('&amp;', '&'));
 
-      createArticle(
-         {
-            ...data,
-            image: localArticle.image,
-            image_blur: localArticle.imageBlur,
-            category_id,
-            status: 'published',
-            author_id: user.id,
-            content: htmlWithDimensions,
-            content_blur_map: contentBlurMap,
-            featured: false,
-            main_feature: false,
-            code: localArticle.code,
-            slug,
-         },
-         {
-            onSuccess: clear,
-         },
-      );
+         const blurEntries = await Promise.all(
+            imgSrcs.map(async (src) => {
+               const cleanSrc = src.split('?')[0];
+               const { blurDataURL, isTransparent } =
+                  await generateBlurDataURLFromURL(src);
+               return [cleanSrc, { blurDataURL, isTransparent }];
+            }),
+         );
+         const contentBlurMap = Object.fromEntries(blurEntries);
+
+         createArticle(
+            {
+               ...data,
+               image: localArticle.image,
+               image_blur: localArticle.imageBlur,
+               category_id,
+               status: 'published',
+               author_id: user.id,
+               content: htmlWithDimensions,
+               content_blur_map: contentBlurMap,
+               featured: false,
+               main_feature: false,
+               code: localArticle.code,
+               slug,
+            },
+            {
+               onSuccess: () => {
+                  clear();
+                  setIsProcessing(false);
+               },
+               onError: () => setIsProcessing(false),
+            },
+         );
+      } catch {
+         setIsProcessing(false);
+      }
    }
 
    async function onSubmitDraft(data) {
-      let category_id;
-      category_id = categories.find(
-         (item) => item.category === localArticle?.category,
-      )?.id;
-      if (!category_id) category_id = categories[0].id;
+      setIsProcessing(true);
+      try {
+         let category_id;
+         category_id = categories.find(
+            (item) => item.category === localArticle?.category,
+         )?.id;
+         if (!category_id) category_id = categories[0].id;
 
-      const slug = toSlug(data.title);
-      const html = await editor.blocksToFullHTML(editor.document);
-      const htmlWithDimensions = await appendDimensionsToHTML(html);
+         const slug = toSlug(data.title);
+         const html = await editor.blocksToFullHTML(editor.document);
+         const htmlWithDimensions = await appendDimensionsToHTML(html);
 
-      // Extract all img srcs from content and generate blur data
-      const imgSrcs = [
-         ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
-      ].map((m) => m[1].replaceAll('&amp;', '&'));
+         // Extract all img srcs from content and generate blur data
+         const imgSrcs = [
+            ...htmlWithDimensions.matchAll(/<img[^>]+src="([^"]+)"/g),
+         ].map((m) => m[1].replaceAll('&amp;', '&'));
 
-      const blurEntries = await Promise.all(
-         imgSrcs.map(async (src) => {
-            const cleanSrc = src.split('?')[0];
-            const { blurDataURL, isTransparent } =
-               await generateBlurDataURLFromURL(src);
-            return [cleanSrc, { blurDataURL, isTransparent }];
-         }),
-      );
-      const contentBlurMap = Object.fromEntries(blurEntries);
+         const blurEntries = await Promise.all(
+            imgSrcs.map(async (src) => {
+               const cleanSrc = src.split('?')[0];
+               const { blurDataURL, isTransparent } =
+                  await generateBlurDataURLFromURL(src);
+               return [cleanSrc, { blurDataURL, isTransparent }];
+            }),
+         );
+         const contentBlurMap = Object.fromEntries(blurEntries);
 
-      createArticle(
-         {
-            ...data,
-            image: localArticle.image,
-            image_blur: localArticle.imageBlur,
-            category_id,
-            status: 'drafted',
-            author_id: user.id,
-            content: htmlWithDimensions,
-            content_blur_map: contentBlurMap,
-            featured: false,
-            main_feature: false,
-            code: localArticle.code,
-            slug,
-         },
-         {
-            onSuccess: clear,
-         },
-      );
+         createArticle(
+            {
+               ...data,
+               image: localArticle.image,
+               image_blur: localArticle.imageBlur,
+               category_id,
+               status: 'drafted',
+               author_id: user.id,
+               content: htmlWithDimensions,
+               content_blur_map: contentBlurMap,
+               featured: false,
+               main_feature: false,
+               code: localArticle.code,
+               slug,
+            },
+            {
+               onSuccess: () => {
+                  clear();
+                  setIsProcessing(false);
+               },
+               onError: () => setIsProcessing(false),
+            },
+         );
+      } catch {
+         setIsProcessing(false);
+      }
    }
 
    // - Reset logic
@@ -455,7 +476,9 @@ function Creator() {
          <div className="flex justify-center items-center gap-8">
             <SubmitButton
                handler={handleSubmit(onSubmit, onInvalid)}
-               isPending={isPending && activeButton === 'publish'}
+               isPending={
+                  (isPending || isProcessing) && activeButton === 'publish'
+               }
                loadingText="Publishing"
                onClick={() => setActiveButton('publish')}
             >
@@ -464,7 +487,9 @@ function Creator() {
             <span className="italic text-4xl text-primary-400">or</span>
             <DraftButton
                handler={handleSubmit(onSubmitDraft, onInvalid)}
-               isPending={isPending && activeButton === 'draft'}
+               isPending={
+                  (isPending || isProcessing) && activeButton === 'draft'
+               }
                onClick={() => setActiveButton('draft')}
             />
          </div>

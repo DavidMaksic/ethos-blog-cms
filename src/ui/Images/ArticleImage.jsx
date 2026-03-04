@@ -1,7 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import mediumZoom from 'medium-zoom';
 
-function ArticleImage({ src, className, blurDataURL, isTransparent }) {
+function ArticleImage({
+   src,
+   className,
+   width,
+   height,
+   blurDataURL,
+   isTransparent,
+}) {
    const [loaded, setLoaded] = useState(false);
    const imgRef = useRef(null);
    const zoomRef = useRef(null);
@@ -24,7 +31,10 @@ function ArticleImage({ src, className, blurDataURL, isTransparent }) {
    }, [loaded]);
 
    return (
-      <span className={`block w-full relative overflow-hidden ${className}`}>
+      <span
+         className={`block w-full relative overflow-hidden ${className}`}
+         style={{ aspectRatio: `${width} / ${height}` }}
+      >
          <span
             className={`absolute inset-0 transition-opacity duration-700 ${isTransparent ? 'scale-85' : 'scale-110'} ${
                loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'

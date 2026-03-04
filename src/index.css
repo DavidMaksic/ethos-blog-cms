@@ -1143,6 +1143,10 @@ article .bn-file-block-content-wrapper {
    border-radius: 1.6rem !important;
 }
 
+.bn-container .bn-visual-media {
+   @apply opacity-90 dark:opacity-75;
+}
+
 @container (max-width: 550px) {
    [data-file-block] .bn-visual-media {
       border-radius: 20px;
