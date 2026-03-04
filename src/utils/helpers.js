@@ -144,27 +144,8 @@ export const appendDimensionsToHTML = async (html) => {
 };
 
 export async function generateBlurDataURLFromURL(src) {
-   const cleanSrc = src.split('?')[0];
-   const isExternal = !cleanSrc.startsWith(window.location.origin);
-
-   const fetchUrl = isExternal
-      ? `/api/proxy?url=${encodeURIComponent(cleanSrc)}`
-      : cleanSrc;
-
-   const res = await fetch(fetchUrl);
-   const arrayBuffer = await res.arrayBuffer();
-
-   const rawContentType = res.headers.get('content-type') || 'image/jpeg';
-   const contentType = rawContentType.split(';')[0].trim();
-
-   console.log('status:', res.status);
-   console.log('contentType:', contentType);
-   console.log('arrayBuffer size:', arrayBuffer.byteLength);
-
-   const blob = new Blob([arrayBuffer], { type: contentType });
-   console.log('blob type:', blob.type);
-   console.log('blob size:', blob.size);
-
+   const res = await fetch(src.split('?')[0]);
+   const blob = await res.blob();
    return await generateBlurDataURL(blob);
 }
 
