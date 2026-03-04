@@ -1,8 +1,9 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import {
+   generateBlurDataURLFromURL,
    appendDimensionsToHTML,
-   blockNoteSchema,
    generateBlurDataURL,
+   blockNoteSchema,
    insertAlert,
    toSlug,
 } from '../../utils/helpers';
@@ -219,13 +220,6 @@ function EditArticleForm() {
    // - React Query logic
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
-
-   // - Blur placeholder logic
-   async function generateBlurDataURLFromURL(src) {
-      const res = await fetch(src.split('?')[0]);
-      const blob = await res.blob();
-      return await generateBlurDataURL(blob);
-   }
 
    // - Submit logic
    async function onSubmit(data) {

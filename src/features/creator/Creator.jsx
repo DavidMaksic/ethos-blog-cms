@@ -1,9 +1,10 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { CONTENT_DEBOUNCE, DEFAULT_LANG, FLAGS } from '../../utils/constants';
 import {
+   generateBlurDataURLFromURL,
    appendDimensionsToHTML,
-   blockNoteSchema,
    generateBlurDataURL,
+   blockNoteSchema,
    insertAlert,
    toSlug,
 } from '../../utils/helpers';
@@ -127,13 +128,6 @@ function Creator() {
          }));
       };
       reader.readAsDataURL(img);
-   }
-
-   // - Blur placeholder logic
-   async function generateBlurDataURLFromURL(src) {
-      const res = await fetch(src.split('?')[0]);
-      const blob = await res.blob();
-      return await generateBlurDataURL(blob);
    }
 
    // - Submit functions

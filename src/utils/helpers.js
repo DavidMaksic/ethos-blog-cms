@@ -143,6 +143,29 @@ export const appendDimensionsToHTML = async (html) => {
    return doc.body.innerHTML;
 };
 
+export async function generateBlurDataURLFromURL(src) {
+   const cleanSrc = src.split('?')[0];
+   const isExternal = !cleanSrc.startsWith(window.location.origin);
+
+   const fetchUrl = isExternal
+      ? `/api/proxy?url=${encodeURIComponent(cleanSrc)}`
+      : cleanSrc;
+
+   const res = await fetch(fetchUrl);
+   const arrayBuffer = await res.arrayBuffer();
+   const contentType = res.headers.get('content-type') || 'image/jpeg';
+
+   console.log('status:', res.status);
+   console.log('contentType:', contentType);
+   console.log('arrayBuffer size:', arrayBuffer.byteLength);
+
+   const blob = new Blob([arrayBuffer], { type: contentType });
+   console.log('blob type:', blob.type);
+   console.log('blob size:', blob.size);
+
+   return await generateBlurDataURL(blob);
+}
+
 export async function generateBlurDataURL(file) {
    const bitmap = await createImageBitmap(file);
 

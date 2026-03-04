@@ -9,10 +9,12 @@ function ArchiveRowImage({ src, alt, blurDataURL, isFirst, isLast }) {
    }, []);
 
    return (
-      <div className="relative w-full h-24 2xl:h-23 xl:h-30 overflow-hidden">
+      <div
+         className={`relative w-full h-24 2xl:h-23 xl:h-30 overflow-hidden ${isFirst ? 'rounded-tr-2xl!' : ''} ${isLast ? 'rounded-br-2xl!' : ''}`}
+      >
          <div
             className={`absolute inset-0 scale-110 transition-opacity duration-300 ${
-               loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
+               !loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
             }`}
             style={{
                backgroundImage: blurDataURL ? `url(${blurDataURL})` : undefined,
@@ -27,7 +29,7 @@ function ArchiveRowImage({ src, alt, blurDataURL, isFirst, isLast }) {
             alt={alt}
             className={`w-full h-full object-cover transition-300 ${
                loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'
-            } ${isFirst ? 'rounded-tr-2xl' : ''} ${isLast ? 'rounded-br-2xl' : ''}`}
+            }`}
             onLoad={() => setLoaded(true)}
          />
       </div>
