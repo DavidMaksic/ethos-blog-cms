@@ -16,7 +16,7 @@ function EditArticle() {
 
    const { isPending: isLoading, user } = useCurrentAuthor();
    const { isPending: isFetching, authors } = useAuthors();
-   const currentAuthor = authors?.find((item) => item.id === user.id);
+   const currentAuthor = authors?.find((item) => item.id === user?.id);
 
    if (isLoading || isFetching)
       return (

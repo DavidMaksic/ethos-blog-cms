@@ -220,27 +220,14 @@ function EditArticleForm() {
    const { isUnFeaturing, unFeature } = useUnFeature();
    const { isEditing, editArticle } = useEditArticle();
 
+   // - Blur placeholder logic
    async function generateBlurDataURLFromURL(src) {
-      const cleanSrc = src.split('?')[0];
-      const res = await fetch(cleanSrc);
+      const res = await fetch(src.split('?')[0]);
       const blob = await res.blob();
-
-      const blurDataURL = await generateBlurDataURL(blob);
-
-      const bitmap = await createImageBitmap(blob);
-      const canvas = document.createElement('canvas');
-      canvas.width = bitmap.width;
-      canvas.height = bitmap.height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(bitmap, 0, 0);
-      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const isTransparent = Array.from(data).some(
-         (val, i) => i % 4 === 3 && val < 255,
-      );
-
-      return { blurDataURL, isTransparent };
+      return await generateBlurDataURL(blob);
    }
 
+   // - Submit logic
    async function onSubmit(data) {
       const { id: category_id } = categories.find(
          (item) => item.category === localArticle.category,
@@ -321,7 +308,7 @@ function EditArticleForm() {
       const img = e.target.files[0];
       if (!img) return;
 
-      const blurDataURL = await generateBlurDataURL(img);
+      const { blurDataURL } = await generateBlurDataURL(img);
 
       const reader = new FileReader();
       reader.onloadend = () => {

@@ -5,6 +5,7 @@ import {
    defaultBlockSpecs,
    insertOrUpdateBlock,
 } from '@blocknote/core';
+import { rgbaToThumbHash, thumbHashToDataURL } from 'thumbhash';
 import { withMultiColumn } from '@blocknote/xl-multi-column';
 import { supabaseUrl } from '../services/supabase';
 import { Alert } from '../ui/Alert';
@@ -143,18 +144,23 @@ export const appendDimensionsToHTML = async (html) => {
 };
 
 export async function generateBlurDataURL(file) {
-   return new Promise((resolve) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.onload = () => {
-         const canvas = document.createElement('canvas');
-         canvas.width = 10;
-         canvas.height = 10;
-         const ctx = canvas.getContext('2d');
-         ctx.drawImage(img, 0, 0, 10, 10); // squish to 10x10
-         URL.revokeObjectURL(url);
-         resolve(canvas.toDataURL('image/jpeg', 0.5)); // tiny base64
-      };
-      img.src = url;
-   });
+   const bitmap = await createImageBitmap(file);
+
+   const maxSize = 100;
+   const scale = Math.min(maxSize / bitmap.width, maxSize / bitmap.height);
+   const w = Math.min(Math.round(bitmap.width * scale), maxSize);
+   const h = Math.min(Math.round(bitmap.height * scale), maxSize);
+
+   const canvas = document.createElement('canvas');
+   canvas.width = w;
+   canvas.height = h;
+   const ctx = canvas.getContext('2d');
+   ctx.drawImage(bitmap, 0, 0, w, h);
+   bitmap.close();
+
+   const { data } = ctx.getImageData(0, 0, w, h);
+   const isTransparent = data.some((val, i) => i % 4 === 3 && val < 255);
+
+   const hash = rgbaToThumbHash(w, h, data);
+   return { blurDataURL: thumbHashToDataURL(hash), isTransparent };
 }
