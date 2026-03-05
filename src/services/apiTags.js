@@ -56,6 +56,15 @@ export async function updateMainFeature({ selectedID, boolean }) {
       .select();
 
    if (error) throw new Error('Article could not be featured');
+
+   // - Trigger Next.js revalidation
+   await fetch('/api/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+         changes: { action: 'feature-update' },
+      }),
+   });
 }
 
 export async function updateTagFeature({ selectedID, boolean }) {
@@ -68,6 +77,15 @@ export async function updateTagFeature({ selectedID, boolean }) {
       .select();
 
    if (error) throw new Error('Article could not be featured');
+
+   // - Trigger Next.js revalidation
+   await fetch('/api/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+         changes: { action: 'feature-update' },
+      }),
+   });
 }
 
 export async function setIndex({ selectedID, index }) {

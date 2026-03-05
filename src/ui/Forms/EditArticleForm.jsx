@@ -298,6 +298,7 @@ function EditArticleForm() {
                id: article.id,
                featured: false,
                main_feature: false,
+               status: article.status,
             });
          }
       } catch {

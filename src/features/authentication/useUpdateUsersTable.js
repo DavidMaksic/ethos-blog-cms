@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateUsersTable as updateUsersTableApi } from '../../services/apiAuth';
+import { updateAuthorsTable as updateAuthorsTableApi } from '../../services/apiAuth';
 
-export function useUpdateUsersTable() {
+export function useUpdateAuthorsTable() {
    const queryClient = useQueryClient();
 
-   const { isPending, mutate: updateUsersTable } = useMutation({
-      mutationFn: updateUsersTableApi,
+   const { isPending, mutate: updateAuthorsTable } = useMutation({
+      mutationFn: updateAuthorsTableApi,
       onSuccess: () => {
          queryClient.invalidateQueries({
             queryKey: ['authors'],
@@ -13,5 +13,5 @@ export function useUpdateUsersTable() {
       },
    });
 
-   return { isPending, updateUsersTable };
+   return { isPending, updateAuthorsTable };
 }

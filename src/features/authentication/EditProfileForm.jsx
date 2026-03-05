@@ -1,5 +1,5 @@
+import { useUpdateAuthorsTable } from './useUpdateUsersTable';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
-import { updateUsersTable } from '../../services/apiAuth';
 import { useRef, useState } from 'react';
 import { useCurrentAuthor } from './useCurrentAuthor';
 import { useUpdateAuthor } from './useUpdateAuthor';
@@ -16,6 +16,8 @@ import Form from '../../ui/Forms/Form';
 function EditProfileForm() {
    const { user: currentAuthor } = useCurrentAuthor();
    const { isPending, updateAuthor } = useUpdateAuthor();
+   const { isPending: isLoading, updateAuthorsTable } = useUpdateAuthorsTable();
+
    const { register, handleSubmit, formState } = useForm();
    const { errors } = formState;
 
@@ -59,7 +61,7 @@ function EditProfileForm() {
          description_srb,
          profile_image,
       });
-      updateUsersTable({
+      updateAuthorsTable({
          full_name: name,
          profile_image,
          description_en,
@@ -70,7 +72,10 @@ function EditProfileForm() {
    }
 
    return (
-      <Form isPending={isPending} onSubmit={handleSubmit(onSubmit)}>
+      <Form
+         isPending={isPending || isLoading}
+         onSubmit={handleSubmit(onSubmit)}
+      >
          <FormRow columns="grid-cols-[32rem]">
             <div className="flex items-center justify-between">
                <FormItem label="Name" error={errors?.full_name?.message}>
@@ -190,7 +195,10 @@ function EditProfileForm() {
 
          <FormRow className="grid-cols-[auto]">
             <div className="flex justify-self-center mt-2">
-               <SubmitButton isPending={isPending} loadingText="Updating">
+               <SubmitButton
+                  isPending={isPending || isLoading}
+                  loadingText="Updating"
+               >
                   Update
                </SubmitButton>
             </div>

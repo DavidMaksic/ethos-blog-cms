@@ -119,7 +119,7 @@ export async function updateAuthor({
    if (error2) throw new Error(error2.message);
 }
 
-export async function updateUsersTable(user) {
+export async function updateAuthorsTable(user) {
    const { error } = await supabase
       .from('authors')
       .update({
