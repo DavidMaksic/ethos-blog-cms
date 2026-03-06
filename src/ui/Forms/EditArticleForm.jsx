@@ -21,7 +21,6 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
-import { useDebounce } from '../../hooks/useDebounce';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
@@ -123,6 +122,8 @@ function EditArticleForm() {
          });
 
          const blocks = await tempEditor.tryParseHTMLToBlocks(html);
+
+         tempEditor.destroy?.();
          setInitialContent(blocks);
       };
 
@@ -155,22 +156,29 @@ function EditArticleForm() {
    }, [initialContent]);
 
    // - Debounce article content
-   const [contentHTML, setContentHTML] = useState();
-   const debouncedContent = useDebounce(contentHTML, CONTENT_DEBOUNCE);
+   const contentHTMLRef = useRef('');
+   const saveTimeoutRef = useRef(null);
+
    useEffect(() => {
-      if (debouncedContent) {
-         setLocalArticle((prev) => ({
-            ...prev,
-            content: debouncedContent,
-         }));
-      }
-   }, [debouncedContent, setLocalArticle]);
+      return () => {
+         if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+      };
+   }, []);
 
    // - When article content changes, store it as html
-   const onChange = async () => {
+   const onChange = () => {
       if (!editor) return;
-      const html = await editor.blocksToFullHTML(editor.document);
-      setContentHTML(html);
+
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+
+      saveTimeoutRef.current = setTimeout(async () => {
+         const html = await editor.blocksToFullHTML(editor.document);
+         contentHTMLRef.current = html;
+         setLocalArticle((prev) => ({
+            ...prev,
+            content: html,
+         }));
+      }, CONTENT_DEBOUNCE);
    };
 
    // - Sync between inputs and localStorage

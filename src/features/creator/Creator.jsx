@@ -19,7 +19,6 @@ import { useFullscreen } from '../../context/FullscreenContext';
 import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
-import { useDebounce } from '../../hooks/useDebounce';
 import { useForm } from 'react-hook-form';
 import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
 
@@ -71,7 +70,7 @@ function Creator() {
    const { errors } = formState;
 
    // - Editor logic
-   const [contentHTML, setContentHTML] = useState('');
+   const contentHTMLRef = useRef('');
 
    const editor = useCreateBlockNote({
       initialContent: localArticle.content,
@@ -88,21 +87,27 @@ function Creator() {
    });
 
    // - Debounce article content
-   const debouncedContent = useDebounce(contentHTML, CONTENT_DEBOUNCE);
+   const saveTimeoutRef = useRef(null);
 
-   useEffect(() => {
-      if (debouncedContent) {
+   const onChange = () => {
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+
+      saveTimeoutRef.current = setTimeout(async () => {
+         const html = await editor.blocksToFullHTML(editor.document);
+         contentHTMLRef.current = html;
          setLocalArticle((prev) => ({
             ...prev,
             content: editor.document,
          }));
-      }
-   }, [debouncedContent, setLocalArticle]); // eslint-disable-line
-
-   const onChange = async () => {
-      const html = await editor.blocksToFullHTML(editor.document);
-      setContentHTML(html);
+      }, CONTENT_DEBOUNCE);
    };
+
+   // Cleanup on unmount
+   useEffect(() => {
+      return () => {
+         if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+      };
+   }, []);
 
    const { categories } = useGetCategories();
 
@@ -470,7 +475,7 @@ function Creator() {
                   return true;
                },
             })}
-            value={contentHTML}
+            value={contentHTMLRef.current}
          />
 
          <div className="flex justify-center items-center gap-8">
