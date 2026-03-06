@@ -20,7 +20,7 @@ import { BlockNoteView } from '@blocknote/mantine';
 import { IoMoonOutline } from 'react-icons/io5';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { useForm } from 'react-hook-form';
-import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
+import { en } from '@blocknote/core/locales';
 
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';

@@ -23,7 +23,7 @@ import { useUnFeature } from '../../features/archive/useUnFeature';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { ImSpinner2 } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
-import { en } from '../../../node_modules/@blocknote/core/src/i18n/locales/en';
+import { en } from '@blocknote/core/locales';
 
 import {
    getDefaultReactSlashMenuItems,
