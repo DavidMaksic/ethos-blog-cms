@@ -73,7 +73,7 @@ export const Alert = createReactBlockSpec(
    {
       render: (props) => {
          const alertType = alertTypes.find(
-            (a) => a.value === props.block.props.type
+            (a) => a.value === props.block.props.type,
          );
          const Icon = alertType.icon;
 
@@ -132,5 +132,5 @@ export const Alert = createReactBlockSpec(
             </div>
          );
       },
-   }
+   },
 );
