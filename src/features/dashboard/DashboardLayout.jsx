@@ -22,7 +22,7 @@ function DashboardLayout() {
          <StatsLayout />
          <Drafts />
          <CategoryChart articles={articles} numDays={numDays} />
-         <Chart articles={articles} numDays={numDays} />
+         <Chart numDays={numDays} />
       </motion.div>
    );
 }
