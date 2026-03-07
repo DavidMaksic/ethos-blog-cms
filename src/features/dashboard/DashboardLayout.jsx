@@ -19,7 +19,7 @@ function DashboardLayout() {
          animate={{ opacity: 1 }}
          transition={{ duration: 0.4 }}
       >
-         <StatsLayout />
+         <StatsLayout numDays={numDays} />
          <Drafts />
          <CategoryChart articles={articles} numDays={numDays} />
          <Chart numDays={numDays} />

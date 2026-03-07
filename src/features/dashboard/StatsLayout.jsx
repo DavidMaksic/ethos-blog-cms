@@ -1,53 +1,58 @@
-import { PiChatCircleLight } from 'react-icons/pi';
-import { HiOutlineUser } from 'react-icons/hi2';
-import { useComments } from '../../hooks/useComments';
-import { CiBookmark } from 'react-icons/ci';
-import { useUsers } from '../../hooks/useUsers';
-import { useLikes } from '../../hooks/useLikes';
-import { SlHeart } from 'react-icons/sl';
+import { HiOutlineUser, HiOutlineEye, HiOutlineClock } from 'react-icons/hi2';
+import { TbBounceRight } from 'react-icons/tb';
+import { useUmamiSummary } from '../../hooks/useUmamiSummary';
 import Stats from './Stats';
 
-function StatsLayout() {
-   const { users } = useUsers();
-   const { likes } = useLikes();
-   const { comments } = useComments();
+function StatsLayout({ numDays }) {
+   const { summary, isLoading } = useUmamiSummary(numDays);
 
-   const numUsers = users?.length;
-   const totalLikes = likes?.length;
-   const totalComments = comments?.length;
-   const totalBookmarks = users?.flatMap((user) => user.bookmarks || []).length;
+   const visitors = summary?.visitors ?? 0;
+   const pageviews = summary?.pageviews ?? 0;
+   const bounceRate =
+      summary?.bounces && summary?.visitors
+         ? ((summary.bounces / summary.visitors) * 100).toFixed(1) + '%'
+         : '0%';
+   const avgDuration =
+      summary?.totaltime && summary?.visitors
+         ? (() => {
+              const secs = Math.round(summary.totaltime / summary.visitors);
+              const m = Math.floor(secs / 60);
+              const s = secs % 60;
+              return m > 0 ? `${m}m ${s}s` : `${s}s`;
+           })()
+         : '0s';
 
    return (
       <>
          <Stats
-            title="Likes"
-            value={totalLikes}
+            title="Visitors"
+            value={isLoading ? '...' : visitors}
+            icon={<HiOutlineUser className="text-svg-users transition-color" />}
+            color="bg-stat-users"
+         />
+         <Stats
+            title="Page Views"
+            value={isLoading ? '...' : pageviews}
             icon={
-               <SlHeart className="text-svg-likes transition-color p-0.5!" />
+               <HiOutlineEye className="text-svg-likes transition-color p-0.5!" />
             }
             color="bg-stat-likes"
          />
          <Stats
-            title="Comments"
-            value={totalComments}
+            title="Bounce Rate"
+            value={isLoading ? '...' : bounceRate}
             icon={
-               <PiChatCircleLight className="text-svg-comments transition-color" />
+               <TbBounceRight className="text-svg-comments transition-color" />
             }
             color="bg-stat-comments"
          />
          <Stats
-            title="Bookmarks"
-            value={totalBookmarks}
+            title="Visit Duration"
+            value={isLoading ? '...' : avgDuration}
             icon={
-               <CiBookmark className="text-svg-bookmarks transition-color" />
+               <HiOutlineClock className="text-svg-bookmarks transition-color" />
             }
             color="bg-stat-bookmarks"
-         />
-         <Stats
-            title="Users"
-            value={numUsers}
-            icon={<HiOutlineUser className="text-svg-users transition-color" />}
-            color="bg-stat-users"
          />
       </>
    );

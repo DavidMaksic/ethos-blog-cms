@@ -122,8 +122,6 @@ function EditArticleForm() {
          });
 
          const blocks = await tempEditor.tryParseHTMLToBlocks(html);
-
-         tempEditor.destroy?.();
          setInitialContent(blocks);
       };
 

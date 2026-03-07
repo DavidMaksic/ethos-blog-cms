@@ -10,7 +10,7 @@ function Stats({ title, value, icon, color }) {
             <span className="text-xs uppercase font-semibold text-primary-400 tracking-wider">
                {title}
             </span>
-            <span className="text-3xl font-bold text-primary-600 dark:text-primary-600/90 font-logo transition-color pl-0.5">
+            <span className="text-3xl text-primary-600 dark:text-primary-600/90 font-stats dark:font-light transition-color pl-0.5">
                {value || '-'}
             </span>
          </div>
