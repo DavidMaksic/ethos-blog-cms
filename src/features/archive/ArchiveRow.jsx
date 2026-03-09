@@ -1,13 +1,12 @@
+import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDeleteArticle } from './useDeleteArticle';
 import { useCurrentAuthor } from '../authentication/useCurrentAuthor';
-import { AnimatePresence } from 'motion/react';
 import { PiArticleMedium } from 'react-icons/pi';
 import { LuPencilLine } from 'react-icons/lu';
 import { useAuthors } from '../authentication/useAuthors';
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
-import { motion } from 'motion/react';
 import { format } from 'date-fns';
 
 import ArchiveRowImage from '../../ui/Images/ArchiveRowImage';

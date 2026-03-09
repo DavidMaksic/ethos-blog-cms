@@ -10,7 +10,7 @@ function StatsLayout({ numDays }) {
    const pageviews = summary?.pageviews ?? 0;
    const bounceRate =
       summary?.bounces && summary?.visitors
-         ? ((summary.bounces / summary.visitors) * 100).toFixed(1) + '%'
+         ? ((summary.bounces / summary.visitors) * 100).toFixed(0) + '%'
          : '0%';
    const avgDuration =
       summary?.totaltime && summary?.visitors
@@ -26,29 +26,31 @@ function StatsLayout({ numDays }) {
       <>
          <Stats
             title="Visitors"
-            value={isLoading ? '...' : visitors}
+            value={visitors}
+            isLoading={isLoading}
             icon={<HiOutlineUser className="text-svg-users transition-color" />}
             color="bg-stat-users"
          />
          <Stats
             title="Page Views"
-            value={isLoading ? '...' : pageviews}
-            icon={
-               <HiOutlineEye className="text-svg-likes transition-color p-0.5!" />
-            }
+            value={pageviews}
+            isLoading={isLoading}
+            icon={<HiOutlineEye className="text-svg-likes transition-color" />}
             color="bg-stat-likes"
          />
          <Stats
             title="Bounce Rate"
-            value={isLoading ? '...' : bounceRate}
+            value={bounceRate}
+            isLoading={isLoading}
             icon={
-               <TbBounceRight className="text-svg-comments transition-color" />
+               <TbBounceRight className="text-svg-comments transition-color stroke-[1.5px]" />
             }
             color="bg-stat-comments"
          />
          <Stats
             title="Visit Duration"
-            value={isLoading ? '...' : avgDuration}
+            value={avgDuration}
+            isLoading={isLoading}
             icon={
                <HiOutlineClock className="text-svg-bookmarks transition-color" />
             }
