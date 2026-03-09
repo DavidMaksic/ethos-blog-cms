@@ -1,9 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
 import { useUpdateTagFeature } from './useUpdateTagFeature';
 import { IoRemoveCircle } from 'react-icons/io5';
 import { useAuthors } from '../authentication/useAuthors';
 import { CgMathPlus } from 'react-icons/cg';
 import { ImSpinner2 } from 'react-icons/im';
-import { useEffect } from 'react';
 import { useEntry } from '../../context/EntryContext';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
@@ -31,19 +31,51 @@ function TagEntry({ article }) {
       if (isSuccess) refetch();
    }, [isSuccess, refetch]);
 
+   const [loaded, setLoaded] = useState(false);
+   const imgRef = useRef(null);
+
+   // Handle already-cached images that won't fire onLoad
+   useEffect(() => {
+      if (imgRef.current?.complete) setTimeout(() => setLoaded(true), 50);
+   }, []);
+
    return (
       <>
          {article ? (
             <motion.li
-               className={`relative flex h-[24rem] 2xl:h-[23rem] xl:h-[22rem] w-[19rem] 2xl:w-[17rem] xl:w-[16rem] border rounded-3xl group transition p-8 2xl:p-7 xl:p-6 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center hover:border-primary-200 dark:opacity-95! ${
+               className={`relative flex h-[24rem] 2xl:h-[23rem] xl:h-[22rem] w-[19rem] 2xl:w-[17rem] xl:w-[16rem] border rounded-[24px] group transition p-8 2xl:p-7 xl:p-6 bg-cover hover:bg-accent-100/10 dark:hover:bg-primary-200 border-primary-200 bg-center hover:border-primary-200 dark:opacity-95! overflow-hidden ${
                   isDeleting && 'opacity-80! pointer-events-none'
                }`}
                initial={{ opacity: 0 }}
                animate={{ opacity: 1 }}
                exit={{ opacity: 0 }}
                transition={{ duration: 0.3 }}
-               style={{ backgroundImage: `url(${article.image})` }}
             >
+               <span
+                  className={`absolute inset-0 scale-110 transition-opacity duration-700 ${
+                     loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
+                  }`}
+                  style={{
+                     backgroundImage: article.image_blur
+                        ? `url(${article.image_blur})`
+                        : undefined,
+                     backgroundSize: 'cover',
+                     backgroundPosition: 'center',
+                     filter: 'blur(20px)',
+                  }}
+               />
+
+               <img
+                  ref={imgRef}
+                  src={article.image}
+                  alt="Article image"
+                  aria-hidden="true"
+                  className={`absolute inset-0 rounded-[20px] w-full h-full object-cover transition-opacity duration-700 ${
+                     loaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={() => setTimeout(() => setLoaded(true), 50)}
+               />
+
                <span className="absolute inset-0 m-0 bg-gradient-to-t from-primary-700 dark:from-primary-200/80 z-10 pointer-events-none rounded-[20px] xl:rounded-[16px] transition duration-300 group-hover:saturate-120" />
 
                <div className="z-20 self-end">

@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
 
 function ArticleItem({
@@ -13,11 +13,16 @@ function ArticleItem({
    const { id, image, title } = article;
 
    const [loaded, setLoaded] = useState(false);
+   const imgRef = useRef(null);
    const [searchParams, setSearchParams] = useSearchParams();
    const [isSelected, setIsSelected] = useState(false);
    const [isUnSelected, setIsUnSelected] = useState(false);
 
-   // - Bug fix for searching
+   useEffect(() => {
+      if (imgRef.current?.complete) setTimeout(() => setLoaded(true), 50);
+   }, []);
+
+   // Bug fix for searching
    useEffect(() => {
       if (isSelected || isUnSelected) {
          setSearchParams(searchParams);
@@ -53,14 +58,30 @@ function ArticleItem({
                {title.length > 51 ? `${title.slice(0, 52)}...` : title}
             </h2>
 
-            <img
-               className={`w-full h-25 object-cover opacity-80 rounded-2xl z-0 group-hover:opacity-100 transition-200 border-l border-primary-200 ${
-                  loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'
-               }`}
-               onLoad={() => setLoaded(true)}
-               src={image}
-               alt={title}
-            />
+            <div className="relative w-full h-25 rounded-2xl overflow-hidden border-l border-primary-200">
+               <span
+                  className={`absolute inset-0 scale-110 transition-opacity duration-700 ${
+                     loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
+                  }`}
+                  style={{
+                     backgroundImage: article.image_blur
+                        ? `url(${article.image_blur})`
+                        : undefined,
+                     backgroundSize: 'cover',
+                     backgroundPosition: 'center',
+                     filter: 'blur(20px)',
+                  }}
+               />
+               <img
+                  ref={imgRef}
+                  src={image}
+                  alt={title}
+                  className={`w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-100 ${
+                     loaded ? 'opacity-85 dark:opacity-70' : 'opacity-0'
+                  }`}
+                  onLoad={() => setTimeout(() => setLoaded(true), 50)}
+               />
+            </div>
          </Link>
       </motion.div>
    );

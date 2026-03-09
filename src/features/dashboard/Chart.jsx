@@ -68,7 +68,7 @@ function Chart({ numDays }) {
          <Heading type="h2">
             <div className="flex justify-between items-center">
                Traffic Overview
-               <span className="bg-primary-300/20 py-1 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
+               <span className="bg-primary-300/20 py-1 pt-1.5 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
                   {format(allDates.at(0), 'MMM dd, yyyy')} &mdash;{' '}
                   {format(allDates.at(-1), 'MMM dd, yyyy')}
                </span>

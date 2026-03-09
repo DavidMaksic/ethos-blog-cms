@@ -1,8 +1,8 @@
+import { useEffect, useState, useRef } from 'react';
 import { useUpdateMainFeature } from './useUpdateMainFeature';
 import { IoRemoveCircle } from 'react-icons/io5';
 import { useSetIndex } from '../features/useSetIndex';
 import { ImSpinner2 } from 'react-icons/im';
-import { useEffect } from 'react';
 import { motion } from 'motion/react';
 
 function MainArticle({ article, refetch, index }) {
@@ -11,6 +11,13 @@ function MainArticle({ article, refetch, index }) {
 
    const id = article.id;
    const { setIndex } = useSetIndex();
+
+   const [loaded, setLoaded] = useState(false);
+   const imgRef = useRef(null);
+
+   useEffect(() => {
+      if (imgRef.current?.complete) setTimeout(() => setLoaded(true), 50);
+   }, []);
 
    useEffect(() => {
       if (isSuccess) refetch();
@@ -49,11 +56,30 @@ function MainArticle({ article, refetch, index }) {
             </div>
          </div>
 
-         <img
-            src={article.image}
-            alt={article.title}
-            className="rounded-3xl h-[18rem] w-full object-cover opacity-90 dark:opacity-75 border border-primary-200"
-         />
+         <div className="relative rounded-3xl overflow-hidden h-[18rem] w-full border border-primary-200">
+            <span
+               className={`absolute inset-0 scale-110 transition-opacity duration-700 ${
+                  loaded ? 'opacity-0' : 'opacity-90 dark:opacity-75'
+               }`}
+               style={{
+                  backgroundImage: article.image_blur
+                     ? `url(${article.image_blur})`
+                     : undefined,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  filter: 'blur(20px)',
+               }}
+            />
+            <img
+               ref={imgRef}
+               src={article.image}
+               alt={article.title}
+               className={`w-full h-full object-cover transition-opacity duration-700 ${
+                  loaded ? 'opacity-90 dark:opacity-75' : 'opacity-0'
+               }`}
+               onLoad={() => setTimeout(() => setLoaded(true), 50)}
+            />
+         </div>
 
          {isEditing ? (
             <button>
