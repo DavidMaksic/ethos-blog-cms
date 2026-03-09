@@ -1579,3 +1579,7 @@ input[type='password']::-ms-reveal {
 .custom {
    @apply pb-2!;
 }
+
+.recharts-legend-item {
+   margin-right: 0px !important;
+}

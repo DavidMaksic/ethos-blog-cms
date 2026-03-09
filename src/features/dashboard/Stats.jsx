@@ -26,7 +26,7 @@ function Stats({ title, value, change, invertChange, isLoading, icon, color }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                >
-                  <div className="h-8 w-16 mt-1 rounded-2xl skeleton animate-skeleton transition-bg_border" />
+                  <div className="h-8 w-30 mt-1 rounded-xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
                </motion.div>
             ) : (
                <motion.div

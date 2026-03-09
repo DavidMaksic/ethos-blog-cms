@@ -211,10 +211,21 @@ export async function deleteArticle(article) {
    }
 }
 
+export async function getAllArticles() {
+   const { data, error } = await supabase
+      .from('articles')
+      .select('id, title, image, slug,code, image_blur, status, category_id');
+
+   if (error) throw new Error('Articles could not be loaded');
+   return data;
+}
+
 export async function getArticlesAfterDate(date) {
    const { data, error } = await supabase
       .from('articles')
-      .select('created_at, status, category_id, likes(id, type)')
+      .select(
+         'created_at, title, image, slug, image_blur, status, category_id, likes(id, type)',
+      )
       .gte('created_at', date)
       .lte('created_at', getToday({ end: true }));
 

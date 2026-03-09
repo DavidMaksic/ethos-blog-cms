@@ -9,8 +9,8 @@ function DraftSkeleton() {
          exit={{ opacity: 0 }}
          transition={{ duration: 0.3 }}
       >
-         <div className="h-25 bg-primary-200/50 dark:bg-primary-300/15 transition-bg_border" />
-         <div className="h-25 bg-primary-200/50 dark:bg-primary-300/15 transition-bg_border" />
+         <div className="h-25 bg-primary-300/25 dark:bg-primary-300/15 transition-bg_border" />
+         <div className="h-25 bg-primary-300/25 dark:bg-primary-300/15 transition-bg_border" />
       </motion.div>
    );
 }

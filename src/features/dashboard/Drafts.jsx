@@ -21,7 +21,7 @@ function Drafts() {
 
    return (
       <motion.div
-         className={`relative col-span-2 space-y-3 text-base border bg-white/70 dark:bg-primary-300/10 rounded-2xl py-8 px-10 box-shadow transition-200 remove-scrollbar [&_h1]:pb-4 z-10 ${myArticles?.length > 0 && 'overflow-auto'}`}
+         className={`relative col-span-2 col-start-3 space-y-3 text-base border bg-white/70 dark:bg-primary-300/10 rounded-2xl py-8 px-10 box-shadow transition-200 remove-scrollbar [&_h1]:pb-4 z-10 ${myArticles?.length > 0 && 'overflow-auto'}`}
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          exit={{ opacity: 0 }}

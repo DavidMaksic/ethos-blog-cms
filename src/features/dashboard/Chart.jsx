@@ -6,6 +6,7 @@ import {
    XAxis,
    YAxis,
    Area,
+   Legend,
 } from 'recharts';
 import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
 import { motion, AnimatePresence } from 'motion/react';
@@ -46,6 +47,7 @@ function Chart({ numDays }) {
            background: 'rgba(46, 51, 61, 0.6)',
            shadow: 'rgba(0, 0, 0, 0.2)',
            border: '#475569',
+           legendOpacity: 0.8,
         }
       : {
            numViews: { stroke: '#16a34a', fill: '#dcfce7' },
@@ -54,23 +56,24 @@ function Chart({ numDays }) {
            background: 'rgba(249, 250, 251, 0.2)',
            shadow: 'rgba(0, 0, 0, 0.1)',
            border: '#e5e7eb',
+           legendOpacity: 0.7,
         };
 
    const isFullHD = useMediaQuery({ maxWidth: 1920 });
    const isXl = useMediaQuery({ maxWidth: 1290 });
 
    let size;
-   if (isFullHD) size = 300;
+   if (isFullHD) size = 340;
    if (isXl) size = 260;
 
    return (
-      <div className="col-span-full space-y-6 bg-white dark:bg-primary-300/10 rounded-2xl py-8 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
+      <div className="col-span-full space-y-6 bg-white dark:bg-primary-300/10 rounded-2xl pt-8 pb-7 px-2 pr-12 box-shadow transition-200 [&_h1]:pl-12">
          <Heading type="h2">
             <div className="flex justify-between items-center">
                Traffic Overview
                <span className="bg-primary-300/20 py-1 pt-1.5 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
-                  {format(allDates.at(0), 'MMM dd, yyyy')} &mdash;{' '}
-                  {format(allDates.at(-1), 'MMM dd, yyyy')}
+                  {format(allDates.at(0), 'MMM dd')} &mdash;{' '}
+                  {format(allDates.at(-1), 'MMM dd')}
                </span>
             </div>
          </Heading>
@@ -84,7 +87,7 @@ function Chart({ numDays }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                >
-                  <div className="h-80 ml-10 rounded-3xl skeleton animate-skeleton transition-bg_border" />
+                  <div className="h-90.5 2xl:h-[340px] xl:h-[260px] ml-10 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
                </motion.div>
             ) : (
                <motion.div
@@ -113,6 +116,28 @@ function Chart({ numDays }) {
                               border: 'none',
                               borderRadius: '14px',
                               boxShadow: `0 8px 32px ${colors.shadow}`,
+                           }}
+                        />
+                        <Legend
+                           verticalAlign="bottom"
+                           align="center"
+                           iconType="circle"
+                           iconSize={10}
+                           formatter={(value) => (
+                              <span
+                                 style={{
+                                    fontSize: '14px',
+                                    marginRight: '16px',
+                                 }}
+                              >
+                                 {value}
+                              </span>
+                           )}
+                           wrapperStyle={{
+                              paddingTop: '16px',
+                              color: colors.text,
+                              opacity: colors.legendOpacity,
+                              transform: 'translateX(16px)',
                            }}
                         />
                         <Area

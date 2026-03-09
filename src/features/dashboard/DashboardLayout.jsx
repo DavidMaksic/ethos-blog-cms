@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 
 import DashboardSkeleton from '../../ui/Skeletons/DashboardSkeleton';
 import CategoryChart from './CategoryChart';
+import PostRankings from './PostRankings';
 import StatsLayout from './StatsLayout';
 import Drafts from './Drafts';
 import Chart from './Chart';
@@ -14,15 +15,16 @@ function DashboardLayout() {
 
    return (
       <motion.div
-         className="grid grid-cols-4 grid-rows-[auto_23rem_auto] 2xl:grid-rows-[auto_23.5rem_auto] xl:grid-rows-[auto_25rem_auto] gap-6"
+         className="grid grid-cols-4 grid-rows-[auto_auto_24rem_24rem] gap-6 mb-15 2xl:mb-20 xl:mb-40"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.4 }}
       >
          <StatsLayout numDays={numDays} />
-         <Drafts />
-         <CategoryChart articles={articles} numDays={numDays} />
          <Chart numDays={numDays} />
+         <PostRankings numDays={numDays} />
+         <CategoryChart articles={articles} numDays={numDays} />
+         <Drafts />
       </motion.div>
    );
 }
