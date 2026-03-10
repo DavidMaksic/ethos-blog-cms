@@ -5,7 +5,7 @@ import { useAllArticles } from './useAllArticles';
 import { PiRankingFill } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
-import RankingSkeleton from '../../ui/skeletons/RankingSkeleton';
+import RankingSkeleton from '../../ui/Skeletons/RankingSkeleton';
 import RankingImage from '../../ui/Images/RankingImage';
 import Heading from '../../ui/Heading';
 
