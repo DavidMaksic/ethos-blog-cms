@@ -3,10 +3,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useUmamiTopPages } from '../../hooks/useUmamiTopPages';
 import { useAllArticles } from './useAllArticles';
 import { Link } from 'react-router-dom';
+
+import RankingSkeleton from '../../ui/skeletons/RankingSkeleton';
+import RankingImage from '../../ui/Images/RankingImage';
 import Heading from '../../ui/Heading';
 
 // TODO: Fix empty state for stat components
 // TODO: Filter bots using Cloudinary
+// TODO: Add blur for article images
+// TODO: Revalidate doesn't fire for article draft -> publish
 
 function PostRankings({ numDays }) {
    const { pages, isLoading } = useUmamiTopPages(numDays);
@@ -30,21 +35,7 @@ function PostRankings({ numDays }) {
 
          <AnimatePresence mode="wait">
             {isLoading ? (
-               <motion.div
-                  key="skeleton"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-3"
-               >
-                  {Array.from({ length: 8 }).map((_, i) => (
-                     <div
-                        key={i}
-                        className="h-[4.38rem] rounded-2xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15"
-                     />
-                  ))}
-               </motion.div>
+               <RankingSkeleton />
             ) : (
                <motion.div
                   key="list"
@@ -69,15 +60,11 @@ function PostRankings({ numDays }) {
 
                               {/* Article */}
                               <div className="flex items-center gap-3 flex-1 min-w-0 ">
-                                 {article?.image ? (
-                                    <img
-                                       src={article.image}
-                                       alt={article.title}
-                                       className="size-12 rounded-lg object-cover shrink-0"
-                                    />
-                                 ) : (
-                                    <div className="w-10 h-10 rounded-lg skeleton shrink-0" />
-                                 )}
+                                 <RankingImage
+                                    src={article?.image}
+                                    blurSrc={article?.image_blur}
+                                    alt={article?.title}
+                                 />
                                  <Link
                                     className={`text-base font-medium truncate text-primary-500 dark:text-primary-500/70 transition-color underlined-text ${article?.code === 'sr' && 'font-cyrillic text-lg'}`}
                                     to={`/archive/${article?.id}`}
@@ -92,7 +79,7 @@ function PostRankings({ numDays }) {
                               </div>
 
                               {/* Views */}
-                              <span className="w-26 2xl:w-20 xl:w-14 text-base flex justify-center tabular-nums text-primary-400 dark:text-primary-400 transition-color shrink-0 font-stats">
+                              <span className="w-26 2xl:w-20 xl:w-14 text-base flex justify-center tabular-nums text-primary-500/80 dark:text-primary-400 transition-color shrink-0 font-stats">
                                  {page.views.toLocaleString()}
                               </span>
 
@@ -133,19 +120,19 @@ function RankDots() {
 function ChangeIndicator({ change }) {
    if (change === null || change === 0)
       return (
-         <span className="flex items-center gap-1 text-base text-primary-400 opacity-50">
+         <span className="flex items-center gap-1 text-base text-primary-500/80 dark:text-primary-400 opacity-50">
             <HiMinus className="text-base stroke-2 font-bold" />
          </span>
       );
    if (change > 0)
       return (
-         <div className="flex items-center gap-1 text-base rounded-lg pl-2 pr-[9px] py-0.5 text-green-600/90 dark:text-green-300/90 bg-green-300/15">
+         <div className="flex items-center gap-1 text-base rounded-lg pl-2 pr-[9px] py-0.5 text-green-600/90 dark:text-green-300/90 bg-green-300/20 dark:bg-green-300/15">
             <HiArrowUp className="text-base stroke-[1.2px] font-bold" />{' '}
             <span className="pt-px">{change}</span>
          </div>
       );
    return (
-      <div className="flex items-center gap-1 text-base rounded-lg pl-2 pr-[9px] py-0.5 text-red-400/90 dark:text-red-300 bg-red-300/15">
+      <div className="flex items-center gap-1 text-base rounded-lg pl-2 pr-[9px] py-0.5 text-red-400/90 dark:text-red-300 bg-red-300/17 dark:bg-red-300/15">
          <HiArrowDown className="text-base stroke-[1.2px] font-bold" />{' '}
          <span className="pt-px">{Math.abs(change)}</span>
       </div>

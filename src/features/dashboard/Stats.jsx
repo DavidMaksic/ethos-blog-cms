@@ -40,7 +40,7 @@ function Stats({ title, value, change, invertChange, isLoading, icon, color }) {
 
                      {change && (
                         <span
-                           className={`self-end text-base rounded-lg px-2 py-px ${isPositive ? 'text-green-600/90 dark:text-green-300/90 bg-green-300/15' : 'text-red-400/90 dark:text-red-300 bg-red-300/15'}`}
+                           className={`self-end text-base rounded-lg px-2 py-px ${isPositive ? 'text-green-600/90 dark:text-green-300/90 bg-green-300/18 dark:bg-green-300/15' : 'text-red-400/90 dark:text-red-300 bg-red-300/17 dark:bg-red-300/15'}`}
                         >
                            {change}
                         </span>
