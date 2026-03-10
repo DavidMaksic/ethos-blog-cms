@@ -16,7 +16,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useDarkMode } from '../../context/DarkModeContext';
 import Heading from '../../ui/Heading';
 
-function Chart({ numDays }) {
+function TrafficChart({ numDays }) {
    const { isDarkMode } = useDarkMode();
    const { visitors, isLoading } = useUmamiStats(numDays);
 
@@ -88,7 +88,7 @@ function Chart({ numDays }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                >
-                  <div className="h-87 ml-10 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
+                  <div className="h-85 ml-10 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
                </motion.div>
             ) : data.every((d) => d.pageviews === 0 && d.sessions === 0) ? (
                <motion.div
@@ -180,4 +180,4 @@ function Chart({ numDays }) {
    );
 }
 
-export default Chart;
+export default TrafficChart;

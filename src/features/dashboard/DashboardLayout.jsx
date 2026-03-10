@@ -2,11 +2,11 @@ import { useRecentArticles } from './useRecentArticles';
 import { motion } from 'motion/react';
 
 import DashboardSkeleton from '../../ui/Skeletons/DashboardSkeleton';
-import CategoryChart from './CategoryChart';
+import ReferrerChart from './ReferrerChart';
+import TrafficChart from './TrafficChart';
 import PostRankings from './PostRankings';
 import StatsLayout from './StatsLayout';
 import Drafts from './Drafts';
-import Chart from './Chart';
 
 function DashboardLayout() {
    const { isPending, articles, numDays } = useRecentArticles();
@@ -21,9 +21,9 @@ function DashboardLayout() {
          transition={{ duration: 0.4 }}
       >
          <StatsLayout numDays={numDays} />
-         <Chart numDays={numDays} />
+         <TrafficChart numDays={numDays} />
          <PostRankings numDays={numDays} />
-         <CategoryChart articles={articles} numDays={numDays} />
+         <ReferrerChart articles={articles} numDays={numDays} />
          <Drafts />
       </motion.div>
    );

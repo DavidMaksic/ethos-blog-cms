@@ -6,13 +6,12 @@ import {
    Cell,
    Pie,
 } from 'recharts';
-import { useUmamiReferrers } from '../../hooks/useUmamiReferrers';
 import { motion, AnimatePresence } from 'motion/react';
+import { useUmamiReferrers } from '../../hooks/useUmamiReferrers';
+import { TbChartPieFilled } from 'react-icons/tb';
 import { useMediaQuery } from 'react-responsive';
 import { useDarkMode } from '../../context/DarkModeContext';
 import Heading from '../../ui/Heading';
-import { PiChartPieSlice } from 'react-icons/pi';
-import { TbChartPieFilled } from 'react-icons/tb';
 
 const COLORS = [
    '#f98585cc',
@@ -35,7 +34,7 @@ function prepareData(referrers) {
    }));
 }
 
-function CategoryChart({ numDays }) {
+function ReferrerChart({ numDays }) {
    const { isDarkMode } = useDarkMode();
    const { referrers, isLoading } = useUmamiReferrers(numDays);
 
@@ -96,7 +95,7 @@ function CategoryChart({ numDays }) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="mt-7"
+                  className="mt-1"
                >
                   <ResponsiveContainer width="100%" height={size}>
                      <PieChart>
@@ -171,4 +170,4 @@ function CategoryChart({ numDays }) {
    );
 }
 
-export default CategoryChart;
+export default ReferrerChart;

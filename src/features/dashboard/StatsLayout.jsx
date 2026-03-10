@@ -1,8 +1,8 @@
-import { HiOutlineUser, HiOutlineEye, HiOutlineClock } from 'react-icons/hi2';
+import { HiOutlineUser, HiOutlineEye } from 'react-icons/hi2';
 import { useUmamiSummary } from '../../hooks/useUmamiSummary';
 import { TbBounceRight } from 'react-icons/tb';
-import Stats from './Stats';
 import { SlClock } from 'react-icons/sl';
+import Stats from './Stats';
 
 function StatsLayout({ numDays }) {
    const { summary, isLoading } = useUmamiSummary(numDays);
