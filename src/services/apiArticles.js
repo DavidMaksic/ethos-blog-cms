@@ -75,19 +75,19 @@ export async function createArticle(newArticle) {
 
    const [imageName, imagePath] = createImagePath(imageFile);
 
-   // - 1. Create article
-   const { error } = await supabase
-      .from('articles')
-      .insert([{ ...newArticle, image: imagePath }]);
-
-   if (error) throw new Error('Article could not be created');
-
-   // - 2. Upload image
+   // - 1. Upload image
    const { error: storageError } = await supabase.storage
       .from('article_images')
       .upload(imageName, imageFile);
 
    if (storageError) throw new Error('Article image could not be uploaded');
+
+   // - 2. Create article
+   const { error } = await supabase
+      .from('articles')
+      .insert([{ ...newArticle, image: imagePath }]);
+
+   if (error) throw new Error('Article could not be created');
 
    // - 3. Trigger Next.js revalidation
    if (newArticle.status === 'published') {
@@ -126,6 +126,20 @@ export async function updateArticle(article) {
 
       if (storageError) throw new Error('Article image could not be uploaded');
 
+      // - Delete old image
+      if (oldArticle.image) {
+         const oldImageName = oldArticle.image.split('/').pop();
+         const { error: imageError } = await supabase.storage
+            .from('article_images')
+            .remove([oldImageName]);
+
+         if (imageError) {
+            throw new Error(
+               'Old article image could not be deleted from storage',
+            );
+         }
+      }
+
       finalImagePath = imagePath;
    }
 
@@ -151,11 +165,12 @@ export async function updateArticle(article) {
    if (error) throw new Error('Article could not be updated');
 
    // 3. Trigger Next.js revalidation
-   if (article.status === 'published') {
+   if (article.status === 'published' || oldArticle.status === 'published') {
       const changes = getArticleChanges(oldArticle, article);
       const relevantChanges = {
          content: changes.content,
-         metadata: changes.title || changes.description || imageFile,
+         metadata:
+            changes.title || changes.description || changes.status || imageFile,
          action: 'update',
       };
 
@@ -167,17 +182,6 @@ export async function updateArticle(article) {
             changes: relevantChanges,
          }),
       });
-   }
-
-   // 4. Delete old image if a new one was uploaded
-   if (imageFile && oldArticle.image) {
-      const oldImageName = oldArticle.image.split('/').pop();
-      const { error: imageError } = await supabase.storage
-         .from('article_images')
-         .remove([oldImageName]);
-
-      if (imageError)
-         throw new Error('Old article image could not be deleted from storage');
    }
 }
 
@@ -192,13 +196,13 @@ export async function deleteArticle(article) {
 
    // 2. Delete image from DB
    const imageName = article.image.split('/').pop();
-   const { error: image2 } = await supabase.storage
+   const { error: imageError } = await supabase.storage
       .from('article_images')
       .remove([imageName]);
 
-   if (image2) throw new Error('Image could not be deleted from database');
+   if (imageError) throw new Error('Image could not be deleted from database');
 
-   // - 3. Trigger Next.js revalidation
+   // 3. Trigger Next.js revalidation
    if (article.status === 'published') {
       await fetch('/api/revalidate', {
          method: 'POST',
@@ -333,7 +337,7 @@ export async function updateFeatures(article) {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
-            changes: { action: 'misc' },
+            changes: { action: 'feature-update' },
          }),
       });
    }

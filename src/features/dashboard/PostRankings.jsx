@@ -9,9 +9,6 @@ import RankingSkeleton from '../../ui/Skeletons/RankingSkeleton';
 import RankingImage from '../../ui/Images/RankingImage';
 import Heading from '../../ui/Heading';
 
-// TODO: Filter bots using Cloudinary
-// TODO: Revalidate doesn't fire for article draft -> publish
-
 function PostRankings({ numDays }) {
    const { pages, isLoading } = useUmamiTopPages(numDays);
    const { articles } = useAllArticles();

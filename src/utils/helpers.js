@@ -100,6 +100,7 @@ export function getArticleChanges(oldArticle, newArticle) {
       title: oldArticle.title !== newArticle.title,
       description: oldArticle.description !== newArticle.description,
       content: oldArticle.content !== newArticle.content,
+      status: oldArticle.status !== newArticle.status,
    };
 }
 
