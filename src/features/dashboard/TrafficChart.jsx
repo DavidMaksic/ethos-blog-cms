@@ -169,7 +169,7 @@ function TrafficChart({ numDays }) {
                            stroke={colors.numVisitors.stroke}
                            fill={colors.numVisitors.fill}
                            strokeWidth={2}
-                           name="Visitors"
+                           name="Visits"
                         />
                      </AreaChart>
                   </ResponsiveContainer>

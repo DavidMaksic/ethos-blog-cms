@@ -50,7 +50,7 @@ function StatsLayout({ numDays }) {
    return (
       <>
          <Stats
-            title="Visitors"
+            title="Visits"
             value={visitors}
             change={visitorsChange}
             isLoading={isLoading}
