@@ -10,6 +10,13 @@ function RankingSkeleton() {
          transition={{ duration: 0.3 }}
          className="relative space-y-3"
       >
+         <div className="flex items-center gap-6 px-0 mb-6 mt-0.5">
+            <div className="w-4 h-3 rounded-full skeleton bg-primary-300/25 dark:bg-primary-300/15 shrink-0" />
+            <div className="w-14 mr-auto h-3 rounded-full skeleton bg-primary-300/25 dark:bg-primary-300/15" />
+            <div className="w-14 mr-8 2xl:mr-3 xl:w-12 h-3 rounded-full skeleton bg-primary-300/25 dark:bg-primary-300/15 shrink-0" />
+            <div className="w-12 2xl:w-14 h-3 rounded-full skeleton bg-primary-300/25 dark:bg-primary-300/15 shrink-0" />
+         </div>
+
          {Array.from({ length: 8 }).map((_, i) => (
             <div
                key={i}

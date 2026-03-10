@@ -11,6 +11,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useMediaQuery } from 'react-responsive';
 import { useDarkMode } from '../../context/DarkModeContext';
 import Heading from '../../ui/Heading';
+import { PiChartPieSlice } from 'react-icons/pi';
+import { TbChartPieFilled } from 'react-icons/tb';
 
 const COLORS = [
    '#f98585cc',
@@ -73,7 +75,7 @@ function CategoryChart({ numDays }) {
    }
 
    return (
-      <div className="categories col-start-3 col-span-2 space-y-6 text-base bg-white dark:bg-primary-300/10 rounded-2xl py-8 px-10 box-shadow transition-200 z-10">
+      <div className="categories col-start-3 col-span-2 flex flex-col space-y-6 text-base bg-white dark:bg-primary-300/10 rounded-2xl py-8 px-10 box-shadow transition-200 z-10">
          <Heading type="h2">Traffic Sources</Heading>
 
          <AnimatePresence mode="wait">
@@ -154,8 +156,10 @@ function CategoryChart({ numDays }) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
+                  className="flex-1 flex flex-col"
                >
-                  <div className="h-full flex flex-col items-center justify-center -translate-y-7 gap-3">
+                  <div className="flex-1 flex flex-col items-center justify-center gap-3 -translate-y-4">
+                     <TbChartPieFilled className="text-6xl text-primary-200 dark:text-primary-300 transition-color" />
                      <span className="text-2xl italic text-primary-300 transition-color w-72 text-center">
                         No traffic data for the last {numDays} days...
                      </span>

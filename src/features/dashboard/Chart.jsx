@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
 import { motion, AnimatePresence } from 'motion/react';
+import { TbChartAreaLineFilled } from 'react-icons/tb';
 import { useUmamiStats } from '../../hooks/useUmamiStats';
 import { useMediaQuery } from 'react-responsive';
 import { useDarkMode } from '../../context/DarkModeContext';
@@ -87,7 +88,21 @@ function Chart({ numDays }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                >
-                  <div className="h-90.5 2xl:h-[340px] xl:h-[260px] ml-10 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
+                  <div className="h-87 ml-10 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
+               </motion.div>
+            ) : data.every((d) => d.pageviews === 0 && d.sessions === 0) ? (
+               <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-center justify-center gap-3 py-16 text-center translate-y-8"
+               >
+                  <TbChartAreaLineFilled className="text-6xl text-primary-200 dark:text-primary-300 transition-color" />
+                  <span className="text-2xl italic text-primary-300 transition-color">
+                     No traffic data for the last {numDays} days...
+                  </span>
                </motion.div>
             ) : (
                <motion.div

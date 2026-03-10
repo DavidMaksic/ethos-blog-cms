@@ -15,7 +15,7 @@ function DashboardLayout() {
 
    return (
       <motion.div
-         className="grid grid-cols-4 grid-rows-[auto_auto_24rem_24rem] gap-6 mb-15 2xl:mb-20 xl:mb-40"
+         className="grid grid-cols-4 grid-rows-[auto_30.3rem_24rem_24rem] gap-6 mb-15 2xl:mb-20 xl:mb-40"
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.4 }}

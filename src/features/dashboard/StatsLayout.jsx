@@ -2,6 +2,7 @@ import { HiOutlineUser, HiOutlineEye, HiOutlineClock } from 'react-icons/hi2';
 import { useUmamiSummary } from '../../hooks/useUmamiSummary';
 import { TbBounceRight } from 'react-icons/tb';
 import Stats from './Stats';
+import { SlClock } from 'react-icons/sl';
 
 function StatsLayout({ numDays }) {
    const { summary, isLoading } = useUmamiSummary(numDays);
@@ -81,7 +82,7 @@ function StatsLayout({ numDays }) {
             change={avgDurationChange}
             isLoading={isLoading}
             icon={
-               <HiOutlineClock className="text-svg-bookmarks transition-color" />
+               <SlClock className="text-svg-bookmarks transition-color p-px" />
             }
             color="bg-stat-bookmarks"
          />
