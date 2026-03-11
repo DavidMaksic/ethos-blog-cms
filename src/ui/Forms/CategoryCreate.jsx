@@ -63,11 +63,7 @@ function CategoryCreate() {
    }, [isSuccess, reset]);
 
    return (
-      <TagForm
-         cols="0.5_1fr"
-         isPending={isPending}
-         onSubmit={handleSubmit(handleCategory)}
-      >
+      <TagForm isPending={isPending} onSubmit={handleSubmit(handleCategory)}>
          <div className="flex flex-col gap-12 items-center [&_label]:text-primary-400 [&_label]:font-light [&_label]:text-base [&_label]:uppercase">
             <section className="flex flex-col gap-2 items-center self-start">
                <FormItem label="Name" error={error} id="name">

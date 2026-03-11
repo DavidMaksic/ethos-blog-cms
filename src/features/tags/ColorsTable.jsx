@@ -50,7 +50,7 @@ function ColorsTable({ input, isEdit = false, localTag, children }) {
    ]);
 
    return (
-      <div className="grid grid-cols-2 self-start gap-14">
+      <div className="flex w-min self-start gap-14">
          <div className="flex flex-col gap-3 items-center">
             <label className="self-start">Colors</label>
 
