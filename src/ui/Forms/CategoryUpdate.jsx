@@ -54,10 +54,6 @@ function CategoryUpdate() {
       colorDarkText,
       setColorDarkText,
 
-      openChart,
-      colorChart,
-      setColorChart,
-
       setCurrentTag,
    } = useColorEditContext();
 
@@ -74,7 +70,6 @@ function CategoryUpdate() {
          colorLightText,
          colorDarkBg,
          colorDarkText,
-         colorChart,
       };
       updateCategory(updateObject);
    }
@@ -160,7 +155,11 @@ function CategoryUpdate() {
                   />
                </ColorTableCol>
 
-               <ColorTableCol name="Dark" picker={'pickerDark'}>
+               <ColorTableCol
+                  name="Dark"
+                  hasBorder={false}
+                  picker={'pickerDark'}
+               >
                   <Color
                      label="DarkBg"
                      open={openDarkBg}
@@ -175,21 +174,6 @@ function CategoryUpdate() {
                      setOpen={togglePicker}
                      color={colorDarkText}
                      setColor={setColorDarkText}
-                     isEdit={true}
-                  />
-               </ColorTableCol>
-
-               <ColorTableCol
-                  name="Chart"
-                  hasBorder={false}
-                  picker={'pickerChart'}
-               >
-                  <Color
-                     label="Chart"
-                     open={openChart}
-                     setOpen={togglePicker}
-                     color={colorChart}
-                     setColor={setColorChart}
                      isEdit={true}
                   />
                </ColorTableCol>

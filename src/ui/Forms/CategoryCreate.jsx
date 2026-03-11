@@ -41,10 +41,6 @@ function CategoryCreate() {
       openDarkText,
       colorDarkText,
       setColorDarkText,
-
-      openChart,
-      colorChart,
-      setColorChart,
    } = useColorContext();
 
    function handleCategory(data) {
@@ -56,7 +52,6 @@ function CategoryCreate() {
          bg_dark: colorDarkBg.hex,
          text_light: colorLightText.hex,
          text_dark: colorDarkText.hex,
-         chart_color: colorChart.hex,
          code: cyrillicPattern.test(data.categoryCreate) ? 'sr' : 'en',
       };
 
@@ -128,7 +123,11 @@ function CategoryCreate() {
                   />
                </ColorTableCol>
 
-               <ColorTableCol name="Dark" picker={'pickerDark'}>
+               <ColorTableCol
+                  name="Dark"
+                  hasBorder={false}
+                  picker={'pickerDark'}
+               >
                   <Color
                      label="DarkBg"
                      open={openDarkBg}
@@ -142,20 +141,6 @@ function CategoryCreate() {
                      setOpen={togglePicker}
                      color={colorDarkText}
                      setColor={setColorDarkText}
-                  />
-               </ColorTableCol>
-
-               <ColorTableCol
-                  name="Chart"
-                  hasBorder={false}
-                  picker={'pickerChart'}
-               >
-                  <Color
-                     label="Chart"
-                     open={openChart}
-                     setOpen={togglePicker}
-                     color={colorChart}
-                     setColor={setColorChart}
                   />
                </ColorTableCol>
             </ColorsTable>

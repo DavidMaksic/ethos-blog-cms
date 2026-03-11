@@ -29,31 +29,23 @@ function ColorEditProvider({ children }) {
       currentCategory?.text_dark ?? '#fff',
    );
 
-   const [openChart, setOpenChart] = useState(false);
-   const [colorChart, setColorChart] = useColor(
-      currentCategory?.chart_color ?? '#fff',
-   );
-
    function togglePicker(context) {
       const currentOpen =
          (context === 'LightBg' && openLightBg) ||
          (context === 'LightText' && openLightText) ||
          (context === 'DarkBg' && openDarkBg) ||
-         (context === 'DarkText' && openDarkText) ||
-         (context === 'Chart' && openChart);
+         (context === 'DarkText' && openDarkText);
 
       setOpenLightBg(false);
       setOpenLightText(false);
       setOpenDarkBg(false);
       setOpenDarkText(false);
-      setOpenChart(false);
 
       if (!currentOpen) {
          if (context === 'LightBg') setOpenLightBg(true);
          if (context === 'LightText') setOpenLightText(true);
          if (context === 'DarkBg') setOpenDarkBg(true);
          if (context === 'DarkText') setOpenDarkText(true);
-         if (context === 'Chart') setOpenChart(true);
       }
    }
 
@@ -76,9 +68,6 @@ function ColorEditProvider({ children }) {
             colorDarkText,
             setColorDarkText,
 
-            openChart,
-            colorChart,
-            setColorChart,
             setCurrentTag,
          }}
       >

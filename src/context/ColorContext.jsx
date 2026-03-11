@@ -14,23 +14,18 @@ function ColorContextProvider({ children }) {
    const [openDarkText, setOpenDarkText] = useState(false);
    const [colorDarkText, setColorDarkText] = useColor('#e6dbffcc');
 
-   const [openChart, setOpenChart] = useState(false);
-   const [colorChart, setColorChart] = useColor('#a885f9cc');
-
    function togglePicker(context) {
       const currentOpen =
          (context === 'LightBg' && openLightBg) ||
          (context === 'LightText' && openLightText) ||
          (context === 'DarkBg' && openDarkBg) ||
-         (context === 'DarkText' && openDarkText) ||
-         (context === 'Chart' && openChart);
+         (context === 'DarkText' && openDarkText);
 
       // Close all modals
       setOpenLightBg(false);
       setOpenLightText(false);
       setOpenDarkBg(false);
       setOpenDarkText(false);
-      setOpenChart(false);
 
       // Toggle current modal
       if (!currentOpen) {
@@ -38,7 +33,6 @@ function ColorContextProvider({ children }) {
          if (context === 'LightText') setOpenLightText(true);
          if (context === 'DarkBg') setOpenDarkBg(true);
          if (context === 'DarkText') setOpenDarkText(true);
-         if (context === 'Chart') setOpenChart(true);
       }
    }
 
@@ -60,10 +54,6 @@ function ColorContextProvider({ children }) {
             openDarkText,
             colorDarkText,
             setColorDarkText,
-
-            openChart,
-            colorChart,
-            setColorChart,
          }}
       >
          {children}
@@ -76,7 +66,7 @@ function useColorContext() {
 
    if (context === undefined)
       throw new Error(
-         'useColorContext was used outside of ColorContextProvider'
+         'useColorContext was used outside of ColorContextProvider',
       );
 
    return context;
