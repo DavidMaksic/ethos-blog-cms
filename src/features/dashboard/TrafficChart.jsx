@@ -72,9 +72,9 @@ function TrafficChart({ numDays }) {
          <Heading type="h2">
             <div className="flex justify-between items-center">
                Traffic Overview
-               <span className="bg-primary-300/20 py-1 pt-1.5 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
-                  {format(allDates.at(0), 'MMM dd')} &mdash;{' '}
-                  {format(allDates.at(-1), 'MMM dd')}
+               <span className="bg-primary-300/15 dark:bg-primary-300/20 py-1 pt-1.5 px-3 rounded-full text-base font-medium border border-quaternary transition-bg_border">
+                  {format(allDates.at(0), 'MMMM d')} &mdash;{' '}
+                  {format(allDates.at(-1), 'MMMM d')}
                </span>
             </div>
          </Heading>

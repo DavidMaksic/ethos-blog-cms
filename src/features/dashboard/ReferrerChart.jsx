@@ -86,7 +86,7 @@ function ReferrerChart({ numDays }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                >
-                  <div className="h-65 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
+                  <div className="h-68 rounded-3xl skeleton animate-skeleton transition-bg_border bg-primary-300/25 dark:bg-primary-300/15" />
                </motion.div>
             ) : data.length > 0 ? (
                <motion.div
