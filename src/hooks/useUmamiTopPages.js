@@ -50,11 +50,11 @@ export function useUmamiTopPages(numDays) {
                .map((page, index) => {
                   const normalizedUrl = page.x.split('?')[0].split('#')[0];
                   const parts = normalizedUrl.split('/').filter(Boolean);
-                  const lang = ['en', 'sr'].includes(parts[0])
-                     ? parts[0]
-                     : 'en';
-                  const slug =
-                     lang !== 'en' ? parts.slice(1).join('/') : parts.join('/');
+
+                  const hasLangPrefix = ['en', 'sr'].includes(parts[0]);
+                  const slug = hasLangPrefix
+                     ? parts.slice(1).join('/')
+                     : parts.join('/');
 
                   const prevIndex = filteredPrevious.findIndex(
                      (p) => p.x.split('?')[0].split('#')[0] === normalizedUrl,
@@ -64,21 +64,16 @@ export function useUmamiTopPages(numDays) {
                   return {
                      url: normalizedUrl,
                      slug,
-                     lang,
                      views: page.y,
                      rank: index + 1,
                      change,
                   };
                })
-               // Remove duplicates — keep the one with explicit lang prefix
-               .filter((page, _, arr) => {
-                  if (page.lang === 'en') {
-                     return !arr.some(
-                        (p) => p.slug === page.slug && p.lang === 'sr',
-                     );
-                  }
-                  return true;
-               })
+               .filter(
+                  (page, _, arr) =>
+                     arr.findIndex((p) => p.slug === page.slug) ===
+                     arr.indexOf(page),
+               )
                .map((page, index) => ({ ...page, rank: index + 1 }));
 
             setPages(ranked);

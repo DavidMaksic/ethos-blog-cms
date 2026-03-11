@@ -13,9 +13,8 @@ function PostRankings({ numDays }) {
    const { pages, isLoading } = useUmamiTopPages(numDays);
    const { articles } = useAllArticles();
 
-   // Match Umami URL slugs to article data
-   function getArticle(slug, lang) {
-      return articles?.find((a) => a.slug === slug && a.code === lang) ?? null;
+   function getArticle(slug) {
+      return articles?.find((a) => a.slug === slug) ?? null;
    }
 
    return (
@@ -52,7 +51,7 @@ function PostRankings({ numDays }) {
                         </div>
                      ) : (
                         pages.map((page, i) => {
-                           const article = getArticle(page.slug, page.lang);
+                           const article = getArticle(page.slug);
                            const isLast = i === pages.length - 1;
 
                            return (
@@ -78,9 +77,9 @@ function PostRankings({ numDays }) {
                                        >
                                           {article?.title ?? page.url}
                                        </Link>
-                                       {page.lang && (
+                                       {article?.code && (
                                           <span className="text-xs font-medium px-1.5 py-0.5 rounded-full bg-primary-300/20 dark:bg-primary-300/20 text-primary-400/80 dark:text-primary-300 shrink-0 uppercase">
-                                             {page.lang}
+                                             {article.code}
                                           </span>
                                        )}
                                     </div>
