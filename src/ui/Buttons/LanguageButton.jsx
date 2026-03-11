@@ -1,11 +1,12 @@
 import { DEFAULT_LANG, LANGUAGES } from '../../utils/constants';
 import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { useState } from 'react';
 
 function LanguageButton({
    localArticle,
    setLocalArticle,
+   categories,
    isEdit = false,
    articleCode = null,
 }) {
@@ -19,6 +20,21 @@ function LanguageButton({
       LANGUAGES.find((item) =>
          isEdit ? item.code === articleCode : item.code === DEFAULT_LANG,
       )?.flag;
+
+   useEffect(() => {
+      if (isEdit) return;
+      if (localArticle.category) return;
+
+      const code = localArticle.code ?? DEFAULT_LANG;
+      const firstCategory = categories?.find((item) => item.code === code);
+
+      if (firstCategory) {
+         setLocalArticle((prev) => ({
+            ...prev,
+            category: firstCategory.category,
+         }));
+      }
+   }, []); // eslint-disable-line
 
    return (
       <div className="absolute rounded-full right-6 top-5 border border-primary-300 cursor-pointer transition-200">
@@ -51,11 +67,17 @@ function LanguageButton({
                         className="flex justify-between items-center relative font-medium rounded-xl py-2 pr-3 pl-5 hover:bg-primary-100/70 text-primary-500 dark:text-primary-500/90 dark:hover:bg-primary-300/20 duration-75 [&_img]:opacity-80 dark:[&_img]:opacity-80 group"
                         key={item.code}
                         onClick={() => {
+                           const firstCategory = categories?.find(
+                              (c) => c.code === item.code,
+                           );
+
                            setLocalArticle((prev) => ({
                               ...prev,
                               flag: item.flag,
                               language: item.lang,
                               code: item.code,
+                              category:
+                                 firstCategory?.category ?? prev.category,
                            }));
 
                            document.documentElement.setAttribute(

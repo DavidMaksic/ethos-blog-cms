@@ -502,6 +502,7 @@ function Creator() {
          <LanguageButton
             localArticle={localArticle}
             setLocalArticle={setLocalArticle}
+            categories={categories}
          />
 
          <Options editor={editor} currentAuthor={user}>

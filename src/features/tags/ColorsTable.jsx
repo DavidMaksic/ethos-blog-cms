@@ -79,7 +79,9 @@ function ColorsTable({ input, isEdit = false, localTag, children }) {
                   {!isEdit
                      ? input
                         ? input
-                        : 'History'
+                        : localTag?.code === 'en'
+                          ? 'History'
+                          : 'Историја'
                      : input
                        ? input
                        : localTag?.category}

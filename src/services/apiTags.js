@@ -25,6 +25,7 @@ export async function updateCategory(updateObject) {
       colorLightText,
       colorDarkBg,
       colorDarkText,
+      code,
    } = updateObject;
 
    const { error } = await supabase
@@ -35,6 +36,7 @@ export async function updateCategory(updateObject) {
          text_light: colorLightText.hex,
          bg_dark: colorDarkBg.hex,
          text_dark: colorDarkText.hex,
+         code,
       })
       .eq('id', id)
       .select()

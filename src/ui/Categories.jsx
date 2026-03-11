@@ -16,6 +16,10 @@ function Categories({
    const { categories } = useGetCategories();
    const ref = useOutsideClick(() => setOpen(false), false);
 
+   const filteredCategories = categories.filter(
+      (item) => item.code === localItem?.code,
+   );
+
    return (
       <div className="relative w-max select-none">
          <div
@@ -40,7 +44,7 @@ function Categories({
                   exit={{ opacity: 0, y: -8, scale: 0.97 }}
                   transition={{ duration: 0.12 }}
                >
-                  {categories.map((item) => (
+                  {filteredCategories.map((item) => (
                      <li
                         key={item.category}
                         value={item.category}
@@ -50,6 +54,7 @@ function Categories({
                            setLocalItem({
                               ...localItem,
                               category: item.category,
+                              code: item.code,
                            });
                         }}
                      >

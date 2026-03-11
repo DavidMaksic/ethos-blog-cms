@@ -1,5 +1,4 @@
 import { useCreateCategory } from '../../features/tags/useCreateCategory';
-import { useGetCategories } from '../../features/tags/useGetCategories';
 import { handleValidation } from '../../utils/helpers';
 import { useColorContext } from '../../context/ColorContext';
 import { useEffect } from 'react';
@@ -13,9 +12,8 @@ import TagForm from './TagForm';
 import Color from '../../features/tags/Color';
 import 'react-color-palette/css';
 
-function CategoryCreate() {
+function CategoryCreate({ localTag, categories }) {
    const { isPending, isSuccess, createCategory } = useCreateCategory();
-   const { categories } = useGetCategories();
 
    // - Form logic
    const { register, handleSubmit, watch, formState, reset } = useForm();
@@ -44,15 +42,13 @@ function CategoryCreate() {
    } = useColorContext();
 
    function handleCategory(data) {
-      const cyrillicPattern = /\p{Script=Cyrillic}/u;
-
       const finalData = {
          category: data.categoryCreate,
          bg_light: colorLightBg.hex,
          bg_dark: colorDarkBg.hex,
          text_light: colorLightText.hex,
          text_dark: colorDarkText.hex,
-         code: cyrillicPattern.test(data.categoryCreate) ? 'sr' : 'en',
+         code: localTag?.code || 'en',
       };
 
       createCategory(finalData);
@@ -97,7 +93,7 @@ function CategoryCreate() {
                </FormItem>
             </section>
 
-            <ColorsTable input={input}>
+            <ColorsTable input={input} localTag={localTag}>
                <ColorTableCol
                   name="Light"
                   hasMargin={true}

@@ -26,7 +26,9 @@ function PostRankings({ numDays }) {
                <RankingSkeleton />
             ) : (
                <>
-                  <div className="flex items-center gap-6 px-0 text-xs font-medium text-primary-300 uppercase tracking-wider mb-4">
+                  <div
+                     className={`flex items-center gap-6 px-0 text-xs font-medium text-primary-300 uppercase tracking-wider mb-4 ${!pages.length && 'opacity-0'}`}
+                  >
                      <div className="w-4 ml-2 shrink-0">#</div>
                      <div className="flex-1">Title</div>
                      <div className="w-18 2xl:w-15 xl:w-12 shrink-0">Views</div>

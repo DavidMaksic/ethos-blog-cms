@@ -1,6 +1,5 @@
 import { useColorEditContext } from '../../context/ColorEditContext';
 import { useUpdateCategory } from '../../features/tags/useUpdateCategory';
-import { useGetCategories } from '../../features/tags/useGetCategories';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,7 +12,7 @@ import FormItem from './FormItem';
 import TagForm from './TagForm';
 import Color from '../../features/tags/Color';
 
-function CategoryUpdate() {
+function CategoryUpdate({ localTag, setLocalTag, categories }) {
    const {
       isEditing: isPending,
       isSuccess,
@@ -21,19 +20,10 @@ function CategoryUpdate() {
    } = useUpdateCategory();
 
    const { register, handleSubmit, watch, formState, reset } = useForm();
-   const { categories } = useGetCategories();
    const input = watch('categoryUpdate', '');
 
    const { errors } = formState;
    const error = errors?.categoryUpdate?.message;
-
-   const [localTag, setLocalTag] = useLocalStorage(
-      {
-         category: 'History',
-      },
-      'updateTag',
-   );
-
    const [localArticle, setLocalArticle] = useLocalStorage(null, 'article');
 
    // - Color picker logic
@@ -70,13 +60,14 @@ function CategoryUpdate() {
          colorLightText,
          colorDarkBg,
          colorDarkText,
+         code: localTag?.code,
       };
       updateCategory(updateObject);
    }
 
    useEffect(() => {
       if (isSuccess) {
-         setLocalTag({ category: input });
+         setLocalTag({ category: input, code: localTag?.code });
          setLocalArticle({ ...localArticle, category: input });
          reset();
       }
