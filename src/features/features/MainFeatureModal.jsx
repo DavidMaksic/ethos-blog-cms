@@ -8,7 +8,7 @@ import ArticleItem from '../../ui/ArticleItem';
 import SearchAlt from '../../ui/Operations/SearchAlt';
 import toast from 'react-hot-toast';
 
-function MainFeatureModal({ onClose }) {
+function MainFeatureModal({ code, onClose }) {
    const { isPending, articles } = usePublishedArticles();
 
    const [selectedID, setSelectedID] = useState('');
@@ -20,9 +20,9 @@ function MainFeatureModal({ onClose }) {
 
    const boolean = true;
 
-   const filteredArticles = articles?.filter(
-      (item) => item.main_feature !== true
-   );
+   const filteredArticles = articles
+      ?.filter((item) => item.main_feature !== true)
+      .filter((item) => item.code === code);
 
    useEffect(() => {
       if (isSuccess) {

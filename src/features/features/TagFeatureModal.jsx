@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 import ArticleItem from '../../ui/ArticleItem';
 import SearchAlt from '../../ui/Operations/SearchAlt';
 
-function TagFeatureModal({ currentTag, onClose }) {
+function TagFeatureModal({ currentTag, code, onClose }) {
    const { isPending, articles } = usePublishedArticles();
 
    const [selectedID, setSelectedID] = useState();
@@ -22,10 +22,12 @@ function TagFeatureModal({ currentTag, onClose }) {
    const boolean = true;
    const category_id = currentTag.id;
 
-   const filteredArticles = articles?.filter((item) => item.featured !== true);
+   const filteredArticles = articles
+      ?.filter((item) => item.featured !== true)
+      .filter((item) => item.code === code);
 
    const taggedArticles = filteredArticles?.filter(
-      (item) => item.category_id === currentTag.id
+      (item) => item.category_id === currentTag.id,
    );
 
    useEffect(() => {

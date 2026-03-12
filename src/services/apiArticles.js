@@ -242,7 +242,7 @@ export async function getPublishedArticles({ search }) {
    let query = supabase
       .from('articles')
       .select(
-         'id, category_id, title, image, image_blur, main_feature, featured',
+         'id, category_id, title, image, image_blur, main_feature, featured, code',
       )
       .eq('status', 'published')
       .order('id', { ascending: false });
@@ -284,7 +284,7 @@ export async function getFeaturedArticles() {
 export async function getMainFeatureArticles() {
    const { data, error } = await supabase
       .from('articles')
-      .select('id, title, image, image_blur, description, index')
+      .select('id, title, image, image_blur, description, index, code')
       .eq('main_feature', true)
       .eq('status', 'published')
       .order('index');

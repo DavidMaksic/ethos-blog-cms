@@ -8,11 +8,12 @@ import Categories from '../../ui/Categories';
 import EmptyEntry from './EmptyEntry';
 import TagEntry from './TagEntry';
 
-function TagFeatures() {
+function TagFeatures({ code }) {
    const { categories } = useGetCategories();
    const [localTag, setLocalTag] = useLocalStorage(
       {
          category: 'History',
+         code,
       },
       'featureTag',
    );
@@ -22,6 +23,20 @@ function TagFeatures() {
    useEffect(() => {
       setContextTag(localTag);
    }, [localTag, setContextTag]);
+
+   // Sync code and reset category when lang filter changes
+   useEffect(() => {
+      if (localTag.code === code) return;
+
+      const firstCategory = categories?.find((item) => item.code === code);
+      if (firstCategory) {
+         setLocalTag((prev) => ({
+            ...prev,
+            code,
+            category: firstCategory.category,
+         }));
+      }
+   }, [code]); // eslint-disable-line
 
    const currentTag = categories?.find(
       (item) => item.category === localTag.category,
@@ -56,21 +71,21 @@ function TagFeatures() {
 
                   {taggedArticles?.length === 0 && (
                      <>
-                        <EmptyEntry currentTag={currentTag} />
-                        <EmptyEntry currentTag={currentTag} />
-                        <EmptyEntry currentTag={currentTag} />
+                        <EmptyEntry currentTag={currentTag} code={code} />
+                        <EmptyEntry currentTag={currentTag} code={code} />
+                        <EmptyEntry currentTag={currentTag} code={code} />
                      </>
                   )}
 
                   {taggedArticles?.length === 1 && (
                      <>
-                        <EmptyEntry currentTag={currentTag} />
-                        <EmptyEntry currentTag={currentTag} />
+                        <EmptyEntry currentTag={currentTag} code={code} />
+                        <EmptyEntry currentTag={currentTag} code={code} />
                      </>
                   )}
 
                   {taggedArticles?.length === 2 && (
-                     <EmptyEntry currentTag={currentTag} />
+                     <EmptyEntry currentTag={currentTag} code={code} />
                   )}
                </ul>
             </section>

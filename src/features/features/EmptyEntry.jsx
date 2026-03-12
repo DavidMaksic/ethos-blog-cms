@@ -6,10 +6,9 @@ import { useState } from 'react';
 import TagFeatureModal from './TagFeatureModal';
 import Modal from '../../ui/Modal/Modal';
 
-function EmptyEntry({ currentTag }) {
+function EmptyEntry({ currentTag, code }) {
    const [openModal, setOpenModal] = useState(false);
-   // eslint-disable-next-line
-   const [searchParams, setSearchParams] = useSearchParams();
+   const [searchParams, setSearchParams] = useSearchParams(); // eslint-disable-line
 
    return (
       <>
@@ -31,6 +30,7 @@ function EmptyEntry({ currentTag }) {
                >
                   <TagFeatureModal
                      currentTag={currentTag}
+                     code={code}
                      onClose={() => {
                         setSearchParams('');
                         setOpenModal(false);

@@ -18,12 +18,13 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-function MainFeatures() {
+function MainFeatures({ code }) {
    const [openModal, setOpenModal] = useState(false);
-   // eslint-disable-next-line
-   const [searchParams, setSearchParams] = useSearchParams();
+
+   const [searchParams, setSearchParams] = useSearchParams(); // eslint-disable-line
    const { isPending, articles, refetch } = useGetMainFeatureArticles();
 
+   const filteredArticles = articles?.filter((item) => item.code === code);
    refetch();
 
    return (
@@ -41,7 +42,7 @@ function MainFeatures() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                />
-            ) : articles?.length ? (
+            ) : filteredArticles?.length ? (
                <>
                   <Swiper
                      spaceBetween={100}
@@ -52,7 +53,7 @@ function MainFeatures() {
                      modules={[Pagination]}
                      className="mySwiper size-full"
                   >
-                     {articles?.map((item, i) => (
+                     {filteredArticles?.map((item, i) => (
                         <SwiperSlide key={item.id}>
                            <MainArticle
                               article={item}
@@ -87,6 +88,7 @@ function MainFeatures() {
                      style="w-[64rem]"
                   >
                      <MainFeatureModal
+                        code={code}
                         onClose={() => {
                            setSearchParams('');
                            setOpenModal(false);
