@@ -12,7 +12,7 @@ import { IoOptions } from 'react-icons/io5';
 
 function Options({ currentAuthor, theAuthor, articleID, editor, children }) {
    const [openMenu, setOpenMenu] = useState(false);
-   const ref = useOutsideClick(() => setOpenMenu(false), true);
+   const ref = useOutsideClick(() => setOpenMenu(false), false);
 
    const [mounted, setMounted] = useState(false);
    useEffect(() => setMounted(true), []);
