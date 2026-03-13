@@ -4,17 +4,28 @@ export default async function handler(req, res) {
 
    const { slug, changes } = req.body || {};
 
-   const response = await fetch('https://ethos-blog.com/api/revalidate', {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json',
-         Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
-      },
-      body: JSON.stringify({ slug, changes }),
-   });
+   try {
+      const response = await fetch('https://ethos-blog.com/api/revalidate', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
+         },
+         body: JSON.stringify({ changes, ...(slug && { slug }) }),
+      });
 
-   if (!response.ok)
-      return res.status(500).json({ error: 'Next.js revalidate failed' });
+      const data = await response.json();
 
-   res.status(200).json({ status: 'success' });
+      if (!response.ok) {
+         console.error('Revalidate failed:', response.status, data);
+         return res
+            .status(500)
+            .json({ error: 'Next.js revalidate failed', detail: data });
+      }
+
+      res.status(200).json({ status: 'success' });
+   } catch (err) {
+      console.error('Handler error:', err);
+      res.status(500).json({ error: err.message });
+   }
 }

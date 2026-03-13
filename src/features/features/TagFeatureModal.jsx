@@ -79,9 +79,9 @@ function TagFeatureModal({ currentTag, code, onClose }) {
             )}
          </ul>
 
-         <div className="flex items-center pt-1.5 mr-6 z-20">
+         <div className="pt-1.5 mr-6 z-20">
             <button
-               className={`relative rounded-full p-2 px-6 text-accent hover:bg-accent-400/80 dark:hover:bg-accent-300/55 hover:text-white dark:hover:text-accent-100 hover:shadow-link-btn dark:hover:shadow-none transition mr-2 ${
+               className={`relative font-logo text-[2.6rem] rounded-full pt-2 pb-1.5 pl-6 pr-5.5 text-accent hover:bg-accent-400/80 dark:hover:bg-accent-300/55 hover:text-white dark:hover:text-accent-100 hover:shadow-link-btn dark:hover:shadow-none transition mr-2 ${
                   !openID || isEditing ? 'pointer-events-none opacity-30' : ''
                }`}
                onClick={() =>
@@ -89,21 +89,21 @@ function TagFeatureModal({ currentTag, code, onClose }) {
                }
             >
                {isEditing ? (
-                  <div className="flex items-center gap-4">
-                     <ImSpinner2 className="size-5.5 animate-spin" />
+                  <>
+                     <ImSpinner2 className="size-7 animate-spin absolute right-51 top-5.5" />
                      <span>Confirming</span>
-                  </div>
+                  </>
                ) : (
                   <span>Confirm</span>
                )}
             </button>
 
-            <span className="text-3xl font-bold text-[#b7babe] dark:text-primary-300 pointer-events-none">
+            <span className="text-2xl font-bold text-[#b7babe] dark:text-primary-300 pointer-events-none">
                /
             </span>
 
             <button
-               className="text-primary-500 dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500 transition ml-7"
+               className="text-primary-500 text-[2.2rem] dark:text-primary-400 hover:text-primary-400 dark:hover:text-primary-500 transition ml-7"
                onClick={onClose}
             >
                Cancel
