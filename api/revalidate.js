@@ -3,7 +3,6 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: 'Method not allowed' });
 
    const { slug, changes } = req.body || {};
-   if (!slug) return res.status(400).json({ error: 'Missing slug' });
 
    const response = await fetch('https://ethos-blog.com/api/revalidate', {
       method: 'POST',
