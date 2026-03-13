@@ -5,14 +5,17 @@ export default async function handler(req, res) {
    const { slug, changes } = req.body || {};
 
    try {
-      const response = await fetch('https://ethos-blog.com/api/revalidate', {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
+      const response = await fetch(
+         'https://ethos-blog.vercel.app/api/revalidate',
+         {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+               Authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
+            },
+            body: JSON.stringify({ changes, ...(slug && { slug }) }),
          },
-         body: JSON.stringify({ changes, ...(slug && { slug }) }),
-      });
+      );
 
       const data = await response.json();
 
